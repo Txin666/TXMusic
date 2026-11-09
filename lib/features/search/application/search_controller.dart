@@ -1,14 +1,16 @@
+import 'dart:async';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../artist/data/fake_artist_data.dart';
+import '../../../core/network/kugou_client.dart';
+import '../../../core/network/kugou_providers.dart';
 import '../../artist/domain/artist.dart';
-import '../../playlist/data/fake_playlist_data.dart';
 import '../../playlist/domain/playlist.dart';
-import '../../song/data/fake_song_data.dart';
+import '../../song/data/kugou_song_api.dart';
 import '../../song/domain/song.dart';
 import '../data/fake_search_data.dart';
 
-/// 搜索结果聚合（骨架期在内存中做名称匹配，不请求接口）。
+/// 搜索结果聚合（歌曲走真实 `/search/song`，歌单/歌手暂留骨架）。
 class SearchState {
   const SearchState({
     this.keyword = '',
@@ -16,6 +18,8 @@ class SearchState {
     this.songs = const <Song>[],
     this.playlists = const <Playlist>[],
     this.artists = const <Artist>[],
+    this.isLoading = false,
+    this.errorMessage,
   });
 
   final String keyword;
@@ -23,9 +27,13 @@ class SearchState {
   final List<Song> songs;
   final List<Playlist> playlists;
   final List<Artist> artists;
+  final bool isLoading;
+  final String? errorMessage;
 
   bool get isEmptyResult =>
       keyword.isNotEmpty &&
+      !isLoading &&
+      errorMessage == null &&
       songs.isEmpty &&
       playlists.isEmpty &&
       artists.isEmpty;
@@ -36,6 +44,9 @@ class SearchState {
     List<Song>? songs,
     List<Playlist>? playlists,
     List<Artist>? artists,
+    bool? isLoading,
+    String? errorMessage,
+    bool clearError = false,
   }) {
     return SearchState(
       keyword: keyword ?? this.keyword,
@@ -43,15 +54,19 @@ class SearchState {
       songs: songs ?? this.songs,
       playlists: playlists ?? this.playlists,
       artists: artists ?? this.artists,
+      isLoading: isLoading ?? this.isLoading,
+      errorMessage: clearError ? null : (errorMessage ?? this.errorMessage),
     );
   }
 }
 
-/// 搜索页编排。
-/// TODO(api): 接入 `/search/song`、`/search/playlist`、`/artist/search`，
-/// 并做 300ms 防抖 + 分页（文档 §5 搜索模块）。
+/// 搜索页编排：真实接口 + 请求竞态保护。
+///
+/// TODO(api): 补 `/search/playlist`、`/artist/search` 聚合；
 /// TODO(storage): 历史记录落 Hive。
 class SearchPageController extends Notifier<SearchState> {
+  int _requestId = 0;
+
   @override
   SearchState build() => const SearchState();
 
@@ -59,39 +74,65 @@ class SearchPageController extends Notifier<SearchState> {
     state = state.copyWith(keyword: value);
   }
 
-  void search(String keyword) {
+  /// 发起搜索；同一关键字重复提交会被忽略（避免重复请求）。
+  Future<void> search(String keyword) async {
     final String key = keyword.trim();
     if (key.isEmpty) {
       clear();
       return;
     }
-    final String lower = key.toLowerCase();
+    if (state.isLoading && state.keyword == key) {
+      return;
+    }
+
     final List<String> history = <String>[
       key,
       ...state.history.where((String item) => item != key),
     ].take(10).toList(growable: false);
 
-    state = SearchState(
+    final int request = ++_requestId;
+    state = state.copyWith(
       keyword: key,
       history: history,
-      songs: FakeSongs.all
-          .where((Song song) =>
-              song.title.toLowerCase().contains(lower) ||
-              song.artist.toLowerCase().contains(lower) ||
-              song.album.toLowerCase().contains(lower))
-          .toList(growable: false),
-      playlists: FakePlaylists.all
-          .where((Playlist playlist) =>
-              playlist.title.toLowerCase().contains(lower) ||
-              playlist.creator.toLowerCase().contains(lower))
-          .toList(growable: false),
-      artists: FakeArtists.all
-          .where((Artist artist) => artist.name.toLowerCase().contains(lower))
-          .toList(growable: false),
+      songs: const <Song>[],
+      isLoading: true,
+      clearError: true,
     );
+
+    try {
+      final KugouSongApi api = ref.read(kugouSongApiProvider);
+      final List<Song> songs = await api.search(key);
+      if (request != _requestId) {
+        return;
+      }
+      state = state.copyWith(
+        songs: songs,
+        isLoading: false,
+        clearError: true,
+      );
+    } on KugouApiException catch (error) {
+      if (request != _requestId) {
+        return;
+      }
+      state = state.copyWith(
+        isLoading: false,
+        songs: const <Song>[],
+        errorMessage: error.message,
+      );
+    } on Object catch (error) {
+      if (request != _requestId) {
+        return;
+      }
+      state = state.copyWith(
+        isLoading: false,
+        songs: const <Song>[],
+        errorMessage: '搜索失败：$error',
+      );
+    }
   }
 
   void clear() {
+    _requestId++;
     state = SearchState(keyword: '', history: state.history);
   }
 

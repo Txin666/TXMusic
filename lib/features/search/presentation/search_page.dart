@@ -21,7 +21,8 @@ import '../data/fake_search_data.dart';
 
 /// 搜索页（路由 `/search`，可选 `?q=关键词` 从顶部搜索框带入）。
 ///
-/// 骨架期在内存中按名称匹配假数据；历史记录仅内存态（TODO(storage): 落 Hive）。
+/// 歌曲结果来自真实 `/search/song`（本地 KuGouMusicApi）；
+/// 历史记录仍为内存态（TODO(storage): 落 Hive）。
 class SearchPage extends ConsumerStatefulWidget {
   const SearchPage({super.key, this.initialQuery});
 
@@ -99,10 +100,23 @@ class _SearchPageState extends ConsumerState<SearchPage> {
               },
               onClearHistory: controller.clearHistory,
             )
+          else if (state.isLoading)
+            const Padding(
+              padding: EdgeInsets.symmetric(vertical: AppSpacing.xxl),
+              child: Center(child: CircularProgressIndicator(strokeWidth: 2.5)),
+            )
+          else if (state.errorMessage != null)
+            EmptyState(
+              title: '搜索失败',
+              description: state.errorMessage!,
+              icon: Icons.cloud_off_rounded,
+              actionLabel: '重试',
+              onActionTap: () => controller.search(state.keyword),
+            )
           else if (state.isEmptyResult)
             EmptyState(
               title: '没有找到「${state.keyword}」相关内容',
-              description: '骨架期仅在本地假数据中匹配，接入接口后即为全量结果',
+              description: '换个关键词试试，或确认本地 KuGouMusicApi 服务是否在运行',
               icon: Icons.search_off_rounded,
               actionLabel: '清空搜索',
               onActionTap: () {

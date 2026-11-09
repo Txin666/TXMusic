@@ -42,6 +42,7 @@ class PlaybackSnapshot {
     this.repeatMode = RepeatMode.all,
     this.queue = const <Song>[],
     this.queueIndex = -1,
+    this.errorMessage,
   });
 
   final Song? currentSong;
@@ -53,6 +54,9 @@ class PlaybackSnapshot {
   final RepeatMode repeatMode;
   final List<Song> queue;
   final int queueIndex;
+
+  /// 音源解析/播放失败原因（[PlaybackStatus.error] 时展示给用户）。
+  final String? errorMessage;
 
   bool get hasSong => currentSong != null;
 
@@ -78,6 +82,8 @@ class PlaybackSnapshot {
     RepeatMode? repeatMode,
     List<Song>? queue,
     int? queueIndex,
+    String? errorMessage,
+    bool clearError = false,
   }) {
     return PlaybackSnapshot(
       currentSong: currentSong ?? this.currentSong,
@@ -89,6 +95,7 @@ class PlaybackSnapshot {
       repeatMode: repeatMode ?? this.repeatMode,
       queue: queue ?? this.queue,
       queueIndex: queueIndex ?? this.queueIndex,
+      errorMessage: clearError ? null : (errorMessage ?? this.errorMessage),
     );
   }
 }

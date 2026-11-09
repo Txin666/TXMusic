@@ -5,8 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:media_kit/media_kit.dart';
 import 'package:window_manager/window_manager.dart';
 
+import 'core/network/kugou_providers.dart';
+import 'core/network/kugou_session.dart';
 import 'features/settings/application/settings_controller.dart';
 import 'routing/app_router.dart';
 import 'theme/app_colors.dart';
@@ -14,14 +17,33 @@ import 'theme/app_theme.dart';
 
 /// TX Music 应用入口（文档 §3.2 main.dart）。
 ///
-/// 骨架阶段职责：
-/// 1. 桌面窗口初始化（尺寸 / 最小尺寸 / 标题），仅桌面平台执行；
-/// 2. 挂载 [ProviderScope]，全局状态与路由实例只创建一次；
-/// 3. 按设置项切换主题（默认深色），路由交给 GoRouter。
+/// 职责：
+/// 1. 初始化 media_kit 音频引擎（libmpv）；
+/// 2. 从 `.local/kugou_cookie.json` 恢复酷狗登录态，游客态也能启动；
+/// 3. 桌面窗口初始化（尺寸 / 最小尺寸 / 标题），仅桌面平台执行；
+/// 4. 挂载 [ProviderScope]，全局状态与路由实例只创建一次；
+/// 5. 按设置项切换主题（默认深色），路由交给 GoRouter。
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  MediaKit.ensureInitialized();
+
+  final KugouSession session = await KugouSession.load();
+  debugPrint(
+    session.isLoggedIn
+        ? '酷狗登录态已恢复：${session.nickname}（dfid=${session.dfid}）'
+        : '未检测到酷狗登录态，将以游客模式运行（仅 60 秒试听）',
+  );
+
   await _setupDesktopWindow();
-  runApp(const ProviderScope(child: TxMusicApp()));
+
+  runApp(
+    ProviderScope(
+      overrides: [
+        kugouSessionProvider.overrideWithValue(session),
+      ],
+      child: const TxMusicApp(),
+    ),
+  );
 }
 
 /// Windows / macOS / Linux 窗口初始化：播放器默认给一个偏宽的横屏窗口。

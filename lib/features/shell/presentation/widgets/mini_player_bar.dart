@@ -121,13 +121,20 @@ class MiniPlayerBar extends ConsumerWidget {
                             ),
                             const SizedBox(height: 2),
                             Text(
-                              '${song.artist} · ${Formatters.duration(song.duration)}',
+                              // 播放失败时把原因顶到副标题位置，用户不用翻日志。
+                              playback.errorMessage ??
+                                  '${song.artist} · '
+                                      '${Formatters.duration(playback.duration)}',
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: Theme.of(context)
                                   .textTheme
                                   .bodySmall
-                                  ?.copyWith(color: AppColors.textSecondary),
+                                  ?.copyWith(
+                                    color: playback.errorMessage != null
+                                        ? AppColors.vip
+                                        : AppColors.textSecondary,
+                                  ),
                             ),
                           ],
                         ),
