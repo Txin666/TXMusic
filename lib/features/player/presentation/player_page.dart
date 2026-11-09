@@ -6,11 +6,12 @@ import '../../../core/utils/formatters.dart';
 import '../../../routing/app_routes.dart';
 import '../../../shared/widgets/cover_placeholder.dart';
 import '../../../shared/widgets/empty_state.dart';
+import '../../../shared/widgets/playback_error_banner.dart';
 import '../../../shared/widgets/song_tile.dart';
 import '../../../theme/app_colors.dart';
 import '../../../theme/app_spacing.dart';
 import '../../lyric/application/lyric_providers.dart';
-import '../../lyric/data/fake_lyric_data.dart';
+import '../../lyric/domain/lyric_index.dart';
 import '../../lyric/domain/lyric_line.dart';
 import '../../player/application/player_controller.dart';
 import '../../player/domain/playback_state.dart';
@@ -18,8 +19,9 @@ import '../../song/domain/song.dart';
 
 /// 播放详情页（路由 `/player`，脱离 Shell 全屏展示）。
 ///
-/// 骨架期：左侧大封面 + 右侧歌词滚动区 + 底部传输控制；音频为假进度，
-/// TODO(audio): 接入 media_kit 后由引擎事件驱动 position / duration。
+/// 歌词来自真实接口（[lyricLinesProvider]，family key 用 [lyricKeyOf]），
+/// 高亮行由播放位置 + [LyricIndex.indexAt] 二分定位；曲目加载 / 解析 /
+/// 播放失败时在顶部展示 [PlaybackErrorBanner] 并提供重试。
 class PlayerPage extends ConsumerWidget {
   const PlayerPage({super.key});
 
@@ -43,8 +45,8 @@ class PlayerPage extends ConsumerWidget {
     }
 
     final Song song = playback.currentSong!;
-    final List<LyricLine> lyrics = ref.watch(lyricLinesProvider(song.id));
-    final int currentLine = FakeLyricData.indexAt(lyrics, playback.position);
+    final AsyncValue<List<LyricLine>> lyricsAsync =
+        ref.watch(lyricLinesProvider(lyricKeyOf(song)));
 
     return Scaffold(
       body: Container(
@@ -82,6 +84,13 @@ class PlayerPage extends ConsumerWidget {
                     ),
                   ],
                 ),
+                if (playback.errorMessage != null) ...<Widget>[
+                  const SizedBox(height: AppSpacing.sm),
+                  PlaybackErrorBanner(
+                    message: playback.errorMessage!,
+                    onRetry: _retry(controller, playback),
+                  ),
+                ],
                 Expanded(
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -119,8 +128,8 @@ class PlayerPage extends ConsumerWidget {
                           padding:
                               const EdgeInsets.only(left: AppSpacing.xxl),
                           child: _LyricPane(
-                            lyrics: lyrics,
-                            currentLine: currentLine,
+                            lyricsAsync: lyricsAsync,
+                            position: playback.position,
                           ),
                         ),
                       ),
@@ -135,54 +144,123 @@ class PlayerPage extends ConsumerWidget {
       ),
     );
   }
+
+  VoidCallback? _retry(PlayerController controller, PlaybackSnapshot playback) {
+    if (!playback.hasSong) {
+      return null;
+    }
+    final Song song = playback.currentSong!;
+    return () {
+      if (playback.queue.isEmpty) {
+        controller.playSong(song);
+        return;
+      }
+      controller.playQueue(
+        playback.queue,
+        startIndex: playback.queueIndex < 0 ? 0 : playback.queueIndex,
+      );
+    };
+  }
 }
 
+/// 歌词区：真实歌词三态（加载中 / 失败 / 有数据）各自独立渲染。
 class _LyricPane extends StatelessWidget {
-  const _LyricPane({required this.lyrics, required this.currentLine});
+  const _LyricPane({required this.lyricsAsync, required this.position});
 
-  final List<LyricLine> lyrics;
-  final int currentLine;
+  final AsyncValue<List<LyricLine>> lyricsAsync;
+  final Duration position;
 
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
 
-    if (lyrics.isEmpty) {
-      return Center(
-        child: Text(
-          '暂无歌词',
-          style: theme.textTheme.bodyMedium
-              ?.copyWith(color: AppColors.textSecondary),
-        ),
-      );
-    }
-
-    final int start = (currentLine - 4).clamp(0, lyrics.length - 1);
-    final int end = (currentLine + 5).clamp(0, lyrics.length);
-
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        for (int i = start; i < end; i++)
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: AppSpacing.sm),
-            child: AnimatedDefaultTextStyle(
-              duration: const Duration(milliseconds: 200),
-              style: (i == currentLine
-                      ? theme.textTheme.headlineSmall
-                      : theme.textTheme.titleMedium)
-                  ?.copyWith(
-                color: i == currentLine
-                    ? AppColors.primary
-                    : AppColors.textSecondary,
-                fontWeight:
-                    i == currentLine ? FontWeight.w700 : FontWeight.w400,
-              ) ?? const TextStyle(),
-              child: Text(lyrics[i].text),
+    return lyricsAsync.when(
+      loading: () => Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            const SizedBox(
+              width: 22,
+              height: 22,
+              child: CircularProgressIndicator(strokeWidth: 2.5),
             ),
-          ),
-      ],
+            const SizedBox(height: AppSpacing.md),
+            Text(
+              '正在加载歌词…',
+              style: theme.textTheme.bodySmall
+                  ?.copyWith(color: AppColors.textSecondary),
+            ),
+          ],
+        ),
+      ),
+      error: (Object error, StackTrace stack) => Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            const Icon(
+              Icons.lyrics_outlined,
+              size: 28,
+              color: AppColors.textTertiary,
+            ),
+            const SizedBox(height: AppSpacing.sm),
+            Text(
+              '歌词加载失败',
+              style: theme.textTheme.bodyMedium
+                  ?.copyWith(color: AppColors.textSecondary),
+            ),
+            const SizedBox(height: AppSpacing.xs),
+            Text(
+              '$error',
+              textAlign: TextAlign.center,
+              maxLines: 3,
+              overflow: TextOverflow.ellipsis,
+              style: theme.textTheme.bodySmall
+                  ?.copyWith(color: AppColors.textTertiary),
+            ),
+          ],
+        ),
+      ),
+      data: (List<LyricLine> lyrics) {
+        if (lyrics.isEmpty) {
+          return Center(
+            child: Text(
+              '暂无歌词',
+              style: theme.textTheme.bodyMedium
+                  ?.copyWith(color: AppColors.textSecondary),
+            ),
+          );
+        }
+
+        final int currentLine = LyricIndex.indexAt(lyrics, position);
+        final int start = (currentLine - 4).clamp(0, lyrics.length - 1);
+        final int end = (currentLine + 5).clamp(0, lyrics.length);
+
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            for (int i = start; i < end; i++)
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: AppSpacing.sm),
+                child: AnimatedDefaultTextStyle(
+                  duration: const Duration(milliseconds: 200),
+                  style: (i == currentLine
+                          ? theme.textTheme.headlineSmall
+                          : theme.textTheme.titleMedium)
+                      ?.copyWith(
+                    color: i == currentLine
+                        ? AppColors.primary
+                        : AppColors.textSecondary,
+                    fontWeight:
+                        i == currentLine ? FontWeight.w700 : FontWeight.w400,
+                  ) ??
+                      const TextStyle(),
+                  child: Text(lyrics[i].text),
+                ),
+              ),
+          ],
+        );
+      },
     );
   }
 }

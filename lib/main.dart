@@ -39,7 +39,11 @@ Future<void> main() async {
   runApp(
     ProviderScope(
       overrides: [
-        kugouSessionProvider.overrideWithValue(session),
+        // NotifierProvider 不支持 overrideWithValue，
+        // 用 KugouSessionController 的初始值构造重写（详见 kugou_providers.dart）。
+        kugouSessionProvider.overrideWith(
+          () => KugouSessionController(session),
+        ),
       ],
       child: const TxMusicApp(),
     ),

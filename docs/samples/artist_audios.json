@@ -1,0 +1,6301 @@
+{
+ "total": 1861,
+ "error_code": 0,
+ "data": [
+  {
+   "video_track": 3,
+   "filesize_flac": 36226753,
+   "old_hide_flac": 1,
+   "playcount": 0,
+   "status": 0,
+   "video_file_head": 1,
+   "filesize_320": 11972641,
+   "rp_id": 339589,
+   "bitrate_flac": 968,
+   "old_hide": 1,
+   "trans_param": {
+    "cpy_grade": 6,
+    "classmap": {
+     "attr0": 234885128
+    },
+    "language": "国语",
+    "cpy_attr0": 58727552,
+    "musicpack_advance": 1,
+    "display": 32,
+    "display_rate": 1,
+    "flags": {},
+    "ogg_320_hash": "2E34FF8DAD5971FE2A7482D30BDCE3F3",
+    "cpy_map": "2",
+    "union_cover": "http://imge.kugou.com/stdmusic/{size}/20250125/20250125121901851911.jpg",
+    "ogg_320_filesize": 12859033,
+    "qualitymap": {
+     "bits": "28fffc0db411fefebf3fc074",
+     "attr0": 1061142644,
+     "attr1": 1747189245
+    },
+    "is_original": 1,
+    "ogg_128_filesize": 3557435,
+    "cid": 2556386,
+    "ogg_128_hash": "A1A416E6E4AE0FDCCD51BD29C123DD91",
+    "pay_block_tpl": 1,
+    "ipmap": {
+     "attr0": 2200197664768,
+     "bits": "10020046001000"
+    },
+    "hash_offset": {
+     "clip_hash": "14137E87988DF2D2632225B4367F6F3B",
+     "start_byte": 0,
+     "end_ms": 129600,
+     "end_byte": 2073984,
+     "file_type": 0,
+     "start_ms": 69600,
+     "offset_hash": "303E5D512610A9D5F6D737F3259B64B8"
+    },
+    "appid_block": "3124",
+    "hash_multitrack": "BF15DBEB91E947DAC229012F67AEF7A4",
+    "cpy_level": 1
+   },
+   "pay_type_128": 3,
+   "remarks": [
+    {
+     "rel_album_audio_id": 0,
+     "remark_type": 8,
+     "remark": "《发如雪》国语版",
+     "is_defaut_alias": "0"
+    }
+   ],
+   "all_privs_super": {},
+   "video_hash": "7AE3E2309AE6DE1871FC04261EBAC0A6",
+   "is_original": 1,
+   "version": 1,
+   "topic_url_high": "",
+   "identity": 1,
+   "album_id": 958909,
+   "old_cpy_320": 0,
+   "privilege_high": 10,
+   "pay_type": 3,
+   "all_privs_128": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "topic_url_flac": "",
+   "rp_publish": 1,
+   "pkg_price_super": 0,
+   "pkg_price_high": 1,
+   "pkg_price_flac": 1,
+   "video_filesize": 42228255,
+   "price_high": 200,
+   "tmp_privilege": 2,
+   "pkg_price": 1,
+   "status_320": 0,
+   "album_audio_id": 32029513,
+   "pay_type_super": 0,
+   "old_hide_320": 1,
+   "pkg_price_320": 1,
+   "topic_remark": "",
+   "pay_type_high": 3,
+   "privilege_128": 10,
+   "timelength_320": 299284,
+   "price_flac": 200,
+   "fail_process_128": 4,
+   "audio_name": "发如雪",
+   "timelength_flac": 299240,
+   "price_320": 200,
+   "pay_type_flac": 3,
+   "topic_url": "",
+   "cid": 2556386,
+   "audio_file_head": 100,
+   "filesize_super": 0,
+   "topic_url_super": "",
+   "old_cpy_super": 1,
+   "all_privs_high": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "all_privs": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "topic_url_320": "",
+   "mixsong_type": 0,
+   "rp_type_320": "audio",
+   "hash": "1F7E7659B9FFF4FB6F71562A61BBC25F",
+   "author_name": "周杰伦",
+   "all_privs_flac": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "fail_process_high": 4,
+   "status_flac": 0,
+   "audio_id": 339589,
+   "status_128": 0,
+   "price_128": 200,
+   "rp_type_flac": "audio",
+   "pay_type_320": 3,
+   "all_privs_320": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "timelength_high": 299240,
+   "filesize_128": 4789176,
+   "rp_type_super": "",
+   "album_name": "十一月的萧邦",
+   "rp_type_high": "audio",
+   "topic_url_128": "",
+   "rp_type_128": "audio",
+   "songid": 452,
+   "rp_type": "audio",
+   "fail_process_super": 0,
+   "extname_super": "",
+   "status_high": 0,
+   "publish_date": "2005-11-01",
+   "hash_320": "CE2F056CA8CDC1027942C6067C532D87",
+   "bitrate_super": 0,
+   "hash_high": "E794A76A484C22429D1FAC16D1B3715C",
+   "extname": "mp3",
+   "fail_process_320": 4,
+   "fail_process": 4,
+   "old_cpy_high": 0,
+   "timelength_super": 0,
+   "old_cpy_flac": 0,
+   "level": 2,
+   "old_hide_super": 0,
+   "privilege_flac": 10,
+   "old_cpy": 0,
+   "status_super": 1,
+   "old_cpy_128": 0,
+   "old_hide_128": 1,
+   "video_timelength": 300699,
+   "bitrate": 128,
+   "cd_url": "",
+   "privilege_320": 10,
+   "pkg_price_128": 1,
+   "price": 200,
+   "filesize_high": 37017096,
+   "filesize": 4789176,
+   "timelength_128": 299284,
+   "price_super": 0,
+   "has_obbligato": 1,
+   "hash_128": "1F7E7659B9FFF4FB6F71562A61BBC25F",
+   "album_audio_remark": "《发如雪》国语版",
+   "bitrate_high": 989,
+   "fail_process_flac": 4,
+   "hash_flac": "ED63BDB17B06B6F31ACDD7A18A0C0503",
+   "old_hide_high": 1,
+   "hash_super": "",
+   "timelength": 299284,
+   "privilege": 10,
+   "privilege_super": 0,
+   "video_id": 2761
+  },
+  {
+   "video_track": 3,
+   "filesize_flac": 31633244,
+   "old_hide_flac": 1,
+   "playcount": 0,
+   "status": 0,
+   "video_file_head": 1,
+   "filesize_320": 10792943,
+   "rp_id": 20505418,
+   "bitrate_flac": 937,
+   "old_hide": 1,
+   "trans_param": {
+    "cpy_grade": 5,
+    "classmap": {
+     "attr0": 234885128
+    },
+    "language": "国语",
+    "cpy_attr0": 58727552,
+    "musicpack_advance": 1,
+    "display": 32,
+    "display_rate": 1,
+    "flags": {},
+    "ogg_320_hash": "6BB59E9DAFACFE4332E07F9E9841E912",
+    "cpy_map": "2",
+    "union_cover": "http://imge.kugou.com/stdmusic/{size}/20230920/20230920142503632013.jpg",
+    "ogg_320_filesize": 10331568,
+    "qualitymap": {
+     "bits": "28fffc0db411ffffff3fc074",
+     "attr0": 2134884468,
+     "attr1": 1747189759
+    },
+    "is_original": 1,
+    "ogg_128_filesize": 2927865,
+    "cid": 2456863,
+    "ogg_128_hash": "D6E0229D1BCD4453981743F6B53F9D75",
+    "pay_block_tpl": 1,
+    "ipmap": {
+     "attr0": 2200130555908,
+     "bits": "10020042001004"
+    },
+    "hash_offset": {
+     "clip_hash": "BBB8430047ADCBAFD1920315B38DDC0A",
+     "start_byte": 0,
+     "end_ms": 60000,
+     "end_byte": 960115,
+     "file_type": 0,
+     "start_ms": 0,
+     "offset_hash": "C31E6556C4E262FB19A88FAE85A2E103"
+    },
+    "appid_block": "3124",
+    "hash_multitrack": "7207ED4C710C8308EEF9EA1F76778CB5",
+    "cpy_level": 1
+   },
+   "pay_type_128": 3,
+   "remarks": [
+    {
+     "rel_album_audio_id": 0,
+     "remark_type": 15,
+     "remark": "首款动态勋章上线",
+     "is_defaut_alias": "0"
+    },
+    {
+     "remark": "《左手上篮》动画ED",
+     "ip_type": 1,
+     "rel_album_audio_id": 0,
+     "work_type": "4",
+     "remark_type": 2
+    },
+    {
+     "remark": "《Left-Hand Layup!》动画ED",
+     "ip_type": 2,
+     "rel_album_audio_id": 0,
+     "work_type": "4",
+     "remark_type": 2
+    },
+    {
+     "remark": "《第10届全球华语榜中榜》奖项最佳歌曲 (港台)",
+     "ip_type": 1,
+     "rel_album_audio_id": 0,
+     "work_type": "46",
+     "remark_type": 2
+    },
+    {
+     "remark": "《China Music Awards》奖项最佳歌曲 (港台)",
+     "ip_type": 2,
+     "rel_album_audio_id": 0,
+     "work_type": "46",
+     "remark_type": 2
+    }
+   ],
+   "all_privs_super": {},
+   "video_hash": "AE03041C1FAB725569983CFB832C27D9",
+   "is_original": 1,
+   "version": 1,
+   "topic_url_high": "",
+   "identity": 1,
+   "album_id": 966846,
+   "old_cpy_320": 0,
+   "privilege_high": 10,
+   "pay_type": 3,
+   "all_privs_128": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "topic_url_flac": "",
+   "rp_publish": 1,
+   "pkg_price_super": 0,
+   "pkg_price_high": 1,
+   "pkg_price_flac": 1,
+   "video_filesize": 44163473,
+   "price_high": 200,
+   "tmp_privilege": 2,
+   "pkg_price": 1,
+   "status_320": 0,
+   "album_audio_id": 32100650,
+   "pay_type_super": 0,
+   "old_hide_320": 1,
+   "pkg_price_320": 1,
+   "topic_remark": "",
+   "pay_type_high": 3,
+   "privilege_128": 10,
+   "timelength_320": 269000,
+   "price_flac": 200,
+   "fail_process_128": 4,
+   "audio_name": "晴天",
+   "timelength_flac": 269000,
+   "price_320": 200,
+   "pay_type_flac": 3,
+   "topic_url": "",
+   "cid": 2456863,
+   "audio_file_head": 100,
+   "filesize_super": 0,
+   "topic_url_super": "",
+   "old_cpy_super": 1,
+   "all_privs_high": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "all_privs": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "topic_url_320": "",
+   "mixsong_type": 0,
+   "rp_type_320": "audio",
+   "hash": "B3A52A7A958BF0AED0EBFBA2E9A818B7",
+   "author_name": "周杰伦",
+   "all_privs_flac": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "fail_process_high": 4,
+   "status_flac": 0,
+   "audio_id": 20505418,
+   "status_128": 0,
+   "price_128": 200,
+   "rp_type_flac": "audio",
+   "pay_type_320": 3,
+   "all_privs_320": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "timelength_high": 269000,
+   "filesize_128": 4317292,
+   "rp_type_super": "",
+   "album_name": "叶惠美",
+   "rp_type_high": "audio",
+   "topic_url_128": "",
+   "rp_type_128": "audio",
+   "songid": 689,
+   "rp_type": "audio",
+   "fail_process_super": 0,
+   "extname_super": "",
+   "status_high": 0,
+   "publish_date": "2003-07-31",
+   "hash_320": "1B56126A8A03924F1DD066259C095CBC",
+   "bitrate_super": 0,
+   "hash_high": "D667BC5EE93F201126697CB3BA745009",
+   "extname": "mp3",
+   "fail_process_320": 4,
+   "fail_process": 4,
+   "old_cpy_high": 0,
+   "timelength_super": 0,
+   "old_cpy_flac": 0,
+   "level": 2,
+   "old_hide_super": 0,
+   "privilege_flac": 10,
+   "old_cpy": 0,
+   "status_super": 1,
+   "old_cpy_128": 0,
+   "old_hide_128": 1,
+   "video_timelength": 317400,
+   "bitrate": 128,
+   "cd_url": "",
+   "privilege_320": 10,
+   "pkg_price_128": 1,
+   "price": 200,
+   "filesize_high": 55397039,
+   "filesize": 4317292,
+   "timelength_128": 269000,
+   "price_super": 0,
+   "has_obbligato": 1,
+   "hash_128": "B3A52A7A958BF0AED0EBFBA2E9A818B7",
+   "album_audio_remark": "首款动态勋章上线",
+   "bitrate_high": 1642,
+   "fail_process_flac": 4,
+   "hash_flac": "0A69169202DE95AAF24A9944CCF0730D",
+   "old_hide_high": 1,
+   "hash_super": "",
+   "timelength": 269000,
+   "privilege": 10,
+   "privilege_super": 0,
+   "video_id": 117613
+  },
+  {
+   "video_track": 3,
+   "filesize_flac": 26170419,
+   "old_hide_flac": 1,
+   "playcount": 0,
+   "status": 0,
+   "video_file_head": 1,
+   "filesize_320": 9576683,
+   "rp_id": 339796,
+   "bitrate_flac": 874,
+   "old_hide": 1,
+   "trans_param": {
+    "cpy_grade": 6,
+    "classmap": {
+     "attr0": 234881032
+    },
+    "language": "国语",
+    "cpy_attr0": 58727552,
+    "musicpack_advance": 1,
+    "display": 0,
+    "display_rate": 0,
+    "flags": {},
+    "ogg_320_hash": "CFD06B52F79DE9B197830B07722E35ED",
+    "cpy_map": "2",
+    "union_cover": "http://imge.kugou.com/stdmusic/{size}/20220705/20220705143006989099.jpg",
+    "ogg_320_filesize": 9522900,
+    "qualitymap": {
+     "bits": "2800000db411ffffff3fc075",
+     "attr0": 2134884469,
+     "attr1": 1747189759
+    },
+    "is_original": 1,
+    "ogg_128_filesize": 2700910,
+    "cid": 2556436,
+    "ogg_128_hash": "0B60A243C1F821719E955AE06492C8C8",
+    "pay_block_tpl": 1,
+    "ipmap": {
+     "attr0": 2200197664768,
+     "bits": "10020046001000"
+    },
+    "hash_offset": {
+     "clip_hash": "9877793C360F13ED36011712BB613131",
+     "start_byte": 0,
+     "end_ms": 60000,
+     "end_byte": 960117,
+     "file_type": 0,
+     "start_ms": 0,
+     "offset_hash": "1D7E04573B8A2FDF51122C3DC0B4A8FB"
+    },
+    "appid_block": "3124",
+    "hash_multitrack": "BA5F9E0B63B9AF4A76B4DA8E0703B280",
+    "cpy_level": 1
+   },
+   "pay_type_128": 3,
+   "remarks": [
+    {
+     "rel_album_audio_id": 0,
+     "remark_type": 8,
+     "remark": "《金滩情义》国语版",
+     "is_defaut_alias": "0"
+    },
+    {
+     "rel_album_audio_id": 0,
+     "remark_type": 15,
+     "remark": "首款动态勋章上线",
+     "is_defaut_alias": "0"
+    },
+    {
+     "remark": "《第19届金曲奖》奖项最佳年度歌曲奖",
+     "ip_type": 1,
+     "rel_album_audio_id": 0,
+     "work_type": "46",
+     "remark_type": 2
+    },
+    {
+     "remark": "《第19屆台灣金曲獎頒獎典禮》奖项最佳年度歌曲奖",
+     "ip_type": 2,
+     "rel_album_audio_id": 0,
+     "work_type": "46",
+     "remark_type": 2
+    }
+   ],
+   "all_privs_super": {},
+   "video_hash": "DDD65ADD91160AC01B010447D64B4164",
+   "is_original": 1,
+   "version": 1,
+   "topic_url_high": "",
+   "identity": 1,
+   "album_id": 979856,
+   "old_cpy_320": 0,
+   "privilege_high": 10,
+   "pay_type": 3,
+   "all_privs_128": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "topic_url_flac": "",
+   "rp_publish": 1,
+   "pkg_price_super": 0,
+   "pkg_price_high": 1,
+   "pkg_price_flac": 1,
+   "video_filesize": 33990003,
+   "price_high": 200,
+   "tmp_privilege": 2,
+   "pkg_price": 1,
+   "status_320": 0,
+   "album_audio_id": 32218352,
+   "pay_type_super": 0,
+   "old_hide_320": 1,
+   "pkg_price_320": 1,
+   "topic_remark": "",
+   "pay_type_high": 3,
+   "privilege_128": 10,
+   "timelength_320": 239386,
+   "price_flac": 200,
+   "fail_process_128": 4,
+   "audio_name": "青花瓷",
+   "timelength_flac": 239348,
+   "price_320": 200,
+   "pay_type_flac": 3,
+   "topic_url": "",
+   "cid": 2556436,
+   "audio_file_head": 100,
+   "filesize_super": 0,
+   "topic_url_super": "",
+   "old_cpy_super": 1,
+   "all_privs_high": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "all_privs": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "topic_url_320": "",
+   "mixsong_type": 0,
+   "rp_type_320": "audio",
+   "hash": "37A8F50A9EC3B267C3CC6BEC633D9C4A",
+   "author_name": "周杰伦",
+   "all_privs_flac": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "fail_process_high": 4,
+   "status_flac": 0,
+   "audio_id": 339796,
+   "status_128": 0,
+   "price_128": 200,
+   "rp_type_flac": "audio",
+   "pay_type_320": 3,
+   "all_privs_320": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "timelength_high": 239346,
+   "filesize_128": 3830789,
+   "rp_type_super": "",
+   "album_name": "我很忙",
+   "rp_type_high": "audio",
+   "topic_url_128": "",
+   "rp_type_128": "audio",
+   "songid": 55,
+   "rp_type": "audio",
+   "fail_process_super": 0,
+   "extname_super": "",
+   "status_high": 0,
+   "publish_date": "2007-11-02",
+   "hash_320": "D38BFF1043FEC27B8D40F40DA953CB0E",
+   "bitrate_super": 0,
+   "hash_high": "A86A3D8AFABE012A0095CB0EEBF55D50",
+   "extname": "mp3",
+   "fail_process_320": 4,
+   "fail_process": 4,
+   "old_cpy_high": 0,
+   "timelength_super": 0,
+   "old_cpy_flac": 0,
+   "level": 2,
+   "old_hide_super": 0,
+   "privilege_flac": 10,
+   "old_cpy": 0,
+   "status_super": 1,
+   "old_cpy_128": 0,
+   "old_hide_128": 1,
+   "video_timelength": 243159,
+   "bitrate": 128,
+   "cd_url": "",
+   "privilege_320": 10,
+   "pkg_price_128": 1,
+   "price": 200,
+   "filesize_high": 26858410,
+   "filesize": 3830789,
+   "timelength_128": 239386,
+   "price_super": 0,
+   "has_obbligato": 1,
+   "hash_128": "37A8F50A9EC3B267C3CC6BEC633D9C4A",
+   "album_audio_remark": "《金滩情义》国语版",
+   "bitrate_high": 897,
+   "fail_process_flac": 4,
+   "hash_flac": "30A29CC648163DD4F265C6E7B4E07C57",
+   "old_hide_high": 1,
+   "hash_super": "",
+   "timelength": 239386,
+   "privilege": 10,
+   "privilege_super": 0,
+   "video_id": 592096
+  },
+  {
+   "video_track": 3,
+   "filesize_flac": 26387413,
+   "old_hide_flac": 1,
+   "playcount": 0,
+   "status": 0,
+   "video_file_head": 1,
+   "filesize_320": 8626883,
+   "rp_id": 301293698,
+   "bitrate_flac": 978,
+   "old_hide": 1,
+   "trans_param": {
+    "cpy_grade": 1,
+    "classmap": {
+     "attr0": 234885128
+    },
+    "language": "国语",
+    "cpy_attr0": 58727552,
+    "musicpack_advance": 1,
+    "display": 32,
+    "display_rate": 1,
+    "flags": {},
+    "ogg_320_hash": "A86BBABAC5CCB4242FC4D8BE1F953120",
+    "cpy_map": "2",
+    "union_cover": "http://imge.kugou.com/stdmusic/{size}/20200620/20200620103601113025.jpg",
+    "ogg_320_filesize": 8997917,
+    "qualitymap": {
+     "bits": "28fffc0dfc11ffffff3fc075",
+     "attr0": 2134884469,
+     "attr1": 2015625215
+    },
+    "is_original": 1,
+    "ogg_128_filesize": 2504843,
+    "cid": 5678206,
+    "ogg_128_hash": "E83A63CAA9F5B6C9E1C15D164C7B19B9",
+    "pay_block_tpl": 1,
+    "ipmap": {
+     "attr0": 1107300352,
+     "bits": "10000042001000"
+    },
+    "hash_offset": {
+     "clip_hash": "184ABE45C7A656B2FBA3F073051BEA1A",
+     "start_byte": 0,
+     "end_ms": 60000,
+     "end_byte": 960129,
+     "file_type": 0,
+     "start_ms": 0,
+     "offset_hash": "A5A9A7DF5DD53CECE1757E780DBECAB7"
+    },
+    "appid_block": "3124",
+    "hash_multitrack": "D5CF50C73CE9A9C9F13EC75078369AD0",
+    "cpy_level": 1
+   },
+   "pay_type_128": 3,
+   "remarks": [
+    {
+     "rel_album_audio_id": 0,
+     "remark_type": 15,
+     "remark": "情人节告白神曲",
+     "is_defaut_alias": "0"
+    },
+    {
+     "remark": "《第28届金曲奖》奖项提名年度歌曲奖",
+     "ip_type": 1,
+     "rel_album_audio_id": 0,
+     "work_type": "46",
+     "remark_type": 2
+    },
+    {
+     "remark": "《Golden Melody Awards & Festival》奖项提名年度歌曲奖",
+     "ip_type": 2,
+     "rel_album_audio_id": 0,
+     "work_type": "46",
+     "remark_type": 2
+    },
+    {
+     "remark": "《第10届音乐盛典咪咕汇》奖项年度十大金曲",
+     "ip_type": 1,
+     "rel_album_audio_id": 0,
+     "work_type": "46",
+     "remark_type": 2
+    },
+    {
+     "remark": "《第10届无线音乐盛典咪咕汇》奖项年度十大金曲",
+     "ip_type": 2,
+     "rel_album_audio_id": 0,
+     "work_type": "46",
+     "remark_type": 2
+    },
+    {
+     "remark": "《第1届唱工委音乐奖》奖项最佳作曲",
+     "ip_type": 1,
+     "rel_album_audio_id": 0,
+     "work_type": "46",
+     "remark_type": 2
+    }
+   ],
+   "all_privs_super": {},
+   "video_hash": "AFF3B6219C15D030F957B82FF50AA91E",
+   "is_original": 1,
+   "version": 1,
+   "topic_url_high": "",
+   "identity": 1,
+   "album_id": 1645030,
+   "old_cpy_320": 0,
+   "privilege_high": 10,
+   "pay_type": 3,
+   "all_privs_128": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "topic_url_flac": "",
+   "rp_publish": 1,
+   "pkg_price_super": 0,
+   "pkg_price_high": 1,
+   "pkg_price_flac": 1,
+   "video_filesize": 30345106,
+   "price_high": 400,
+   "tmp_privilege": 2,
+   "pkg_price": 1,
+   "status_320": 0,
+   "album_audio_id": 39612569,
+   "pay_type_super": 0,
+   "old_hide_320": 1,
+   "pkg_price_320": 1,
+   "topic_remark": "",
+   "pay_type_high": 3,
+   "privilege_128": 10,
+   "timelength_320": 215640,
+   "price_flac": 400,
+   "fail_process_128": 4,
+   "audio_name": "告白气球",
+   "timelength_flac": 215589,
+   "price_320": 400,
+   "pay_type_flac": 3,
+   "topic_url": "",
+   "cid": 5678206,
+   "audio_file_head": 100,
+   "filesize_super": 0,
+   "topic_url_super": "",
+   "old_cpy_super": 1,
+   "all_privs_high": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "all_privs": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "topic_url_320": "",
+   "mixsong_type": 0,
+   "rp_type_320": "audio",
+   "hash": "688857974673645CE89EDA26A36DB19D",
+   "author_name": "周杰伦",
+   "all_privs_flac": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "fail_process_high": 4,
+   "status_flac": 0,
+   "audio_id": 301293698,
+   "status_128": 0,
+   "price_128": 400,
+   "rp_type_flac": "audio",
+   "pay_type_320": 3,
+   "all_privs_320": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "timelength_high": 215589,
+   "filesize_128": 3450877,
+   "rp_type_super": "",
+   "album_name": "周杰伦的床边故事",
+   "rp_type_high": "audio",
+   "topic_url_128": "",
+   "rp_type_128": "audio",
+   "songid": 9247979,
+   "rp_type": "audio",
+   "fail_process_super": 0,
+   "extname_super": "",
+   "status_high": 0,
+   "publish_date": "2016-06-24",
+   "hash_320": "646035C6C56D18A4C7785F6008BD4820",
+   "bitrate_super": 0,
+   "hash_high": "589BB1B46E1C63BC95CFDC6B2F34B087",
+   "extname": "mp3",
+   "fail_process_320": 4,
+   "fail_process": 4,
+   "old_cpy_high": 0,
+   "timelength_super": 0,
+   "old_cpy_flac": 0,
+   "level": 2,
+   "old_hide_super": 0,
+   "privilege_flac": 10,
+   "old_cpy": 0,
+   "status_super": 1,
+   "old_cpy_128": 0,
+   "old_hide_128": 1,
+   "video_timelength": 215583,
+   "bitrate": 128,
+   "cd_url": "",
+   "privilege_320": 10,
+   "pkg_price_128": 1,
+   "price": 400,
+   "filesize_high": 78024024,
+   "filesize": 3450877,
+   "timelength_128": 215640,
+   "price_super": 0,
+   "has_obbligato": 1,
+   "hash_128": "688857974673645CE89EDA26A36DB19D",
+   "album_audio_remark": "情人节告白神曲",
+   "bitrate_high": 2894,
+   "fail_process_flac": 4,
+   "hash_flac": "3206E5C3880F5E0E47FCD8671449A9D2",
+   "old_hide_high": 1,
+   "hash_super": "",
+   "timelength": 215640,
+   "privilege": 10,
+   "privilege_super": 0,
+   "video_id": 589001
+  },
+  {
+   "video_track": 3,
+   "filesize_flac": 28520892,
+   "old_hide_flac": 1,
+   "playcount": 0,
+   "status": 0,
+   "video_file_head": 1,
+   "filesize_320": 10965357,
+   "rp_id": 582129,
+   "bitrate_flac": 832,
+   "old_hide": 1,
+   "trans_param": {
+    "cpy_grade": 5,
+    "classmap": {
+     "attr0": 234885128
+    },
+    "language": "国语",
+    "cpy_attr0": 58727552,
+    "musicpack_advance": 1,
+    "display": 32,
+    "display_rate": 1,
+    "flags": {},
+    "ogg_320_hash": "05004F16DAF80F23318F92B0A8B84202",
+    "cpy_map": "2",
+    "union_cover": "http://imge.kugou.com/stdmusic/{size}/20231016/20231016111750787075.jpg",
+    "ogg_320_filesize": 10409195,
+    "qualitymap": {
+     "bits": "2800000db411ffffff3fc075",
+     "attr0": 2134884469,
+     "attr1": 1747189759
+    },
+    "is_original": 1,
+    "ogg_128_filesize": 3022186,
+    "cid": 2456726,
+    "ogg_128_hash": "959D6B60FC7A74405CFA7143398A0E96",
+    "pay_block_tpl": 1,
+    "ipmap": {
+     "attr0": 2475075571712,
+     "bits": "10024046001000"
+    },
+    "hash_offset": {
+     "clip_hash": "67B1566AA64EFECDAF241DBC58E1696C",
+     "start_byte": 0,
+     "end_ms": 60000,
+     "end_byte": 960121,
+     "file_type": 0,
+     "start_ms": 0,
+     "offset_hash": "DA1D8EF7BB4893D7882D24ADD967F224"
+    },
+    "appid_block": "3124",
+    "hash_multitrack": "22DCB636E8134267E2AD839BF5CECCEB",
+    "cpy_level": 1
+   },
+   "pay_type_128": 3,
+   "remarks": [
+    {
+     "remark": "《第3届全球流行音乐金榜》奖项年度二十大金曲",
+     "ip_type": 1,
+     "rel_album_audio_id": 0,
+     "work_type": "46",
+     "remark_type": 2
+    },
+    {
+     "remark": "《第5届华语金曲奖》奖项十大华语国语金曲",
+     "ip_type": 1,
+     "rel_album_audio_id": 0,
+     "work_type": "46",
+     "remark_type": 2
+    },
+    {
+     "remark": "《第8届音乐盛典咪咕汇》奖项年度十大金曲",
+     "ip_type": 1,
+     "rel_album_audio_id": 0,
+     "work_type": "46",
+     "remark_type": 2
+    },
+    {
+     "remark": "《第36届十大中文金曲》奖项优秀流行国语歌曲奖银奖",
+     "ip_type": 1,
+     "rel_album_audio_id": 0,
+     "work_type": "46",
+     "remark_type": 2
+    }
+   ],
+   "all_privs_super": {},
+   "video_hash": "3430231BD631D8855EA645C2FD653DA7",
+   "is_original": 1,
+   "version": 1,
+   "topic_url_high": "",
+   "identity": 1,
+   "album_id": 982051,
+   "old_cpy_320": 0,
+   "privilege_high": 10,
+   "pay_type": 3,
+   "all_privs_128": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "topic_url_flac": "",
+   "rp_publish": 1,
+   "pkg_price_super": 0,
+   "pkg_price_high": 1,
+   "pkg_price_flac": 1,
+   "video_filesize": 38746123,
+   "price_high": 200,
+   "tmp_privilege": 2,
+   "pkg_price": 1,
+   "status_320": 0,
+   "album_audio_id": 32238253,
+   "pay_type_super": 0,
+   "old_hide_320": 1,
+   "pkg_price_320": 1,
+   "topic_remark": "",
+   "pay_type_high": 3,
+   "privilege_128": 10,
+   "timelength_320": 274102,
+   "price_flac": 200,
+   "fail_process_128": 4,
+   "audio_name": "红尘客栈",
+   "timelength_flac": 274066,
+   "price_320": 200,
+   "pay_type_flac": 3,
+   "topic_url": "",
+   "cid": 2456726,
+   "audio_file_head": 100,
+   "filesize_super": 0,
+   "topic_url_super": "",
+   "old_cpy_super": 1,
+   "all_privs_high": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "all_privs": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "topic_url_320": "",
+   "mixsong_type": 0,
+   "rp_type_320": "audio",
+   "hash": "48729371F20FB048EF4E51D4CD41DBF5",
+   "author_name": "周杰伦",
+   "all_privs_flac": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "fail_process_high": 4,
+   "status_flac": 0,
+   "audio_id": 582129,
+   "status_128": 0,
+   "price_128": 200,
+   "rp_type_flac": "audio",
+   "pay_type_320": 3,
+   "all_privs_320": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "timelength_high": 274066,
+   "filesize_128": 4386261,
+   "rp_type_super": "",
+   "album_name": "十二新作",
+   "rp_type_high": "audio",
+   "topic_url_128": "",
+   "rp_type_128": "audio",
+   "songid": 579132,
+   "rp_type": "audio",
+   "fail_process_super": 0,
+   "extname_super": "",
+   "status_high": 0,
+   "publish_date": "2012-12-28",
+   "hash_320": "998F6DA0137E1B7EE11CE66B9981AA44",
+   "bitrate_super": 0,
+   "hash_high": "597839D02E00B32C08D19E7593CEAD73",
+   "extname": "mp3",
+   "fail_process_320": 4,
+   "fail_process": 4,
+   "old_cpy_high": 0,
+   "timelength_super": 0,
+   "old_cpy_flac": 0,
+   "level": 2,
+   "old_hide_super": 0,
+   "privilege_flac": 10,
+   "old_cpy": 0,
+   "status_super": 1,
+   "old_cpy_128": 0,
+   "old_hide_128": 1,
+   "video_timelength": 275435,
+   "bitrate": 128,
+   "cd_url": "",
+   "privilege_320": 10,
+   "pkg_price_128": 1,
+   "price": 200,
+   "filesize_high": 29581034,
+   "filesize": 4386261,
+   "timelength_128": 274103,
+   "price_super": 0,
+   "has_obbligato": 1,
+   "hash_128": "48729371F20FB048EF4E51D4CD41DBF5",
+   "album_audio_remark": "《第3届全球流行音乐金榜》奖项年度二十大金曲",
+   "bitrate_high": 863,
+   "fail_process_flac": 4,
+   "hash_flac": "4C79F19AB8FC8079F4AF0C078F7817DA",
+   "old_hide_high": 1,
+   "hash_super": "",
+   "timelength": 274103,
+   "privilege": 10,
+   "privilege_super": 0,
+   "video_id": 596097
+  },
+  {
+   "video_track": 3,
+   "filesize_flac": 26174554,
+   "old_hide_flac": 1,
+   "playcount": 0,
+   "status": 0,
+   "video_file_head": 1,
+   "filesize_320": 9607864,
+   "rp_id": 254112,
+   "bitrate_flac": 871,
+   "old_hide": 1,
+   "trans_param": {
+    "cpy_grade": 5,
+    "classmap": {
+     "attr0": 234885128
+    },
+    "language": "国语",
+    "cpy_attr0": 58727552,
+    "musicpack_advance": 1,
+    "display": 32,
+    "display_rate": 1,
+    "flags": {},
+    "ogg_320_hash": "2049705BAF03190EFFA0077963EDD46F",
+    "cpy_map": "2",
+    "union_cover": "http://imge.kugou.com/stdmusic/{size}/20250125/20250125121745628430.jpg",
+    "ogg_320_filesize": 8929800,
+    "qualitymap": {
+     "bits": "28fffc0db411ffffff3fc034",
+     "attr0": 2134884404,
+     "attr1": 1747189759
+    },
+    "is_original": 1,
+    "ogg_128_filesize": 2582556,
+    "cid": 2556354,
+    "ogg_128_hash": "703894710732A98EAA9FCB6A68863F52",
+    "pay_block_tpl": 1,
+    "ipmap": {
+     "attr0": 2200130555904,
+     "bits": "10020042001000"
+    },
+    "hash_offset": {
+     "clip_hash": "C648D79C645952CCA0CAD7402EDD7143",
+     "start_byte": 0,
+     "end_ms": 60000,
+     "end_byte": 960115,
+     "file_type": 0,
+     "start_ms": 0,
+     "offset_hash": "3B64BB531BCC1E2029375672C650AF70"
+    },
+    "appid_block": "3124",
+    "hash_multitrack": "7D9F36B6197EDB37A24B4506927CAB64",
+    "cpy_level": 1
+   },
+   "pay_type_128": 3,
+   "remarks": [
+    {
+     "rel_album_audio_id": 0,
+     "remark_type": 6,
+     "remark": "歌手2024第四期现场表演原曲",
+     "is_defaut_alias": "0"
+    },
+    {
+     "rel_album_audio_id": 0,
+     "remark_type": 12,
+     "remark": "对白周杰伦",
+     "is_defaut_alias": "0"
+    },
+    {
+     "rel_album_audio_id": 0,
+     "remark_type": 12,
+     "remark": "周杰伦对白",
+     "is_defaut_alias": "0"
+    },
+    {
+     "rel_album_audio_id": 0,
+     "remark_type": 12,
+     "remark": "对白 周杰伦",
+     "is_defaut_alias": "0"
+    },
+    {
+     "rel_album_audio_id": 0,
+     "remark_type": 12,
+     "remark": "周杰伦 对白",
+     "is_defaut_alias": "0"
+    },
+    {
+     "rel_album_audio_id": 0,
+     "remark_type": 15,
+     "remark": "首款动态勋章上线",
+     "is_defaut_alias": "0"
+    }
+   ],
+   "all_privs_super": {},
+   "video_hash": "3779EF8A791C2183901515C37310F25D",
+   "is_original": 1,
+   "version": 1,
+   "topic_url_high": "",
+   "identity": 1,
+   "album_id": 971783,
+   "old_cpy_320": 0,
+   "privilege_high": 0,
+   "pay_type": 3,
+   "all_privs_128": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "topic_url_flac": "",
+   "rp_publish": 1,
+   "pkg_price_super": 0,
+   "pkg_price_high": 0,
+   "pkg_price_flac": 1,
+   "video_filesize": 37529084,
+   "price_high": 0,
+   "tmp_privilege": 2,
+   "pkg_price": 1,
+   "status_320": 0,
+   "album_audio_id": 32144422,
+   "pay_type_super": 0,
+   "old_hide_320": 1,
+   "pkg_price_320": 1,
+   "topic_remark": "",
+   "pay_type_high": 0,
+   "privilege_128": 10,
+   "timelength_320": 240169,
+   "price_flac": 200,
+   "fail_process_128": 4,
+   "audio_name": "搁浅",
+   "timelength_flac": 240133,
+   "price_320": 200,
+   "pay_type_flac": 3,
+   "topic_url": "",
+   "cid": 2556354,
+   "audio_file_head": 100,
+   "filesize_super": 0,
+   "topic_url_super": "",
+   "old_cpy_super": 1,
+   "all_privs_high": {},
+   "all_privs": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "topic_url_320": "",
+   "mixsong_type": 0,
+   "rp_type_320": "audio",
+   "hash": "8141FAA45AAD5BCFF5FF9873B89709E3",
+   "author_name": "周杰伦",
+   "all_privs_flac": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "fail_process_high": 0,
+   "status_flac": 0,
+   "audio_id": 254112,
+   "status_128": 0,
+   "price_128": 200,
+   "rp_type_flac": "audio",
+   "pay_type_320": 3,
+   "all_privs_320": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "timelength_high": 0,
+   "filesize_128": 3843167,
+   "rp_type_super": "",
+   "album_name": "七里香",
+   "rp_type_high": "",
+   "topic_url_128": "",
+   "rp_type_128": "audio",
+   "songid": 427,
+   "rp_type": "audio",
+   "fail_process_super": 0,
+   "extname_super": "",
+   "status_high": 1,
+   "publish_date": "2004-08-03",
+   "hash_320": "88F8850923B6408DB6DEFE4CCBB4C4AB",
+   "bitrate_super": 0,
+   "hash_high": "",
+   "extname": "mp3",
+   "fail_process_320": 4,
+   "fail_process": 4,
+   "old_cpy_high": 1,
+   "timelength_super": 0,
+   "old_cpy_flac": 0,
+   "level": 2,
+   "old_hide_super": 0,
+   "privilege_flac": 10,
+   "old_cpy": 0,
+   "status_super": 1,
+   "old_cpy_128": 0,
+   "old_hide_128": 1,
+   "video_timelength": 265333,
+   "bitrate": 128,
+   "cd_url": "",
+   "privilege_320": 10,
+   "pkg_price_128": 1,
+   "price": 200,
+   "filesize_high": 0,
+   "filesize": 3843167,
+   "timelength_128": 240169,
+   "price_super": 0,
+   "has_obbligato": 1,
+   "hash_128": "8141FAA45AAD5BCFF5FF9873B89709E3",
+   "album_audio_remark": "歌手2024第四期现场表演原曲",
+   "bitrate_high": 0,
+   "fail_process_flac": 4,
+   "hash_flac": "D1D7835F9BED257E613A2C854333667B",
+   "old_hide_high": 0,
+   "hash_super": "",
+   "timelength": 240169,
+   "privilege": 10,
+   "privilege_super": 0,
+   "video_id": 756760
+  },
+  {
+   "video_track": 3,
+   "filesize_flac": 26012257,
+   "old_hide_flac": 1,
+   "playcount": 0,
+   "status": 0,
+   "video_file_head": 1,
+   "filesize_320": 8940938,
+   "rp_id": 332453,
+   "bitrate_flac": 930,
+   "old_hide": 1,
+   "trans_param": {
+    "cpy_grade": 5,
+    "classmap": {
+     "attr0": 234885128
+    },
+    "language": "国语",
+    "cpy_attr0": 58727552,
+    "musicpack_advance": 1,
+    "display": 32,
+    "display_rate": 1,
+    "flags": {},
+    "ogg_320_hash": "B114B90EE3694CA61A97A070D7DED17D",
+    "cpy_map": "2",
+    "union_cover": "http://imge.kugou.com/stdmusic/{size}/20241118/20241118160622508429.jpg",
+    "ogg_320_filesize": 8990532,
+    "qualitymap": {
+     "bits": "28fffc0dfc11ffffff3fc075",
+     "attr0": 2134884469,
+     "attr1": 2015625215
+    },
+    "is_original": 1,
+    "ogg_128_filesize": 2532271,
+    "cid": 2556475,
+    "ogg_128_hash": "5BFC866CFC79EA6790D6D4892EBF91CE",
+    "pay_block_tpl": 1,
+    "ipmap": {
+     "attr0": 2475008462848,
+     "bits": "10024042001000"
+    },
+    "hash_offset": {
+     "clip_hash": "CEDC66EA175AED2ED09E4858BE2C80CD",
+     "start_byte": 0,
+     "end_ms": 60000,
+     "end_byte": 960115,
+     "file_type": 0,
+     "start_ms": 0,
+     "offset_hash": "974381C4C3DAD140FD7CC02466378C93"
+    },
+    "appid_block": "3124",
+    "hash_multitrack": "F7CD60A7FBDD7CB8E0A6AAEE9BBF1123",
+    "cpy_level": 1
+   },
+   "pay_type_128": 3,
+   "remarks": [
+    {
+     "rel_album_audio_id": 0,
+     "remark_type": 12,
+     "remark": "叫一个爸",
+     "is_defaut_alias": "0"
+    },
+    {
+     "remark": "《第20届金曲奖》奖项最佳年度歌曲奖",
+     "ip_type": 1,
+     "rel_album_audio_id": 0,
+     "work_type": "46",
+     "remark_type": 2
+    },
+    {
+     "remark": "《第20屆台灣金曲獎頒獎典禮》奖项最佳年度歌曲奖",
+     "ip_type": 2,
+     "rel_album_audio_id": 0,
+     "work_type": "46",
+     "remark_type": 2
+    },
+    {
+     "remark": "《第10届音乐盛典咪咕汇》奖项十年10大金曲",
+     "ip_type": 1,
+     "rel_album_audio_id": 0,
+     "work_type": "46",
+     "remark_type": 2
+    },
+    {
+     "remark": "《第10届无线音乐盛典咪咕汇》奖项十年10大金曲",
+     "ip_type": 2,
+     "rel_album_audio_id": 0,
+     "work_type": "46",
+     "remark_type": 2
+    },
+    {
+     "remark": "《第10届音乐风云榜年度盛典》奖项十年港台十大金曲",
+     "ip_type": 1,
+     "rel_album_audio_id": 0,
+     "work_type": "46",
+     "remark_type": 2
+    }
+   ],
+   "all_privs_super": {},
+   "video_hash": "F816FEB9F4972D57C16503DAE9E36802",
+   "is_original": 1,
+   "version": 1,
+   "topic_url_high": "",
+   "identity": 1,
+   "album_id": 960399,
+   "old_cpy_320": 0,
+   "privilege_high": 10,
+   "pay_type": 3,
+   "all_privs_128": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "topic_url_flac": "",
+   "rp_publish": 1,
+   "pkg_price_super": 0,
+   "pkg_price_high": 1,
+   "pkg_price_flac": 1,
+   "video_filesize": 31683187,
+   "price_high": 200,
+   "tmp_privilege": 2,
+   "pkg_price": 1,
+   "status_320": 0,
+   "album_audio_id": 32042828,
+   "pay_type_super": 0,
+   "old_hide_320": 1,
+   "pkg_price_320": 1,
+   "topic_remark": "",
+   "pay_type_high": 3,
+   "privilege_128": 10,
+   "timelength_320": 223503,
+   "price_flac": 200,
+   "fail_process_128": 4,
+   "audio_name": "稻香",
+   "timelength_flac": 223452,
+   "price_320": 200,
+   "pay_type_flac": 3,
+   "topic_url": "",
+   "cid": 2556475,
+   "audio_file_head": 100,
+   "filesize_super": 0,
+   "topic_url_super": "",
+   "old_cpy_super": 1,
+   "all_privs_high": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "all_privs": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "topic_url_320": "",
+   "mixsong_type": 0,
+   "rp_type_320": "audio",
+   "hash": "8909E1809908CD8E3BF6CF85D98B93F0",
+   "author_name": "周杰伦",
+   "all_privs_flac": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "fail_process_high": 4,
+   "status_flac": 0,
+   "audio_id": 332453,
+   "status_128": 0,
+   "price_128": 200,
+   "rp_type_flac": "audio",
+   "pay_type_320": 3,
+   "all_privs_320": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "timelength_high": 223452,
+   "filesize_128": 3576668,
+   "rp_type_super": "",
+   "album_name": "魔杰座",
+   "rp_type_high": "audio",
+   "topic_url_128": "",
+   "rp_type_128": "audio",
+   "songid": 100,
+   "rp_type": "audio",
+   "fail_process_super": 0,
+   "extname_super": "",
+   "status_high": 0,
+   "publish_date": "2008-10-15",
+   "hash_320": "21AC928E1D68EC3632EF2CAE68718201",
+   "bitrate_super": 0,
+   "hash_high": "D987462A7FD98151845DB245FE214267",
+   "extname": "mp3",
+   "fail_process_320": 4,
+   "fail_process": 4,
+   "old_cpy_high": 0,
+   "timelength_super": 0,
+   "old_cpy_flac": 0,
+   "level": 2,
+   "old_hide_super": 0,
+   "privilege_flac": 10,
+   "old_cpy": 0,
+   "status_super": 1,
+   "old_cpy_128": 0,
+   "old_hide_128": 1,
+   "video_timelength": 224057,
+   "bitrate": 128,
+   "cd_url": "",
+   "privilege_320": 10,
+   "pkg_price_128": 1,
+   "price": 200,
+   "filesize_high": 88706509,
+   "filesize": 3576668,
+   "timelength_128": 223503,
+   "price_super": 0,
+   "has_obbligato": 1,
+   "hash_128": "8909E1809908CD8E3BF6CF85D98B93F0",
+   "album_audio_remark": "叫一个爸",
+   "bitrate_high": 3175,
+   "fail_process_flac": 4,
+   "hash_flac": "36AB2C542AF54578EFD376A4E2C57C1F",
+   "old_hide_high": 1,
+   "hash_super": "",
+   "timelength": 223503,
+   "privilege": 10,
+   "privilege_super": 0,
+   "video_id": 592103
+  },
+  {
+   "video_track": 3,
+   "filesize_flac": 30596877,
+   "old_hide_flac": 1,
+   "playcount": 0,
+   "status": 0,
+   "video_file_head": 1,
+   "filesize_320": 11029094,
+   "rp_id": 316558,
+   "bitrate_flac": 887,
+   "old_hide": 1,
+   "trans_param": {
+    "cpy_grade": 5,
+    "classmap": {
+     "attr0": 234885128
+    },
+    "language": "国语",
+    "cpy_attr0": 58727552,
+    "musicpack_advance": 1,
+    "display": 32,
+    "display_rate": 1,
+    "flags": {},
+    "ogg_320_hash": "ED99306BC4096D5EBB8B716CCD57200E",
+    "cpy_map": "2",
+    "union_cover": "http://imge.kugou.com/stdmusic/{size}/20250125/20250125121901851911.jpg",
+    "ogg_320_filesize": 10683299,
+    "qualitymap": {
+     "bits": "28fffc0dfc11ffffff3fc074",
+     "attr0": 2134884468,
+     "attr1": 2015625215
+    },
+    "is_original": 1,
+    "ogg_128_filesize": 3082197,
+    "cid": 2556389,
+    "ogg_128_hash": "6332EAD40A6761FD9D8EC17A033F7BAA",
+    "pay_block_tpl": 1,
+    "ipmap": {
+     "attr0": 2200130555904,
+     "bits": "10020042001000"
+    },
+    "hash_offset": {
+     "clip_hash": "F1444AA336B3C42664E98B70BC51221E",
+     "start_byte": 0,
+     "end_ms": 60000,
+     "end_byte": 960119,
+     "file_type": 0,
+     "start_ms": 0,
+     "offset_hash": "21009F245DAA0E287E973FA0AB058F09"
+    },
+    "appid_block": "3124",
+    "hash_multitrack": "EB52C047BAA03D67E668BCF3FE21A7EF",
+    "cpy_level": 1
+   },
+   "pay_type_128": 3,
+   "remarks": [],
+   "all_privs_super": {},
+   "video_hash": "0F5C780B56CD4FB78B6DD34759D861B6",
+   "is_original": 1,
+   "version": 1,
+   "topic_url_high": "",
+   "identity": 1,
+   "album_id": 958909,
+   "old_cpy_320": 0,
+   "privilege_high": 10,
+   "pay_type": 3,
+   "all_privs_128": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "topic_url_flac": "",
+   "rp_publish": 1,
+   "pkg_price_super": 0,
+   "pkg_price_high": 1,
+   "pkg_price_flac": 1,
+   "video_filesize": 39797733,
+   "price_high": 200,
+   "tmp_privilege": 2,
+   "pkg_price": 1,
+   "status_320": 0,
+   "album_audio_id": 32029516,
+   "pay_type_super": 0,
+   "old_hide_320": 1,
+   "pkg_price_320": 1,
+   "topic_remark": "",
+   "pay_type_high": 3,
+   "privilege_128": 10,
+   "timelength_320": 275696,
+   "price_flac": 200,
+   "fail_process_128": 4,
+   "audio_name": "枫",
+   "timelength_flac": 275667,
+   "price_320": 200,
+   "pay_type_flac": 3,
+   "topic_url": "",
+   "cid": 2556389,
+   "audio_file_head": 100,
+   "filesize_super": 0,
+   "topic_url_super": "",
+   "old_cpy_super": 1,
+   "all_privs_high": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "all_privs": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "topic_url_320": "",
+   "mixsong_type": 0,
+   "rp_type_320": "audio",
+   "hash": "0D7E8C11C961A17EB8779FEB0CA772E3",
+   "author_name": "周杰伦",
+   "all_privs_flac": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "fail_process_high": 4,
+   "status_flac": 0,
+   "audio_id": 316558,
+   "status_128": 0,
+   "price_128": 200,
+   "rp_type_flac": "audio",
+   "pay_type_320": 3,
+   "all_privs_320": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "timelength_high": 275667,
+   "filesize_128": 4411755,
+   "rp_type_super": "",
+   "album_name": "十一月的萧邦",
+   "rp_type_high": "audio",
+   "topic_url_128": "",
+   "rp_type_128": "audio",
+   "songid": 594,
+   "rp_type": "audio",
+   "fail_process_super": 0,
+   "extname_super": "",
+   "status_high": 0,
+   "publish_date": "2005-11-01",
+   "hash_320": "858B34B2BE2E2B0FDA83E1E3A2F1813B",
+   "bitrate_super": 0,
+   "hash_high": "81F7C70059AD46B2BAFE6392D5120D05",
+   "extname": "mp3",
+   "fail_process_320": 4,
+   "fail_process": 4,
+   "old_cpy_high": 0,
+   "timelength_super": 0,
+   "old_cpy_flac": 0,
+   "level": 2,
+   "old_hide_super": 0,
+   "privilege_flac": 10,
+   "old_cpy": 0,
+   "status_super": 1,
+   "old_cpy_128": 0,
+   "old_hide_128": 1,
+   "video_timelength": 282603,
+   "bitrate": 128,
+   "cd_url": "",
+   "privilege_320": 10,
+   "pkg_price_128": 1,
+   "price": 200,
+   "filesize_high": 119858269,
+   "filesize": 4411755,
+   "timelength_128": 275696,
+   "price_super": 0,
+   "has_obbligato": 1,
+   "hash_128": "0D7E8C11C961A17EB8779FEB0CA772E3",
+   "album_audio_remark": "",
+   "bitrate_high": 3477,
+   "fail_process_flac": 4,
+   "hash_flac": "F5C3EAC58187030AB476A47196E6897A",
+   "old_hide_high": 1,
+   "hash_super": "",
+   "timelength": 275696,
+   "privilege": 10,
+   "privilege_super": 0,
+   "video_id": 2808
+  },
+  {
+   "video_track": 3,
+   "filesize_flac": 28309022,
+   "old_hide_flac": 1,
+   "playcount": 0,
+   "status": 0,
+   "video_file_head": 1,
+   "filesize_320": 10160781,
+   "rp_id": 167645,
+   "bitrate_flac": 891,
+   "old_hide": 1,
+   "trans_param": {
+    "cpy_grade": 5,
+    "classmap": {
+     "attr0": 234881032
+    },
+    "language": "国语",
+    "cpy_attr0": 58727552,
+    "musicpack_advance": 1,
+    "display": 0,
+    "display_rate": 0,
+    "flags": {},
+    "ogg_320_hash": "F6D206DA2B28F8BAC357DD6702DBE227",
+    "cpy_map": "2",
+    "union_cover": "http://imge.kugou.com/stdmusic/{size}/20241118/20241118160622508429.jpg",
+    "ogg_320_filesize": 9886068,
+    "qualitymap": {
+     "bits": "2800000dfc11ffffff3fc0f5",
+     "attr0": 2134884597,
+     "attr1": 2015625215
+    },
+    "is_original": 1,
+    "ogg_128_filesize": 2845150,
+    "cid": 2556471,
+    "ogg_128_hash": "55FAF85E7B9D7A79160A45346C8DB2D6",
+    "pay_block_tpl": 1,
+    "ipmap": {
+     "attr0": 2200197664768,
+     "bits": "10020046001000"
+    },
+    "hash_offset": {
+     "clip_hash": "C10008F51F1BAC71E6D9244C7E1B4FF8",
+     "start_byte": 0,
+     "end_ms": 60000,
+     "end_byte": 960117,
+     "file_type": 0,
+     "start_ms": 0,
+     "offset_hash": "1D6EF757C5A81A9E5F722693DF3D9A06"
+    },
+    "appid_block": "3124",
+    "hash_multitrack": "DB73022DCF65CE9F440C0E77A02F6D34",
+    "cpy_level": 1
+   },
+   "pay_type_128": 3,
+   "remarks": [
+    {
+     "rel_album_audio_id": 0,
+     "remark_type": 10,
+     "remark": "祖国人关羽",
+     "is_defaut_alias": "0"
+    },
+    {
+     "rel_album_audio_id": 0,
+     "remark_type": 10,
+     "remark": "祖国人",
+     "is_defaut_alias": "0"
+    },
+    {
+     "rel_album_audio_id": 0,
+     "remark_type": 12,
+     "remark": "秀才兰亭序",
+     "is_defaut_alias": "0"
+    },
+    {
+     "rel_album_audio_id": 0,
+     "remark_type": 12,
+     "remark": "相思王维抖音",
+     "is_defaut_alias": "0"
+    },
+    {
+     "rel_album_audio_id": 0,
+     "remark_type": 12,
+     "remark": "抖音版相思王维",
+     "is_defaut_alias": "0"
+    },
+    {
+     "rel_album_audio_id": 0,
+     "remark_type": 12,
+     "remark": "秀才bgm",
+     "is_defaut_alias": "0"
+    },
+    {
+     "rel_album_audio_id": 0,
+     "remark_type": 12,
+     "remark": "秀才",
+     "is_defaut_alias": "0"
+    },
+    {
+     "rel_album_audio_id": 0,
+     "remark_type": 12,
+     "remark": "抖音相思王维",
+     "is_defaut_alias": "0"
+    },
+    {
+     "rel_album_audio_id": 0,
+     "remark_type": 12,
+     "remark": "兰亭序抖音秀才",
+     "is_defaut_alias": "0"
+    },
+    {
+     "rel_album_audio_id": 0,
+     "remark_type": 12,
+     "remark": "秀才抖音",
+     "is_defaut_alias": "0"
+    },
+    {
+     "rel_album_audio_id": 0,
+     "remark_type": 12,
+     "remark": "兰亭序秀才版",
+     "is_defaut_alias": "0"
+    },
+    {
+     "rel_album_audio_id": 0,
+     "remark_type": 12,
+     "remark": "相思王维抖音版",
+     "is_defaut_alias": "0"
+    },
+    {
+     "rel_album_audio_id": 0,
+     "remark_type": 12,
+     "remark": "相思王维bgm",
+     "is_defaut_alias": "0"
+    },
+    {
+     "rel_album_audio_id": 0,
+     "remark_type": 12,
+     "remark": "相思王维抖音bgm",
+     "is_defaut_alias": "0"
+    },
+    {
+     "rel_album_audio_id": 0,
+     "remark_type": 12,
+     "remark": "情字何解",
+     "is_defaut_alias": "0"
+    },
+    {
+     "rel_album_audio_id": 0,
+     "remark_type": 12,
+     "remark": "秀才抖音版",
+     "is_defaut_alias": "0"
+    },
+    {
+     "rel_album_audio_id": 0,
+     "remark_type": 12,
+     "remark": "兰亭序秀才",
+     "is_defaut_alias": "0"
+    },
+    {
+     "rel_album_audio_id": 0,
+     "remark_type": 12,
+     "remark": "你听过王维的相思吗",
+     "is_defaut_alias": "0"
+    },
+    {
+     "rel_album_audio_id": 0,
+     "remark_type": 12,
+     "remark": "相思王维背景音乐",
+     "is_defaut_alias": "0"
+    },
+    {
+     "rel_album_audio_id": 0,
+     "remark_type": 12,
+     "remark": "这可不是一般的红豆",
+     "is_defaut_alias": "0"
+    },
+    {
+     "rel_album_audio_id": 0,
+     "remark_type": 12,
+     "remark": "相思王维抖音背景音乐",
+     "is_defaut_alias": "0"
+    }
+   ],
+   "all_privs_super": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "video_hash": "E8D3C89F523FD91BE5A9075E70F5184C",
+   "is_original": 1,
+   "version": 1,
+   "topic_url_high": "",
+   "identity": 1,
+   "album_id": 960399,
+   "old_cpy_320": 0,
+   "privilege_high": 10,
+   "pay_type": 3,
+   "all_privs_128": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "topic_url_flac": "",
+   "rp_publish": 1,
+   "pkg_price_super": 1,
+   "pkg_price_high": 1,
+   "pkg_price_flac": 1,
+   "video_filesize": 37195909,
+   "price_high": 200,
+   "tmp_privilege": 2,
+   "pkg_price": 1,
+   "status_320": 0,
+   "album_audio_id": 32042824,
+   "pay_type_super": 3,
+   "old_hide_320": 1,
+   "pkg_price_320": 1,
+   "topic_remark": "",
+   "pay_type_high": 3,
+   "privilege_128": 10,
+   "timelength_320": 253988,
+   "price_flac": 200,
+   "fail_process_128": 4,
+   "audio_name": "兰亭序",
+   "timelength_flac": 253960,
+   "price_320": 200,
+   "pay_type_flac": 3,
+   "topic_url": "",
+   "cid": 2556471,
+   "audio_file_head": 100,
+   "filesize_super": 179197724,
+   "topic_url_super": "",
+   "old_cpy_super": 0,
+   "all_privs_high": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "all_privs": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "topic_url_320": "",
+   "mixsong_type": 0,
+   "rp_type_320": "audio",
+   "hash": "4EC10B1B7B9BEB2F0ADB89BBEC5F664B",
+   "author_name": "周杰伦",
+   "all_privs_flac": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "fail_process_high": 4,
+   "status_flac": 0,
+   "audio_id": 167645,
+   "status_128": 0,
+   "price_128": 200,
+   "rp_type_flac": "audio",
+   "pay_type_320": 3,
+   "all_privs_320": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "timelength_high": 253960,
+   "filesize_128": 4064429,
+   "rp_type_super": "audio",
+   "album_name": "魔杰座",
+   "rp_type_high": "audio",
+   "topic_url_128": "",
+   "rp_type_128": "audio",
+   "songid": 395,
+   "rp_type": "audio",
+   "fail_process_super": 4,
+   "extname_super": "dff",
+   "status_high": 0,
+   "publish_date": "2008-10-15",
+   "hash_320": "C8C4BCC476356477341C84D5E2E946EF",
+   "bitrate_super": 5644,
+   "hash_high": "12B91717DBD7C05D31F57F9CA7C39907",
+   "extname": "mp3",
+   "fail_process_320": 4,
+   "fail_process": 4,
+   "old_cpy_high": 0,
+   "timelength_super": 253964,
+   "old_cpy_flac": 0,
+   "level": 2,
+   "old_hide_super": 1,
+   "privilege_flac": 10,
+   "old_cpy": 0,
+   "status_super": 0,
+   "old_cpy_128": 0,
+   "old_hide_128": 1,
+   "video_timelength": 266032,
+   "bitrate": 128,
+   "cd_url": "",
+   "privilege_320": 10,
+   "pkg_price_128": 1,
+   "price": 200,
+   "filesize_high": 88828640,
+   "filesize": 4064429,
+   "timelength_128": 253988,
+   "price_super": 200,
+   "has_obbligato": 1,
+   "hash_128": "4EC10B1B7B9BEB2F0ADB89BBEC5F664B",
+   "album_audio_remark": "祖国人关羽",
+   "bitrate_high": 2797,
+   "fail_process_flac": 4,
+   "hash_flac": "9A5444DACDD328DF305B847C8C998324",
+   "old_hide_high": 1,
+   "hash_super": "57262FC5432B671826041E2EE0FAC864",
+   "timelength": 253988,
+   "privilege": 10,
+   "privilege_super": 10,
+   "video_id": 756476
+  },
+  {
+   "video_track": 3,
+   "filesize_flac": 26691277,
+   "old_hide_flac": 1,
+   "playcount": 0,
+   "status": 0,
+   "video_file_head": 1,
+   "filesize_320": 9076031,
+   "rp_id": 338638,
+   "bitrate_flac": 941,
+   "old_hide": 1,
+   "trans_param": {
+    "cpy_grade": 6,
+    "classmap": {
+     "attr0": 234881032
+    },
+    "language": "国语",
+    "cpy_attr0": 58727552,
+    "musicpack_advance": 1,
+    "display": 0,
+    "display_rate": 0,
+    "flags": {},
+    "ogg_320_hash": "192BD53487B102A005373B7C73896A43",
+    "cpy_map": "2",
+    "union_cover": "http://imge.kugou.com/stdmusic/{size}/20250125/20250125121901851911.jpg",
+    "ogg_320_filesize": 9759467,
+    "qualitymap": {
+     "bits": "28fffc0db411ffffff3fc034",
+     "attr0": 2134884404,
+     "attr1": 1747189759
+    },
+    "is_original": 1,
+    "ogg_128_filesize": 2830091,
+    "cid": 2556384,
+    "ogg_128_hash": "6BA1B707B7DF8399A26B606B781BD717",
+    "pay_block_tpl": 1,
+    "ipmap": {
+     "attr0": 2475008462880,
+     "bits": "10024042001020"
+    },
+    "hash_offset": {
+     "clip_hash": "A510094EAE0A9BE9B1EFC769EBCE2D58",
+     "start_byte": 0,
+     "end_ms": 60000,
+     "end_byte": 960121,
+     "file_type": 0,
+     "start_ms": 0,
+     "offset_hash": "53056BD37FCD1A3632BC1EA05851F2BB"
+    },
+    "appid_block": "3124",
+    "hash_multitrack": "ABE07BA981B9BB2C9B3FB9B8EBF774B7",
+    "cpy_level": 1
+   },
+   "pay_type_128": 3,
+   "remarks": [
+    {
+     "rel_album_audio_id": 0,
+     "remark_type": 12,
+     "remark": "肖邦的夜曲",
+     "is_defaut_alias": "0"
+    }
+   ],
+   "all_privs_super": {},
+   "video_hash": "5FA9DA04AFD3317DCAE55A5D73664596",
+   "is_original": 1,
+   "version": 1,
+   "topic_url_high": "",
+   "identity": 1,
+   "album_id": 958909,
+   "old_cpy_320": 0,
+   "privilege_high": 0,
+   "pay_type": 3,
+   "all_privs_128": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "topic_url_flac": "",
+   "rp_publish": 1,
+   "pkg_price_super": 0,
+   "pkg_price_high": 0,
+   "pkg_price_flac": 1,
+   "video_filesize": 32684171,
+   "price_high": 0,
+   "tmp_privilege": 2,
+   "pkg_price": 1,
+   "status_320": 0,
+   "album_audio_id": 32029511,
+   "pay_type_super": 0,
+   "old_hide_320": 1,
+   "pkg_price_320": 1,
+   "topic_remark": "",
+   "pay_type_high": 0,
+   "privilege_128": 10,
+   "timelength_320": 226873,
+   "price_flac": 200,
+   "fail_process_128": 4,
+   "audio_name": "夜曲",
+   "timelength_flac": 226827,
+   "price_320": 200,
+   "pay_type_flac": 3,
+   "topic_url": "",
+   "cid": 2556384,
+   "audio_file_head": 100,
+   "filesize_super": 0,
+   "topic_url_super": "",
+   "old_cpy_super": 1,
+   "all_privs_high": {},
+   "all_privs": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "topic_url_320": "",
+   "mixsong_type": 0,
+   "rp_type_320": "audio",
+   "hash": "16C8AB298231370293D16BCF9E5FF9B6",
+   "author_name": "周杰伦",
+   "all_privs_flac": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "fail_process_high": 0,
+   "status_flac": 0,
+   "audio_id": 338638,
+   "status_128": 0,
+   "price_128": 200,
+   "rp_type_flac": "audio",
+   "pay_type_320": 3,
+   "all_privs_320": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "timelength_high": 0,
+   "filesize_128": 3630591,
+   "rp_type_super": "",
+   "album_name": "十一月的萧邦",
+   "rp_type_high": "",
+   "topic_url_128": "",
+   "rp_type_128": "audio",
+   "songid": 231,
+   "rp_type": "audio",
+   "fail_process_super": 0,
+   "extname_super": "",
+   "status_high": 1,
+   "publish_date": "2005-11-01",
+   "hash_320": "9A8AAD4E01CC443812DC48B7DA5BA101",
+   "bitrate_super": 0,
+   "hash_high": "",
+   "extname": "mp3",
+   "fail_process_320": 4,
+   "fail_process": 4,
+   "old_cpy_high": 1,
+   "timelength_super": 0,
+   "old_cpy_flac": 0,
+   "level": 2,
+   "old_hide_super": 0,
+   "privilege_flac": 10,
+   "old_cpy": 0,
+   "status_super": 1,
+   "old_cpy_128": 0,
+   "old_hide_128": 1,
+   "video_timelength": 231732,
+   "bitrate": 128,
+   "cd_url": "",
+   "privilege_320": 10,
+   "pkg_price_128": 1,
+   "price": 200,
+   "filesize_high": 0,
+   "filesize": 3630591,
+   "timelength_128": 226873,
+   "price_super": 0,
+   "has_obbligato": 1,
+   "hash_128": "16C8AB298231370293D16BCF9E5FF9B6",
+   "album_audio_remark": "肖邦的夜曲",
+   "bitrate_high": 0,
+   "fail_process_flac": 4,
+   "hash_flac": "A527C2F783886AFBEF99640F8A28A3C2",
+   "old_hide_high": 0,
+   "hash_super": "",
+   "timelength": 226873,
+   "privilege": 10,
+   "privilege_super": 0,
+   "video_id": 596344
+  },
+  {
+   "video_track": 3,
+   "filesize_flac": 26775743,
+   "old_hide_flac": 1,
+   "playcount": 0,
+   "status": 0,
+   "video_file_head": 1,
+   "filesize_320": 9891204,
+   "rp_id": 832771,
+   "bitrate_flac": 866,
+   "old_hide": 1,
+   "trans_param": {
+    "cpy_grade": 5,
+    "classmap": {
+     "attr0": 234885128
+    },
+    "language": "国语",
+    "cpy_attr0": 58727552,
+    "musicpack_advance": 1,
+    "display": 32,
+    "display_rate": 1,
+    "flags": {},
+    "ogg_320_hash": "9DEDB6063F252182D3D41B7F4174011C",
+    "cpy_map": "2",
+    "union_cover": "http://imge.kugou.com/stdmusic/{size}/20220705/20220705143006989099.jpg",
+    "ogg_320_filesize": 9295357,
+    "qualitymap": {
+     "bits": "2800000db4107ffff73fc035",
+     "attr0": 2000666677,
+     "attr1": 1746993151
+    },
+    "is_original": 1,
+    "ogg_128_filesize": 2765478,
+    "cid": 2556438,
+    "ogg_128_hash": "CD85DE0983B8477A027EAA18EED91121",
+    "pay_block_tpl": 1,
+    "ipmap": {
+     "attr0": 2200130555904,
+     "bits": "10020042001000"
+    },
+    "hash_offset": {
+     "clip_hash": "F6610B6137FB39B58DE1D0EDF2CA55FF",
+     "start_byte": 0,
+     "end_ms": 60000,
+     "end_byte": 960123,
+     "file_type": 0,
+     "start_ms": 0,
+     "offset_hash": "09BEF2D5980BD1B80F85F20AA79C587C"
+    },
+    "appid_block": "3124",
+    "hash_multitrack": "BC3C7B77E070EC3AB08A8FBBB9EC96AC",
+    "cpy_level": 1
+   },
+   "pay_type_128": 3,
+   "remarks": [],
+   "all_privs_super": {},
+   "video_hash": "4DD4F2E36E9AEC7DD5D788594CDD5F3D",
+   "is_original": 1,
+   "version": 1,
+   "topic_url_high": "",
+   "identity": 1,
+   "album_id": 979856,
+   "old_cpy_320": 0,
+   "privilege_high": 0,
+   "pay_type": 3,
+   "all_privs_128": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "topic_url_flac": "",
+   "rp_publish": 1,
+   "pkg_price_super": 0,
+   "pkg_price_high": 0,
+   "pkg_price_flac": 1,
+   "video_filesize": 17378340,
+   "price_high": 0,
+   "tmp_privilege": 2,
+   "pkg_price": 1,
+   "status_320": 0,
+   "album_audio_id": 32218354,
+   "pay_type_super": 0,
+   "old_hide_320": 1,
+   "pkg_price_320": 1,
+   "topic_remark": "",
+   "pay_type_high": 0,
+   "privilege_128": 10,
+   "timelength_320": 247248,
+   "price_flac": 200,
+   "fail_process_128": 4,
+   "audio_name": "蒲公英的约定",
+   "timelength_flac": 247199,
+   "price_320": 200,
+   "pay_type_flac": 3,
+   "topic_url": "",
+   "cid": 2556438,
+   "audio_file_head": 100,
+   "filesize_super": 0,
+   "topic_url_super": "",
+   "old_cpy_super": 1,
+   "all_privs_high": {},
+   "all_privs": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "topic_url_320": "",
+   "mixsong_type": 0,
+   "rp_type_320": "audio",
+   "hash": "A14373681262867AB43FEF5467F4CC1D",
+   "author_name": "周杰伦",
+   "all_privs_flac": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "fail_process_high": 0,
+   "status_flac": 0,
+   "audio_id": 832771,
+   "status_128": 0,
+   "price_128": 200,
+   "rp_type_flac": "audio",
+   "pay_type_320": 3,
+   "all_privs_320": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "timelength_high": 0,
+   "filesize_128": 3956601,
+   "rp_type_super": "",
+   "album_name": "我很忙",
+   "rp_type_high": "",
+   "topic_url_128": "",
+   "rp_type_128": "audio",
+   "songid": 318,
+   "rp_type": "audio",
+   "fail_process_super": 0,
+   "extname_super": "",
+   "status_high": 1,
+   "publish_date": "2007-11-02",
+   "hash_320": "9671532B11BEBE1D9140CE5C7C13ADFE",
+   "bitrate_super": 0,
+   "hash_high": "",
+   "extname": "mp3",
+   "fail_process_320": 4,
+   "fail_process": 4,
+   "old_cpy_high": 1,
+   "timelength_super": 0,
+   "old_cpy_flac": 0,
+   "level": 2,
+   "old_hide_super": 0,
+   "privilege_flac": 10,
+   "old_cpy": 0,
+   "status_super": 1,
+   "old_cpy_128": 0,
+   "old_hide_128": 1,
+   "video_timelength": 248129,
+   "bitrate": 128,
+   "cd_url": "",
+   "privilege_320": 10,
+   "pkg_price_128": 1,
+   "price": 200,
+   "filesize_high": 0,
+   "filesize": 3956601,
+   "timelength_128": 247248,
+   "price_super": 0,
+   "has_obbligato": 1,
+   "hash_128": "A14373681262867AB43FEF5467F4CC1D",
+   "album_audio_remark": "",
+   "bitrate_high": 0,
+   "fail_process_flac": 4,
+   "hash_flac": "40A35CEFB4A773090B79E69C6FCFEE82",
+   "old_hide_high": 0,
+   "hash_super": "",
+   "timelength": 247248,
+   "privilege": 10,
+   "privilege_super": 0,
+   "video_id": 158907
+  },
+  {
+   "video_track": 3,
+   "filesize_flac": 35845646,
+   "old_hide_flac": 1,
+   "playcount": 0,
+   "status": 0,
+   "video_file_head": 1,
+   "filesize_320": 11970297,
+   "rp_id": 2561552,
+   "bitrate_flac": 958,
+   "old_hide": 1,
+   "trans_param": {
+    "cpy_grade": 6,
+    "classmap": {
+     "attr0": 234885128
+    },
+    "language": "国语",
+    "cpy_attr0": 58727552,
+    "musicpack_advance": 1,
+    "display": 32,
+    "display_rate": 1,
+    "flags": {},
+    "ogg_320_hash": "B47151F675311B27A2193C4A70CD5278",
+    "cpy_map": "2",
+    "union_cover": "http://imge.kugou.com/stdmusic/{size}/20250125/20250125121745628430.jpg",
+    "ogg_320_filesize": 11993357,
+    "qualitymap": {
+     "bits": "28fffc0db411ffffbf3fc074",
+     "attr0": 1061142644,
+     "attr1": 1747189759
+    },
+    "is_original": 1,
+    "ogg_128_filesize": 3416364,
+    "cid": 2556350,
+    "ogg_128_hash": "FCABC376CA621A163D22CCB5AC61581F",
+    "pay_block_tpl": 1,
+    "ipmap": {
+     "attr0": 2475008462848,
+     "bits": "10024042001000"
+    },
+    "hash_offset": {
+     "clip_hash": "195AA769C0AB9AB2A5F0CB62BA88D3B8",
+     "start_byte": 0,
+     "end_ms": 140700,
+     "end_byte": 2251611,
+     "file_type": 0,
+     "start_ms": 80700,
+     "offset_hash": "91E33709A2B3E828A3ECB93C96E5A320"
+    },
+    "appid_block": "3124",
+    "hash_multitrack": "1EB0624E43899F7BB6829C52C544E0F5",
+    "cpy_level": 1
+   },
+   "pay_type_128": 3,
+   "remarks": [
+    {
+     "rel_album_audio_id": 0,
+     "remark_type": 8,
+     "remark": "《初夏物语》国语版",
+     "is_defaut_alias": "0"
+    },
+    {
+     "remark": "《第11届全球华语榜中榜》奖项最佳歌曲 (港台)",
+     "ip_type": 1,
+     "rel_album_audio_id": 0,
+     "work_type": "46",
+     "remark_type": 2
+    },
+    {
+     "remark": "《China Music Awards》奖项最佳歌曲 (港台)",
+     "ip_type": 2,
+     "rel_album_audio_id": 0,
+     "work_type": "46",
+     "remark_type": 2
+    },
+    {
+     "remark": "《第27届十大中文金曲》奖项优秀国语歌曲奖金奖",
+     "ip_type": 1,
+     "rel_album_audio_id": 0,
+     "work_type": "46",
+     "remark_type": 2
+    },
+    {
+     "remark": "《第27届十大中文金曲》奖项十大金曲奖",
+     "ip_type": 1,
+     "rel_album_audio_id": 0,
+     "work_type": "46",
+     "remark_type": 2
+    },
+    {
+     "remark": "《第17届叱咤乐坛流行榜颁奖典礼》奖项提名叱咤乐坛我最喜爱的歌曲大奖",
+     "ip_type": 1,
+     "rel_album_audio_id": 0,
+     "work_type": "46",
+     "remark_type": 2
+    }
+   ],
+   "all_privs_super": {},
+   "video_hash": "ED8C9E98225D95DCC5A923154AE5926F",
+   "is_original": 1,
+   "version": 1,
+   "topic_url_high": "",
+   "identity": 1,
+   "album_id": 971783,
+   "old_cpy_320": 0,
+   "privilege_high": 10,
+   "pay_type": 3,
+   "all_privs_128": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "topic_url_flac": "",
+   "rp_publish": 1,
+   "pkg_price_super": 0,
+   "pkg_price_high": 1,
+   "pkg_price_flac": 1,
+   "video_filesize": 42904945,
+   "price_high": 200,
+   "tmp_privilege": 2,
+   "pkg_price": 1,
+   "status_320": 0,
+   "album_audio_id": 32144418,
+   "pay_type_super": 0,
+   "old_hide_320": 1,
+   "pkg_price_320": 1,
+   "topic_remark": "",
+   "pay_type_high": 3,
+   "privilege_128": 10,
+   "timelength_320": 299232,
+   "price_flac": 200,
+   "fail_process_128": 4,
+   "audio_name": "七里香",
+   "timelength_flac": 299200,
+   "price_320": 200,
+   "pay_type_flac": 3,
+   "topic_url": "",
+   "cid": 2556350,
+   "audio_file_head": 100,
+   "filesize_super": 0,
+   "topic_url_super": "",
+   "old_cpy_super": 1,
+   "all_privs_high": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "all_privs": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "topic_url_320": "",
+   "mixsong_type": 0,
+   "rp_type_320": "audio",
+   "hash": "9218D81686C6AC681BC7CA621958AD6D",
+   "author_name": "周杰伦",
+   "all_privs_flac": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "fail_process_high": 4,
+   "status_flac": 0,
+   "audio_id": 2561552,
+   "status_128": 0,
+   "price_128": 200,
+   "rp_type_flac": "audio",
+   "pay_type_320": 3,
+   "all_privs_320": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "timelength_high": 299200,
+   "filesize_128": 4788294,
+   "rp_type_super": "",
+   "album_name": "七里香",
+   "rp_type_high": "audio",
+   "topic_url_128": "",
+   "rp_type_128": "audio",
+   "songid": 1268344,
+   "rp_type": "audio",
+   "fail_process_super": 0,
+   "extname_super": "",
+   "status_high": 0,
+   "publish_date": "2004-08-03",
+   "hash_320": "AC88869751BEC75488DC336950386E83",
+   "bitrate_super": 0,
+   "hash_high": "77A986C7A248DEDEE704C2A3871AC72D",
+   "extname": "mp3",
+   "fail_process_320": 4,
+   "fail_process": 4,
+   "old_cpy_high": 0,
+   "timelength_super": 0,
+   "old_cpy_flac": 0,
+   "level": 2,
+   "old_hide_super": 0,
+   "privilege_flac": 10,
+   "old_cpy": 0,
+   "status_super": 1,
+   "old_cpy_128": 0,
+   "old_hide_128": 1,
+   "video_timelength": 303021,
+   "bitrate": 128,
+   "cd_url": "",
+   "privilege_320": 10,
+   "pkg_price_128": 1,
+   "price": 200,
+   "filesize_high": 36801321,
+   "filesize": 4788294,
+   "timelength_128": 299232,
+   "price_super": 0,
+   "has_obbligato": 1,
+   "hash_128": "9218D81686C6AC681BC7CA621958AD6D",
+   "album_audio_remark": "《初夏物语》国语版",
+   "bitrate_high": 983,
+   "fail_process_flac": 4,
+   "hash_flac": "00BEE56133CD8E1DF130DE48ABF1DCE9",
+   "old_hide_high": 1,
+   "hash_super": "",
+   "timelength": 299232,
+   "privilege": 10,
+   "privilege_super": 0,
+   "video_id": 756969
+  },
+  {
+   "video_track": 3,
+   "filesize_flac": 28349759,
+   "old_hide_flac": 1,
+   "playcount": 0,
+   "status": 0,
+   "video_file_head": 1,
+   "filesize_320": 10326924,
+   "rp_id": 158966,
+   "bitrate_flac": 878,
+   "old_hide": 1,
+   "trans_param": {
+    "cpy_grade": 5,
+    "classmap": {
+     "attr0": 234885128
+    },
+    "language": "国语",
+    "cpy_attr0": 58727552,
+    "musicpack_advance": 1,
+    "display": 32,
+    "display_rate": 1,
+    "flags": {},
+    "ogg_320_hash": "4123C427209B7BDBCC19F88B0E2F2F80",
+    "cpy_map": "2",
+    "union_cover": "http://imge.kugou.com/stdmusic/{size}/20250125/20250125121911543146.jpg",
+    "ogg_320_filesize": 9714222,
+    "qualitymap": {
+     "bits": "28fffc0db411ffffff3fc074",
+     "attr0": 2134884468,
+     "attr1": 1747189759
+    },
+    "is_original": 1,
+    "ogg_128_filesize": 2677512,
+    "cid": 2556290,
+    "ogg_128_hash": "DE6C6EF89F91DCA59F05BD0FD1BEABE7",
+    "pay_block_tpl": 1,
+    "ipmap": {
+     "attr0": 2200130555906,
+     "bits": "10020042001002"
+    },
+    "hash_offset": {
+     "clip_hash": "F7D3022FBBA7EC2AF66FCA1005981D6E",
+     "start_byte": 0,
+     "end_ms": 60000,
+     "end_byte": 960121,
+     "file_type": 0,
+     "start_ms": 0,
+     "offset_hash": "65F6D1B0BA0D22B8EFA7DD67C640329E"
+    },
+    "appid_block": "3124",
+    "hash_multitrack": "702D3ED7A3EBB6DCA9BB53F68BF56760",
+    "cpy_level": 1
+   },
+   "pay_type_128": 3,
+   "remarks": [
+    {
+     "remark": "《魔影紫光》电视剧中文版片头曲",
+     "ip_type": 1,
+     "rel_album_audio_id": 0,
+     "work_type": "9",
+     "remark_type": 2
+    },
+    {
+     "remark": "《幽暗紫瞳真人版》电视剧中文版片头曲",
+     "ip_type": 2,
+     "rel_album_audio_id": 0,
+     "work_type": "9",
+     "remark_type": 2
+    }
+   ],
+   "all_privs_super": {},
+   "video_hash": "D918BEB18108B18A359FAD99B1EFA845",
+   "is_original": 1,
+   "version": 1,
+   "topic_url_high": "",
+   "identity": 1,
+   "album_id": 978031,
+   "old_cpy_320": 0,
+   "privilege_high": 10,
+   "pay_type": 3,
+   "all_privs_128": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "topic_url_flac": "",
+   "rp_publish": 1,
+   "pkg_price_super": 0,
+   "pkg_price_high": 1,
+   "pkg_price_flac": 1,
+   "video_filesize": 36490915,
+   "price_high": 200,
+   "tmp_privilege": 2,
+   "pkg_price": 1,
+   "status_320": 0,
+   "album_audio_id": 64531905,
+   "pay_type_super": 0,
+   "old_hide_320": 1,
+   "pkg_price_320": 1,
+   "topic_remark": "",
+   "pay_type_high": 3,
+   "privilege_128": 10,
+   "timelength_320": 258142,
+   "price_flac": 200,
+   "fail_process_128": 4,
+   "audio_name": "反方向的钟",
+   "timelength_flac": 258107,
+   "price_320": 200,
+   "pay_type_flac": 3,
+   "topic_url": "",
+   "cid": 2556290,
+   "audio_file_head": 100,
+   "filesize_super": 0,
+   "topic_url_super": "",
+   "old_cpy_super": 1,
+   "all_privs_high": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "all_privs": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "topic_url_320": "",
+   "mixsong_type": 0,
+   "rp_type_320": "audio",
+   "hash": "A6049AAB184A305CAA906C6BBB8E8233",
+   "author_name": "周杰伦",
+   "all_privs_flac": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "fail_process_high": 4,
+   "status_flac": 0,
+   "audio_id": 158966,
+   "status_128": 0,
+   "price_128": 200,
+   "rp_type_flac": "audio",
+   "pay_type_320": 3,
+   "all_privs_320": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "timelength_high": 258107,
+   "filesize_128": 4130888,
+   "rp_type_super": "",
+   "album_name": "Jay",
+   "rp_type_high": "audio",
+   "topic_url_128": "",
+   "rp_type_128": "audio",
+   "songid": 3881,
+   "rp_type": "audio",
+   "fail_process_super": 0,
+   "extname_super": "",
+   "status_high": 0,
+   "publish_date": "2000-11-07",
+   "hash_320": "FD0126696CB3DB528D87EBAE8CDB2573",
+   "bitrate_super": 0,
+   "hash_high": "5AA9F0E3F97D6F0C3E002535A8D7742F",
+   "extname": "mp3",
+   "fail_process_320": 4,
+   "fail_process": 4,
+   "old_cpy_high": 0,
+   "timelength_super": 0,
+   "old_cpy_flac": 0,
+   "level": 2,
+   "old_hide_super": 0,
+   "privilege_flac": 10,
+   "old_cpy": 0,
+   "status_super": 1,
+   "old_cpy_128": 0,
+   "old_hide_128": 1,
+   "video_timelength": 261828,
+   "bitrate": 128,
+   "cd_url": "",
+   "privilege_320": 10,
+   "pkg_price_128": 1,
+   "price": 200,
+   "filesize_high": 28751057,
+   "filesize": 4130888,
+   "timelength_128": 258142,
+   "price_super": 0,
+   "has_obbligato": 1,
+   "hash_128": "A6049AAB184A305CAA906C6BBB8E8233",
+   "album_audio_remark": "《魔影紫光》电视剧中文版片头曲",
+   "bitrate_high": 890,
+   "fail_process_flac": 4,
+   "hash_flac": "D01164807F85C7F89FB2F2747923BD40",
+   "old_hide_high": 1,
+   "hash_super": "",
+   "timelength": 258142,
+   "privilege": 10,
+   "privilege_super": 0,
+   "video_id": 52705
+  },
+  {
+   "video_track": 3,
+   "filesize_flac": 27086130,
+   "old_hide_flac": 1,
+   "playcount": 0,
+   "status": 0,
+   "video_file_head": 1,
+   "filesize_320": 10271547,
+   "rp_id": 338517,
+   "bitrate_flac": 843,
+   "old_hide": 1,
+   "trans_param": {
+    "cpy_grade": 5,
+    "classmap": {
+     "attr0": 234885128
+    },
+    "language": "国语",
+    "cpy_attr0": 58727552,
+    "musicpack_advance": 1,
+    "display": 32,
+    "display_rate": 1,
+    "flags": {},
+    "ogg_320_hash": "66EF3BE73A6E657C1DD1337C0C5C4DBB",
+    "cpy_map": "2",
+    "union_cover": "http://imge.kugou.com/stdmusic/{size}/20241118/20241118160622508429.jpg",
+    "ogg_320_filesize": 9512654,
+    "qualitymap": {
+     "bits": "28fffc0db411ffffbf3fc075",
+     "attr0": 1061142645,
+     "attr1": 1747189759
+    },
+    "is_original": 1,
+    "ogg_128_filesize": 2788393,
+    "cid": 2556470,
+    "ogg_128_hash": "E1EB90297C4B639CF5067AA9BD84441E",
+    "pay_block_tpl": 1,
+    "ipmap": {
+     "attr0": 2200130555904,
+     "bits": "10020042001000"
+    },
+    "hash_offset": {
+     "clip_hash": "528D3A801F0EB65E0BCFFFEF64348079",
+     "start_byte": 0,
+     "end_ms": 133031,
+     "end_byte": 2128737,
+     "file_type": 0,
+     "start_ms": 73031,
+     "offset_hash": "08E78142942467D4A9074E1DB99984E3"
+    },
+    "appid_block": "3124",
+    "hash_multitrack": "1F68DAD522E50F45305AB10AD9BBA63E",
+    "cpy_level": 1
+   },
+   "pay_type_128": 3,
+   "remarks": [],
+   "all_privs_super": {},
+   "video_hash": "4AB50D42D7F7B23897F4C2B3709FD48F",
+   "is_original": 1,
+   "version": 1,
+   "topic_url_high": "",
+   "identity": 1,
+   "album_id": 960399,
+   "old_cpy_320": 0,
+   "privilege_high": 10,
+   "pay_type": 3,
+   "all_privs_128": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "topic_url_flac": "",
+   "rp_publish": 1,
+   "pkg_price_super": 0,
+   "pkg_price_high": 1,
+   "pkg_price_flac": 1,
+   "video_filesize": 36041548,
+   "price_high": 200,
+   "tmp_privilege": 2,
+   "pkg_price": 1,
+   "status_320": 0,
+   "album_audio_id": 32042823,
+   "pay_type_super": 0,
+   "old_hide_320": 1,
+   "pkg_price_320": 1,
+   "topic_remark": "",
+   "pay_type_high": 3,
+   "privilege_128": 10,
+   "timelength_320": 256756,
+   "price_flac": 200,
+   "fail_process_128": 4,
+   "audio_name": "说好的幸福呢",
+   "timelength_flac": 256720,
+   "price_320": 200,
+   "pay_type_flac": 3,
+   "topic_url": "",
+   "cid": 2556470,
+   "audio_file_head": 100,
+   "filesize_super": 0,
+   "topic_url_super": "",
+   "old_cpy_super": 1,
+   "all_privs_high": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "all_privs": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "topic_url_320": "",
+   "mixsong_type": 0,
+   "rp_type_320": "audio",
+   "hash": "892B7AD62499C97A1A994454423E30F6",
+   "author_name": "周杰伦",
+   "all_privs_flac": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "fail_process_high": 4,
+   "status_flac": 0,
+   "audio_id": 338517,
+   "status_128": 0,
+   "price_128": 200,
+   "rp_type_flac": "audio",
+   "pay_type_320": 3,
+   "all_privs_320": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "timelength_high": 256720,
+   "filesize_128": 4108738,
+   "rp_type_super": "",
+   "album_name": "魔杰座",
+   "rp_type_high": "audio",
+   "topic_url_128": "",
+   "rp_type_128": "audio",
+   "songid": 58,
+   "rp_type": "audio",
+   "fail_process_super": 0,
+   "extname_super": "",
+   "status_high": 0,
+   "publish_date": "2008-10-15",
+   "hash_320": "E7FC000969C2EF1E37E6F76E229A4411",
+   "bitrate_super": 0,
+   "hash_high": "8F409A9EFF64D9FE3B44A8226C7B1413",
+   "extname": "mp3",
+   "fail_process_320": 4,
+   "fail_process": 4,
+   "old_cpy_high": 0,
+   "timelength_super": 0,
+   "old_cpy_flac": 0,
+   "level": 2,
+   "old_hide_super": 0,
+   "privilege_flac": 10,
+   "old_cpy": 0,
+   "status_super": 1,
+   "old_cpy_128": 0,
+   "old_hide_128": 1,
+   "video_timelength": 257280,
+   "bitrate": 128,
+   "cd_url": "",
+   "privilege_320": 10,
+   "pkg_price_128": 1,
+   "price": 200,
+   "filesize_high": 27593149,
+   "filesize": 4108738,
+   "timelength_128": 256756,
+   "price_super": 0,
+   "has_obbligato": 1,
+   "hash_128": "892B7AD62499C97A1A994454423E30F6",
+   "album_audio_remark": "",
+   "bitrate_high": 859,
+   "fail_process_flac": 4,
+   "hash_flac": "0B8A7DF93839E23F06CBA33A68B46A16",
+   "old_hide_high": 1,
+   "hash_super": "",
+   "timelength": 256756,
+   "privilege": 10,
+   "privilege_super": 0,
+   "video_id": 158898
+  },
+  {
+   "video_track": 3,
+   "filesize_flac": 35671916,
+   "old_hide_flac": 1,
+   "playcount": 0,
+   "status": 0,
+   "video_file_head": 1,
+   "filesize_320": 11772042,
+   "rp_id": 298888513,
+   "bitrate_flac": 969,
+   "old_hide": 1,
+   "trans_param": {
+    "cpy_grade": 6,
+    "classmap": {
+     "attr0": 234881032
+    },
+    "language": "国语",
+    "cpy_attr0": 58727552,
+    "musicpack_advance": 1,
+    "display": 0,
+    "display_rate": 0,
+    "flags": {},
+    "ogg_320_hash": "86C9928FE9F39B0D63C395DE974EAD12",
+    "cpy_map": "2",
+    "union_cover": "http://imge.kugou.com/stdmusic/{size}/20250125/20250125121743958387.jpg",
+    "ogg_320_filesize": 11552397,
+    "qualitymap": {
+     "bits": "2800000db411ffffff3fc074",
+     "attr0": 2134884468,
+     "attr1": 1747189759
+    },
+    "is_original": 1,
+    "ogg_128_filesize": 3355015,
+    "cid": 5809961,
+    "ogg_128_hash": "C9C03E421008DDC42414D0FE45FA3BCA",
+    "pay_block_tpl": 1,
+    "ipmap": {
+     "attr0": 2200130555904,
+     "bits": "10020042001000"
+    },
+    "hash_offset": {
+     "clip_hash": "3ECFFDADFA4BBE3F2D083C7DB1B75797",
+     "start_byte": 0,
+     "end_ms": 60000,
+     "end_byte": 960145,
+     "file_type": 0,
+     "start_ms": 0,
+     "offset_hash": "E6883CB8344D1A5D6DB7D6D5F7652822"
+    },
+    "appid_block": "3124",
+    "hash_multitrack": "9BB343520E629EB5F694F3B173813CEC",
+    "cpy_level": 1
+   },
+   "pay_type_128": 3,
+   "remarks": [
+    {
+     "rel_album_audio_id": 0,
+     "remark_type": 15,
+     "remark": "五一出游必听",
+     "is_defaut_alias": "0"
+    },
+    {
+     "remark": "《头文字D》电影插曲",
+     "ip_type": 1,
+     "rel_album_audio_id": 0,
+     "work_type": "8",
+     "remark_type": 2
+    },
+    {
+     "remark": "《漂移族》电影插曲",
+     "ip_type": 2,
+     "rel_album_audio_id": 0,
+     "work_type": "8",
+     "remark_type": 2
+    }
+   ],
+   "all_privs_super": {},
+   "video_hash": "C5013370974B11C9883B0E0154E9758B",
+   "is_original": 1,
+   "version": 1,
+   "topic_url_high": "",
+   "identity": 1,
+   "album_id": 1739223,
+   "old_cpy_320": 0,
+   "privilege_high": 10,
+   "pay_type": 3,
+   "all_privs_128": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "topic_url_flac": "",
+   "rp_publish": 1,
+   "pkg_price_super": 0,
+   "pkg_price_high": 1,
+   "pkg_price_flac": 1,
+   "video_filesize": 41988521,
+   "price_high": 200,
+   "tmp_privilege": 2,
+   "pkg_price": 1,
+   "status_320": 0,
+   "album_audio_id": 39590741,
+   "pay_type_super": 0,
+   "old_hide_320": 1,
+   "pkg_price_320": 1,
+   "topic_remark": "",
+   "pay_type_high": 3,
+   "privilege_128": 10,
+   "timelength_320": 294000,
+   "price_flac": 200,
+   "fail_process_128": 4,
+   "audio_name": "一路向北",
+   "timelength_flac": 294000,
+   "price_320": 200,
+   "pay_type_flac": 3,
+   "topic_url": "",
+   "cid": 5809961,
+   "audio_file_head": 100,
+   "filesize_super": 0,
+   "topic_url_super": "",
+   "old_cpy_super": 1,
+   "all_privs_high": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "all_privs": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "topic_url_320": "",
+   "mixsong_type": 0,
+   "rp_type_320": "audio",
+   "hash": "F73F22FB046CA1A135C70417163AF82E",
+   "author_name": "周杰伦",
+   "all_privs_flac": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "fail_process_high": 4,
+   "status_flac": 0,
+   "audio_id": 298888513,
+   "status_128": 0,
+   "price_128": 200,
+   "rp_type_flac": "audio",
+   "pay_type_320": 3,
+   "all_privs_320": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "timelength_high": 294000,
+   "filesize_128": 4708950,
+   "rp_type_super": "",
+   "album_name": "J III MP3 Player",
+   "rp_type_high": "audio",
+   "topic_url_128": "",
+   "rp_type_128": "audio",
+   "songid": 927,
+   "rp_type": "audio",
+   "fail_process_super": 0,
+   "extname_super": "",
+   "status_high": 0,
+   "publish_date": "2005-06-23",
+   "hash_320": "BFC5F4D845D515688D5B6A419050B8F7",
+   "bitrate_super": 0,
+   "hash_high": "0D9BD5766F5963A0A3E8FD0E229E9FB0",
+   "extname": "mp3",
+   "fail_process_320": 4,
+   "fail_process": 4,
+   "old_cpy_high": 0,
+   "timelength_super": 0,
+   "old_cpy_flac": 0,
+   "level": 2,
+   "old_hide_super": 0,
+   "privilege_flac": 10,
+   "old_cpy": 0,
+   "status_super": 1,
+   "old_cpy_128": 0,
+   "old_hide_128": 1,
+   "video_timelength": 298360,
+   "bitrate": 128,
+   "cd_url": "",
+   "privilege_320": 10,
+   "pkg_price_128": 1,
+   "price": 200,
+   "filesize_high": 61646557,
+   "filesize": 4708950,
+   "timelength_128": 294000,
+   "price_super": 0,
+   "has_obbligato": 1,
+   "hash_128": "F73F22FB046CA1A135C70417163AF82E",
+   "album_audio_remark": "五一出游必听",
+   "bitrate_high": 1675,
+   "fail_process_flac": 4,
+   "hash_flac": "B0B18F48F84C540212ED35CD11EBFD5D",
+   "old_hide_high": 1,
+   "hash_super": "",
+   "timelength": 294000,
+   "privilege": 10,
+   "privilege_super": 0,
+   "video_id": 32776
+  },
+  {
+   "video_track": 3,
+   "filesize_flac": 28837379,
+   "old_hide_flac": 1,
+   "playcount": 0,
+   "status": 0,
+   "video_file_head": 1,
+   "filesize_320": 10317943,
+   "rp_id": 4761,
+   "bitrate_flac": 894,
+   "old_hide": 1,
+   "trans_param": {
+    "cpy_grade": 5,
+    "classmap": {
+     "attr0": 234885128
+    },
+    "language": "国语",
+    "cpy_attr0": 58727552,
+    "musicpack_advance": 1,
+    "display": 32,
+    "display_rate": 1,
+    "flags": {},
+    "ogg_320_hash": "E03F424DA80E1854C52E5F7464CEC75C",
+    "cpy_map": "2",
+    "union_cover": "http://imge.kugou.com/stdmusic/{size}/20250125/20250125121628799968.jpg",
+    "ogg_320_filesize": 9673340,
+    "qualitymap": {
+     "bits": "2800000db411ffffff3fc075",
+     "attr0": 2134884469,
+     "attr1": 1747189759
+    },
+    "is_original": 1,
+    "ogg_128_filesize": 2938183,
+    "cid": 2556483,
+    "ogg_128_hash": "B345AC96360052B2FD4BF1E94EFC95A2",
+    "pay_block_tpl": 1,
+    "ipmap": {
+     "attr0": 2200130555904,
+     "bits": "10020042001000"
+    },
+    "hash_offset": {
+     "clip_hash": "FBCB2FC7C773B3C8C9F8C9E5FF1FD8BE",
+     "start_byte": 0,
+     "end_ms": 60000,
+     "end_byte": 960125,
+     "file_type": 0,
+     "start_ms": 0,
+     "offset_hash": "D8E876B36E1E811216A092D430408BE4"
+    },
+    "appid_block": "3124",
+    "hash_multitrack": "411BE2854F9203B2D5203FFD23E38E33",
+    "cpy_level": 1
+   },
+   "pay_type_128": 3,
+   "remarks": [],
+   "all_privs_super": {},
+   "video_hash": "8ECA00DFEC813CD98957493E62F468C3",
+   "is_original": 1,
+   "version": 1,
+   "topic_url_high": "",
+   "identity": 1,
+   "album_id": 958812,
+   "old_cpy_320": 0,
+   "privilege_high": 10,
+   "pay_type": 3,
+   "all_privs_128": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "topic_url_flac": "",
+   "rp_publish": 1,
+   "pkg_price_super": 0,
+   "pkg_price_high": 1,
+   "pkg_price_flac": 1,
+   "video_filesize": 35969258,
+   "price_high": 200,
+   "tmp_privilege": 2,
+   "pkg_price": 1,
+   "status_320": 0,
+   "album_audio_id": 32028734,
+   "pay_type_super": 0,
+   "old_hide_320": 1,
+   "pkg_price_320": 1,
+   "topic_remark": "",
+   "pay_type_high": 3,
+   "privilege_128": 10,
+   "timelength_320": 257933,
+   "price_flac": 200,
+   "fail_process_128": 4,
+   "audio_name": "我落泪情绪零碎",
+   "timelength_flac": 257893,
+   "price_320": 200,
+   "pay_type_flac": 3,
+   "topic_url": "",
+   "cid": 2556483,
+   "audio_file_head": 100,
+   "filesize_super": 0,
+   "topic_url_super": "",
+   "old_cpy_super": 1,
+   "all_privs_high": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "all_privs": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "topic_url_320": "",
+   "mixsong_type": 0,
+   "rp_type_320": "audio",
+   "hash": "27943EB1CBD46F7BB165B054CE6EBDC8",
+   "author_name": "周杰伦",
+   "all_privs_flac": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "fail_process_high": 4,
+   "status_flac": 0,
+   "audio_id": 4761,
+   "status_128": 0,
+   "price_128": 200,
+   "rp_type_flac": "audio",
+   "pay_type_320": 3,
+   "all_privs_320": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "timelength_high": 257893,
+   "filesize_128": 4127549,
+   "rp_type_super": "",
+   "album_name": "跨时代",
+   "rp_type_high": "audio",
+   "topic_url_128": "",
+   "rp_type_128": "audio",
+   "songid": 13034899,
+   "rp_type": "audio",
+   "fail_process_super": 0,
+   "extname_super": "",
+   "status_high": 0,
+   "publish_date": "2010-05-18",
+   "hash_320": "788C16D45365FA76890B677D8E115DD4",
+   "bitrate_super": 0,
+   "hash_high": "217D6FB7BF03FD6B764B41ABAF7FFF36",
+   "extname": "mp3",
+   "fail_process_320": 4,
+   "fail_process": 4,
+   "old_cpy_high": 0,
+   "timelength_super": 0,
+   "old_cpy_flac": 0,
+   "level": 2,
+   "old_hide_super": 0,
+   "privilege_flac": 10,
+   "old_cpy": 0,
+   "status_super": 1,
+   "old_cpy_128": 0,
+   "old_hide_128": 1,
+   "video_timelength": 255257,
+   "bitrate": 128,
+   "cd_url": "",
+   "privilege_320": 10,
+   "pkg_price_128": 1,
+   "price": 200,
+   "filesize_high": 51442267,
+   "filesize": 4127549,
+   "timelength_128": 257933,
+   "price_super": 0,
+   "has_obbligato": 1,
+   "hash_128": "27943EB1CBD46F7BB165B054CE6EBDC8",
+   "album_audio_remark": "",
+   "bitrate_high": 1595,
+   "fail_process_flac": 4,
+   "hash_flac": "64673FF054003CD1F0849EB4361C3AD5",
+   "old_hide_high": 1,
+   "hash_super": "",
+   "timelength": 257933,
+   "privilege": 10,
+   "privilege_super": 0,
+   "video_id": 91188
+  },
+  {
+   "video_track": 3,
+   "filesize_flac": 28353822,
+   "old_hide_flac": 1,
+   "playcount": 0,
+   "status": 0,
+   "video_file_head": 1,
+   "filesize_320": 10537992,
+   "rp_id": 351422,
+   "bitrate_flac": 860,
+   "old_hide": 1,
+   "trans_param": {
+    "cpy_grade": 5,
+    "classmap": {
+     "attr0": 234885128
+    },
+    "language": "国语",
+    "cpy_attr0": 58727552,
+    "musicpack_advance": 1,
+    "display": 32,
+    "display_rate": 1,
+    "flags": {},
+    "ogg_320_hash": "8042B2DE1998CB2B4E67F10B1FB6ADDD",
+    "cpy_map": "2",
+    "union_cover": "http://imge.kugou.com/stdmusic/{size}/20250125/20250125121628799968.jpg",
+    "ogg_320_filesize": 10154256,
+    "qualitymap": {
+     "bits": "28fffc0db411ffffff3fc035",
+     "attr0": 2134884405,
+     "attr1": 1747189759
+    },
+    "is_original": 1,
+    "ogg_128_filesize": 3005796,
+    "cid": 2456770,
+    "ogg_128_hash": "7131B8E9ECB373C9B67BCF3ED2D0AE04",
+    "pay_block_tpl": 1,
+    "ipmap": {
+     "attr0": 2200197664768,
+     "bits": "10020046001000"
+    },
+    "hash_offset": {
+     "clip_hash": "486F87DFE9B6459BF7509A2729563147",
+     "start_byte": 0,
+     "end_ms": 60000,
+     "end_byte": 960119,
+     "file_type": 0,
+     "start_ms": 0,
+     "offset_hash": "0F8398A464CE6C3E5E4B40F700936C1F"
+    },
+    "appid_block": "3124",
+    "hash_multitrack": "1BC0F660AC6D2F5076DB9450EF45C1C5",
+    "cpy_level": 1
+   },
+   "pay_type_128": 3,
+   "remarks": [
+    {
+     "rel_album_audio_id": 0,
+     "remark_type": 8,
+     "remark": "《岁月饶人》国语版",
+     "is_defaut_alias": "0"
+    },
+    {
+     "remark": "《第5届音乐盛典咪咕汇》奖项无线音乐年度最畅销创作金曲",
+     "ip_type": 1,
+     "rel_album_audio_id": 0,
+     "work_type": "46",
+     "remark_type": 2
+    },
+    {
+     "remark": "《第5届无线音乐盛典咪咕汇》奖项无线音乐年度最畅销创作金曲",
+     "ip_type": 2,
+     "rel_album_audio_id": 0,
+     "work_type": "46",
+     "remark_type": 2
+    }
+   ],
+   "all_privs_super": {},
+   "video_hash": "5341ACBEF1B6EDC0F04E9CFB4231B49B",
+   "is_original": 1,
+   "version": 1,
+   "topic_url_high": "",
+   "identity": 1,
+   "album_id": 958812,
+   "old_cpy_320": 0,
+   "privilege_high": 0,
+   "pay_type": 3,
+   "all_privs_128": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "topic_url_flac": "",
+   "rp_publish": 1,
+   "pkg_price_super": 0,
+   "pkg_price_high": 0,
+   "pkg_price_flac": 1,
+   "video_filesize": 38471638,
+   "price_high": 0,
+   "tmp_privilege": 2,
+   "pkg_price": 1,
+   "status_320": 0,
+   "album_audio_id": 32028729,
+   "pay_type_super": 0,
+   "old_hide_320": 1,
+   "pkg_price_320": 1,
+   "topic_remark": "",
+   "pay_type_high": 0,
+   "privilege_128": 10,
+   "timelength_320": 263418,
+   "price_flac": 200,
+   "fail_process_128": 4,
+   "audio_name": "烟花易冷",
+   "timelength_flac": 263386,
+   "price_320": 200,
+   "pay_type_flac": 3,
+   "topic_url": "",
+   "cid": 2456770,
+   "audio_file_head": 100,
+   "filesize_super": 0,
+   "topic_url_super": "",
+   "old_cpy_super": 1,
+   "all_privs_high": {},
+   "all_privs": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "topic_url_320": "",
+   "mixsong_type": 0,
+   "rp_type_320": "audio",
+   "hash": "B9FC03DF9015D6BFF0554A110BF2C84F",
+   "author_name": "周杰伦",
+   "all_privs_flac": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "fail_process_high": 0,
+   "status_flac": 0,
+   "audio_id": 351422,
+   "status_128": 0,
+   "price_128": 200,
+   "rp_type_flac": "audio",
+   "pay_type_320": 3,
+   "all_privs_320": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "timelength_high": 0,
+   "filesize_128": 4215314,
+   "rp_type_super": "",
+   "album_name": "跨时代",
+   "rp_type_high": "",
+   "topic_url_128": "",
+   "rp_type_128": "audio",
+   "songid": 537030,
+   "rp_type": "audio",
+   "fail_process_super": 0,
+   "extname_super": "",
+   "status_high": 1,
+   "publish_date": "2010-05-18",
+   "hash_320": "11DC83A694E0E451DBE21CDFADBEC917",
+   "bitrate_super": 0,
+   "hash_high": "",
+   "extname": "mp3",
+   "fail_process_320": 4,
+   "fail_process": 4,
+   "old_cpy_high": 1,
+   "timelength_super": 0,
+   "old_cpy_flac": 0,
+   "level": 2,
+   "old_hide_super": 0,
+   "privilege_flac": 10,
+   "old_cpy": 0,
+   "status_super": 1,
+   "old_cpy_128": 0,
+   "old_hide_128": 1,
+   "video_timelength": 273840,
+   "bitrate": 128,
+   "cd_url": "",
+   "privilege_320": 10,
+   "pkg_price_128": 1,
+   "price": 200,
+   "filesize_high": 0,
+   "filesize": 4215314,
+   "timelength_128": 263418,
+   "price_super": 0,
+   "has_obbligato": 1,
+   "hash_128": "B9FC03DF9015D6BFF0554A110BF2C84F",
+   "album_audio_remark": "《岁月饶人》国语版",
+   "bitrate_high": 0,
+   "fail_process_flac": 4,
+   "hash_flac": "3D91395321ED14531BEF304D653B2FFF",
+   "old_hide_high": 0,
+   "hash_super": "",
+   "timelength": 263418,
+   "privilege": 10,
+   "privilege_super": 0,
+   "video_id": 79424
+  },
+  {
+   "video_track": 3,
+   "filesize_flac": 29671753,
+   "old_hide_flac": 1,
+   "playcount": 0,
+   "status": 0,
+   "video_file_head": 1,
+   "filesize_320": 10587098,
+   "rp_id": 327075,
+   "bitrate_flac": 896,
+   "old_hide": 1,
+   "trans_param": {
+    "cpy_grade": 5,
+    "classmap": {
+     "attr0": 234885128
+    },
+    "language": "国语",
+    "cpy_attr0": 58727552,
+    "musicpack_advance": 1,
+    "display": 32,
+    "display_rate": 1,
+    "flags": {},
+    "ogg_320_hash": "03DD3DD1804EC99E2BE01DEEE8C94DC8",
+    "cpy_map": "2",
+    "union_cover": "http://imge.kugou.com/stdmusic/{size}/20241118/20241118160622508429.jpg",
+    "ogg_320_filesize": 10619087,
+    "qualitymap": {
+     "bits": "2800000db401ffffbf3fc035",
+     "attr0": 1061142581,
+     "attr1": 1745092607
+    },
+    "is_original": 1,
+    "ogg_128_filesize": 2898630,
+    "cid": 2556468,
+    "ogg_128_hash": "BEBAC1F90C3F9657490D620DE9936E6A",
+    "pay_block_tpl": 1,
+    "ipmap": {
+     "attr0": 2200130555904,
+     "bits": "10020042001000"
+    },
+    "hash_offset": {
+     "clip_hash": "E56829AC9AF0418BAFB49BDF50D1E998",
+     "start_byte": 0,
+     "end_ms": 137300,
+     "end_byte": 2197274,
+     "file_type": 0,
+     "start_ms": 77300,
+     "offset_hash": "9A25380A6DEA2A97A909DDEF3CBA2AF6"
+    },
+    "appid_block": "3124",
+    "hash_multitrack": "D3DD6258F305426D0F7826B8B1BB5C67",
+    "cpy_level": 1
+   },
+   "pay_type_128": 3,
+   "remarks": [
+    {
+     "rel_album_audio_id": 0,
+     "remark_type": 6,
+     "remark": "《花海》中文原曲",
+     "is_defaut_alias": "0"
+    },
+    {
+     "rel_album_audio_id": 0,
+     "remark_type": 12,
+     "remark": "离开周杰伦",
+     "is_defaut_alias": "0"
+    },
+    {
+     "rel_album_audio_id": 0,
+     "remark_type": 15,
+     "remark": "首款动态勋章上线",
+     "is_defaut_alias": "0"
+    }
+   ],
+   "all_privs_super": {},
+   "video_hash": "0443350283A55D8EFA77AC351AC19740",
+   "is_original": 1,
+   "version": 1,
+   "topic_url_high": "",
+   "identity": 1,
+   "album_id": 960399,
+   "old_cpy_320": 0,
+   "privilege_high": 0,
+   "pay_type": 3,
+   "all_privs_128": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "topic_url_flac": "",
+   "rp_publish": 1,
+   "pkg_price_super": 0,
+   "pkg_price_high": 0,
+   "pkg_price_flac": 1,
+   "video_filesize": 37219934,
+   "price_high": 0,
+   "tmp_privilege": 2,
+   "pkg_price": 1,
+   "status_320": 0,
+   "album_audio_id": 32042821,
+   "pay_type_super": 0,
+   "old_hide_320": 1,
+   "pkg_price_320": 1,
+   "topic_remark": "",
+   "pay_type_high": 0,
+   "privilege_128": 10,
+   "timelength_320": 264646,
+   "price_flac": 200,
+   "fail_process_128": 4,
+   "audio_name": "花海",
+   "timelength_flac": 264600,
+   "price_320": 200,
+   "pay_type_flac": 3,
+   "topic_url": "",
+   "cid": 2556468,
+   "audio_file_head": 100,
+   "filesize_super": 0,
+   "topic_url_super": "",
+   "old_cpy_super": 1,
+   "all_privs_high": {},
+   "all_privs": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "topic_url_320": "",
+   "mixsong_type": 0,
+   "rp_type_320": "audio",
+   "hash": "3328808CECBD1A1038166003840FDDD7",
+   "author_name": "周杰伦",
+   "all_privs_flac": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "fail_process_high": 0,
+   "status_flac": 0,
+   "audio_id": 327075,
+   "status_128": 0,
+   "price_128": 200,
+   "rp_type_flac": "audio",
+   "pay_type_320": 3,
+   "all_privs_320": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "timelength_high": 0,
+   "filesize_128": 4234954,
+   "rp_type_super": "",
+   "album_name": "魔杰座",
+   "rp_type_high": "",
+   "topic_url_128": "",
+   "rp_type_128": "audio",
+   "songid": 16363,
+   "rp_type": "audio",
+   "fail_process_super": 0,
+   "extname_super": "",
+   "status_high": 1,
+   "publish_date": "2008-10-15",
+   "hash_320": "8E39ECA364361E4A0652E77B8B3E6617",
+   "bitrate_super": 0,
+   "hash_high": "",
+   "extname": "mp3",
+   "fail_process_320": 4,
+   "fail_process": 4,
+   "old_cpy_high": 1,
+   "timelength_super": 0,
+   "old_cpy_flac": 0,
+   "level": 2,
+   "old_hide_super": 0,
+   "privilege_flac": 10,
+   "old_cpy": 0,
+   "status_super": 1,
+   "old_cpy_128": 0,
+   "old_hide_128": 1,
+   "video_timelength": 265120,
+   "bitrate": 128,
+   "cd_url": "",
+   "privilege_320": 10,
+   "pkg_price_128": 1,
+   "price": 200,
+   "filesize_high": 0,
+   "filesize": 4234954,
+   "timelength_128": 264646,
+   "price_super": 0,
+   "has_obbligato": 1,
+   "hash_128": "3328808CECBD1A1038166003840FDDD7",
+   "album_audio_remark": "《花海》中文原曲",
+   "bitrate_high": 0,
+   "fail_process_flac": 4,
+   "hash_flac": "E94D32013B4E5E6200075BCCAB96787C",
+   "old_hide_high": 0,
+   "hash_super": "",
+   "timelength": 264646,
+   "privilege": 10,
+   "privilege_super": 0,
+   "video_id": 29532
+  },
+  {
+   "video_track": 3,
+   "filesize_flac": 30022976,
+   "old_hide_flac": 1,
+   "playcount": 0,
+   "status": 0,
+   "video_file_head": 1,
+   "filesize_320": 10461714,
+   "rp_id": 316913,
+   "bitrate_flac": 918,
+   "old_hide": 1,
+   "trans_param": {
+    "cpy_grade": 6,
+    "classmap": {
+     "attr0": 234881032
+    },
+    "language": "国语",
+    "cpy_attr0": 58727552,
+    "musicpack_advance": 1,
+    "display": 0,
+    "display_rate": 0,
+    "flags": {},
+    "ogg_320_hash": "AB047BE934E2A8C72B864062E0743467",
+    "cpy_map": "2",
+    "union_cover": "http://imge.kugou.com/stdmusic/{size}/20170728/20170728122746411503.jpg",
+    "ogg_320_filesize": 10214588,
+    "qualitymap": {
+     "bits": "28fffc0db411ffffff3fc075",
+     "attr0": 2134884469,
+     "attr1": 1747189759
+    },
+    "is_original": 1,
+    "ogg_128_filesize": 2948827,
+    "cid": 2556402,
+    "ogg_128_hash": "8CD51EB648C7DA04A286F193F538F07B",
+    "pay_block_tpl": 1,
+    "ipmap": {
+     "attr0": 2200130555904,
+     "bits": "10020042001000"
+    },
+    "hash_offset": {
+     "clip_hash": "F9C1E914DF0CB79FDA9C232EE23BD3F6",
+     "start_byte": 0,
+     "end_ms": 60000,
+     "end_byte": 960119,
+     "file_type": 0,
+     "start_ms": 0,
+     "offset_hash": "7021A33108B3BCD1EDA072CA9065B2FF"
+    },
+    "appid_block": "3124",
+    "hash_multitrack": "6EEDA3F34EB762964282A5C66350FE74",
+    "cpy_level": 1
+   },
+   "pay_type_128": 3,
+   "remarks": [],
+   "all_privs_super": {},
+   "video_hash": "5F54EA24D7351D463B8767CC98CEC8B6",
+   "is_original": 1,
+   "version": 1,
+   "topic_url_high": "",
+   "identity": 1,
+   "album_id": 965291,
+   "old_cpy_320": 0,
+   "privilege_high": 10,
+   "pay_type": 3,
+   "all_privs_128": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "topic_url_flac": "",
+   "rp_publish": 1,
+   "pkg_price_super": 0,
+   "pkg_price_high": 1,
+   "pkg_price_flac": 1,
+   "video_filesize": 42333790,
+   "price_high": 200,
+   "tmp_privilege": 2,
+   "pkg_price": 1,
+   "status_320": 0,
+   "album_audio_id": 64473829,
+   "pay_type_super": 0,
+   "old_hide_320": 1,
+   "pkg_price_320": 1,
+   "topic_remark": "",
+   "pay_type_high": 3,
+   "privilege_128": 10,
+   "timelength_320": 261510,
+   "price_flac": 200,
+   "fail_process_128": 4,
+   "audio_name": "退后",
+   "timelength_flac": 261466,
+   "price_320": 200,
+   "pay_type_flac": 3,
+   "topic_url": "",
+   "cid": 2556402,
+   "audio_file_head": 100,
+   "filesize_super": 0,
+   "topic_url_super": "",
+   "old_cpy_super": 1,
+   "all_privs_high": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "all_privs": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "topic_url_320": "",
+   "mixsong_type": 0,
+   "rp_type_320": "audio",
+   "hash": "5971DE0B235D5B2708D6A6FEB3D31B6F",
+   "author_name": "周杰伦",
+   "all_privs_flac": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "fail_process_high": 4,
+   "status_flac": 0,
+   "audio_id": 316913,
+   "status_128": 0,
+   "price_128": 200,
+   "rp_type_flac": "audio",
+   "pay_type_320": 3,
+   "all_privs_320": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "timelength_high": 261466,
+   "filesize_128": 4184803,
+   "rp_type_super": "",
+   "album_name": "依然范特西",
+   "rp_type_high": "audio",
+   "topic_url_128": "",
+   "rp_type_128": "audio",
+   "songid": 370,
+   "rp_type": "audio",
+   "fail_process_super": 0,
+   "extname_super": "",
+   "status_high": 0,
+   "publish_date": "2006-09-01",
+   "hash_320": "A6D04F0DD7EDB72941815938393B7E7E",
+   "bitrate_super": 0,
+   "hash_high": "2676D3A4F50C5B6AEC87DA11ED2D402E",
+   "extname": "mp3",
+   "fail_process_320": 4,
+   "fail_process": 4,
+   "old_cpy_high": 0,
+   "timelength_super": 0,
+   "old_cpy_flac": 0,
+   "level": 2,
+   "old_hide_super": 0,
+   "privilege_flac": 10,
+   "old_cpy": 0,
+   "status_super": 1,
+   "old_cpy_128": 0,
+   "old_hide_128": 1,
+   "video_timelength": 302035,
+   "bitrate": 128,
+   "cd_url": "",
+   "privilege_320": 10,
+   "pkg_price_128": 1,
+   "price": 200,
+   "filesize_high": 30696310,
+   "filesize": 4184803,
+   "timelength_128": 261510,
+   "price_super": 0,
+   "has_obbligato": 1,
+   "hash_128": "5971DE0B235D5B2708D6A6FEB3D31B6F",
+   "album_audio_remark": "",
+   "bitrate_high": 938,
+   "fail_process_flac": 4,
+   "hash_flac": "4BBD1CC6C2C380D28D2987F4A56D9DF4",
+   "old_hide_high": 1,
+   "hash_super": "",
+   "timelength": 261510,
+   "privilege": 10,
+   "privilege_super": 0,
+   "video_id": 179586
+  },
+  {
+   "video_track": 3,
+   "filesize_flac": 27658991,
+   "old_hide_flac": 1,
+   "playcount": 0,
+   "status": 0,
+   "video_file_head": 1,
+   "filesize_320": 10417828,
+   "rp_id": 582068,
+   "bitrate_flac": 849,
+   "old_hide": 1,
+   "trans_param": {
+    "cpy_grade": 5,
+    "classmap": {
+     "attr0": 234885128
+    },
+    "language": "国语",
+    "cpy_attr0": 58727552,
+    "musicpack_advance": 1,
+    "display": 32,
+    "display_rate": 1,
+    "flags": {},
+    "ogg_320_hash": "663D819F62487B289C748EB0D936CAC9",
+    "cpy_map": "2",
+    "union_cover": "http://imge.kugou.com/stdmusic/{size}/20231016/20231016111750787075.jpg",
+    "ogg_320_filesize": 9711009,
+    "qualitymap": {
+     "bits": "28fffc0db411ffffff3fc0f5",
+     "attr0": 2134884597,
+     "attr1": 1747189759
+    },
+    "is_original": 1,
+    "ogg_128_filesize": 2875122,
+    "cid": 2456716,
+    "ogg_128_hash": "44AE1E2BB0F60620772A848629E57913",
+    "pay_block_tpl": 1,
+    "ipmap": {
+     "attr0": 2475008462848,
+     "bits": "10024042001000"
+    },
+    "hash_offset": {
+     "clip_hash": "71E330E06AB8EB59FA176AF49009C6F4",
+     "start_byte": 0,
+     "end_ms": 60000,
+     "end_byte": 960119,
+     "file_type": 0,
+     "start_ms": 0,
+     "offset_hash": "609A25E92A0A4382C6472E972FAA4E46"
+    },
+    "appid_block": "3124",
+    "hash_multitrack": "CFD039D72F03394E94E3C04318C072DB",
+    "cpy_level": 1
+   },
+   "pay_type_128": 3,
+   "remarks": [
+    {
+     "remark": "《第3届全球流行音乐金榜》奖项年度进榜最久冠军歌曲",
+     "ip_type": 1,
+     "rel_album_audio_id": 0,
+     "work_type": "46",
+     "remark_type": 2
+    },
+    {
+     "remark": "《第11届hito流行音乐奖》奖项年度十大华语歌曲",
+     "ip_type": 1,
+     "rel_album_audio_id": 0,
+     "work_type": "46",
+     "remark_type": 2
+    }
+   ],
+   "all_privs_super": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "video_hash": "D4816C0F230079D19EE18D892A7DBEBF",
+   "is_original": 1,
+   "version": 1,
+   "topic_url_high": "",
+   "identity": 1,
+   "album_id": 982051,
+   "old_cpy_320": 0,
+   "privilege_high": 10,
+   "pay_type": 3,
+   "all_privs_128": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "topic_url_flac": "",
+   "rp_publish": 1,
+   "pkg_price_super": 1,
+   "pkg_price_high": 1,
+   "pkg_price_flac": 1,
+   "video_filesize": 36380633,
+   "price_high": 200,
+   "tmp_privilege": 2,
+   "pkg_price": 1,
+   "status_320": 0,
+   "album_audio_id": 32238249,
+   "pay_type_super": 3,
+   "old_hide_320": 1,
+   "pkg_price_320": 1,
+   "topic_remark": "",
+   "pay_type_high": 3,
+   "privilege_128": 10,
+   "timelength_320": 260414,
+   "price_flac": 200,
+   "fail_process_128": 4,
+   "audio_name": "明明就",
+   "timelength_flac": 260385,
+   "price_320": 200,
+   "pay_type_flac": 3,
+   "topic_url": "",
+   "cid": 2456716,
+   "audio_file_head": 100,
+   "filesize_super": 183732380,
+   "topic_url_super": "",
+   "old_cpy_super": 0,
+   "all_privs_high": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "all_privs": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "topic_url_320": "",
+   "mixsong_type": 0,
+   "rp_type_320": "audio",
+   "hash": "D85C14E02008B7A2F97D55CDC29C2221",
+   "author_name": "周杰伦",
+   "all_privs_flac": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "fail_process_high": 4,
+   "status_flac": 0,
+   "audio_id": 582068,
+   "status_128": 0,
+   "price_128": 200,
+   "rp_type_flac": "audio",
+   "pay_type_320": 3,
+   "all_privs_320": {
+    "3": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "4": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "5": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "6": {
+     "fail_process": 0,
+     "privilege": 5,
+     "status": 0
+    },
+    "7": {
+     "fail_process": 4,
+     "privilege": 10,
+     "status": 0
+    }
+   },
+   "timelength_high": 260385,
+   "filesize_128": 4167249,
+   "rp_type_super": "audio",
+   "album_name": "十二新作",
+   "rp_type_high": "audio",
+   "topic_url_128": "",
+   "rp_type_128": "audio",
+   "songid": 579513,
+   "rp_type": "audio",
+   "fail_process_super": 4,
+   "extname_super": "dff",
+   "status_high": 0,
+   "publish_date": "2012-12-28",
+   "hash_320": "28C75B958DF591AF2AF9EA4618CF840D",
+   "bitrate_super": 5644,
+   "hash_high": "4F1A0F453DB098502829B568F42CE7A3",
+   "extname": "mp3",
+   "fail_process_320": 4,
+   "fail_process": 4,
+   "old_cpy_high": 0,
+   "timelength_super": 260391,
+   "old_cpy_flac": 0,
+   "level": 2,
+   "old_hide_super": 1,
+   "privilege_flac": 10,
+   "old_cpy": 0,
+   "status_super": 0,
+   "old_cpy_128": 0,
+   "old_hide_128": 1,
+   "video_timelength": 259601,
+   "bitrate": 128,
+   "cd_url": "",
+   "privilege_320": 10,
+   "pkg_price_128": 1,
+   "price": 200,
+   "filesize_high": 28372811,
+   "filesize": 4167249,
+   "timelength_128": 260414,
+   "price_super": 200,
+   "has_obbligato": 1,
+   "hash_128": "D85C14E02008B7A2F97D55CDC29C2221",
+   "album_audio_remark": "《第3届全球流行音乐金榜》奖项年度进榜最久冠军歌曲",
+   "bitrate_high": 871,
+   "fail_process_flac": 4,
+   "hash_flac": "58726D7B16EDB94253B71A9335C93576",
+   "old_hide_high": 1,
+   "hash_super": "302225E7BADA10D3A664C12CFC1C50E8",
+   "timelength": 260414,
+   "privilege": 10,
+   "privilege_super": 10,
+   "video_id": 596504
+  }
+ ],
+ "extra": {
+  "page_total": 1861,
+  "group": 0
+ },
+ "errcode": 0,
+ "status": 1,
+ "errmsg": ""
+}

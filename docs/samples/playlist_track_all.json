@@ -1,0 +1,4063 @@
+{
+ "error_code": 0,
+ "errmsg": "",
+ "data": {
+  "begin_idx": 0,
+  "pagesize": 30,
+  "count": 152,
+  "userid": 19779498,
+  "list_info": {
+   "tags": "电子,车载",
+   "status": 1,
+   "create_user_pic": "http://imge.kugou.com/kugouicon/165/20240220/20240220071202488769.jpg",
+   "is_pri": 0,
+   "pub_new": 1,
+   "is_drop": 0,
+   "list_create_userid": 19779498,
+   "is_publish": 1,
+   "musiclib_tags": [
+    {
+     "tag_id": 33,
+     "parent_id": 8,
+     "tag_name": "电子"
+    },
+    {
+     "tag_id": 63,
+     "parent_id": 5,
+     "tag_name": "车载"
+    }
+   ],
+   "pub_type": 2,
+   "is_featured": 1,
+   "publish_date": "2023-07-22",
+   "collect_total": 0,
+   "list_ver": 417,
+   "intro": "炸街精选，极致低音享受，自带压迫感的重低音电子！",
+   "type": 0,
+   "list_create_listid": 17,
+   "specialid": 6906430,
+   "radio_id": 0,
+   "source": 1,
+   "trans_param": {
+    "iden": 0
+   },
+   "code": 1,
+   "is_def": 0,
+   "parent_global_collection_id": "collection_3_19779498_17_0",
+   "sound_quality": "",
+   "per_count": 0,
+   "plist": [],
+   "create_time": 1689953837,
+   "is_per": 0,
+   "is_edit": 1,
+   "update_time": 1790353729,
+   "per_num": 0,
+   "count": 152,
+   "sort": 4,
+   "listid": 17,
+   "musiclib_id": 0,
+   "kq_talent": 1,
+   "create_user_gender": 1,
+   "pic": "http://c1.kgimg.com/custom/{size}/20230915/20230915115137115794.jpg",
+   "list_create_username": "三月_",
+   "name": "车载（炸街硬曲）：缓缓而来的压迫感",
+   "is_custom_pic": 1,
+   "global_collection_id": "collection_3_19779498_17_0",
+   "heat": 0,
+   "list_create_gid": "collection_3_19779498_17_0",
+   "sound": {
+    "id": "85",
+    "type": 5,
+    "args": ""
+   },
+   "abtags": [
+    {
+     "name": "车载"
+    },
+    {
+     "name": "动感"
+    }
+   ],
+   "is_mine": 0,
+   "review_status": 1
+  },
+  "songs": [
+   {
+    "hash": "350398016DD4D78B7C58740C787B2EFE",
+    "brief": "",
+    "audio_id": 653338765,
+    "mvtype": 0,
+    "size": 1953395,
+    "publish_date": "2026-09-16",
+    "name": "MANIPULA - 雷霆：降临 (Thunder Lord)",
+    "mvtrack": 0,
+    "bpm_type": "3",
+    "add_mixsongid": 963490551,
+    "album_id": "207790135",
+    "bpm": 119,
+    "mvhash": "",
+    "extname": "mp3",
+    "language": "纯音乐",
+    "collecttime": 1790353729,
+    "csong": 0,
+    "remark": "雷霆：降临 (Thunder Lord)",
+    "level": 1,
+    "media_old_cpy": 0,
+    "relate_goods": [
+     {
+      "hash": "350398016DD4D78B7C58740C787B2EFE",
+      "size": 1953395,
+      "bitrate": 128,
+      "privilege": 10,
+      "level": 2
+     },
+     {
+      "hash": "D695CF9E22CC3A370BB3970AB2947E11",
+      "size": 4883080,
+      "bitrate": 320,
+      "privilege": 10,
+      "level": 4
+     },
+     {
+      "hash": "392A7D2B9079042F3457F18126778196",
+      "size": 14098968,
+      "bitrate": 925,
+      "privilege": 10,
+      "level": 5
+     },
+     {
+      "hash": "73764257127075879400B7A94960FB5C",
+      "size": 24868691,
+      "bitrate": 1631,
+      "privilege": 10,
+      "level": 6
+     }
+    ],
+    "download": [
+     {
+      "hash": "350398016DD4D78B7C58740C787B2EFE",
+      "status": 0,
+      "pay_type": 3,
+      "fail_process": 4
+     }
+    ],
+    "rcflag": 0,
+    "feetype": 0,
+    "has_obbligato": 1,
+    "timelen": 122000,
+    "sort": 0,
+    "trans_param": {
+     "appid_block": "3124",
+     "cid": 664279358,
+     "classmap": {
+      "attr0": 234881032
+     },
+     "cpy_attr0": 15488,
+     "cpy_grade": 5,
+     "cpy_level": 1,
+     "cpy_map": "2",
+     "display": 0,
+     "display_rate": 0,
+     "flags": {},
+     "hash_multitrack": "CBBEC53B8DC2054DDF10C99C1796ABBC",
+     "hash_offset": {
+      "clip_hash": "F3A1F8440129D39FA1C63A19D06366AD",
+      "end_byte": 960195,
+      "end_ms": 60000,
+      "file_type": 0,
+      "offset_hash": "A832B6FD284568E18B872A4EAA6D0EF9",
+      "start_byte": 0,
+      "start_ms": 0
+     },
+     "ipmap": {
+      "attr0": 137975840768,
+      "bits": "10002020004000"
+     },
+     "language": "纯音乐",
+     "musicpack_advance": 1,
+     "ogg_128_filesize": 1563422,
+     "ogg_128_hash": "AAE0F5C73CA262651EBEFFFD96725FE8",
+     "ogg_320_filesize": 4969577,
+     "ogg_320_hash": "A4167A55605CECDBCB02A02C7B221368",
+     "pay_block_tpl": 1,
+     "provider": 5,
+     "qualitymap": {
+      "attr0": 285261940,
+      "attr1": 1745027072,
+      "bits": "2800000c340180001100c074"
+     },
+     "songname_suffix": "(Thunder Lord)",
+     "union_cover": "http://imge.kugou.com/stdmusic/{size}/20260916/20260916153332405800.jpg"
+    },
+    "medistype": "audio",
+    "user_id": 0,
+    "albuminfo": {
+     "name": "雷霆：降临 (Thunder Lord)",
+     "id": 207790135,
+     "publish": 1
+    },
+    "bitrate": 128,
+    "audio_group_id": "697718302",
+    "privilege": 10,
+    "cover": "http://imge.kugou.com/stdmusic/{size}/20260916/20260916153332405800.jpg",
+    "mixsongid": 963490551,
+    "fileid": 159,
+    "heat": 0,
+    "singerinfo": [
+     {
+      "name": "MANIPULA",
+      "publish": 1,
+      "id": 17135675,
+      "avatar": "http://singerimg.kugou.com/uploadpic/softhead/{size}/20250901/20250901121806402837.jpg",
+      "type": 0
+     }
+    ],
+    "tagmap": {
+     "genre0": 0
+    }
+   },
+   {
+    "hash": "5DC1605D2420AD846BD7D00658AB0B95",
+    "brief": "",
+    "audio_id": 576731756,
+    "mvtype": 0,
+    "size": 4322363,
+    "publish_date": "2026-05-20",
+    "name": "Suddenly Appear - 杀戒 Killing Order (压迫感)",
+    "mvtrack": 0,
+    "bpm_type": "3",
+    "add_mixsongid": 884338297,
+    "album_id": "191829693",
+    "bpm": 103,
+    "mvhash": "",
+    "extname": "mp3",
+    "language": "英语",
+    "collecttime": 1785593635,
+    "csong": 0,
+    "remark": "Angel",
+    "level": 1,
+    "media_old_cpy": 0,
+    "relate_goods": [
+     {
+      "hash": "5DC1605D2420AD846BD7D00658AB0B95",
+      "size": 4322363,
+      "bitrate": 128,
+      "privilege": 10,
+      "level": 2
+     },
+     {
+      "hash": "07DA22DA803C3B2F54EBAF08139E4FFE",
+      "size": 10805537,
+      "bitrate": 320,
+      "privilege": 10,
+      "level": 4
+     },
+     {
+      "hash": "8111AD8E4B21122C8644B369653E41B2",
+      "size": 31445825,
+      "bitrate": 931,
+      "privilege": 10,
+      "level": 5
+     }
+    ],
+    "download": [
+     {
+      "hash": "5DC1605D2420AD846BD7D00658AB0B95",
+      "status": 0,
+      "pay_type": 3,
+      "fail_process": 4
+     }
+    ],
+    "rcflag": 0,
+    "feetype": 0,
+    "has_obbligato": 1,
+    "timelen": 270000,
+    "sort": 1,
+    "trans_param": {
+     "cid": 599801208,
+     "classmap": {
+      "attr0": 1308622856
+     },
+     "cpy_attr0": 15488,
+     "cpy_grade": 5,
+     "cpy_level": 1,
+     "cpy_map": "2",
+     "display": 0,
+     "display_rate": 0,
+     "flags": {},
+     "hash_multitrack": "642BE96863C6F2D8FB18545053AC7641",
+     "hash_offset": {
+      "clip_hash": "A5E3D41AFD6C5F1111FA4B09C144F738",
+      "end_byte": 960171,
+      "end_ms": 60000,
+      "file_type": 0,
+      "offset_hash": "A2FEC5B7CCF0668B8E5D18CC6EC555C9",
+      "start_byte": 0,
+      "start_ms": 0
+     },
+     "ipmap": {
+      "attr0": 137455779840,
+      "bits": "1000200100c000"
+     },
+     "is_original": 6,
+     "language": "英语",
+     "musicpack_advance": 1,
+     "ogg_128_filesize": 3888171,
+     "ogg_128_hash": "4A415E05CBB0937890AE5D32F249A5FF",
+     "ogg_320_filesize": 12500952,
+     "ogg_320_hash": "BDE998E874B8B65338375C026AA5DE5A",
+     "pay_block_tpl": 1,
+     "provider": 5,
+     "qualitymap": {
+      "attr0": 923910196,
+      "attr1": 1746927616,
+      "bits": "800020db41000003711c034"
+     },
+     "songname_suffix": "(压迫感)",
+     "union_cover": "http://imge.kugou.com/stdmusic/{size}/20260520/20260520163302473268.jpg"
+    },
+    "medistype": "audio",
+    "user_id": 0,
+    "albuminfo": {
+     "name": "Angel",
+     "id": 191829693,
+     "publish": 1
+    },
+    "bitrate": 128,
+    "audio_group_id": "625428844",
+    "privilege": 10,
+    "cover": "http://imge.kugou.com/stdmusic/{size}/20260520/20260520163302473268.jpg",
+    "mixsongid": 884338297,
+    "fileid": 157,
+    "heat": 0,
+    "singerinfo": [
+     {
+      "name": "Suddenly Appear",
+      "publish": 1,
+      "id": 21776963,
+      "avatar": "http://singerimg.kugou.com/uploadpic/softhead/{size}/20260517/20260517173803497951.jpg",
+      "type": 1
+     }
+    ],
+    "tagmap": {
+     "genre0": 0
+    }
+   },
+   {
+    "hash": "F02070091639708AC90500EB64ADAC6E",
+    "brief": "",
+    "audio_id": 119685630,
+    "mvtype": 1,
+    "size": 2795137,
+    "publish_date": "2021-09-10",
+    "name": "Dxrk ダーク - CLOUD (Explicit)",
+    "mvtrack": 3,
+    "bpm_type": "3",
+    "add_mixsongid": 335909366,
+    "album_id": "48600804",
+    "bpm": 120,
+    "mvhash": "0D51ECBA12B53AE6C8E5E032BB8A9167",
+    "extname": "mp3",
+    "language": "英语",
+    "collecttime": 1787367567,
+    "csong": 0,
+    "remark": "Night Show (Explicit)",
+    "level": 1,
+    "media_old_cpy": 0,
+    "relate_goods": [
+     {
+      "hash": "F02070091639708AC90500EB64ADAC6E",
+      "size": 2795137,
+      "bitrate": 128,
+      "privilege": 10,
+      "level": 2
+     },
+     {
+      "hash": "DA46554084EC7574E15B2550FC095A1B",
+      "size": 6987476,
+      "bitrate": 320,
+      "privilege": 10,
+      "level": 4
+     },
+     {
+      "hash": "8A8443DC38432E79E73ECF02129FE2B0",
+      "size": 17957107,
+      "bitrate": 822,
+      "privilege": 10,
+      "level": 5
+     },
+     {
+      "hash": "ED410B1C651D40E91E01FE0107575C2F",
+      "size": 33238107,
+      "bitrate": 1522,
+      "privilege": 10,
+      "level": 6
+     }
+    ],
+    "download": [
+     {
+      "hash": "F02070091639708AC90500EB64ADAC6E",
+      "status": 0,
+      "pay_type": 3,
+      "fail_process": 4
+     }
+    ],
+    "rcflag": 1,
+    "feetype": 0,
+    "has_obbligato": 1,
+    "timelen": 174654,
+    "sort": 2,
+    "trans_param": {
+     "cid": 168202960,
+     "classmap": {
+      "attr0": 234881032
+     },
+     "cpy_attr0": 50347136,
+     "cpy_grade": 5,
+     "cpy_level": 1,
+     "cpy_map": "6",
+     "display": 0,
+     "display_rate": 0,
+     "flags": {},
+     "hash_multitrack": "B1E452F9F99AFEDC0F49113DF75FB02A",
+     "hash_offset": {
+      "clip_hash": "CE15250ED5E53F6BDEAB4B2E499A01F1",
+      "end_byte": 960167,
+      "end_ms": 60000,
+      "file_type": 0,
+      "offset_hash": "D515B2E0CB6C4D4B7AE55FDF86BC1A43",
+      "start_byte": 0,
+      "start_ms": 0
+     },
+     "ipmap": {
+      "attr0": 8606716928,
+      "bits": "201001400"
+     },
+     "is_original": 6,
+     "language": "英语",
+     "musicpack_advance": 1,
+     "ogg_128_filesize": 2134639,
+     "ogg_128_hash": "63AC7D56961CA7EF2AAB49632F8B1016",
+     "ogg_320_filesize": 7255288,
+     "ogg_320_hash": "52EEF771271D8A1CCB3EEFF3EF1D236A",
+     "pay_block_tpl": 1,
+     "qualitymap": {
+      "attr0": 2134884468,
+      "attr1": 1747124224,
+      "bits": "800000db41180007f3fc074"
+     },
+     "songname_suffix": "(Explicit)",
+     "union_cover": "http://imge.kugou.com/stdmusic/{size}/20210907/20210907035504174025.jpg"
+    },
+    "medistype": "audio",
+    "user_id": 0,
+    "albuminfo": {
+     "name": "Night Show (Explicit)",
+     "id": 48600804,
+     "publish": 1
+    },
+    "bitrate": 128,
+    "audio_group_id": "175164049",
+    "privilege": 10,
+    "cover": "http://imge.kugou.com/stdmusic/{size}/20210907/20210907035504174025.jpg",
+    "mixsongid": 335909366,
+    "fileid": 158,
+    "heat": 0,
+    "singerinfo": [
+     {
+      "name": "Dxrk ダーク",
+      "publish": 1,
+      "id": 6694265,
+      "avatar": "http://singerimg.kugou.com/uploadpic/softhead/{size}/20251030/20251030155505606015.jpg",
+      "type": 1
+     }
+    ],
+    "tagmap": {
+     "genre0": 2621440
+    },
+    "mvdata": [
+     {
+      "typ": 0
+     }
+    ]
+   },
+   {
+    "hash": "0A6A747070F4C2B8937E017D78A4FD5E",
+    "brief": "",
+    "audio_id": 504049217,
+    "mvtype": 1,
+    "size": 2370456,
+    "publish_date": "2025-10-27",
+    "name": "Smoke - Amazon",
+    "mvtrack": 3,
+    "bpm_type": "3",
+    "add_mixsongid": 805565398,
+    "album_id": "165757126",
+    "bpm": 108,
+    "mvhash": "B2FCC598D8ABAE9135B628E2264A8843",
+    "extname": "mp3",
+    "language": "纯音乐",
+    "collecttime": 1784532126,
+    "csong": 0,
+    "remark": "Amazon",
+    "level": 1,
+    "media_old_cpy": 0,
+    "relate_goods": [
+     {
+      "hash": "0A6A747070F4C2B8937E017D78A4FD5E",
+      "size": 2370456,
+      "bitrate": 128,
+      "privilege": 8,
+      "level": 2
+     },
+     {
+      "hash": "6AE4B4FC81980E4A8F064F54248E2A13",
+      "size": 5925826,
+      "bitrate": 320,
+      "privilege": 10,
+      "level": 4
+     },
+     {
+      "hash": "3B01A8D9C0D783C9F392F265860E084F",
+      "size": 17662706,
+      "bitrate": 953,
+      "privilege": 10,
+      "level": 5
+     }
+    ],
+    "download": [
+     {
+      "hash": "0A6A747070F4C2B8937E017D78A4FD5E",
+      "status": 0,
+      "pay_type": 3,
+      "fail_process": 4
+     }
+    ],
+    "rcflag": 0,
+    "feetype": 0,
+    "has_obbligato": 1,
+    "timelen": 148000,
+    "sort": 3,
+    "trans_param": {
+     "cid": 543190651,
+     "classmap": {
+      "attr0": 234881032
+     },
+     "cpy_attr0": 8192,
+     "cpy_grade": 22,
+     "cpy_level": 1,
+     "cpy_map": "2",
+     "display": 0,
+     "display_rate": 0,
+     "flags": {},
+     "free_for_ad": 32,
+     "hash_multitrack": "8884965303B09FA6738F8827EDC08076",
+     "ipmap": {
+      "attr0": 137975857152,
+      "bits": "10002020008000"
+     },
+     "language": "纯音乐",
+     "musicpack_advance": 0,
+     "ogg_128_filesize": 1766499,
+     "ogg_128_hash": "C283EC4BA7501CE99EE4036CAE25CE2A",
+     "ogg_320_filesize": 6093844,
+     "ogg_320_hash": "BCA70711A3B3BFEB4148C74C69E76A4A",
+     "pay_block_tpl": 1,
+     "qualitymap": {
+      "attr0": 319864884,
+      "attr1": 1746927616,
+      "bits": "800000c341000001310c034"
+     },
+     "union_cover": "http://imge.kugou.com/stdmusic/{size}/20251027/20251027171637886905.jpg"
+    },
+    "medistype": "audio",
+    "user_id": 0,
+    "albuminfo": {
+     "name": "Amazon",
+     "id": 165757126,
+     "publish": 1
+    },
+    "bitrate": 128,
+    "audio_group_id": "566370167",
+    "privilege": 8,
+    "cover": "http://imge.kugou.com/stdmusic/{size}/20251027/20251027171637886905.jpg",
+    "mixsongid": 805565398,
+    "fileid": 155,
+    "heat": 0,
+    "singerinfo": [
+     {
+      "name": "Smoke",
+      "publish": 1,
+      "id": 14910232,
+      "avatar": "http://singerimg.kugou.com/uploadpic/softhead/{size}/20250914/20250914003356473388.jpg",
+      "type": 1
+     }
+    ],
+    "tagmap": {
+     "genre0": 0
+    },
+    "mvdata": [
+     {
+      "typ": 0
+     }
+    ]
+   },
+   {
+    "hash": "BD01050419BB9B3D8B66215F4299F410",
+    "brief": "",
+    "audio_id": 520975108,
+    "mvtype": 0,
+    "size": 2709443,
+    "publish_date": "2025-12-24",
+    "name": "HEAB - Berkan Harent (高燃压迫感)",
+    "mvtrack": 0,
+    "bpm_type": "2",
+    "add_mixsongid": 827497676,
+    "album_id": "171644337",
+    "bpm": 86,
+    "mvhash": "",
+    "extname": "mp3",
+    "language": "纯音乐",
+    "collecttime": 1782303353,
+    "csong": 0,
+    "remark": "Fly (氛围纯享版)",
+    "level": 1,
+    "media_old_cpy": 0,
+    "relate_goods": [
+     {
+      "hash": "BD01050419BB9B3D8B66215F4299F410",
+      "size": 2709443,
+      "bitrate": 128,
+      "privilege": 10,
+      "level": 2
+     },
+     {
+      "hash": "160A5C3A97712116F012F7D80D363F91",
+      "size": 6773260,
+      "bitrate": 320,
+      "privilege": 10,
+      "level": 4
+     },
+     {
+      "hash": "B6BA7651F78965264B62A5A673087A03",
+      "size": 20806998,
+      "bitrate": 983,
+      "privilege": 10,
+      "level": 5
+     },
+     {
+      "hash": "4B0BCE0DCF665922A37ACD7B61F7E4AA",
+      "size": 37815174,
+      "bitrate": 1787,
+      "privilege": 10,
+      "level": 6
+     }
+    ],
+    "download": [
+     {
+      "hash": "BD01050419BB9B3D8B66215F4299F410",
+      "status": 0,
+      "pay_type": 3,
+      "fail_process": 4
+     }
+    ],
+    "rcflag": 0,
+    "feetype": 0,
+    "has_obbligato": 1,
+    "timelen": 169000,
+    "sort": 4,
+    "trans_param": {
+     "appid_block": "3124",
+     "cid": 557867060,
+     "classmap": {
+      "attr0": 234881032
+     },
+     "cpy_attr0": 15488,
+     "cpy_grade": 5,
+     "cpy_level": 1,
+     "cpy_map": "2",
+     "display": 0,
+     "display_rate": 0,
+     "flags": {},
+     "hash_multitrack": "0667CC681C8B47A1577A947877F618E8",
+     "hash_offset": {
+      "clip_hash": "9C169DD5D556BCC07E518BAB8E4606F1",
+      "end_byte": 960155,
+      "end_ms": 60000,
+      "file_type": 0,
+      "offset_hash": "BFDEDFFF963E98C15410FF09AE6099E4",
+      "start_byte": 0,
+      "start_ms": 0
+     },
+     "ipmap": {
+      "attr0": 137975873536,
+      "bits": "1000202000c000"
+     },
+     "language": "纯音乐",
+     "musicpack_advance": 1,
+     "ogg_128_filesize": 2261979,
+     "ogg_128_hash": "1A84F4E50F53C5FB7A663C6E28DE2CB4",
+     "ogg_320_filesize": 7115921,
+     "ogg_320_hash": "1F6C0B4897A46C33AD0EF98C36ED1418",
+     "pay_block_tpl": 1,
+     "provider": 5,
+     "qualitymap": {
+      "attr0": 285261940,
+      "attr1": 1745027072,
+      "bits": "800000c340180001100c074"
+     },
+     "songname_suffix": "(高燃压迫感)",
+     "union_cover": "http://imge.kugou.com/stdmusic/{size}/20251224/20251224170324397299.jpg"
+    },
+    "medistype": "audio",
+    "user_id": 0,
+    "albuminfo": {
+     "name": "Fly (氛围纯享版)",
+     "id": 171644337,
+     "publish": 1
+    },
+    "bitrate": 128,
+    "audio_group_id": "580368860",
+    "privilege": 10,
+    "cover": "http://imge.kugou.com/stdmusic/{size}/20251224/20251224170324397299.jpg",
+    "mixsongid": 827497676,
+    "fileid": 150,
+    "heat": 0,
+    "singerinfo": [
+     {
+      "name": "HEAB",
+      "publish": 1,
+      "id": 17580266,
+      "avatar": "http://singerimg.kugou.com/uploadpic/softhead/{size}/20251015/20251015110003297135.jpg",
+      "type": 0
+     }
+    ],
+    "tagmap": {
+     "genre0": 0
+    }
+   },
+   {
+    "hash": "C23CD734122DBB4695CA473C6589508D",
+    "brief": "",
+    "audio_id": 572215183,
+    "mvtype": 0,
+    "size": 2024220,
+    "publish_date": "2026-05-11",
+    "name": "VVKM - Growls Felt",
+    "mvtrack": 0,
+    "bpm_type": "3",
+    "add_mixsongid": 880174194,
+    "album_id": "190425197",
+    "bpm": 114,
+    "mvhash": "",
+    "extname": "mp3",
+    "language": "纯音乐",
+    "collecttime": 1782822531,
+    "csong": 0,
+    "remark": "Growls Felt",
+    "level": 1,
+    "media_old_cpy": 0,
+    "relate_goods": [
+     {
+      "hash": "C23CD734122DBB4695CA473C6589508D",
+      "size": 2024220,
+      "bitrate": 128,
+      "privilege": 10,
+      "level": 2
+     },
+     {
+      "hash": "9B9705A308C5AE3770BD533FFDD37BA5",
+      "size": 5060669,
+      "bitrate": 320,
+      "privilege": 10,
+      "level": 4
+     },
+     {
+      "hash": "F42DD80BA491745992FE5683C32FD50F",
+      "size": 14761783,
+      "bitrate": 933,
+      "privilege": 10,
+      "level": 5
+     }
+    ],
+    "download": [
+     {
+      "hash": "C23CD734122DBB4695CA473C6589508D",
+      "status": 0,
+      "pay_type": 3,
+      "fail_process": 4
+     }
+    ],
+    "rcflag": 0,
+    "feetype": 0,
+    "has_obbligato": 1,
+    "timelen": 126000,
+    "sort": 5,
+    "trans_param": {
+     "cid": 596776229,
+     "classmap": {
+      "attr0": 234881032
+     },
+     "cpy_attr0": 15488,
+     "cpy_grade": 22,
+     "cpy_level": 1,
+     "cpy_map": "2",
+     "display": 0,
+     "display_rate": 0,
+     "free_for_ad": 32,
+     "hash_multitrack": "1383F51F66381525A0C27CC541D37F32",
+     "hash_offset": {
+      "clip_hash": "3D2BE6B43D69404ACE6574FEAF20374C",
+      "end_byte": 960931,
+      "end_ms": 60000,
+      "file_type": 0,
+      "offset_hash": "FB145297DA3C8A8693B3ECD1AA80DA1F",
+      "start_byte": 0,
+      "start_ms": 0
+     },
+     "ipmap": {
+      "attr0": 536870912,
+      "bits": "10000020000000"
+     },
+     "language": "纯音乐",
+     "musicpack_advance": 1,
+     "ogg_128_filesize": 1562500,
+     "ogg_128_hash": "D194416B5537F3493BAC5F7A96C3F71B",
+     "ogg_320_filesize": 5231918,
+     "ogg_320_hash": "EDB72A6933B48D6876DFACEDBD277AD7",
+     "pay_block_tpl": 1,
+     "qualitymap": {
+      "attr0": 319864884,
+      "attr1": 1746927616,
+      "bits": "800020c341000001310c034"
+     },
+     "union_cover": "http://imge.kugou.com/stdmusic/{size}/20260511/20260511163905729705.jpg"
+    },
+    "medistype": "audio",
+    "user_id": 0,
+    "albuminfo": {
+     "name": "Growls Felt",
+     "id": 190425197,
+     "publish": 1
+    },
+    "bitrate": 128,
+    "audio_group_id": "622358620",
+    "privilege": 10,
+    "cover": "http://imge.kugou.com/stdmusic/{size}/20260511/20260511163905729705.jpg",
+    "mixsongid": 880174194,
+    "fileid": 152,
+    "heat": 0,
+    "singerinfo": [
+     {
+      "name": "VVKM",
+      "publish": 1,
+      "id": 12718987,
+      "avatar": "http://singerimg.kugou.com/uploadpic/softhead/{size}/20241012/20241012142312544803.jpg",
+      "type": 1
+     }
+    ],
+    "tagmap": {
+     "genre0": 0
+    }
+   },
+   {
+    "hash": "787BF147B560B96868321174FCFC0A08",
+    "brief": "",
+    "audio_id": 391998322,
+    "mvtype": 0,
+    "size": 2087930,
+    "publish_date": "2024-10-08",
+    "name": "GTR7 - Snake Lady",
+    "mvtrack": 0,
+    "bpm_type": "2",
+    "add_mixsongid": 679854591,
+    "album_id": "105727768",
+    "bpm": 97,
+    "mvhash": "",
+    "extname": "mp3",
+    "language": "英语",
+    "collecttime": 1781839529,
+    "csong": 0,
+    "remark": "Snake Lady",
+    "level": 1,
+    "media_old_cpy": 0,
+    "relate_goods": [
+     {
+      "hash": "787BF147B560B96868321174FCFC0A08",
+      "size": 2087930,
+      "bitrate": 128,
+      "privilege": 10,
+      "level": 2
+     },
+     {
+      "hash": "D7EA3D675560BCA58AC80059307213E2",
+      "size": 5219489,
+      "bitrate": 320,
+      "privilege": 10,
+      "level": 4
+     },
+     {
+      "hash": "1FB107D39F88FB2728FCDF601811EBF9",
+      "size": 14680351,
+      "bitrate": 900,
+      "privilege": 10,
+      "level": 5
+     }
+    ],
+    "download": [
+     {
+      "hash": "787BF147B560B96868321174FCFC0A08",
+      "status": 0,
+      "pay_type": 3,
+      "fail_process": 4
+     }
+    ],
+    "rcflag": 1,
+    "feetype": 0,
+    "has_obbligato": 1,
+    "timelen": 130000,
+    "sort": 6,
+    "trans_param": {
+     "cid": 429373927,
+     "classmap": {
+      "attr0": 234881032
+     },
+     "cpy_attr0": 16792704,
+     "cpy_grade": 22,
+     "cpy_level": 1,
+     "cpy_map": "2",
+     "display": 0,
+     "display_rate": 0,
+     "flags": {},
+     "free_for_ad": 32,
+     "hash_multitrack": "E9C9CFFB2D35062BF7B55642DF9D1469",
+     "hash_offset": {
+      "clip_hash": "28C151563233E2B6C30CFAC6C5840A13",
+      "end_byte": 960147,
+      "end_ms": 60000,
+      "file_type": 0,
+      "offset_hash": "53B4AE80FCF7B964D1C8EADC2E7A2E56",
+      "start_byte": 0,
+      "start_ms": 0
+     },
+     "ipmap": {
+      "attr0": 16811008,
+      "bits": "10000001008400"
+     },
+     "is_original": 6,
+     "language": "英语",
+     "musicpack_advance": 1,
+     "ogg_128_filesize": 1654522,
+     "ogg_128_hash": "2F1B0D7648B30CA9965AA9D3FF66C184",
+     "ogg_320_filesize": 5715300,
+     "ogg_320_hash": "E468FE0A7C356DB24AB8B5BA272F42F9",
+     "pay_block_tpl": 1,
+     "qualitymap": {
+      "attr0": 1997652020,
+      "attr1": 1746927616,
+      "bits": "800000db41000007711c034"
+     },
+     "union_cover": "http://imge.kugou.com/stdmusic/{size}/20241008/20241008161530947632.jpg"
+    },
+    "medistype": "audio",
+    "user_id": 0,
+    "albuminfo": {
+     "name": "Snake Lady",
+     "id": 105727768,
+     "publish": 1
+    },
+    "bitrate": 128,
+    "audio_group_id": "462779358",
+    "privilege": 10,
+    "cover": "http://imge.kugou.com/stdmusic/{size}/20241008/20241008161530947632.jpg",
+    "mixsongid": 679854591,
+    "fileid": 149,
+    "heat": 0,
+    "singerinfo": [
+     {
+      "name": "GTR7",
+      "publish": 1,
+      "id": 8269518,
+      "avatar": "http://singerimg.kugou.com/uploadpic/softhead/{size}/20240806/20240806193344230351.jpg",
+      "type": 1
+     }
+    ],
+    "tagmap": {
+     "genre0": 2097152
+    }
+   },
+   {
+    "hash": "25B95BA37019E12ACB3C246DF1214C66",
+    "brief": "",
+    "audio_id": 480851108,
+    "mvtype": 1,
+    "size": 1949641,
+    "publish_date": "2025-08-04",
+    "name": "1HXSX、wnorg17 - REVENGE (Super Slowed)",
+    "mvtrack": 3,
+    "bpm_type": "3",
+    "add_mixsongid": 780030950,
+    "album_id": "156583786",
+    "bpm": 121,
+    "mvhash": "F1942F41F6CB0A7B9D8208FC938823FB",
+    "extname": "mp3",
+    "language": "小语种",
+    "collecttime": 1778421703,
+    "csong": 0,
+    "remark": "REVENGE !",
+    "level": 1,
+    "media_old_cpy": 0,
+    "relate_goods": [
+     {
+      "hash": "25B95BA37019E12ACB3C246DF1214C66",
+      "size": 1949641,
+      "bitrate": 128,
+      "privilege": 8,
+      "level": 2
+     },
+     {
+      "hash": "ABEA54971879593D23969884D1F1BBF9",
+      "size": 4873684,
+      "bitrate": 320,
+      "privilege": 10,
+      "level": 4
+     },
+     {
+      "hash": "8468F100CA3AA620C8315852D1343688",
+      "size": 13450289,
+      "bitrate": 882,
+      "privilege": 10,
+      "level": 5
+     },
+     {
+      "hash": "05DB808CCF489F6FC27AB5C42B59B40E",
+      "size": 24057782,
+      "bitrate": 1578,
+      "privilege": 10,
+      "level": 6
+     }
+    ],
+    "download": [
+     {
+      "hash": "25B95BA37019E12ACB3C246DF1214C66",
+      "status": 0,
+      "pay_type": 3,
+      "fail_process": 4
+     }
+    ],
+    "rcflag": 1,
+    "feetype": 0,
+    "has_obbligato": 1,
+    "timelen": 121000,
+    "sort": 7,
+    "trans_param": {
+     "cid": 523171065,
+     "classmap": {
+      "attr0": 234881032
+     },
+     "cpy_attr0": 50339840,
+     "cpy_grade": 5,
+     "cpy_level": 1,
+     "cpy_map": "2",
+     "display": 0,
+     "display_rate": 0,
+     "flags": {},
+     "free_limited": 1,
+     "hash_multitrack": "3B7DA336E3D54646AE8EBB19A106AAC6",
+     "hash_offset": {
+      "clip_hash": "DFBA603900DABDDB36D41100A9B56F97",
+      "end_byte": 960203,
+      "end_ms": 60000,
+      "file_type": 0,
+      "offset_hash": "4072A242B92ACA4C1A3B7DB4538E639C",
+      "start_byte": 0,
+      "start_ms": 0
+     },
+     "ipmap": {
+      "attr0": 1024,
+      "bits": "10000000000400"
+     },
+     "language": "小语种",
+     "musicpack_advance": 0,
+     "ogg_128_filesize": 1479288,
+     "ogg_128_hash": "094574D789EB08EE8346B80311AC73EB",
+     "ogg_320_filesize": 5069175,
+     "ogg_320_hash": "251570F3DDDE84285C5C61039507319E",
+     "pay_block_tpl": 1,
+     "qualitymap": {
+      "attr0": 1060880500,
+      "attr1": 1747124224,
+      "bits": "800000db41180003f3bc074"
+     },
+     "songname_suffix": "(Super Slowed)",
+     "union_cover": "http://imge.kugou.com/stdmusic/{size}/20261105/20261105000354770673.jpg"
+    },
+    "medistype": "audio",
+    "user_id": 0,
+    "albuminfo": {
+     "name": "REVENGE !",
+     "id": 156583786,
+     "publish": 1
+    },
+    "bitrate": 128,
+    "audio_group_id": "545538054",
+    "privilege": 8,
+    "cover": "http://imge.kugou.com/stdmusic/{size}/20261105/20261105000354770673.jpg",
+    "mixsongid": 780030950,
+    "fileid": 143,
+    "heat": 0,
+    "singerinfo": [
+     {
+      "name": "1HXSX",
+      "publish": 1,
+      "id": 10442019,
+      "avatar": "",
+      "type": 1
+     },
+     {
+      "name": "wnorg17",
+      "publish": 1,
+      "id": 13147459,
+      "avatar": "",
+      "type": -1
+     }
+    ],
+    "tagmap": {
+     "genre0": 2097152
+    },
+    "mvdata": [
+     {
+      "typ": 0
+     }
+    ]
+   },
+   {
+    "hash": "6EDBCFAAA76F65430A5F01633F68B6F9",
+    "brief": "",
+    "audio_id": 46732100,
+    "mvtype": 1,
+    "size": 3048852,
+    "publish_date": "2018-11-15",
+    "name": "Groove Delight、Prinsh - Sax Appeal",
+    "mvtrack": 3,
+    "bpm_type": "3",
+    "add_mixsongid": 122054099,
+    "album_id": "12557044",
+    "bpm": 125,
+    "mvhash": "27BA64E809BCB0AC215954C26A630865",
+    "extname": "mp3",
+    "language": "英语",
+    "collecttime": 1781399329,
+    "csong": 0,
+    "remark": "萨克斯上诉",
+    "level": 1,
+    "media_old_cpy": 0,
+    "relate_goods": [
+     {
+      "hash": "6EDBCFAAA76F65430A5F01633F68B6F9",
+      "size": 3048852,
+      "bitrate": 128,
+      "privilege": 8,
+      "level": 2
+     },
+     {
+      "hash": "61EA7E99FAAEA5F041B470CE1522F8AD",
+      "size": 7621729,
+      "bitrate": 320,
+      "privilege": 10,
+      "level": 4
+     },
+     {
+      "hash": "E540674A278158CF18A44DE49AA0985E",
+      "size": 22465355,
+      "bitrate": 943,
+      "privilege": 10,
+      "level": 5
+     }
+    ],
+    "download": [
+     {
+      "hash": "6EDBCFAAA76F65430A5F01633F68B6F9",
+      "status": 0,
+      "pay_type": 3,
+      "fail_process": 4
+     }
+    ],
+    "rcflag": 1,
+    "feetype": 0,
+    "has_obbligato": 1,
+    "timelen": 190511,
+    "sort": 8,
+    "trans_param": {
+     "cid": 51670707,
+     "classmap": {
+      "attr0": 234881032
+     },
+     "cpy_attr0": 50339840,
+     "cpy_grade": 5,
+     "cpy_level": 1,
+     "cpy_map": "6",
+     "display": 0,
+     "display_rate": 0,
+     "flags": {},
+     "hash_multitrack": "322BF5AE340E1A5842EB0D8C388B243D",
+     "hash_offset": {
+      "clip_hash": "17E1073B947E4E55F08699A52D2A6266",
+      "end_byte": 960181,
+      "end_ms": 60000,
+      "file_type": 0,
+      "offset_hash": "E90684BAD8E294E612553D63CE218E67",
+      "start_byte": 0,
+      "start_ms": 0
+     },
+     "ipmap": {
+      "attr0": 16811008,
+      "bits": "1008400"
+     },
+     "is_original": 1,
+     "language": "英语",
+     "musicpack_advance": 0,
+     "ogg_128_filesize": 2341374,
+     "ogg_128_hash": "59069BA6357CE01C27140230D8E3FA38",
+     "ogg_320_filesize": 8135031,
+     "ogg_320_hash": "19C7D64E144C312240377A13D437D2D3",
+     "pay_block_tpl": 1,
+     "qualitymap": {
+      "attr0": 2000666676,
+      "attr1": 1746927616,
+      "bits": "1b4100000773fc034"
+     },
+     "union_cover": "http://imge.kugou.com/stdmusic/{size}/20260316/20260316182104631861.jpg"
+    },
+    "medistype": "audio",
+    "user_id": 0,
+    "albuminfo": {
+     "name": "Sax Appeal",
+     "id": 12557044,
+     "publish": 1
+    },
+    "bitrate": 128,
+    "audio_group_id": "34974688",
+    "privilege": 8,
+    "cover": "http://imge.kugou.com/stdmusic/{size}/20260316/20260316182104631861.jpg",
+    "mixsongid": 122054099,
+    "fileid": 145,
+    "heat": 0,
+    "singerinfo": [
+     {
+      "name": "Groove Delight",
+      "publish": 1,
+      "id": 728385,
+      "avatar": "http://singerimg.kugou.com/uploadpic/softhead/{size}/20260131/20260131221441203542.jpg",
+      "type": 0
+     },
+     {
+      "name": "Prinsh",
+      "publish": 1,
+      "id": 858825,
+      "avatar": "http://singerimg.kugou.com/uploadpic/softhead/{size}/20260202/20260202010511404045.jpg",
+      "type": 1
+     }
+    ],
+    "tagmap": {
+     "genre0": 2097154
+    },
+    "mvdata": [
+     {
+      "typ": 0
+     }
+    ]
+   },
+   {
+    "hash": "7948E4D1D4AB2AA2E3B31A8419AA889D",
+    "brief": "",
+    "audio_id": 26473776,
+    "mvtype": 1,
+    "size": 5873062,
+    "publish_date": "2017-04-27",
+    "name": "Delta Heavy - S.T.A.Y. (Delta Heavy Tribute)",
+    "mvtrack": 3,
+    "bpm_type": "2",
+    "add_mixsongid": 57681808,
+    "album_id": "15702500",
+    "bpm": 86,
+    "mvhash": "AF0B924D26E38ACCB7EF12062496C416",
+    "extname": "mp3",
+    "language": "纯音乐",
+    "collecttime": 1753456797,
+    "csong": 0,
+    "remark": "停留（三角洲致敬）",
+    "level": 1,
+    "media_old_cpy": 0,
+    "relate_goods": [
+     {
+      "hash": "7948E4D1D4AB2AA2E3B31A8419AA889D",
+      "size": 5873062,
+      "bitrate": 128,
+      "privilege": 10,
+      "level": 2
+     },
+     {
+      "hash": "CA6A01635750C802AB20A39BCDEF2A97",
+      "size": 14682179,
+      "bitrate": 320,
+      "privilege": 10,
+      "level": 4
+     },
+     {
+      "hash": "259DAD90CA48D5BA10A136CCB8BABAE8",
+      "size": 49780292,
+      "bitrate": 1085,
+      "privilege": 10,
+      "level": 5
+     }
+    ],
+    "download": [
+     {
+      "hash": "7948E4D1D4AB2AA2E3B31A8419AA889D",
+      "status": 0,
+      "pay_type": 3,
+      "fail_process": 4
+     }
+    ],
+    "rcflag": 1,
+    "feetype": 0,
+    "has_obbligato": 1,
+    "timelen": 366000,
+    "sort": 9,
+    "trans_param": {
+     "cid": 99792463,
+     "classmap": {
+      "attr0": 234881032
+     },
+     "cpy_attr0": 15488,
+     "cpy_grade": 5,
+     "cpy_level": 1,
+     "cpy_map": "2",
+     "display": 0,
+     "display_rate": 0,
+     "flags": {},
+     "hash_multitrack": "5DD0BE75CCA28A22793FEF79E6FE78AE",
+     "hash_offset": {
+      "clip_hash": "A938E0FA8C201D3EF9CA41552954C9DD",
+      "end_byte": 960241,
+      "end_ms": 60000,
+      "file_type": 0,
+      "offset_hash": "00C5C949BADDEFD48E4632DF10732495",
+      "start_byte": 0,
+      "start_ms": 0
+     },
+     "ipmap": {
+      "attr0": 536888320,
+      "bits": "10000020004400"
+     },
+     "is_original": 4,
+     "language": "纯音乐",
+     "musicpack_advance": 1,
+     "ogg_128_filesize": 4403948,
+     "ogg_128_hash": "667423CEAA9F833D2E59D7F68990BA06",
+     "ogg_320_filesize": 15772581,
+     "ogg_320_hash": "2BFC85990F8AD071E97F15549E3A3536",
+     "pay_block_tpl": 1,
+     "qualitymap": {
+      "attr0": 1359003700,
+      "attr1": 1744830464,
+      "bits": "2800000c340000005100c034"
+     },
+     "union_cover": "http://imge.kugou.com/stdmusic/{size}/20250228/20250228160401367000.jpg"
+    },
+    "medistype": "audio",
+    "user_id": 0,
+    "albuminfo": {
+     "name": "S.T.A.Y. (Delta Heavy Tribute)",
+     "id": 15702500,
+     "publish": 1
+    },
+    "bitrate": 128,
+    "audio_group_id": "413092052",
+    "privilege": 10,
+    "cover": "http://imge.kugou.com/stdmusic/{size}/20250228/20250228160401367000.jpg",
+    "mixsongid": 57681808,
+    "fileid": 106,
+    "heat": 0,
+    "singerinfo": [
+     {
+      "name": "Delta Heavy",
+      "publish": 1,
+      "id": 210856,
+      "avatar": "http://singerimg.kugou.com/uploadpic/softhead/{size}/20240425/20240425161206789365.jpg",
+      "type": 2
+     }
+    ],
+    "tagmap": {
+     "genre0": 6291456
+    },
+    "mvdata": [
+     {
+      "typ": 0
+     }
+    ]
+   },
+   {
+    "hash": "FE2398447D12BA6CB306D2737DF5F5AC",
+    "brief": "",
+    "audio_id": 43594153,
+    "mvtype": 1,
+    "size": 2963534,
+    "publish_date": "2017-11-01",
+    "name": "ZABO - Drown",
+    "mvtrack": 3,
+    "bpm_type": "3",
+    "add_mixsongid": 114994768,
+    "album_id": "10411429",
+    "bpm": 104,
+    "mvhash": "380055369CA9C0E1C67D5CBA9F8DA1FA",
+    "extname": "mp3",
+    "language": "纯音乐",
+    "collecttime": 1689956820,
+    "csong": 0,
+    "remark": "浸透",
+    "level": 1,
+    "media_old_cpy": 0,
+    "relate_goods": [
+     {
+      "hash": "FE2398447D12BA6CB306D2737DF5F5AC",
+      "size": 2963534,
+      "bitrate": 128,
+      "privilege": 10,
+      "level": 2
+     },
+     {
+      "hash": "0A2F8FB61CCC85460080D4FDA8B079BB",
+      "size": 7408530,
+      "bitrate": 320,
+      "privilege": 10,
+      "level": 4
+     },
+     {
+      "hash": "4ADC1C0DC503B2BEE58802AEFE86BCE6",
+      "size": 19509001,
+      "bitrate": 842,
+      "privilege": 10,
+      "level": 5
+     }
+    ],
+    "download": [
+     {
+      "hash": "FE2398447D12BA6CB306D2737DF5F5AC",
+      "status": 0,
+      "pay_type": 3,
+      "fail_process": 4
+     }
+    ],
+    "rcflag": 1,
+    "feetype": 0,
+    "has_obbligato": 1,
+    "timelen": 185182,
+    "sort": 10,
+    "trans_param": {
+     "appid_block": "3124",
+     "cid": 48178226,
+     "classmap": {
+      "attr0": 234881032
+     },
+     "cpy_attr0": 15488,
+     "cpy_grade": 5,
+     "cpy_level": 1,
+     "cpy_map": "2",
+     "display": 0,
+     "display_rate": 0,
+     "flags": {},
+     "hash_multitrack": "355E31094E2718F786941A19A56BDA5F",
+     "hash_offset": {
+      "clip_hash": "08AA6C44A0D1FE3234869ACE3592AC12",
+      "end_byte": 960127,
+      "end_ms": 60000,
+      "file_type": 0,
+      "offset_hash": "17C69C190CD15EB8B21F025723D3337B",
+      "start_byte": 0,
+      "start_ms": 0
+     },
+     "ipmap": {
+      "attr0": 536888320,
+      "bits": "10000020004400"
+     },
+     "is_original": 10,
+     "language": "纯音乐",
+     "musicpack_advance": 1,
+     "ogg_128_filesize": 2488839,
+     "ogg_128_hash": "55907A67C16D107E450ECE71DFAF5246",
+     "ogg_320_filesize": 7958886,
+     "ogg_320_hash": "694B75B4706233640480A3EBCE9A8657",
+     "pay_block_tpl": 1,
+     "qualitymap": {
+      "attr0": 1393606708,
+      "attr1": 1744830464,
+      "bits": "800000c340000005310c034"
+     },
+     "union_cover": "http://imge.kugou.com/stdmusic/{size}/20180918/20180918053138819871.jpg"
+    },
+    "medistype": "audio",
+    "user_id": 0,
+    "albuminfo": {
+     "name": "Drown",
+     "id": 10411429,
+     "publish": 1
+    },
+    "bitrate": 128,
+    "audio_group_id": "31798368",
+    "privilege": 10,
+    "cover": "http://imge.kugou.com/stdmusic/{size}/20180918/20180918053138819871.jpg",
+    "mixsongid": 114994768,
+    "fileid": 29,
+    "heat": 0,
+    "singerinfo": [
+     {
+      "name": "ZABO",
+      "publish": 1,
+      "id": 815329,
+      "avatar": "http://singerimg.kugou.com/uploadpic/softhead/{size}/20250314/20250314221951725253.jpg",
+      "type": 1
+     }
+    ],
+    "tagmap": {
+     "genre0": 6291456
+    },
+    "mvdata": [
+     {
+      "typ": 0
+     }
+    ]
+   },
+   {
+    "hash": "F2A7073433FC4983F2C1E9EA52BDCABA",
+    "brief": "",
+    "audio_id": 75574379,
+    "mvtype": 1,
+    "size": 2185740,
+    "publish_date": "2020-06-20",
+    "name": "JVLA - Such a Whore",
+    "mvtrack": 3,
+    "bpm_type": "2",
+    "add_mixsongid": 262539012,
+    "album_id": "38229485",
+    "bpm": 91,
+    "mvhash": "BB3DC2AFE78A12FEED88EFCA52942E2D",
+    "extname": "mp3",
+    "language": "纯音乐",
+    "collecttime": 1689954644,
+    "csong": 0,
+    "remark": "Such a Whore",
+    "level": 1,
+    "media_old_cpy": 0,
+    "relate_goods": [
+     {
+      "hash": "F2A7073433FC4983F2C1E9EA52BDCABA",
+      "size": 2185740,
+      "bitrate": 128,
+      "privilege": 10,
+      "level": 2
+     },
+     {
+      "hash": "701712455C149FAF88B78FF4126CFFF2",
+      "size": 5463815,
+      "bitrate": 320,
+      "privilege": 10,
+      "level": 4
+     },
+     {
+      "hash": "823B80A03DCE2F1BD98399869C2138E9",
+      "size": 14797294,
+      "bitrate": 866,
+      "privilege": 10,
+      "level": 5
+     },
+     {
+      "hash": "10F674F520E8702A4882E414AFFA51E5",
+      "size": 27974458,
+      "bitrate": 1638,
+      "privilege": 10,
+      "level": 6
+     }
+    ],
+    "download": [
+     {
+      "hash": "F2A7073433FC4983F2C1E9EA52BDCABA",
+      "status": 0,
+      "pay_type": 1,
+      "fail_process": 4
+     }
+    ],
+    "rcflag": 1,
+    "feetype": 0,
+    "has_obbligato": 1,
+    "timelen": 136568,
+    "sort": 11,
+    "trans_param": {
+     "appid_block": "3124",
+     "cid": 104483697,
+     "classmap": {
+      "attr0": 234881792
+     },
+     "cpy_attr0": 15488,
+     "cpy_grade": 5,
+     "cpy_level": 1,
+     "cpy_map": "2",
+     "display": 4,
+     "display_rate": 2,
+     "flags": {},
+     "hash_multitrack": "0228AD54E74588A341E44DCCBD995A1D",
+     "hash_offset": {
+      "clip_hash": "E9B779B7CAC12C8CC187DA99A3535EEA",
+      "end_byte": 960155,
+      "end_ms": 60000,
+      "file_type": 0,
+      "offset_hash": "AE2D85E443A8951D4808D1B7C3E48E6D",
+      "start_byte": 0,
+      "start_ms": 0
+     },
+     "ipmap": {
+      "attr0": 536888320,
+      "bits": "10000020004400"
+     },
+     "is_original": 4,
+     "language": "纯音乐",
+     "musicpack_advance": 1,
+     "ogg_128_filesize": 1725640,
+     "ogg_128_hash": "BB7327791B36CAE3C315C8FDB09626A7",
+     "ogg_320_filesize": 5507539,
+     "ogg_320_hash": "57DAC6B5D197899EB44EE4711665A3F5",
+     "pay_block_tpl": 1,
+     "qualitymap": {
+      "attr0": 2132131956,
+      "attr1": 1745027072,
+      "bits": "2800000db40180007f15c074"
+     },
+     "union_cover": "http://imge.kugou.com/stdmusic/{size}/20200624/20200624021710772663.jpg"
+    },
+    "medistype": "audio",
+    "user_id": 0,
+    "albuminfo": {
+     "name": "Such a Whore",
+     "id": 38229485,
+     "publish": 1
+    },
+    "bitrate": 128,
+    "audio_group_id": "113002181",
+    "privilege": 10,
+    "cover": "http://imge.kugou.com/stdmusic/{size}/20200624/20200624021710772663.jpg",
+    "mixsongid": 262539012,
+    "fileid": 6,
+    "heat": 0,
+    "singerinfo": [
+     {
+      "name": "JVLA",
+      "publish": 1,
+      "id": 1027580,
+      "avatar": "http://singerimg.kugou.com/uploadpic/softhead/{size}/20251106/20251106173611412514.jpg",
+      "type": 15
+     }
+    ],
+    "tagmap": {
+     "genre0": 6291456
+    },
+    "mvdata": [
+     {
+      "typ": 0
+     }
+    ]
+   },
+   {
+    "hash": "E7CDF805C029CC6DEE58279ADD825CE2",
+    "brief": "",
+    "audio_id": 302365215,
+    "mvtype": 1,
+    "size": 2146470,
+    "publish_date": "2023-12-04",
+    "name": "Fatrik、L1NO - 窒 Suffocating",
+    "mvtrack": 3,
+    "bpm_type": "3",
+    "add_mixsongid": 576075146,
+    "album_id": "80974411",
+    "bpm": 127,
+    "mvhash": "F0CE0AAF2D47B7823CF555E276696232",
+    "extname": "mp3",
+    "language": "纯音乐",
+    "collecttime": 1730388818,
+    "csong": 0,
+    "remark": "窒 Suffocating",
+    "level": 1,
+    "media_old_cpy": 0,
+    "relate_goods": [
+     {
+      "hash": "E7CDF805C029CC6DEE58279ADD825CE2",
+      "size": 2146470,
+      "bitrate": 128,
+      "privilege": 10,
+      "level": 2
+     },
+     {
+      "hash": "4268AE035073EC6E25190DCB1A198333",
+      "size": 5365615,
+      "bitrate": 320,
+      "privilege": 10,
+      "level": 4
+     },
+     {
+      "hash": "C5607DC176D7083DF7562FF9EFE914FF",
+      "size": 13725307,
+      "bitrate": 818,
+      "privilege": 10,
+      "level": 5
+     },
+     {
+      "hash": "21FAF30D5BCFDE5DD06ECB716DCB70D4",
+      "size": 25498200,
+      "bitrate": 1521,
+      "privilege": 10,
+      "level": 6
+     }
+    ],
+    "download": [
+     {
+      "hash": "E7CDF805C029CC6DEE58279ADD825CE2",
+      "status": 0,
+      "pay_type": 3,
+      "fail_process": 4
+     }
+    ],
+    "rcflag": 1,
+    "feetype": 0,
+    "has_obbligato": 1,
+    "timelen": 134112,
+    "sort": 12,
+    "trans_param": {
+     "appid_block": "3124",
+     "cid": 334750598,
+     "classmap": {
+      "attr0": 234881032
+     },
+     "cpy_attr0": 15488,
+     "cpy_grade": 5,
+     "cpy_level": 1,
+     "cpy_map": "2",
+     "display": 0,
+     "display_rate": 0,
+     "flags": {},
+     "hash_multitrack": "C13527538CFFB9451DB4158FA4AE9F02",
+     "hash_offset": {
+      "clip_hash": "6B1DC8A8ED36D4ED2609FD66556B43E2",
+      "end_byte": 960173,
+      "end_ms": 60000,
+      "file_type": 0,
+      "offset_hash": "441BE5FA9D29402DA98C5FF398188A59",
+      "start_byte": 0,
+      "start_ms": 0
+     },
+     "ipmap": {
+      "attr0": 536888320,
+      "bits": "10000020004400"
+     },
+     "is_original": 10,
+     "language": "纯音乐",
+     "musicpack_advance": 1,
+     "ogg_128_filesize": 1586959,
+     "ogg_128_hash": "68E0D289CF454193B727202CB8E0E6C5",
+     "ogg_320_filesize": 5225312,
+     "ogg_320_hash": "16F42FEB4ADEB14A505C7EE6E94A3924",
+     "pay_block_tpl": 1,
+     "qualitymap": {
+      "attr0": 1393672308,
+      "attr1": 1745027072,
+      "bits": "800000c340180005311c074"
+     },
+     "union_cover": "http://imge.kugou.com/stdmusic/{size}/20250318/20250318151113650346.jpg"
+    },
+    "medistype": "audio",
+    "user_id": 0,
+    "albuminfo": {
+     "name": "窒 Suffocating",
+     "id": 80974411,
+     "publish": 1
+    },
+    "bitrate": 128,
+    "audio_group_id": "401752737",
+    "privilege": 10,
+    "cover": "http://imge.kugou.com/stdmusic/{size}/20250318/20250318151113650346.jpg",
+    "mixsongid": 576075146,
+    "fileid": 58,
+    "heat": 0,
+    "singerinfo": [
+     {
+      "name": "Fatrik",
+      "publish": 1,
+      "id": 1768446,
+      "avatar": "http://singerimg.kugou.com/uploadpic/softhead/{size}/20260128/20260128122405707286.jpg",
+      "type": 1
+     },
+     {
+      "name": "L1NO",
+      "publish": 1,
+      "id": 10908190,
+      "avatar": "http://singerimg.kugou.com/uploadpic/softhead/{size}/20260728/20260728000352796055.jpg",
+      "type": 1
+     }
+    ],
+    "tagmap": {
+     "genre0": 6291456
+    },
+    "mvdata": [
+     {
+      "typ": 0
+     }
+    ]
+   },
+   {
+    "hash": "48A6C07F94390BBA8AE8AC9E05C1EB72",
+    "brief": "",
+    "audio_id": 467869927,
+    "mvtype": 0,
+    "size": 3615857,
+    "publish_date": "2025-06-19",
+    "name": "MWDLH - To Behead (斩杀超燃版)",
+    "mvtrack": 0,
+    "bpm_type": "3",
+    "add_mixsongid": 765345864,
+    "album_id": "151058079",
+    "bpm": 98,
+    "mvhash": "",
+    "extname": "mp3",
+    "language": "纯音乐",
+    "collecttime": 1760062828,
+    "csong": 0,
+    "remark": "为你疯狂",
+    "level": 1,
+    "media_old_cpy": 0,
+    "relate_goods": [
+     {
+      "hash": "48A6C07F94390BBA8AE8AC9E05C1EB72",
+      "size": 3615857,
+      "bitrate": 128,
+      "privilege": 10,
+      "level": 2
+     },
+     {
+      "hash": "D0D682ECB712B24531957E7C41851234",
+      "size": 9039220,
+      "bitrate": 320,
+      "privilege": 10,
+      "level": 4
+     },
+     {
+      "hash": "993CD964E8C6429C62C06205BAA61973",
+      "size": 26410216,
+      "bitrate": 935,
+      "privilege": 10,
+      "level": 5
+     }
+    ],
+    "download": [
+     {
+      "hash": "48A6C07F94390BBA8AE8AC9E05C1EB72",
+      "status": 0,
+      "pay_type": 3,
+      "fail_process": 4
+     }
+    ],
+    "rcflag": 0,
+    "feetype": 0,
+    "has_obbligato": 1,
+    "timelen": 225959,
+    "sort": 13,
+    "trans_param": {
+     "appid_block": "3124",
+     "cid": 511222958,
+     "classmap": {
+      "attr0": 234881032
+     },
+     "cpy_attr0": 15488,
+     "cpy_grade": 5,
+     "cpy_level": 1,
+     "cpy_map": "2",
+     "display": 0,
+     "display_rate": 0,
+     "hash_multitrack": "B4FDE440C82F6F87BA9F5DCB6691C6C7",
+     "hash_offset": {
+      "clip_hash": "82B41ADAF075F51DE3D668C80B973DE3",
+      "end_byte": 960149,
+      "end_ms": 60000,
+      "file_type": 0,
+      "offset_hash": "2C58B9D9C81581FC478000F61C379592",
+      "start_byte": 0,
+      "start_ms": 0
+     },
+     "ipmap": {
+      "attr0": 137975840768,
+      "bits": "10002020004000"
+     },
+     "language": "纯音乐",
+     "musicpack_advance": 1,
+     "ogg_128_filesize": 3057389,
+     "ogg_128_hash": "79241A7F1C49D93205F141D29FAEA298",
+     "ogg_320_filesize": 9181600,
+     "ogg_320_hash": "C64155F521979CE73324E02A68A54B78",
+     "pay_block_tpl": 1,
+     "qualitymap": {
+      "attr0": 1359003700,
+      "attr1": 1744830464,
+      "bits": "340000005100c034"
+     },
+     "songname_suffix": "(斩杀超燃版)",
+     "union_cover": "http://imge.kugou.com/stdmusic/{size}/20260711/20260711152203672922.jpg"
+    },
+    "medistype": "audio",
+    "user_id": 0,
+    "albuminfo": {
+     "name": "为你疯狂",
+     "id": 151058079,
+     "publish": 1
+    },
+    "bitrate": 128,
+    "audio_group_id": "533811688",
+    "privilege": 10,
+    "cover": "http://imge.kugou.com/stdmusic/{size}/20260711/20260711152203672922.jpg",
+    "mixsongid": 765345864,
+    "fileid": 119,
+    "heat": 0,
+    "singerinfo": [
+     {
+      "name": "MWDLH",
+      "publish": 1,
+      "id": 16436257,
+      "avatar": "http://singerimg.kugou.com/uploadpic/softhead/{size}/20250616/20250616101601992152.jpg",
+      "type": 0
+     }
+    ],
+    "tagmap": {
+     "genre0": 0
+    }
+   },
+   {
+    "hash": "8A3558704D698F15CAC2DC3F4478BBAE",
+    "brief": "",
+    "audio_id": 161012053,
+    "mvtype": 1,
+    "size": 4505014,
+    "publish_date": "2022-05-06",
+    "name": "Fatrik - Fainted Priest (褪色的牧师)",
+    "mvtrack": 3,
+    "bpm_type": "3",
+    "add_mixsongid": 405484689,
+    "album_id": "56860814",
+    "bpm": 127,
+    "mvhash": "6EDB0E8BFC17F5DF2DE5C94DBE945419",
+    "extname": "mp3",
+    "language": "纯音乐",
+    "collecttime": 1694450944,
+    "csong": 0,
+    "remark": "褪色的牧师",
+    "level": 1,
+    "media_old_cpy": 0,
+    "relate_goods": [
+     {
+      "hash": "8A3558704D698F15CAC2DC3F4478BBAE",
+      "size": 4505014,
+      "bitrate": 128,
+      "privilege": 10,
+      "level": 2
+     },
+     {
+      "hash": "0262D34BEE5C7EB14F46FC664FAC4C65",
+      "size": 11262160,
+      "bitrate": 320,
+      "privilege": 10,
+      "level": 4
+     },
+     {
+      "hash": "3190D2A22B039A0145D8B2EB4B93C802",
+      "size": 31787488,
+      "bitrate": 903,
+      "privilege": 10,
+      "level": 5
+     }
+    ],
+    "download": [
+     {
+      "hash": "8A3558704D698F15CAC2DC3F4478BBAE",
+      "status": 0,
+      "pay_type": 3,
+      "fail_process": 4
+     }
+    ],
+    "rcflag": 1,
+    "feetype": 0,
+    "has_obbligato": 1,
+    "timelen": 281521,
+    "sort": 14,
+    "trans_param": {
+     "appid_block": "3124",
+     "cid": 208020842,
+     "classmap": {
+      "attr0": 234881032
+     },
+     "cpy_attr0": 15488,
+     "cpy_grade": 5,
+     "cpy_level": 1,
+     "cpy_map": "2",
+     "display": 0,
+     "display_rate": 0,
+     "flags": {},
+     "hash_multitrack": "55A11F8D1BF49E215C04960F2325BC38",
+     "hash_offset": {
+      "clip_hash": "33075282807F3B232B4A22011CB0EFB6",
+      "end_byte": 960173,
+      "end_ms": 60000,
+      "file_type": 0,
+      "offset_hash": "853942E5389DA525241C1C6B7B2141F7",
+      "start_byte": 0,
+      "start_ms": 0
+     },
+     "ipmap": {
+      "attr0": 69256365056,
+      "bits": "10001020004400"
+     },
+     "is_original": 10,
+     "language": "纯音乐",
+     "musicpack_advance": 1,
+     "ogg_128_filesize": 3291128,
+     "ogg_128_hash": "80849C8DCE0D1584E01390BEB673435D",
+     "ogg_320_filesize": 11363186,
+     "ogg_320_hash": "A9B3E42B75776AED00383C8106E65650",
+     "pay_block_tpl": 1,
+     "qualitymap": {
+      "attr0": 1997652021,
+      "attr1": 1744830464,
+      "bits": "2800000db40000007711c035"
+     },
+     "songname_suffix": "(褪色的牧师)",
+     "union_cover": "http://imge.kugou.com/stdmusic/{size}/20220421/20220421153413982255.jpg"
+    },
+    "medistype": "audio",
+    "user_id": 0,
+    "albuminfo": {
+     "name": "Gangnam Classic 2",
+     "id": 56860814,
+     "publish": 1
+    },
+    "bitrate": 128,
+    "audio_group_id": "230753509",
+    "privilege": 10,
+    "cover": "http://imge.kugou.com/stdmusic/{size}/20220421/20220421153413982255.jpg",
+    "mixsongid": 405484689,
+    "fileid": 41,
+    "heat": 0,
+    "singerinfo": [
+     {
+      "name": "Fatrik",
+      "publish": 1,
+      "id": 1768446,
+      "avatar": "http://singerimg.kugou.com/uploadpic/softhead/{size}/20260128/20260128122405707286.jpg",
+      "type": 1
+     }
+    ],
+    "tagmap": {
+     "genre0": 14680064
+    },
+    "mvdata": [
+     {
+      "typ": 0
+     }
+    ]
+   },
+   {
+    "hash": "868E5AA2C64F38C45CAB5BF84A4365F1",
+    "brief": "",
+    "audio_id": 363787822,
+    "mvtype": 1,
+    "size": 3214762,
+    "publish_date": "2024-06-28",
+    "name": "Ganger Baster - Car Music",
+    "mvtrack": 3,
+    "bpm_type": "2",
+    "add_mixsongid": 645155264,
+    "album_id": "97519136",
+    "bpm": 94,
+    "mvhash": "FB877EFE04B0A41D7BFAED30578D1CCD",
+    "extname": "mp3",
+    "language": "纯音乐",
+    "collecttime": 1734786784,
+    "csong": 0,
+    "remark": "Car Music",
+    "level": 1,
+    "media_old_cpy": 0,
+    "relate_goods": [
+     {
+      "hash": "868E5AA2C64F38C45CAB5BF84A4365F1",
+      "size": 3214762,
+      "bitrate": 128,
+      "privilege": 10,
+      "level": 2
+     },
+     {
+      "hash": "0F50FFE6175BD7F8531638F2F22D1276",
+      "size": 8036548,
+      "bitrate": 320,
+      "privilege": 10,
+      "level": 4
+     },
+     {
+      "hash": "1DC67995E27483E8EC916359D924966F",
+      "size": 22624818,
+      "bitrate": 900,
+      "privilege": 10,
+      "level": 5
+     }
+    ],
+    "download": [
+     {
+      "hash": "868E5AA2C64F38C45CAB5BF84A4365F1",
+      "status": 0,
+      "pay_type": 1,
+      "fail_process": 4
+     }
+    ],
+    "rcflag": 0,
+    "feetype": 0,
+    "has_obbligato": 1,
+    "timelen": 200881,
+    "sort": 15,
+    "trans_param": {
+     "appid_block": "3124",
+     "cid": 402550615,
+     "classmap": {
+      "attr0": 234881032
+     },
+     "cpy_attr0": 15488,
+     "cpy_grade": 5,
+     "cpy_level": 1,
+     "cpy_map": "2",
+     "display": 0,
+     "display_rate": 0,
+     "hash_multitrack": "8A8B6C5F5A26CB3B579D75668052FD26",
+     "hash_offset": {
+      "clip_hash": "1EBA790F1D27EF51AFD46EFF22476E61",
+      "end_byte": 960161,
+      "end_ms": 60000,
+      "file_type": 0,
+      "offset_hash": "EB5B2B501DF5810B53CDCD9B76C0D968",
+      "start_byte": 0,
+      "start_ms": 0
+     },
+     "ipmap": {
+      "attr0": 137975840768,
+      "bits": "10002020004000"
+     },
+     "language": "纯音乐",
+     "musicpack_advance": 1,
+     "ogg_128_filesize": 2410644,
+     "ogg_128_hash": "E6CDCA20015928FC1B0B79583C528315",
+     "ogg_320_filesize": 8196442,
+     "ogg_320_hash": "FFD9CE35076EAD1DE6FC33CE9C16CD17",
+     "pay_block_tpl": 1,
+     "qualitymap": {
+      "attr0": 1359003700,
+      "attr1": 1744830464,
+      "bits": "340000005100c034"
+     },
+     "union_cover": "http://imge.kugou.com/stdmusic/{size}/20240628/20240628132603127254.jpg"
+    },
+    "medistype": "audio",
+    "user_id": 0,
+    "albuminfo": {
+     "name": "Car Music",
+     "id": 97519136,
+     "publish": 1
+    },
+    "bitrate": 128,
+    "audio_group_id": "429549325",
+    "privilege": 10,
+    "cover": "http://imge.kugou.com/stdmusic/{size}/20240628/20240628132603127254.jpg",
+    "mixsongid": 645155264,
+    "fileid": 91,
+    "heat": 0,
+    "singerinfo": [
+     {
+      "name": "Ganger Baster",
+      "publish": 1,
+      "id": 8206370,
+      "avatar": "http://singerimg.kugou.com/uploadpic/softhead/{size}/20260201/20260201002149302988.jpg",
+      "type": 1
+     }
+    ],
+    "tagmap": {
+     "genre0": 0
+    },
+    "mvdata": [
+     {
+      "typ": 0
+     }
+    ]
+   },
+   {
+    "hash": "BB8B7C74E4FF5ED043C3FCA8EC6B7C34",
+    "brief": "",
+    "audio_id": 605984370,
+    "mvtype": 1,
+    "size": 1805019,
+    "publish_date": "2026-06-22",
+    "name": "耳朵加油站、Jonice - FUNK NA MIRA teto重音 (Slap House)",
+    "mvtrack": 3,
+    "bpm_type": "3",
+    "add_mixsongid": 913355976,
+    "album_id": "196497493",
+    "bpm": 124,
+    "mvhash": "182FAB25CAE7FBC8CDC8ED13FE99D342",
+    "extname": "mp3",
+    "language": "国语",
+    "collecttime": 1784532467,
+    "csong": 0,
+    "remark": "瞎活就行了",
+    "level": 1,
+    "media_old_cpy": 1,
+    "relate_goods": [
+     {
+      "hash": "BB8B7C74E4FF5ED043C3FCA8EC6B7C34",
+      "size": 1805019,
+      "bitrate": 128,
+      "privilege": 5,
+      "level": 2
+     },
+     {
+      "hash": "60594E79A0EF8D0D14B9D2461541FC89",
+      "size": 4512141,
+      "bitrate": 320,
+      "privilege": 5,
+      "level": 4
+     },
+     {
+      "hash": "CA695F8711AEEE946BB5A2E2FBCE9B57",
+      "size": 14878901,
+      "bitrate": 1055,
+      "privilege": 5,
+      "level": 5
+     }
+    ],
+    "download": [
+     {
+      "hash": "BB8B7C74E4FF5ED043C3FCA8EC6B7C34",
+      "status": 0,
+      "pay_type": 0,
+      "fail_process": 0
+     }
+    ],
+    "rcflag": 0,
+    "feetype": 0,
+    "has_obbligato": 1,
+    "timelen": 112000,
+    "sort": 16,
+    "trans_param": {
+     "appid_block": "3124",
+     "cid": 625319973,
+     "classmap": {
+      "attr0": 234881032
+     },
+     "cpy_attr0": 33554434,
+     "cpy_grade": 75,
+     "cpy_map": "2",
+     "display": 1,
+     "display_rate": 0,
+     "flags": {},
+     "hash_multitrack": "EB73CFFBC4435C458A7BC59C52BFBA58",
+     "ipmap": {
+      "attr0": 137472540672,
+      "bits": "10002002008000"
+     },
+     "language": "国语",
+     "musicpack_advance": 0,
+     "ogg_128_filesize": 1403060,
+     "ogg_128_hash": "477A191D0E31B4ABBAC6221226CA9E02",
+     "ogg_320_filesize": 4354074,
+     "ogg_320_hash": "4347BEA4E318D70B4F8BF48146843EA9",
+     "pay_block_tpl": 1,
+     "provider": 5,
+     "qualitymap": {
+      "attr0": 926671924,
+      "attr1": 1746927616,
+      "bits": "800000db4100000373be434"
+     },
+     "songname_suffix": "(Slap House)",
+     "union_cover": "http://imge.kugou.com/stdmusic/{size}/20260622/20260622145343382815.jpg"
+    },
+    "medistype": "audio",
+    "user_id": 0,
+    "albuminfo": {
+     "name": "瞎活就行了",
+     "id": 196497493,
+     "publish": 1
+    },
+    "bitrate": 128,
+    "audio_group_id": "650496229",
+    "privilege": 5,
+    "cover": "http://imge.kugou.com/stdmusic/{size}/20260622/20260622145343382815.jpg",
+    "mixsongid": 913355976,
+    "fileid": 156,
+    "heat": 0,
+    "singerinfo": [
+     {
+      "name": "耳朵加油站",
+      "publish": 1,
+      "id": 14928954,
+      "avatar": "http://singerimg.kugou.com/uploadpic/softhead/{size}/20250403/20250403102301779802.jpg",
+      "type": 1
+     },
+     {
+      "name": "Jonice",
+      "publish": 1,
+      "id": 13951247,
+      "avatar": "http://singerimg.kugou.com/uploadpic/softhead/{size}/20250319/20250319130205999894.jpg",
+      "type": 1
+     }
+    ],
+    "tagmap": {
+     "genre0": 0
+    },
+    "mvdata": [
+     {
+      "typ": 0
+     }
+    ],
+    "recommend_type": 2
+   },
+   {
+    "hash": "6A082D96D293E4486BB793F411CD4680",
+    "brief": "",
+    "audio_id": 1076637162,
+    "mvtype": 1,
+    "size": 3583442,
+    "publish_date": "2016-01-22",
+    "name": "Rezz、Isabelle Rezazadeh - Edge",
+    "mvtrack": 3,
+    "bpm_type": "3",
+    "add_mixsongid": 66678393,
+    "album_id": "2778633",
+    "bpm": 99,
+    "mvhash": "8DB91805DDC987FC0F3E9F90FD4ED8E8",
+    "extname": "mp3",
+    "language": "纯音乐",
+    "collecttime": 1761834567,
+    "csong": 0,
+    "remark": "边缘",
+    "level": 1,
+    "media_old_cpy": 0,
+    "relate_goods": [
+     {
+      "hash": "6A082D96D293E4486BB793F411CD4680",
+      "size": 3583442,
+      "bitrate": 128,
+      "privilege": 10,
+      "level": 2
+     },
+     {
+      "hash": "2100CF833E063BF6D7991D643102E49B",
+      "size": 8958188,
+      "bitrate": 320,
+      "privilege": 10,
+      "level": 4
+     },
+     {
+      "hash": "0EA99E0185AEABA342F79DAA7046AB64",
+      "size": 24982047,
+      "bitrate": 892,
+      "privilege": 10,
+      "level": 5
+     }
+    ],
+    "download": [
+     {
+      "hash": "6A082D96D293E4486BB793F411CD4680",
+      "status": 0,
+      "pay_type": 3,
+      "fail_process": 4
+     }
+    ],
+    "rcflag": 1,
+    "feetype": 0,
+    "has_obbligato": 1,
+    "timelen": 223921,
+    "sort": 17,
+    "trans_param": {
+     "cid": 63733588,
+     "classmap": {
+      "attr0": 234881032
+     },
+     "cpy_attr0": 15488,
+     "cpy_grade": 5,
+     "cpy_level": 1,
+     "cpy_map": "6",
+     "display": 0,
+     "display_rate": 0,
+     "flags": {},
+     "hash_multitrack": "BDE33DBB070CB5E42E248D1DC1AF2DC5",
+     "hash_offset": {
+      "clip_hash": "4D363739074C43A0FD4CC3E6E37B44D9",
+      "end_byte": 960201,
+      "end_ms": 60000,
+      "file_type": 0,
+      "offset_hash": "65E6EAAC4D235D79BE8CB66FFE23E172",
+      "start_byte": 0,
+      "start_ms": 0
+     },
+     "ipmap": {
+      "attr0": 536888320,
+      "bits": "20004400"
+     },
+     "is_original": 1,
+     "language": "纯音乐",
+     "musicpack_advance": 1,
+     "ogg_128_filesize": 2996132,
+     "ogg_128_hash": "38ACE0AC1E8BB1836C51083DF7EF12D3",
+     "ogg_320_filesize": 10232441,
+     "ogg_320_hash": "27FA5A2DEAE2014D97EBF5A332C59E71",
+     "pay_block_tpl": 1,
+     "qualitymap": {
+      "attr0": 1359003700,
+      "attr1": 1744830464,
+      "bits": "20000000340000005100c034"
+     },
+     "union_cover": "http://imge.kugou.com/stdmusic/{size}/20230117/20230117004916213183.jpg"
+    },
+    "medistype": "audio",
+    "user_id": 0,
+    "albuminfo": {
+     "name": "The Silence Is Deafening",
+     "id": 2778633,
+     "publish": 1
+    },
+    "bitrate": 128,
+    "audio_group_id": "287564504",
+    "privilege": 10,
+    "cover": "http://imge.kugou.com/stdmusic/{size}/20230117/20230117004916213183.jpg",
+    "mixsongid": 66678393,
+    "fileid": 126,
+    "heat": 0,
+    "singerinfo": [
+     {
+      "name": "Rezz",
+      "publish": 1,
+      "id": 725593,
+      "avatar": "http://singerimg.kugou.com/uploadpic/softhead/{size}/20250314/20250314193039585106.jpg",
+      "type": 0
+     },
+     {
+      "name": "Isabelle Rezazadeh",
+      "publish": 1,
+      "id": 8638952,
+      "avatar": "http://singerimg.kugou.com/uploadpic/softhead/{size}/20251110/20251110151901994601.jpg",
+      "type": 15
+     }
+    ],
+    "tagmap": {
+     "genre0": 6291456
+    },
+    "mvdata": [
+     {
+      "typ": 0
+     }
+    ]
+   },
+   {
+    "hash": "47EC3CEE80C1A9F44D00C9ECD3DA57C3",
+    "brief": "",
+    "audio_id": 337201149,
+    "mvtype": 0,
+    "size": 2305088,
+    "publish_date": "2024-03-16",
+    "name": "GTR7 - Flame",
+    "mvtrack": 0,
+    "bpm_type": "3",
+    "add_mixsongid": 613418466,
+    "album_id": "89395831",
+    "bpm": 99,
+    "mvhash": "",
+    "extname": "mp3",
+    "language": "纯音乐",
+    "collecttime": 1779979980,
+    "csong": 0,
+    "remark": "Flame",
+    "level": 1,
+    "media_old_cpy": 0,
+    "relate_goods": [
+     {
+      "hash": "47EC3CEE80C1A9F44D00C9ECD3DA57C3",
+      "size": 2305088,
+      "bitrate": 128,
+      "privilege": 10,
+      "level": 2
+     },
+     {
+      "hash": "20220FFDC800A34B9769E9E7CF384448",
+      "size": 5762656,
+      "bitrate": 320,
+      "privilege": 10,
+      "level": 4
+     },
+     {
+      "hash": "C593BA4C78EAF7779C711234BDC3776C",
+      "size": 17151567,
+      "bitrate": 952,
+      "privilege": 10,
+      "level": 5
+     }
+    ],
+    "download": [
+     {
+      "hash": "47EC3CEE80C1A9F44D00C9ECD3DA57C3",
+      "status": 0,
+      "pay_type": 3,
+      "fail_process": 4
+     }
+    ],
+    "rcflag": 0,
+    "feetype": 0,
+    "has_obbligato": 1,
+    "timelen": 144039,
+    "sort": 18,
+    "trans_param": {
+     "cid": 365971329,
+     "classmap": {
+      "attr0": 234881032
+     },
+     "cpy_attr0": 16792704,
+     "cpy_grade": 22,
+     "cpy_level": 1,
+     "cpy_map": "2",
+     "display": 0,
+     "display_rate": 0,
+     "flags": {},
+     "free_for_ad": 32,
+     "hash_multitrack": "CBB8630D923A3CCD8766EE8B77B82ED2",
+     "hash_offset": {
+      "clip_hash": "3420301B9A62AA1F6BBC5A59B49F7776",
+      "end_byte": 960931,
+      "end_ms": 60000,
+      "file_type": 0,
+      "offset_hash": "94C748CCD828198760522E84E3ECD8F8",
+      "start_byte": 0,
+      "start_ms": 0
+     },
+     "ipmap": {
+      "attr0": 536920064,
+      "bits": "1000002000c000"
+     },
+     "is_original": 10,
+     "language": "纯音乐",
+     "musicpack_advance": 1,
+     "pay_block_tpl": 1,
+     "qualitymap": {
+      "attr0": 1396686900,
+      "attr1": 1746927616,
+      "bits": "34100000533fc034"
+     },
+     "union_cover": "http://imge.kugou.com/stdmusic/{size}/20240316/20240316104006533602.jpg"
+    },
+    "medistype": "audio",
+    "user_id": 0,
+    "albuminfo": {
+     "name": "Flame",
+     "id": 89395831,
+     "publish": 1
+    },
+    "bitrate": 128,
+    "audio_group_id": "404728795",
+    "privilege": 10,
+    "cover": "http://imge.kugou.com/stdmusic/{size}/20240316/20240316104006533602.jpg",
+    "mixsongid": 613418466,
+    "fileid": 144,
+    "heat": 0,
+    "singerinfo": [
+     {
+      "name": "GTR7",
+      "publish": 1,
+      "id": 8269518,
+      "avatar": "http://singerimg.kugou.com/uploadpic/softhead/{size}/20240806/20240806193344230351.jpg",
+      "type": 1
+     }
+    ],
+    "tagmap": {
+     "genre0": 4194306
+    }
+   },
+   {
+    "hash": "532BDAB8A00451D595A47D2078C54E7F",
+    "brief": "",
+    "audio_id": 93315450,
+    "mvtype": 1,
+    "size": 3073965,
+    "publish_date": "2021-02-01",
+    "name": "NextRO - Anatomy (Original Mix)",
+    "mvtrack": 3,
+    "bpm_type": "2",
+    "add_mixsongid": 292170258,
+    "album_id": "41413543",
+    "bpm": 94,
+    "mvhash": "64B1D37C4EBC54BF9BD8CE299A1E696F",
+    "extname": "mp3",
+    "language": "纯音乐",
+    "collecttime": 1689955029,
+    "csong": 0,
+    "remark": "解剖",
+    "level": 1,
+    "media_old_cpy": 0,
+    "relate_goods": [
+     {
+      "hash": "532BDAB8A00451D595A47D2078C54E7F",
+      "size": 3073965,
+      "bitrate": 128,
+      "privilege": 10,
+      "level": 2
+     },
+     {
+      "hash": "4B7D61378BC853410D20C5E29AE46A6B",
+      "size": 7682119,
+      "bitrate": 320,
+      "privilege": 10,
+      "level": 4
+     },
+     {
+      "hash": "1A31FE1928D209A148FD8A311DED67FE",
+      "size": 18196196,
+      "bitrate": 757,
+      "privilege": 10,
+      "level": 5
+     },
+     {
+      "hash": "BD3B02058440DE18016F80144FCA36A1",
+      "size": 18809981,
+      "bitrate": 783,
+      "privilege": 10,
+      "level": 6
+     }
+    ],
+    "download": [
+     {
+      "hash": "532BDAB8A00451D595A47D2078C54E7F",
+      "status": 0,
+      "pay_type": 3,
+      "fail_process": 4
+     }
+    ],
+    "rcflag": 1,
+    "feetype": 0,
+    "has_obbligato": 1,
+    "timelen": 192096,
+    "sort": 19,
+    "trans_param": {
+     "cid": 131086566,
+     "classmap": {
+      "attr0": 234881032
+     },
+     "cpy_attr0": 15488,
+     "cpy_grade": 5,
+     "cpy_level": 1,
+     "cpy_map": "6",
+     "display": 0,
+     "display_rate": 0,
+     "flags": {},
+     "hash_multitrack": "D3710F91AC5514A67CB0BE6DD1355267",
+     "hash_offset": {
+      "clip_hash": "57F5E06BFA4A74F4799F434AE126A5C8",
+      "end_byte": 960812,
+      "end_ms": 60000,
+      "file_type": 0,
+      "offset_hash": "5B31E8C67606DB5C9B32675D77E41F37",
+      "start_byte": 0,
+      "start_ms": 0
+     },
+     "ipmap": {
+      "attr0": 536888320,
+      "bits": "20004400"
+     },
+     "is_original": 10,
+     "language": "纯音乐",
+     "musicpack_advance": 1,
+     "ogg_128_filesize": 2226946,
+     "ogg_128_hash": "D056423D7F5DA4898C31750E5908C78C",
+     "ogg_320_filesize": 7619265,
+     "ogg_320_hash": "A9460943324E8F427E6086CF45427894",
+     "pay_block_tpl": 1,
+     "qualitymap": {
+      "attr0": 1393672308,
+      "attr1": 1745027072,
+      "bits": "2800000c340180005311c074"
+     },
+     "songname_suffix": "(Original Mix)",
+     "union_cover": "http://imge.kugou.com/stdmusic/{size}/20250228/20250228162425226075.jpg"
+    },
+    "medistype": "audio",
+    "user_id": 0,
+    "albuminfo": {
+     "name": "Anatomy",
+     "id": 41413543,
+     "publish": 1
+    },
+    "bitrate": 128,
+    "audio_group_id": "139927156",
+    "privilege": 10,
+    "cover": "http://imge.kugou.com/stdmusic/{size}/20250228/20250228162425226075.jpg",
+    "mixsongid": 292170258,
+    "fileid": 11,
+    "heat": 0,
+    "singerinfo": [
+     {
+      "name": "NextRO",
+      "publish": 1,
+      "id": 578222,
+      "avatar": "http://singerimg.kugou.com/uploadpic/softhead/{size}/20260201/20260201235612355721.jpg",
+      "type": 1
+     }
+    ],
+    "tagmap": {
+     "genre0": 6291456
+    },
+    "mvdata": [
+     {
+      "typ": 0
+     }
+    ]
+   },
+   {
+    "hash": "DDC9AE2145CCC836E5E58AE1F21DA2F7",
+    "brief": "",
+    "audio_id": 1076560426,
+    "mvtype": 1,
+    "size": 2726583,
+    "publish_date": "2021-11-16",
+    "name": "Hensonn - Sahara (Explicit)",
+    "mvtrack": 3,
+    "bpm_type": "3",
+    "add_mixsongid": 476831522,
+    "album_id": "66862106",
+    "bpm": 114,
+    "mvhash": "CCB58CA8AA357CAF6EAD8FCB36AE3AFD",
+    "extname": "mp3",
+    "language": "纯音乐",
+    "collecttime": 1733156428,
+    "csong": 0,
+    "remark": "Sahara (Explicit)",
+    "level": 1,
+    "media_old_cpy": 0,
+    "relate_goods": [
+     {
+      "hash": "DDC9AE2145CCC836E5E58AE1F21DA2F7",
+      "size": 2726583,
+      "bitrate": 128,
+      "privilege": 10,
+      "level": 2
+     },
+     {
+      "hash": "4272DEDE422F5C517284AC91F404B5D1",
+      "size": 6815628,
+      "bitrate": 320,
+      "privilege": 10,
+      "level": 4
+     },
+     {
+      "hash": "6058A82B92EB80BCBD31E0ABBBD93B2B",
+      "size": 16674876,
+      "bitrate": 782,
+      "privilege": 10,
+      "level": 5
+     },
+     {
+      "hash": "07746139BC13077CD132436374ECF817",
+      "size": 31670251,
+      "bitrate": 1487,
+      "privilege": 10,
+      "level": 6
+     }
+    ],
+    "download": [
+     {
+      "hash": "DDC9AE2145CCC836E5E58AE1F21DA2F7",
+      "status": 0,
+      "pay_type": 3,
+      "fail_process": 4
+     }
+    ],
+    "rcflag": 0,
+    "feetype": 0,
+    "has_obbligato": 1,
+    "timelen": 170000,
+    "sort": 20,
+    "trans_param": {
+     "cid": 250129785,
+     "classmap": {
+      "attr0": 234881032
+     },
+     "cpy_attr0": 15488,
+     "cpy_grade": 5,
+     "cpy_level": 1,
+     "cpy_map": "6",
+     "display": 0,
+     "display_rate": 0,
+     "flags": {},
+     "hash_multitrack": "83007DBDFC070A80BA094806F60480E0",
+     "hash_offset": {
+      "clip_hash": "935B0F61E018C53FC768D3DD713400FC",
+      "end_byte": 960159,
+      "end_ms": 60000,
+      "file_type": 0,
+      "offset_hash": "7E71F1337DECD7EBBA4B805BE27A28EE",
+      "start_byte": 0,
+      "start_ms": 0
+     },
+     "ipmap": {
+      "attr0": 137975840768,
+      "bits": "2020004000"
+     },
+     "is_original": 6,
+     "language": "纯音乐",
+     "musicpack_advance": 1,
+     "ogg_128_filesize": 1939020,
+     "ogg_128_hash": "778E1BBFEE7FDA9CE8125BD295DB3179",
+     "ogg_320_filesize": 6430640,
+     "ogg_320_hash": "885DDE776C8082E555475C42B2D701FD",
+     "pay_block_tpl": 1,
+     "qualitymap": {
+      "attr0": 2097201268,
+      "attr1": 1745027072,
+      "bits": "800000db40180007d00c074"
+     },
+     "songname_suffix": "(Explicit)",
+     "union_cover": "http://imge.kugou.com/stdmusic/{size}/20260509/20260509054921892969.jpg"
+    },
+    "medistype": "audio",
+    "user_id": 0,
+    "albuminfo": {
+     "name": "Sahara (Explicit)",
+     "id": 66862106,
+     "publish": 1
+    },
+    "bitrate": 128,
+    "audio_group_id": "181405866",
+    "privilege": 10,
+    "cover": "http://imge.kugou.com/stdmusic/{size}/20260509/20260509054921892969.jpg",
+    "mixsongid": 476831522,
+    "fileid": 76,
+    "heat": 0,
+    "singerinfo": [
+     {
+      "name": "Hensonn",
+      "publish": 1,
+      "id": 1357510,
+      "avatar": "http://singerimg.kugou.com/uploadpic/softhead/{size}/20260201/20260201145352591233.jpg",
+      "type": 1
+     }
+    ],
+    "tagmap": {
+     "genre0": 0
+    },
+    "mvdata": [
+     {
+      "typ": 0
+     }
+    ]
+   },
+   {
+    "hash": "FAE461028E61597A410CDC28542053B1",
+    "brief": "",
+    "audio_id": 336955103,
+    "mvtype": 0,
+    "size": 2228602,
+    "publish_date": "2024-03-15",
+    "name": "VVKM - deaths",
+    "mvtrack": 0,
+    "bpm_type": "3",
+    "add_mixsongid": 613170291,
+    "album_id": "89338554",
+    "bpm": 99,
+    "mvhash": "",
+    "extname": "mp3",
+    "language": "纯音乐",
+    "collecttime": 1782823454,
+    "csong": 0,
+    "remark": "deaths",
+    "level": 1,
+    "media_old_cpy": 0,
+    "relate_goods": [
+     {
+      "hash": "FAE461028E61597A410CDC28542053B1",
+      "size": 2228602,
+      "bitrate": 128,
+      "privilege": 8,
+      "level": 2
+     },
+     {
+      "hash": "E205C5BDDFD545A22950F279EAD5C72C",
+      "size": 5571440,
+      "bitrate": 320,
+      "privilege": 10,
+      "level": 4
+     },
+     {
+      "hash": "B17622793B0AF15D620CE511929E15D0",
+      "size": 15584952,
+      "bitrate": 895,
+      "privilege": 10,
+      "level": 5
+     }
+    ],
+    "download": [
+     {
+      "hash": "FAE461028E61597A410CDC28542053B1",
+      "status": 0,
+      "pay_type": 3,
+      "fail_process": 4
+     }
+    ],
+    "rcflag": 0,
+    "feetype": 0,
+    "has_obbligato": 1,
+    "timelen": 139258,
+    "sort": 21,
+    "trans_param": {
+     "cid": 365714347,
+     "classmap": {
+      "attr0": 234881032
+     },
+     "cpy_attr0": 8192,
+     "cpy_grade": 20,
+     "cpy_level": 1,
+     "cpy_map": "2",
+     "display": 0,
+     "display_rate": 0,
+     "free_for_ad": 32,
+     "hash_multitrack": "FB7171E3D2678E2EFA0282DD770F24F4",
+     "ipmap": {
+      "attr0": 536870912,
+      "bits": "10000020000000"
+     },
+     "language": "纯音乐",
+     "musicpack_advance": 0,
+     "pay_block_tpl": 1,
+     "qualitymap": {
+      "attr0": 319864884,
+      "attr1": 134217728,
+      "bits": "800020c040000001310c034"
+     },
+     "union_cover": "http://imge.kugou.com/stdmusic/{size}/20240923/20240923141910892665.jpg"
+    },
+    "medistype": "audio",
+    "user_id": 0,
+    "albuminfo": {
+     "name": "deaths",
+     "id": 89338554,
+     "publish": 1
+    },
+    "bitrate": 128,
+    "audio_group_id": "439736142",
+    "privilege": 8,
+    "cover": "http://imge.kugou.com/stdmusic/{size}/20240923/20240923141910892665.jpg",
+    "mixsongid": 613170291,
+    "fileid": 153,
+    "heat": 0,
+    "singerinfo": [
+     {
+      "name": "VVKM",
+      "publish": 1,
+      "id": 12718987,
+      "avatar": "http://singerimg.kugou.com/uploadpic/softhead/{size}/20241012/20241012142312544803.jpg",
+      "type": 1
+     }
+    ],
+    "tagmap": {
+     "genre0": 0
+    }
+   },
+   {
+    "hash": "A12295AEFF7FEF5D23D7D23E83FDB34F",
+    "brief": "",
+    "audio_id": 141472793,
+    "mvtype": 1,
+    "size": 2889581,
+    "publish_date": "2022-01-18",
+    "name": "Barış Çakır、Emre Kabak - Homicide",
+    "mvtrack": 3,
+    "bpm_type": "3",
+    "add_mixsongid": 367235903,
+    "album_id": "52378571",
+    "bpm": 115,
+    "mvhash": "A70825343448A4A1254528528B3D68DC",
+    "extname": "mp3",
+    "language": "英语",
+    "collecttime": 1777487657,
+    "csong": 0,
+    "remark": "Homicide",
+    "level": 1,
+    "media_old_cpy": 0,
+    "relate_goods": [
+     {
+      "hash": "A12295AEFF7FEF5D23D7D23E83FDB34F",
+      "size": 2889581,
+      "bitrate": 128,
+      "privilege": 8,
+      "level": 2
+     },
+     {
+      "hash": "1A2AD518409AC60F895CCCB779558292",
+      "size": 7223609,
+      "bitrate": 320,
+      "privilege": 10,
+      "level": 4
+     },
+     {
+      "hash": "43029C4F6354C186FD6F21AE0A909271",
+      "size": 19656391,
+      "bitrate": 870,
+      "privilege": 10,
+      "level": 5
+     },
+     {
+      "hash": "18593748CABE67516E1574FF7F6614F2",
+      "size": 35523176,
+      "bitrate": 1573,
+      "privilege": 10,
+      "level": 6
+     }
+    ],
+    "download": [
+     {
+      "hash": "A12295AEFF7FEF5D23D7D23E83FDB34F",
+      "status": 0,
+      "pay_type": 3,
+      "fail_process": 4
+     }
+    ],
+    "rcflag": 0,
+    "feetype": 0,
+    "has_obbligato": 1,
+    "timelen": 180558,
+    "sort": 22,
+    "trans_param": {
+     "cid": 191445783,
+     "classmap": {
+      "attr0": 234881032
+     },
+     "cpy_attr0": 33562624,
+     "cpy_grade": 5,
+     "cpy_level": 1,
+     "cpy_map": "2",
+     "display": 0,
+     "display_rate": 0,
+     "flags": {},
+     "hash_multitrack": "3546A0FEAD84D1D3FB95D745F747233B",
+     "hash_offset": {
+      "clip_hash": "2B0EB51F3504F2E0A92071B020626714",
+      "end_byte": 960153,
+      "end_ms": 60000,
+      "file_type": 0,
+      "offset_hash": "828FC2A9E28A2D1DB486513F905CBF1F",
+      "start_byte": 0,
+      "start_ms": 0
+     },
+     "ipmap": {
+      "attr0": 16777216,
+      "bits": "10000001000000"
+     },
+     "language": "英语",
+     "musicpack_advance": 0,
+     "ogg_128_filesize": 2270884,
+     "ogg_128_hash": "6FD28D63268F3ECF178D17FECB5A7D78",
+     "ogg_320_filesize": 7615852,
+     "ogg_320_hash": "49055AD562CE5816AF13047A39F8A7E0",
+     "pay_block_tpl": 1,
+     "qualitymap": {
+      "attr0": 2134622324,
+      "attr1": 1747124224,
+      "bits": "800000db41180007f3bc074"
+     },
+     "union_cover": "http://imge.kugou.com/stdmusic/{size}/20250717/20250717220051850875.jpg"
+    },
+    "medistype": "audio",
+    "user_id": 0,
+    "albuminfo": {
+     "name": "Homicide",
+     "id": 52378571,
+     "publish": 1
+    },
+    "bitrate": 128,
+    "audio_group_id": "205019032",
+    "privilege": 8,
+    "cover": "http://imge.kugou.com/stdmusic/{size}/20250717/20250717220051850875.jpg",
+    "mixsongid": 367235903,
+    "fileid": 142,
+    "heat": 0,
+    "singerinfo": [
+     {
+      "name": "Barış Çakır",
+      "publish": 1,
+      "id": 5845385,
+      "avatar": "http://singerimg.kugou.com/uploadpic/softhead/{size}/20250116/20250116111904938864.jpg",
+      "type": 1
+     },
+     {
+      "name": "Emre Kabak",
+      "publish": 1,
+      "id": 1320772,
+      "avatar": "http://singerimg.kugou.com/uploadpic/softhead/{size}/20260201/20260201210323733504.jpg",
+      "type": 1
+     }
+    ],
+    "tagmap": {
+     "genre0": 0
+    },
+    "mvdata": [
+     {
+      "typ": 0
+     }
+    ]
+   },
+   {
+    "hash": "601CD03AD8FF2B0598B8D739C05A4466",
+    "brief": "",
+    "audio_id": 550651234,
+    "mvtype": 1,
+    "size": 2850327,
+    "publish_date": "2026-03-25",
+    "name": "GFY1994、越心 - Long For (只有我想念你)",
+    "mvtrack": 3,
+    "bpm_type": "3",
+    "add_mixsongid": 857984898,
+    "album_id": "180688002",
+    "bpm": 99,
+    "mvhash": "CF9D987E3EE8183912BEB9D2095ADD45",
+    "extname": "mp3",
+    "language": "英语",
+    "collecttime": 1776050606,
+    "csong": 0,
+    "remark": "Long For (只有我想念你)",
+    "level": 1,
+    "media_old_cpy": 0,
+    "relate_goods": [
+     {
+      "hash": "601CD03AD8FF2B0598B8D739C05A4466",
+      "size": 2850327,
+      "bitrate": 128,
+      "privilege": 10,
+      "level": 2
+     },
+     {
+      "hash": "2FCE17A89014B1B2722AD5F1D88878AE",
+      "size": 7125423,
+      "bitrate": 320,
+      "privilege": 10,
+      "level": 4
+     },
+     {
+      "hash": "3577A16D7675A900BF198098559778C6",
+      "size": 19983328,
+      "bitrate": 897,
+      "privilege": 10,
+      "level": 5
+     }
+    ],
+    "download": [
+     {
+      "hash": "601CD03AD8FF2B0598B8D739C05A4466",
+      "status": 0,
+      "pay_type": 3,
+      "fail_process": 4
+     }
+    ],
+    "rcflag": 0,
+    "feetype": 0,
+    "has_obbligato": 1,
+    "timelen": 178000,
+    "sort": 23,
+    "trans_param": {
+     "appid_block": "3124",
+     "cid": 581782224,
+     "classmap": {
+      "attr0": 234881032
+     },
+     "cpy_attr0": 33569920,
+     "cpy_grade": 5,
+     "cpy_level": 1,
+     "cpy_map": "2",
+     "display": 0,
+     "display_rate": 0,
+     "flags": {},
+     "hash_multitrack": "8DEB0F2445B4B28E4B361FBE4A5B572C",
+     "hash_offset": {
+      "clip_hash": "A5709264D900DCD1CD4EAE1A36A7F97C",
+      "end_byte": 960187,
+      "end_ms": 60000,
+      "file_type": 0,
+      "offset_hash": "25F1104993106B8A236FE5B6123881D5",
+      "start_byte": 0,
+      "start_ms": 0
+     },
+     "ipmap": {
+      "attr0": 137455763456,
+      "bits": "10002001008000"
+     },
+     "language": "英语",
+     "musicpack_advance": 1,
+     "ogg_128_filesize": 2075729,
+     "ogg_128_hash": "C81421BF397FBE08C0ACBC7B939122E8",
+     "ogg_320_filesize": 6722470,
+     "ogg_320_hash": "45FFF617EA7C4FB614C297F558001DE3",
+     "pay_block_tpl": 1,
+     "provider": 2,
+     "qualitymap": {
+      "attr0": 319939636,
+      "attr1": 1746927616,
+      "bits": "800000c341000001311e434"
+     },
+     "songname_suffix": "(只有我想念你)",
+     "union_cover": "http://imge.kugou.com/stdmusic/{size}/20260324/20260324235313592980.jpg"
+    },
+    "medistype": "audio",
+    "user_id": 0,
+    "albuminfo": {
+     "name": "Long For (只有我想念你)",
+     "id": 180688002,
+     "publish": 1
+    },
+    "bitrate": 128,
+    "audio_group_id": "604372639",
+    "privilege": 10,
+    "cover": "http://imge.kugou.com/stdmusic/{size}/20260324/20260324235313592980.jpg",
+    "mixsongid": 857984898,
+    "fileid": 138,
+    "heat": 0,
+    "singerinfo": [
+     {
+      "name": "GFY1994",
+      "publish": 1,
+      "id": 14600136,
+      "avatar": "http://singerimg.kugou.com/uploadpic/softhead/{size}/20250208/20250208161313457718.jpg",
+      "type": 1
+     },
+     {
+      "name": "越心",
+      "publish": 1,
+      "id": 17665017,
+      "avatar": "http://singerimg.kugou.com/uploadpic/softhead/{size}/20261109/20261109180537883236.jpg",
+      "type": 1
+     }
+    ],
+    "tagmap": {
+     "genre0": 0
+    },
+    "mvdata": [
+     {
+      "typ": 0
+     }
+    ]
+   },
+   {
+    "hash": "303FE56E98F34F66E5ED1EF941FDDE77",
+    "brief": "",
+    "audio_id": 10609941,
+    "mvtype": 1,
+    "size": 3744734,
+    "publish_date": "2011-07-18",
+    "name": "Gesaffelstein - Opr",
+    "mvtrack": 3,
+    "bpm_type": "3",
+    "add_mixsongid": 31667707,
+    "album_id": "923691",
+    "bpm": 100,
+    "mvhash": "5173C0B50CC772AA86CEAA73C2FAD4CC",
+    "extname": "mp3",
+    "language": "纯音乐",
+    "collecttime": 1689956880,
+    "csong": 0,
+    "remark": "Conspiracy Pt.2",
+    "level": 1,
+    "media_old_cpy": 0,
+    "relate_goods": [
+     {
+      "hash": "303FE56E98F34F66E5ED1EF941FDDE77",
+      "size": 3744734,
+      "bitrate": 128,
+      "privilege": 10,
+      "level": 2
+     },
+     {
+      "hash": "E9B246FCC32F13F55DB1AF9CD4FAADA7",
+      "size": 9377400,
+      "bitrate": 320,
+      "privilege": 10,
+      "level": 4
+     },
+     {
+      "hash": "0FCFD7A213C9A76D732B0B26897373A8",
+      "size": 22767494,
+      "bitrate": 778,
+      "privilege": 10,
+      "level": 5
+     }
+    ],
+    "download": [
+     {
+      "hash": "303FE56E98F34F66E5ED1EF941FDDE77",
+      "status": 0,
+      "pay_type": 1,
+      "fail_process": 4
+     }
+    ],
+    "rcflag": 1,
+    "feetype": 0,
+    "has_obbligato": 1,
+    "timelen": 233000,
+    "sort": 24,
+    "trans_param": {
+     "appid_block": "3124",
+     "cid": 47731393,
+     "classmap": {
+      "attr0": 234881032
+     },
+     "cpy_attr0": 15488,
+     "cpy_grade": 5,
+     "cpy_level": 1,
+     "cpy_map": "6",
+     "display": 0,
+     "display_rate": 0,
+     "flags": {},
+     "hash_multitrack": "05A2F12D841A53B519D240B77D8F1333",
+     "hash_offset": {
+      "clip_hash": "EFFA3BD9EB8829C89BA8BE8164D018E8",
+      "end_byte": 960161,
+      "end_ms": 60000,
+      "file_type": 0,
+      "offset_hash": "FC0A37381FAAD3800B20B8EBC63BD3AE",
+      "start_byte": 0,
+      "start_ms": 0
+     },
+     "ipmap": {
+      "attr0": 536888320,
+      "bits": "20004400"
+     },
+     "is_original": 1,
+     "language": "纯音乐",
+     "musicpack_advance": 1,
+     "ogg_128_filesize": 2449555,
+     "ogg_128_hash": "804394368CED261FBA7702057D8CB782",
+     "ogg_320_filesize": 8508324,
+     "ogg_320_hash": "D2B7DC4E87F1B8103936278E8291F883",
+     "pay_block_tpl": 1,
+     "qualitymap": {
+      "attr0": 1962983476,
+      "attr1": 1744830464,
+      "bits": "800000db40000007500c034"
+     },
+     "union_cover": "http://imge.kugou.com/stdmusic/{size}/20240319/20240319035201239366.jpg"
+    },
+    "medistype": "audio",
+    "user_id": 0,
+    "albuminfo": {
+     "name": "Conspiracy Pt.2",
+     "id": 923691,
+     "publish": 1
+    },
+    "bitrate": 128,
+    "audio_group_id": "7813998",
+    "privilege": 10,
+    "cover": "http://imge.kugou.com/stdmusic/{size}/20240319/20240319035201239366.jpg",
+    "mixsongid": 31667707,
+    "fileid": 30,
+    "heat": 0,
+    "singerinfo": [
+     {
+      "name": "Gesaffelstein",
+      "publish": 1,
+      "id": 95816,
+      "avatar": "http://singerimg.kugou.com/uploadpic/softhead/{size}/20250314/20250314201402591660.jpg",
+      "type": 1
+     }
+    ],
+    "tagmap": {
+     "genre0": 6291456
+    },
+    "mvdata": [
+     {
+      "typ": 0
+     }
+    ]
+   },
+   {
+    "hash": "E94CB102024E387E06774C7163F00B40",
+    "brief": "",
+    "audio_id": 133308863,
+    "mvtype": 1,
+    "size": 3408303,
+    "publish_date": "2021-12-04",
+    "name": "无畏契约、Grabbitz - Die For You (为你而战)",
+    "mvtrack": 3,
+    "bpm_type": "2",
+    "add_mixsongid": 355777235,
+    "album_id": "50909324",
+    "bpm": 94,
+    "mvhash": "5429BC3272BA13FCC6976ED91E5DAACA",
+    "extname": "mp3",
+    "language": "英语",
+    "collecttime": 1781838489,
+    "csong": 0,
+    "remark": "《无畏契约》游戏2021全球冠军赛主题曲",
+    "level": 1,
+    "media_old_cpy": 1,
+    "relate_goods": [
+     {
+      "hash": "E94CB102024E387E06774C7163F00B40",
+      "size": 3408303,
+      "bitrate": 128,
+      "privilege": 0,
+      "level": 2
+     },
+     {
+      "hash": "AE86E29A6759168F7EBE71B7F7B69EDB",
+      "size": 8520166,
+      "bitrate": 320,
+      "privilege": 0,
+      "level": 4
+     },
+     {
+      "hash": "B99BA3E75B5A685C44B74C1E1F9AD05F",
+      "size": 25849945,
+      "bitrate": 970,
+      "privilege": 0,
+      "level": 5
+     },
+     {
+      "hash": "2AC8C3ABF962B1134FF306E2C5C386D8",
+      "size": 44646495,
+      "bitrate": 1677,
+      "privilege": 0,
+      "level": 6
+     }
+    ],
+    "download": [
+     {
+      "hash": "E94CB102024E387E06774C7163F00B40",
+      "status": 0,
+      "pay_type": 0,
+      "fail_process": 0
+     }
+    ],
+    "rcflag": 1,
+    "feetype": 0,
+    "has_obbligato": 1,
+    "timelen": 212976,
+    "sort": 25,
+    "trans_param": {
+     "cid": 184145214,
+     "classmap": {
+      "attr0": 234881032
+     },
+     "cpy_attr0": 58720256,
+     "cpy_grade": 6,
+     "cpy_level": 1,
+     "cpy_map": "2",
+     "display": 0,
+     "display_rate": 0,
+     "flags": {},
+     "hash_multitrack": "A66AD1DA1548C05FD1C5CF6D58AA8715",
+     "ipmap": {
+      "attr0": 8606716932,
+      "bits": "10000201001404"
+     },
+     "is_original": 1,
+     "language": "英语",
+     "musicpack_advance": 0,
+     "ogg_128_filesize": 2450588,
+     "ogg_128_hash": "85F49743F16595FC8E87D20AFF948188",
+     "ogg_320_filesize": 8898054,
+     "ogg_320_hash": "1D55FC271E1ED25595018939DB0A6C31",
+     "pay_block_tpl": 1,
+     "qualitymap": {
+      "attr0": 2134884468,
+      "attr1": 1747124224,
+      "bits": "2800000db41180007f3fc074"
+     },
+     "songname_suffix": "(为你而战)",
+     "union_cover": "http://imge.kugou.com/stdmusic/{size}/20211203/20211203203401416043.jpg"
+    },
+    "medistype": "audio",
+    "user_id": 0,
+    "albuminfo": {
+     "name": "Die For You (为你而战)",
+     "id": 50909324,
+     "publish": 1
+    },
+    "bitrate": 128,
+    "audio_group_id": "304609457",
+    "privilege": 0,
+    "cover": "http://imge.kugou.com/stdmusic/{size}/20211203/20211203203401416043.jpg",
+    "mixsongid": 355777235,
+    "fileid": 148,
+    "heat": 0,
+    "singerinfo": [
+     {
+      "name": "Grabbitz",
+      "publish": 1,
+      "id": 207895,
+      "avatar": "http://singerimg.kugou.com/uploadpic/softhead/{size}/20241213/20241213193832256730.jpg",
+      "type": 1
+     }
+    ],
+    "tagmap": {
+     "genre0": 2621441
+    },
+    "mvdata": [
+     {
+      "typ": 0
+     }
+    ]
+   },
+   {
+    "hash": "39AA1559EDE91DF1D1DE635403BB659D",
+    "brief": "",
+    "audio_id": 104158363,
+    "mvtype": 1,
+    "size": 3213094,
+    "publish_date": "2021-04-30",
+    "name": "Butch U - Feel The Vibe",
+    "mvtrack": 3,
+    "bpm_type": "3",
+    "add_mixsongid": 307361010,
+    "album_id": "43392366",
+    "bpm": 109,
+    "mvhash": "B57D92628910C24344F8AC889A589785",
+    "extname": "mp3",
+    "language": "英语",
+    "collecttime": 1769960565,
+    "csong": 0,
+    "remark": "Feel The Vibe",
+    "level": 1,
+    "media_old_cpy": 0,
+    "relate_goods": [
+     {
+      "hash": "39AA1559EDE91DF1D1DE635403BB659D",
+      "size": 3213094,
+      "bitrate": 128,
+      "privilege": 10,
+      "level": 2
+     },
+     {
+      "hash": "3BD8DDB6D6FF518DC32575D01231E78E",
+      "size": 8032372,
+      "bitrate": 320,
+      "privilege": 10,
+      "level": 4
+     },
+     {
+      "hash": "606E9B9FE0F09F1E2E945BAC77EBAB28",
+      "size": 23376645,
+      "bitrate": 931,
+      "privilege": 10,
+      "level": 5
+     }
+    ],
+    "download": [
+     {
+      "hash": "39AA1559EDE91DF1D1DE635403BB659D",
+      "status": 0,
+      "pay_type": 3,
+      "fail_process": 4
+     }
+    ],
+    "rcflag": 1,
+    "feetype": 0,
+    "has_obbligato": 1,
+    "timelen": 200777,
+    "sort": 26,
+    "trans_param": {
+     "appid_block": "3124",
+     "cid": 143974306,
+     "classmap": {
+      "attr0": 234881032
+     },
+     "cpy_attr0": 16792704,
+     "cpy_grade": 5,
+     "cpy_level": 1,
+     "cpy_map": "6",
+     "display": 0,
+     "display_rate": 0,
+     "flags": {},
+     "hash_multitrack": "C3E454B833D47FC6741683D4A51787F5",
+     "hash_offset": {
+      "clip_hash": "5EF28AE1670BA7D2E7E4C03155A2FBD9",
+      "end_byte": 960165,
+      "end_ms": 60000,
+      "file_type": 0,
+      "offset_hash": "638B3E4DE412A5D5E307DABD426AB6CF",
+      "start_byte": 0,
+      "start_ms": 0
+     },
+     "ipmap": {
+      "attr0": 8606749696,
+      "bits": "201009400"
+     },
+     "is_original": 6,
+     "language": "英语",
+     "musicpack_advance": 1,
+     "ogg_128_filesize": 2419989,
+     "ogg_128_hash": "1A621A452D62C6ED9CEFCE4E840F9FB7",
+     "ogg_320_filesize": 8233951,
+     "ogg_320_hash": "72F091E3CAA46A30D496597A93983D16",
+     "pay_block_tpl": 1,
+     "qualitymap": {
+      "attr0": 1997914164,
+      "attr1": 1746927616,
+      "bits": "1b41000007715c034"
+     },
+     "union_cover": "http://imge.kugou.com/stdmusic/{size}/20231021/20231021082801509685.jpg"
+    },
+    "medistype": "audio",
+    "user_id": 0,
+    "albuminfo": {
+     "name": "Feel The Vibe",
+     "id": 43392366,
+     "publish": 1
+    },
+    "bitrate": 128,
+    "audio_group_id": "152850019",
+    "privilege": 10,
+    "cover": "http://imge.kugou.com/stdmusic/{size}/20231021/20231021082801509685.jpg",
+    "mixsongid": 307361010,
+    "fileid": 136,
+    "heat": 0,
+    "singerinfo": [
+     {
+      "name": "Butch U",
+      "publish": 1,
+      "id": 1390257,
+      "avatar": "http://singerimg.kugou.com/uploadpic/softhead/{size}/20251105/20251105175340277398.jpg",
+      "type": 15
+     }
+    ],
+    "tagmap": {
+     "genre0": 2621440
+    },
+    "mvdata": [
+     {
+      "typ": 0
+     }
+    ]
+   },
+   {
+    "hash": "728F1F9BA957B4D3341CF2BDEAF1D8E3",
+    "brief": "",
+    "audio_id": 517296959,
+    "mvtype": 1,
+    "size": 2161523,
+    "publish_date": "2025-12-12",
+    "name": "GFY1994、越心 - Overturn (反转进行曲)",
+    "mvtrack": 3,
+    "bpm_type": "3",
+    "add_mixsongid": 823684980,
+    "album_id": "170472706",
+    "bpm": 117,
+    "mvhash": "EB76734CD7E427A3A277A8665EED4947",
+    "extname": "mp3",
+    "language": "纯音乐",
+    "collecttime": 1776050833,
+    "csong": 0,
+    "remark": "Overturn（反转进行曲）",
+    "level": 1,
+    "media_old_cpy": 0,
+    "relate_goods": [
+     {
+      "hash": "728F1F9BA957B4D3341CF2BDEAF1D8E3",
+      "size": 2161523,
+      "bitrate": 128,
+      "privilege": 10,
+      "level": 2
+     },
+     {
+      "hash": "281A68FAAF21DEB47735E5BF6379166F",
+      "size": 5403423,
+      "bitrate": 320,
+      "privilege": 10,
+      "level": 4
+     },
+     {
+      "hash": "6471E5940567BD09F7BA1C74DDA278CF",
+      "size": 15848777,
+      "bitrate": 938,
+      "privilege": 10,
+      "level": 5
+     },
+     {
+      "hash": "1AF2B8D71D7CD0DD0C30494387B1A8C8",
+      "size": 27649633,
+      "bitrate": 1637,
+      "privilege": 10,
+      "level": 6
+     }
+    ],
+    "download": [
+     {
+      "hash": "728F1F9BA957B4D3341CF2BDEAF1D8E3",
+      "status": 0,
+      "pay_type": 3,
+      "fail_process": 4
+     }
+    ],
+    "rcflag": 0,
+    "feetype": 0,
+    "has_obbligato": 1,
+    "timelen": 135000,
+    "sort": 27,
+    "trans_param": {
+     "appid_block": "3124",
+     "cid": 554355760,
+     "classmap": {
+      "attr0": 234881032
+     },
+     "cpy_attr0": 16792704,
+     "cpy_grade": 5,
+     "cpy_level": 1,
+     "cpy_map": "2",
+     "display": 0,
+     "display_rate": 0,
+     "flags": {},
+     "hash_multitrack": "F54629C6F7DE1F0059B5BB117F81193E",
+     "hash_offset": {
+      "clip_hash": "7E69FC9FD3762A035A1F66C0764EFC0D",
+      "end_byte": 960597,
+      "end_ms": 60000,
+      "file_type": 0,
+      "offset_hash": "8998D1F9F00BB488749BBEB6A36CA12D",
+      "start_byte": 0,
+      "start_ms": 0
+     },
+     "ipmap": {
+      "attr0": 137975873536,
+      "bits": "1000202000c000"
+     },
+     "language": "纯音乐",
+     "musicpack_advance": 1,
+     "ogg_128_filesize": 1590959,
+     "ogg_128_hash": "BAE6B52735DF9BF0D5356F58B2CF3AA0",
+     "ogg_320_filesize": 5264203,
+     "ogg_320_hash": "92B451046CFFE4130DFE85AA7D1B763F",
+     "pay_block_tpl": 1,
+     "provider": 5,
+     "qualitymap": {
+      "attr0": 320127092,
+      "attr1": 1747124224,
+      "bits": "2800000c341180001314c074"
+     },
+     "songname_suffix": "(反转进行曲)",
+     "union_cover": "http://imge.kugou.com/stdmusic/{size}/20251211/20251211184201912711.jpg"
+    },
+    "medistype": "audio",
+    "user_id": 0,
+    "albuminfo": {
+     "name": "Overturn（反转进行曲）",
+     "id": 170472706,
+     "publish": 1
+    },
+    "bitrate": 128,
+    "audio_group_id": "577327211",
+    "privilege": 10,
+    "cover": "http://imge.kugou.com/stdmusic/{size}/20251211/20251211184201912711.jpg",
+    "mixsongid": 823684980,
+    "fileid": 139,
+    "heat": 0,
+    "singerinfo": [
+     {
+      "name": "GFY1994",
+      "publish": 1,
+      "id": 14600136,
+      "avatar": "http://singerimg.kugou.com/uploadpic/softhead/{size}/20250208/20250208161313457718.jpg",
+      "type": 1
+     },
+     {
+      "name": "越心",
+      "publish": 1,
+      "id": 17665017,
+      "avatar": "http://singerimg.kugou.com/uploadpic/softhead/{size}/20261109/20261109180537883236.jpg",
+      "type": 1
+     }
+    ],
+    "tagmap": {
+     "genre0": 0
+    },
+    "mvdata": [
+     {
+      "typ": 0
+     }
+    ]
+   },
+   {
+    "hash": "7D1383E1E435953D043E8AEA26F7BC09",
+    "brief": "",
+    "audio_id": 25120549,
+    "mvtype": 1,
+    "size": 5854614,
+    "publish_date": "2016-09-04",
+    "name": "Rompasso - Angetenar (Original Mix)",
+    "mvtrack": 3,
+    "bpm_type": "3",
+    "add_mixsongid": 96711606,
+    "album_id": "6274058",
+    "bpm": 102,
+    "mvhash": "EF6132009AE1DDDF48F0F2A3AB59B339",
+    "extname": "mp3",
+    "language": "纯音乐",
+    "collecttime": 1689955776,
+    "csong": 0,
+    "remark": "安捷纳尔",
+    "level": 1,
+    "media_old_cpy": 0,
+    "relate_goods": [
+     {
+      "hash": "7D1383E1E435953D043E8AEA26F7BC09",
+      "size": 5854614,
+      "bitrate": 128,
+      "privilege": 10,
+      "level": 2
+     },
+     {
+      "hash": "A07616C356F3CE3FE9A711C3202343AC",
+      "size": 14635884,
+      "bitrate": 320,
+      "privilege": 10,
+      "level": 4
+     },
+     {
+      "hash": "CB44F538C5A7CF09884E490E1BC60C5E",
+      "size": 35370051,
+      "bitrate": 773,
+      "privilege": 10,
+      "level": 5
+     },
+     {
+      "hash": "A1E65DD9208A691BBC2E58002DEA22C6",
+      "size": 62537834,
+      "bitrate": 1367,
+      "privilege": 10,
+      "level": 6
+     }
+    ],
+    "download": [
+     {
+      "hash": "7D1383E1E435953D043E8AEA26F7BC09",
+      "status": 0,
+      "pay_type": 3,
+      "fail_process": 4
+     }
+    ],
+    "rcflag": 1,
+    "feetype": 0,
+    "has_obbligato": 1,
+    "timelen": 365871,
+    "sort": 28,
+    "trans_param": {
+     "cid": 25731202,
+     "classmap": {
+      "attr0": 234881032
+     },
+     "cpy_attr0": 8404096,
+     "cpy_grade": 5,
+     "cpy_level": 1,
+     "cpy_map": "2",
+     "display": 0,
+     "display_rate": 0,
+     "flags": {},
+     "hash_multitrack": "B462197E74DD849816A606851E7E56F0",
+     "hash_offset": {
+      "clip_hash": "0EDFF7A1C7155E70EEE1124178A6274D",
+      "end_byte": 2337776,
+      "end_ms": 146100,
+      "file_type": 0,
+      "offset_hash": "5D568F8D39CE60343E4230A79AD53549",
+      "start_byte": 0,
+      "start_ms": 86100
+     },
+     "ipmap": {
+      "attr0": 536888320,
+      "bits": "10000020004400"
+     },
+     "is_original": 4,
+     "language": "纯音乐",
+     "musicpack_advance": 1,
+     "ogg_128_filesize": 4204268,
+     "ogg_128_hash": "2B3723D7D490EB2807DA066BF398B716",
+     "ogg_320_filesize": 14284808,
+     "ogg_320_hash": "7046246E114258851241F271CEB5FF6C",
+     "pay_block_tpl": 1,
+     "qualitymap": {
+      "attr0": 1023459444,
+      "attr1": 1745027072,
+      "bits": "800000db40180003d00c074"
+     },
+     "songname_suffix": "(Original Mix)",
+     "union_cover": "http://imge.kugou.com/stdmusic/{size}/20250217/20250217144529300774.jpg"
+    },
+    "medistype": "audio",
+    "user_id": 0,
+    "albuminfo": {
+     "name": "Angetenar",
+     "id": 6274058,
+     "publish": 1
+    },
+    "bitrate": 128,
+    "audio_group_id": "9368522",
+    "privilege": 10,
+    "cover": "http://imge.kugou.com/stdmusic/{size}/20250217/20250217144529300774.jpg",
+    "mixsongid": 96711606,
+    "fileid": 22,
+    "heat": 0,
+    "singerinfo": [
+     {
+      "name": "Rompasso",
+      "publish": 1,
+      "id": 641087,
+      "avatar": "http://singerimg.kugou.com/uploadpic/softhead/{size}/20250314/20250314200423879865.jpg",
+      "type": 1
+     }
+    ],
+    "tagmap": {
+     "genre0": 6291456
+    },
+    "mvdata": [
+     {
+      "typ": 0
+     }
+    ]
+   },
+   {
+    "hash": "46404FECBFF8FB05D2DBCC636F22D087",
+    "brief": "",
+    "audio_id": 486710958,
+    "mvtype": 0,
+    "size": 2186594,
+    "publish_date": "2025-08-29",
+    "name": "KNSRK - Crystal Obsidian",
+    "mvtrack": 0,
+    "bpm_type": "3",
+    "add_mixsongid": 786681988,
+    "album_id": "158913018",
+    "bpm": 122,
+    "mvhash": "",
+    "extname": "mp3",
+    "language": "小语种",
+    "collecttime": 1769957624,
+    "csong": 0,
+    "remark": "Crystal Obsidian",
+    "level": 1,
+    "media_old_cpy": 0,
+    "relate_goods": [
+     {
+      "hash": "46404FECBFF8FB05D2DBCC636F22D087",
+      "size": 2186594,
+      "bitrate": 128,
+      "privilege": 10,
+      "level": 2
+     },
+     {
+      "hash": "E2956E6F041F8EBB5E71501B639F2600",
+      "size": 5465759,
+      "bitrate": 320,
+      "privilege": 10,
+      "level": 4
+     },
+     {
+      "hash": "6512126B1B7CE77236966EF0A3E01DC6",
+      "size": 15161903,
+      "bitrate": 888,
+      "privilege": 10,
+      "level": 5
+     }
+    ],
+    "download": [
+     {
+      "hash": "46404FECBFF8FB05D2DBCC636F22D087",
+      "status": 0,
+      "pay_type": 3,
+      "fail_process": 4
+     }
+    ],
+    "rcflag": 1,
+    "feetype": 0,
+    "has_obbligato": 1,
+    "timelen": 136620,
+    "sort": 29,
+    "trans_param": {
+     "cid": 529098422,
+     "classmap": {
+      "attr0": 234881032
+     },
+     "cpy_attr0": 16792704,
+     "cpy_grade": 5,
+     "cpy_level": 1,
+     "cpy_map": "2",
+     "display": 0,
+     "display_rate": 0,
+     "flags": {},
+     "hash_multitrack": "B1C54FF1CE8F7720B1737A8FBE23CBAD",
+     "hash_offset": {
+      "clip_hash": "9AEBB81CF2BE941F3282C710B5364A71",
+      "end_byte": 960173,
+      "end_ms": 60000,
+      "file_type": 0,
+      "offset_hash": "9077443D6D0B46F91FF131DF7DF1E6CB",
+      "start_byte": 0,
+      "start_ms": 0
+     },
+     "ipmap": {
+      "attr0": 137438954496,
+      "bits": "10002000000400"
+     },
+     "is_original": 6,
+     "language": "小语种",
+     "musicpack_advance": 1,
+     "ogg_128_filesize": 1806589,
+     "ogg_128_hash": "288DCA8F8CFED609FAC3F1B039069815",
+     "ogg_320_filesize": 6000872,
+     "ogg_320_hash": "5FECA3390C71DF5A5DA658F007FF20B6",
+     "pay_block_tpl": 1,
+     "qualitymap": {
+      "attr0": 1997586484,
+      "attr1": 1746927616,
+      "bits": "800000db41000007710c034"
+     },
+     "union_cover": "http://imge.kugou.com/stdmusic/{size}/20251005/20251005000407247092.jpg"
+    },
+    "medistype": "audio",
+    "user_id": 0,
+    "albuminfo": {
+     "name": "Crystal Obsidian",
+     "id": 158913018,
+     "publish": 1
+    },
+    "bitrate": 128,
+    "audio_group_id": "550678267",
+    "privilege": 10,
+    "cover": "http://imge.kugou.com/stdmusic/{size}/20251005/20251005000407247092.jpg",
+    "mixsongid": 786681988,
+    "fileid": 135,
+    "heat": 0,
+    "singerinfo": [
+     {
+      "name": "KNSRK",
+      "publish": 1,
+      "id": 10111178,
+      "avatar": "http://singerimg.kugou.com/uploadpic/softhead/{size}/20260202/20260202004025941026.jpg",
+      "type": 1
+     }
+    ],
+    "tagmap": {
+     "genre0": 0
+    }
+   }
+  ],
+  "popularization": {}
+ },
+ "status": 1
+}

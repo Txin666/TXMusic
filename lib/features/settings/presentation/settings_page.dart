@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/constants/app_constants.dart';
+import '../../../core/network/kugou_providers.dart';
+import '../../../core/network/kugou_session.dart';
 import '../../../routing/app_routes.dart';
 import '../../../shared/widgets/page_container.dart';
 import '../../../theme/app_colors.dart';
@@ -20,6 +22,7 @@ class SettingsPage extends ConsumerWidget {
     final SettingsState settings = ref.watch(settingsControllerProvider);
     final SettingsController controller =
         ref.read(settingsControllerProvider.notifier);
+    final KugouSession session = ref.watch(kugouSessionProvider);
     final ThemeData theme = Theme.of(context);
 
     return PageContainer(
@@ -35,6 +38,59 @@ class SettingsPage extends ConsumerWidget {
                 ?.copyWith(color: AppColors.textSecondary),
           ),
           const SizedBox(height: AppSpacing.xl),
+          _SettingSection(
+            title: '账号',
+            children: <Widget>[
+              if (session.isLoggedIn)
+                ListTile(
+                  contentPadding: EdgeInsets.zero,
+                  leading: const CircleAvatar(
+                    backgroundColor: AppColors.primaryDim,
+                    child: Icon(
+                      Icons.person_rounded,
+                      size: 18,
+                      color: AppColors.textPrimary,
+                    ),
+                  ),
+                  title: Text(
+                    session.nickname.isEmpty ? '酷狗用户' : session.nickname,
+                  ),
+                  subtitle: Text('已登录 · userid ${session.userid}'),
+                  trailing: TextButton(
+                    onPressed: () async {
+                      await ref
+                          .read(kugouSessionProvider.notifier)
+                          .signOut();
+                      if (!context.mounted) {
+                        return;
+                      }
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('已退出登录，当前为游客模式')),
+                      );
+                    },
+                    child: const Text('退出登录'),
+                  ),
+                )
+              else
+                ListTile(
+                  contentPadding: EdgeInsets.zero,
+                  leading: const CircleAvatar(
+                    backgroundColor: AppColors.surfaceAlt,
+                    child: Icon(
+                      Icons.person_outline_rounded,
+                      size: 18,
+                      color: AppColors.textSecondary,
+                    ),
+                  ),
+                  title: const Text('未登录 · 游客模式'),
+                  subtitle: const Text('登录后可解锁全曲播放与高音质，仅 60 秒试听'),
+                  trailing: FilledButton(
+                    onPressed: () => context.go(AppRoutes.login),
+                    child: const Text('登录'),
+                  ),
+                ),
+            ],
+          ),
           _SettingSection(
             title: '外观',
             children: <Widget>[

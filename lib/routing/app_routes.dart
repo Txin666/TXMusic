@@ -24,6 +24,9 @@ class AppRoutes {
   static const String player = '/player';
   static const String desktopLyric = '/desktop-lyric';
 
+  /// 应用内自助扫码登录页（脱离 Shell，独立全屏页）。
+  static const String login = '/login';
+
   /// 侧边导航可选项（顺序即展示顺序）。
   static const List<String> navDestinations = <String>[
     discover,

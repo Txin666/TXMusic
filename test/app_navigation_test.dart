@@ -9,6 +9,8 @@ import 'package:txmusic/main.dart';
 import 'package:txmusic/routing/app_routes.dart';
 import 'package:txmusic/routing/app_router.dart';
 
+import 'helpers/test_app_harness.dart';
+
 Future<void> _pumpApp(WidgetTester tester) async {
   // 桌面窗口尺寸下校验布局，避免测试默认 800x600 造成窄屏折叠差异。
   tester.view.physicalSize = const Size(1440, 900);
@@ -16,7 +18,13 @@ Future<void> _pumpApp(WidgetTester tester) async {
   addTearDown(tester.view.resetPhysicalSize);
   addTearDown(tester.view.resetDevicePixelRatio);
 
-  await tester.pumpWidget(const ProviderScope(child: TxMusicApp()));
+  // 全部数据与音频引擎经 overrides 注入，测试不触碰真实接口与 media_kit 原生库。
+  await tester.pumpWidget(
+    ProviderScope(
+      overrides: buildTestOverrides(),
+      child: const TxMusicApp(),
+    ),
+  );
   await tester.pumpAndSettle();
 }
 
@@ -53,14 +61,36 @@ void main() {
     expect(find.byType(RankPage), findsOneWidget);
 
     // 点击榜单标题进入详情页，详情页仍渲染在主框架内（播放条保留）。
-    await tester.tap(find.text('TX 飙升榜'));
+    await tester.tap(find.text('TX 飙升榜').first);
     await tester.pumpAndSettle();
+    expect(find.byType(RankDetailPage), findsOneWidget);
+    expect(find.byType(MainShell), findsOneWidget);
+    // 详情页标题与曲目均来自注入的桩数据。
+    expect(find.text('榜单曲目'), findsOneWidget);
+    expect(find.text('晴天'), findsWidgets);
+  });
+
+  testWidgets('发现页榜单行可跳转榜单详情页', (WidgetTester tester) async {
+    await _pumpApp(tester);
+
+    // 榜单行位于首屏下方，先滚动到可见位置再点击。
+    await tester.scrollUntilVisible(
+      find.text('查看').first,
+      200,
+      scrollable: find.byType(Scrollable).first,
+    );
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('查看').first);
+    await tester.pumpAndSettle();
+
     expect(find.byType(RankDetailPage), findsOneWidget);
     expect(find.byType(MainShell), findsOneWidget);
   });
 
   test('路由常量与实例可用', () {
-    final ProviderContainer container = ProviderContainer();
+    final ProviderContainer container = ProviderContainer(
+      overrides: buildTestOverrides(),
+    );
     addTearDown(container.dispose);
 
     expect(container.read(appRouterProvider).routeInformationParser, isNotNull);

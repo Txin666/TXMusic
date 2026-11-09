@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../features/album/presentation/album_detail_page.dart';
 import '../features/artist/presentation/artist_detail_page.dart';
+import '../features/auth/presentation/login_page.dart';
 import '../features/discover/presentation/discover_page.dart';
 import '../features/library/presentation/library_page.dart';
 import '../features/lyric/presentation/desktop_lyric_page.dart';
@@ -124,6 +125,10 @@ class AppRouter {
         GoRoute(
           path: AppRoutes.desktopLyric,
           pageBuilder: _fadePage(const DesktopLyricPage()),
+        ),
+        GoRoute(
+          path: AppRoutes.login,
+          pageBuilder: _fadePage(const LoginPage()),
         ),
       ],
       errorBuilder: (BuildContext context, GoRouterState state) {

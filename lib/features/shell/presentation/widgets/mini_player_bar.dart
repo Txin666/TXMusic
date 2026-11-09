@@ -1,15 +1,19 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart' hide RepeatMode;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../core/network/kugou_client.dart';
 import '../../../../routing/app_routes.dart';
 import '../../../../core/utils/formatters.dart';
 import '../../../../shared/widgets/cover_placeholder.dart';
 import '../../../../theme/app_colors.dart';
 import '../../../../theme/app_spacing.dart';
+import '../../../discover/application/discover_providers.dart';
+import '../../../library/application/library_providers.dart';
 import '../../../player/application/player_controller.dart';
 import '../../../player/domain/playback_state.dart';
-import '../../../song/data/fake_song_data.dart';
 import '../../../song/domain/song.dart';
 
 /// 底部播放控制条：与播放状态双向绑定，点击信息区进入播放详情页。
@@ -21,6 +25,19 @@ class MiniPlayerBar extends ConsumerWidget {
     final PlaybackSnapshot playback = ref.watch(playerControllerProvider);
     final PlayerController controller = ref.read(playerControllerProvider.notifier);
     final Song? song = playback.currentSong;
+
+    // 切歌时写入真实「最近播放」（`.local/recent.json`），失败曲目不计入。
+    ref.listen<PlaybackSnapshot>(playerControllerProvider,
+        (PlaybackSnapshot? previous, PlaybackSnapshot next) {
+      final Song? current = next.currentSong;
+      if (current == null || next.errorMessage != null) {
+        return;
+      }
+      if (current.hash == previous?.currentSong?.hash) {
+        return;
+      }
+      ref.read(libraryProvider.notifier).recordPlayed(current);
+    });
 
     return Container(
       height: AppSpacing.nowPlayingBarHeight,
@@ -55,13 +72,7 @@ class MiniPlayerBar extends ConsumerWidget {
             ],
           ),
         ),
-        TextButton(
-          // 骨架期：直接播放推荐假数据队列；接入推荐接口后改为读取每日推荐 Provider。
-          onPressed: () => ref
-              .read(playerControllerProvider.notifier)
-              .playQueue(FakeSongs.slice(0, 6)),
-          child: const Text('随便听听'),
-        ),
+        const _ShuffleButton(),
         const SizedBox(width: AppSpacing.lg),
       ],
     );
@@ -132,7 +143,7 @@ class MiniPlayerBar extends ConsumerWidget {
                                   .bodySmall
                                   ?.copyWith(
                                     color: playback.errorMessage != null
-                                        ? AppColors.vip
+                                        ? AppColors.danger
                                         : AppColors.textSecondary,
                                   ),
                             ),
@@ -143,18 +154,36 @@ class MiniPlayerBar extends ConsumerWidget {
                   ),
                 ),
                 const SizedBox(width: AppSpacing.sm),
-                IconButton(
-                  tooltip: '收藏（骨架期仅界面反馈）',
-                  onPressed: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('收藏功能将在接入本地存储后可用'),
-                        duration: Duration(seconds: 2),
+                Builder(
+                  builder: (BuildContext buttonContext) {
+                    // 收藏态来自真实 LibraryController（落盘 `.local/favorites.json`）。
+                    final bool liked =
+                        ref.watch(libraryProvider).isFavorite(song.hash);
+                    return IconButton(
+                      tooltip: liked ? '取消收藏' : '收藏',
+                      onPressed: () async {
+                        await ref
+                            .read(libraryProvider.notifier)
+                            .toggleFavorite(song);
+                        if (!buttonContext.mounted) {
+                          return;
+                        }
+                        ScaffoldMessenger.of(buttonContext).showSnackBar(
+                          SnackBar(
+                            content: Text(liked ? '已取消收藏' : '已加入我喜欢的音乐'),
+                            duration: const Duration(seconds: 2),
+                          ),
+                        );
+                      },
+                      icon: Icon(
+                        liked
+                            ? Icons.favorite_rounded
+                            : Icons.favorite_border_rounded,
+                        size: 18,
                       ),
+                      color: liked ? AppColors.primary : AppColors.textTertiary,
                     );
                   },
-                  icon: const Icon(Icons.favorite_border_rounded, size: 18),
-                  color: AppColors.textTertiary,
                 ),
                 const Spacer(),
                 IconButton(
@@ -352,4 +381,66 @@ class _PlayButton extends StatelessWidget {
   }
 }
 
-/// 空闲态「随便听听」使用推荐假数据（FakeSongs.slice），无需额外 Provider。
+/// 空闲态「随便听听」：取真实每日推荐（`/everyday/recommend`）随机起播，
+/// 拉取失败或为空时提示用户，绝不回退到假数据。
+class _ShuffleButton extends ConsumerStatefulWidget {
+  const _ShuffleButton();
+
+  @override
+  ConsumerState<_ShuffleButton> createState() => _ShuffleButtonState();
+}
+
+class _ShuffleButtonState extends ConsumerState<_ShuffleButton> {
+  bool _busy = false;
+
+  Future<void> _shuffle() async {
+    if (_busy) {
+      return;
+    }
+    setState(() => _busy = true);
+    try {
+      final DiscoverFeed feed = await ref.read(discoverFeedProvider.future);
+      final List<Song> pool = List<Song>.of(feed.dailySongs);
+      if (pool.isEmpty) {
+        _toast('暂时拿不到每日推荐，请确认本地接口服务是否运行');
+        return;
+      }
+      pool.shuffle(Random());
+      await ref.read(playerControllerProvider.notifier).playQueue(pool);
+    } on Object catch (error) {
+      _toast(
+        error is KugouApiException
+            ? '获取每日推荐失败：${error.message}'
+            : '获取每日推荐失败：$error',
+      );
+    } finally {
+      if (mounted) {
+        setState(() => _busy = false);
+      }
+    }
+  }
+
+  void _toast(String message) {
+    if (!mounted) {
+      return;
+    }
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(message), duration: const Duration(seconds: 2)),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton.icon(
+      onPressed: _busy ? null : _shuffle,
+      icon: _busy
+          ? const SizedBox(
+              width: 14,
+              height: 14,
+              child: CircularProgressIndicator(strokeWidth: 2),
+            )
+          : const Icon(Icons.shuffle_rounded, size: 16),
+      label: Text(_busy ? '准备中' : '随便听听'),
+    );
+  }
+}

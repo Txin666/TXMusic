@@ -1,30 +1,60 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../album/domain/album.dart';
-import '../../artist/domain/artist.dart';
+import '../../../core/network/kugou_providers.dart';
 import '../../playlist/domain/playlist.dart';
+import '../../rank/domain/rank_item.dart';
 import '../../song/domain/song.dart';
-import '../data/fake_discover_data.dart';
-import '../domain/discover_banner.dart';
 
-/// 发现页各区块数据。
-/// 骨架期直接返回假数据；接入接口后改为 `FutureProvider` / `AsyncNotifierProvider`（见文档 §9.2）。
-final discoverBannersProvider = Provider<List<DiscoverBanner>>(
-  (Ref ref) => FakeDiscoverData.banners,
-);
+/// 发现页聚合数据：全部来自真实接口，无假数据兜底。
+@immutable
+class DiscoverFeed {
+  const DiscoverFeed({
+    this.dailySongs = const <Song>[],
+    this.playlists = const <Playlist>[],
+    this.ranks = const <RankItem>[],
+  });
 
-final recommendedPlaylistsProvider = Provider<List<Playlist>>(
-  (Ref ref) => FakeDiscoverData.recommendedPlaylists,
-);
+  /// 每日推荐（`/everyday/recommend`）。
+  final List<Song> dailySongs;
 
-final recommendedAlbumsProvider = Provider<List<Album>>(
-  (Ref ref) => FakeDiscoverData.recommendedAlbums,
-);
+  /// 推荐歌单（`/top/playlist`）。
+  final List<Playlist> playlists;
 
-final recommendedArtistsProvider = Provider<List<Artist>>(
-  (Ref ref) => FakeDiscoverData.recommendedArtists,
-);
+  /// 热门榜单（`/rank/list` 前几个）。
+  final List<RankItem> ranks;
 
-final newSongsProvider = Provider<List<Song>>(
-  (Ref ref) => FakeDiscoverData.newSongs,
-);
+  bool get isEmpty =>
+      dailySongs.isEmpty && playlists.isEmpty && ranks.isEmpty;
+}
+
+/// 发现页一次性并发拉取三个区块，任一区块失败不影响其它区块渲染。
+final discoverFeedProvider = FutureProvider<DiscoverFeed>((Ref ref) async {
+  Future<List<T>> safe<T>(Future<List<T>> Function() task, String label) async {
+    try {
+      return await task();
+    } on Object catch (error) {
+      debugPrint('$label拉取失败: $error');
+      return <T>[];
+    }
+  }
+
+  final List<Song> daily = await safe<Song>(
+    () => ref.read(kugouDiscoverApiProvider).dailyRecommend(),
+    '每日推荐',
+  );
+  final List<Playlist> playlists = await safe<Playlist>(
+    () => ref.read(kugouPlaylistApiProvider).topPlaylists(pageSize: 12),
+    '推荐歌单',
+  );
+  final List<RankItem> ranks = await safe<RankItem>(
+    () => ref.read(kugouRankApiProvider).list(),
+    '榜单列表',
+  );
+
+  return DiscoverFeed(
+    dailySongs: daily,
+    playlists: playlists,
+    ranks: ranks.take(6).toList(growable: false),
+  );
+});

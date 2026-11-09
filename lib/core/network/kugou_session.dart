@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 
+import '../storage/local_store.dart';
 import 'kugou_config.dart';
 
 /// 酷狗登录态 / 设备标识（对应 `.local/kugou_cookie.json`）。
@@ -113,5 +114,48 @@ class KugouSession {
       baseUrl: fileBase.isNotEmpty ? fileBase : KugouConfig.baseUrl,
       sourceFile: path,
     );
+  }
+
+  Map<String, dynamic> toJson() => <String, dynamic>{
+        'cookie': cookie,
+        'dfid': dfid,
+        'userid': userid,
+        'token': token,
+        'nickname': nickname,
+        'base_url': baseUrl,
+        'saved_at': DateTime.now().toIso8601String(),
+      };
+
+  /// 把当前登录态写回 `.local/kugou_cookie.json`（扫码登录成功后调用）。
+  ///
+  /// 目录与 [LocalStore] 保持一致，保证 dev / 打包两种情况都命中同一份文件。
+  Future<void> persist() async {
+    final File file = LocalStore.fileOf('kugou_cookie.json');
+    try {
+      final Directory dir = file.parent;
+      if (!await dir.exists()) {
+        await dir.create(recursive: true);
+      }
+      await file.writeAsString(
+        const JsonEncoder.withIndent('  ').convert(toJson()),
+        flush: true,
+      );
+    } on Object catch (error) {
+      debugPrint('写入酷狗登录态失败: $error');
+    }
+  }
+
+  /// 退出登录：清掉本地 cookie 文件，仅保留 dfid 继续游客可用。
+  static Future<void> clearPersisted() async {
+    for (final String path in KugouConfig.cookieFileCandidates) {
+      final File file = File(path);
+      try {
+        if (await file.exists()) {
+          await file.delete();
+        }
+      } on Object catch (error) {
+        debugPrint('清除酷狗登录态失败($path): $error');
+      }
+    }
   }
 }

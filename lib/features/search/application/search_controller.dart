@@ -4,22 +4,25 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/network/kugou_client.dart';
 import '../../../core/network/kugou_providers.dart';
+import '../../album/domain/album.dart';
 import '../../artist/domain/artist.dart';
 import '../../playlist/domain/playlist.dart';
-import '../../song/data/kugou_song_api.dart';
 import '../../song/domain/song.dart';
-import '../data/fake_search_data.dart';
+import '../data/kugou_search_api.dart';
+import '../data/search_history_repository.dart';
 
-/// 搜索结果聚合（歌曲走真实 `/search/song`，歌单/歌手暂留骨架）。
+/// 搜索结果聚合：全部来自真实 `/search/complex`（歌曲 + 歌单 + 歌手 + 专辑）。
 class SearchState {
   const SearchState({
     this.keyword = '',
-    this.history = FakeSearchData.history,
+    this.history = const <String>[],
     this.songs = const <Song>[],
     this.playlists = const <Playlist>[],
     this.artists = const <Artist>[],
+    this.albums = const <Album>[],
     this.isLoading = false,
     this.errorMessage,
+    this.notice,
   });
 
   final String keyword;
@@ -27,8 +30,12 @@ class SearchState {
   final List<Song> songs;
   final List<Playlist> playlists;
   final List<Artist> artists;
+  final List<Album> albums;
   final bool isLoading;
   final String? errorMessage;
+
+  /// 降级提示（如分区接口不可用，仅展示单曲），有值时才展示。
+  final String? notice;
 
   bool get isEmptyResult =>
       keyword.isNotEmpty &&
@@ -36,7 +43,8 @@ class SearchState {
       errorMessage == null &&
       songs.isEmpty &&
       playlists.isEmpty &&
-      artists.isEmpty;
+      artists.isEmpty &&
+      albums.isEmpty;
 
   SearchState copyWith({
     String? keyword,
@@ -44,31 +52,53 @@ class SearchState {
     List<Song>? songs,
     List<Playlist>? playlists,
     List<Artist>? artists,
+    List<Album>? albums,
     bool? isLoading,
     String? errorMessage,
+    String? notice,
     bool clearError = false,
+    bool clearResults = false,
   }) {
     return SearchState(
       keyword: keyword ?? this.keyword,
       history: history ?? this.history,
-      songs: songs ?? this.songs,
-      playlists: playlists ?? this.playlists,
-      artists: artists ?? this.artists,
+      songs: clearResults ? const <Song>[] : (songs ?? this.songs),
+      playlists:
+          clearResults ? const <Playlist>[] : (playlists ?? this.playlists),
+      artists: clearResults ? const <Artist>[] : (artists ?? this.artists),
+      albums: clearResults ? const <Album>[] : (albums ?? this.albums),
       isLoading: isLoading ?? this.isLoading,
       errorMessage: clearError ? null : (errorMessage ?? this.errorMessage),
+      notice: clearResults ? notice : (notice ?? this.notice),
     );
   }
 }
 
-/// 搜索页编排：真实接口 + 请求竞态保护。
+/// 搜索页编排：真实搜索接口 + 历史落盘 + 请求竞态保护。
 ///
-/// TODO(api): 补 `/search/playlist`、`/artist/search` 聚合；
-/// TODO(storage): 历史记录落 Hive。
+/// - 结果：`KugouSearchApi.bundle`（以 `/search` 单曲为主，`/search/complex`
+///   仅作分区补充，失败静默降级为只有单曲，分区数据为空时 UI 隐藏分区）；
+/// - 历史：`SearchHistoryRepository`（`.local/search_history.json`）。
 class SearchPageController extends Notifier<SearchState> {
+  static const SearchHistoryRepository _history =
+      SearchHistoryRepository();
+
   int _requestId = 0;
 
   @override
-  SearchState build() => const SearchState();
+  SearchState build() {
+    Future<void>.microtask(_restoreHistory);
+    return const SearchState();
+  }
+
+  Future<void> _restoreHistory() async {
+    try {
+      final List<String> history = await _history.load();
+      state = state.copyWith(history: history);
+    } on Object {
+      // 历史读取失败不阻塞搜索，静默降级为空历史。
+    }
+  }
 
   void updateKeyword(String value) {
     state = state.copyWith(keyword: value);
@@ -85,30 +115,31 @@ class SearchPageController extends Notifier<SearchState> {
       return;
     }
 
-    final List<String> history = <String>[
-      key,
-      ...state.history.where((String item) => item != key),
-    ].take(10).toList(growable: false);
-
     final int request = ++_requestId;
     state = state.copyWith(
       keyword: key,
-      history: history,
-      songs: const <Song>[],
       isLoading: true,
+      clearResults: true,
       clearError: true,
     );
+    unawaited(_remember(key));
 
     try {
-      final KugouSongApi api = ref.read(kugouSongApiProvider);
-      final List<Song> songs = await api.search(key);
+      final SearchBundle bundle =
+          await ref.read(kugouSearchApiProvider).bundle(key);
       if (request != _requestId) {
         return;
       }
       state = state.copyWith(
-        songs: songs,
+        songs: bundle.songs,
+        playlists: bundle.playlists,
+        artists: bundle.artists,
+        albums: bundle.albums,
         isLoading: false,
         clearError: true,
+        notice: bundle.partitionsAvailable
+            ? null
+            : '歌单 / 歌手 / 专辑分区接口当前不可用（/search/complex 返回 error_code 152），已展示单曲结果',
       );
     } on KugouApiException catch (error) {
       if (request != _requestId) {
@@ -116,7 +147,7 @@ class SearchPageController extends Notifier<SearchState> {
       }
       state = state.copyWith(
         isLoading: false,
-        songs: const <Song>[],
+        clearResults: true,
         errorMessage: error.message,
       );
     } on Object catch (error) {
@@ -125,9 +156,19 @@ class SearchPageController extends Notifier<SearchState> {
       }
       state = state.copyWith(
         isLoading: false,
-        songs: const <Song>[],
+        clearResults: true,
         errorMessage: '搜索失败：$error',
       );
+    }
+  }
+
+  /// 历史落盘：失败不影响搜索结果。
+  Future<void> _remember(String key) async {
+    try {
+      final List<String> history = await _history.push(key);
+      state = state.copyWith(history: history);
+    } on Object {
+      // 忽略写入异常，历史仅作辅助信息。
     }
   }
 
@@ -138,8 +179,15 @@ class SearchPageController extends Notifier<SearchState> {
 
   void clearHistory() {
     state = state.copyWith(history: const <String>[]);
+    unawaited(_history.clear());
   }
 }
 
 final searchPageControllerProvider =
     NotifierProvider<SearchPageController, SearchState>(SearchPageController.new);
+
+/// 热搜关键词（真实 `/search/hot/detail`），搜索页空态展示。
+final FutureProvider<List<String>> hotKeywordsProvider =
+    FutureProvider<List<String>>(
+  (Ref ref) => ref.watch(kugouSearchApiProvider).hotKeywords(),
+);

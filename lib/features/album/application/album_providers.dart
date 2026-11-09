@@ -1,13 +1,15 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../data/fake_album_data.dart';
+import '../../../core/network/kugou_providers.dart';
+import '../../song/domain/song.dart';
 import '../domain/album.dart';
 
-/// 专辑详情（骨架期假数据，按 id 参数化）。
-final albumListProvider = Provider<List<Album>>(
-  (Ref ref) => FakeAlbums.all,
+/// 专辑详情（`/album/detail`）。
+final albumDetailProvider = FutureProvider.family<Album?, String>(
+  (Ref ref, String id) => ref.watch(kugouAlbumApiProvider).detail(id),
 );
 
-final albumDetailProvider = Provider.family<Album, String>(
-  (Ref ref, String id) => FakeAlbums.byId(id),
+/// 专辑曲目（`/album/songs`）。
+final albumSongsProvider = FutureProvider.family<List<Song>, String>(
+  (Ref ref, String id) => ref.watch(kugouAlbumApiProvider).songs(id),
 );

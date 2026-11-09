@@ -206,6 +206,31 @@ dfid 必须是登录时那一个（换新 dfid 也能识别登录态，但建议
   - flutter_test 默认把 HttpClient 拦成 400，需 `HttpOverrides.global = null` 才能走真实网络
 - 构建：`flutter build windows --debug` 成功；`flutter analyze` No issues found
 
+### 7.2.1 第二轮实测修复（2026-11-10）
+
+验证脚本：`test/kugou_api_fixes_smoke_test.dart`（真实请求本地 `localhost:3000`，7 项全过）
+
+| 问题 | 实测现象 | 修复 |
+|---|---|---|
+| 响应体带 HTML 注释前缀 | 部分接口返回 `<!--KG_TAG_RES_START-->{...}<!--KG_TAG_RES_END-->`，`jsonDecode` 直接抛 FormatException | `KugouClient.sanitizeBody` 剥离 BOM/前后注释/内部注释后再解析；解析失败时把响应前 60 字符带进异常便于排查 |
+| 成功码判定过严 | `/lyric`、`/search/lyric` 的 `status=200`、`errcode=200` 被判为失败 | `_isOkErrorCode`（0/200）、`_isOkStatus`（1/200）统一兼容 |
+| `/search/complex` 不稳定 | 实测存在 `error_code 152 Parameter Error`；`/search/playlist` `/search/author` `/search/album` 只回歌曲列表，不能撑分区 | 搜索页改为 `bundle()`：主链路 `/search` 单曲（失败才整页报错），`/search/complex` 仅补分区且失败静默降级；分区为空时 UI 隐藏分区并显示降级提示条 |
+| 歌词 base64 | `/lyric?decode=true` 的 `content` 仍是 base64，`decodeContent` 可能缺失 | `KugouLyricApi.decodeIfBase64` 兜底解码；LRC 解析兼容 `\r\n`；歌词请求异常降级为空文档 |
+| 歌单 ID | `/playlist/detail`、`/playlist/track/all` 只认 `global_collection_id`（`collection_x_y_z`）；传 specialid 时详情空、曲目 HTTP 502 | `Playlist.collectionId`/`hasCollectionId` 收敛 ID；`KugouPlaylistApi.normalizeCollectionId` 拦截非 collection ID；502 与空数据降级为「暂无曲目/暂不支持查看」，详情页对非 collection ID 提前提示 |
+
+实测输出摘录：
+
+```
+[search] songs=10 playlists=5 artists=0 albums=6 partitionsAvailable=true
+[degrade] songs=5 partitionsAvailable=false        // complex 强制失败时仍返回单曲
+[lyric] lines=63 firstLines=[晴天 - 周杰伦 (Jay Chou), 词：周杰伦, 曲：周杰伦]
+[playlist] total=40 withCollection=40 sampleIds=[collection_3_xxx_...]
+[playlist/detail] title=... songCount=41
+[playlist/track/all] tracks=10 first=...
+```
+
+结果：`dart analyze lib test` No issues found；`flutter test` 22 项全过。
+
 ### 7.3 踩坑
 
 - **libmpv 下载被截断**：`media_kit_libs_windows_audio` 通过 CMake `file(DOWNLOAD)` 从 GitHub Releases 拉 `mpv-dev-x86_64-20230924-git-652a1dd.7z`，本机直连 GitHub 失败（schannel 吊销检查/连接被断），生成 0 字节文件 → 报 `Integrity check failed`。

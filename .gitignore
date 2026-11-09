@@ -49,3 +49,8 @@ app.*.map.json
 
 # 本地凭据与登录态（不入库）
 .local/
+
+# local logs
+*.log
+test_out.txt
+temp_analyze.txt

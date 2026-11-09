@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../core/network/kugou_client.dart';
 import '../../../core/utils/formatters.dart';
 import '../../../routing/app_routes.dart';
 import '../../../shared/widgets/artist_avatar.dart';
@@ -12,17 +13,21 @@ import '../../../shared/widgets/section_header.dart';
 import '../../../shared/widgets/song_tile.dart';
 import '../../../theme/app_colors.dart';
 import '../../../theme/app_spacing.dart';
+import '../../album/domain/album.dart';
 import '../../artist/domain/artist.dart';
 import '../../player/application/player_controller.dart';
 import '../../playlist/domain/playlist.dart';
 import '../../song/domain/song.dart';
 import '../application/search_controller.dart';
-import '../data/fake_search_data.dart';
+
+/// 错误文案统一取 [KugouApiException.message]，避免把堆栈抛给用户。
+String _describeError(Object error) =>
+    error is KugouApiException ? error.message : '请求失败，请检查本地接口服务';
 
 /// 搜索页（路由 `/search`，可选 `?q=关键词` 从顶部搜索框带入）。
 ///
-/// 歌曲结果来自真实 `/search/song`（本地 KuGouMusicApi）；
-/// 历史记录仍为内存态（TODO(storage): 落 Hive）。
+/// 结果与热搜均来自真实接口（`/search/complex`、`/search/hot/detail`），
+/// 搜索历史由 `SearchHistoryRepository` 落盘，全页不引用任何假数据。
 class SearchPage extends ConsumerStatefulWidget {
   const SearchPage({super.key, this.initialQuery});
 
@@ -126,6 +131,10 @@ class _SearchPageState extends ConsumerState<SearchPage> {
               },
             )
           else ...<Widget>[
+            if (state.notice != null && state.notice!.isNotEmpty) ...<Widget>[
+              _DegradeNotice(text: state.notice!),
+              const SizedBox(height: AppSpacing.md),
+            ],
             if (state.songs.isNotEmpty) ...<Widget>[
               SectionHeader(
                 title: '单曲',
@@ -185,6 +194,30 @@ class _SearchPageState extends ConsumerState<SearchPage> {
                     )
                     .toList(growable: false),
               ),
+              const SizedBox(height: AppSpacing.xl),
+            ],
+            if (state.albums.isNotEmpty) ...<Widget>[
+              SectionHeader(
+                title: '专辑',
+                subtitle: '${state.albums.length} 条结果',
+              ),
+              Wrap(
+                spacing: AppSpacing.lg,
+                runSpacing: AppSpacing.lg,
+                children: state.albums
+                    .map(
+                      (Album album) => MediaCard(
+                        title: album.title,
+                        seed: album.title,
+                        subtitle: album.artist.isEmpty
+                            ? '${album.trackCount} 首'
+                            : '${album.artist} · ${album.trackCount} 首',
+                        icon: Icons.album_rounded,
+                        onTap: () => context.go(AppRoutes.albumDetail(album.id)),
+                      ),
+                    )
+                    .toList(growable: false),
+              ),
             ],
           ],
         ],
@@ -193,7 +226,7 @@ class _SearchPageState extends ConsumerState<SearchPage> {
   }
 }
 
-class _IdleView extends StatelessWidget {
+class _IdleView extends ConsumerWidget {
   const _IdleView({
     required this.history,
     required this.onPick,
@@ -205,7 +238,7 @@ class _IdleView extends StatelessWidget {
   final VoidCallback onClearHistory;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final ThemeData theme = Theme.of(context);
 
     return Column(
@@ -232,28 +265,105 @@ class _IdleView extends StatelessWidget {
                 .toList(growable: false),
           ),
         const SizedBox(height: AppSpacing.xxl),
-        const SectionHeader(title: '热搜榜', subtitle: '骨架期示例数据'),
-        ...FakeSearchData.hotKeywords.asMap().entries.map(
-              (MapEntry<int, String> entry) => ListTile(
-                onTap: () => onPick(entry.value),
-                contentPadding: EdgeInsets.zero,
-                leading: SizedBox(
-                  width: 24,
-                  child: Text(
-                    '${entry.key + 1}'.padLeft(2, '0'),
-                    style: theme.textTheme.bodySmall?.copyWith(
-                      color: entry.key < 3
-                          ? AppColors.primary
-                          : AppColors.textTertiary,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ),
-                title: Text(entry.value, style: theme.textTheme.bodyMedium),
-                trailing: const Icon(Icons.north_east_rounded, size: 15),
+        const SectionHeader(title: '热搜榜', subtitle: '来自酷狗实时热搜'),
+        ref.watch(hotKeywordsProvider).when(
+              loading: () => const Padding(
+                padding: EdgeInsets.symmetric(vertical: AppSpacing.xl),
+                child: Center(child: CircularProgressIndicator(strokeWidth: 2.5)),
               ),
+              error: (Object error, StackTrace stackTrace) => Padding(
+                padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
+                child: Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: Text(
+                        '热搜加载失败：${_describeError(error)}',
+                        style: theme.textTheme.bodySmall
+                            ?.copyWith(color: AppColors.textSecondary),
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () => ref.invalidate(hotKeywordsProvider),
+                      child: const Text('重试'),
+                    ),
+                  ],
+                ),
+              ),
+              data: (List<String> keywords) {
+                if (keywords.isEmpty) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
+                    child: Text(
+                      '暂时没有热搜数据，直接输入关键词搜索吧',
+                      style: theme.textTheme.bodySmall
+                          ?.copyWith(color: AppColors.textSecondary),
+                    ),
+                  );
+                }
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: keywords.asMap().entries.map(
+                    (MapEntry<int, String> entry) => ListTile(
+                      onTap: () => onPick(entry.value),
+                      contentPadding: EdgeInsets.zero,
+                      leading: SizedBox(
+                        width: 24,
+                        child: Text(
+                          '${entry.key + 1}'.padLeft(2, '0'),
+                          style: theme.textTheme.bodySmall?.copyWith(
+                            color: entry.key < 3
+                                ? AppColors.primary
+                                : AppColors.textTertiary,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ),
+                      title:
+                          Text(entry.value, style: theme.textTheme.bodyMedium),
+                      trailing: const Icon(Icons.north_east_rounded, size: 15),
+                    ),
+                  ).toList(growable: false),
+                );
+              },
             ),
       ],
+    );
+  }
+}
+
+class _DegradeNotice extends StatelessWidget {
+  const _DegradeNotice({required this.text});
+
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppSpacing.md,
+        vertical: AppSpacing.sm,
+      ),
+      decoration: BoxDecoration(
+        color: AppColors.surfaceAlt,
+        borderRadius: BorderRadius.circular(AppRadius.md),
+        border: Border.all(color: AppColors.divider),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          const Icon(Icons.info_outline_rounded,
+              size: 16, color: AppColors.textTertiary),
+          const SizedBox(width: AppSpacing.sm),
+          Expanded(
+            child: Text(
+              text,
+              style: theme.textTheme.bodySmall
+                  ?.copyWith(color: AppColors.textSecondary),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -285,7 +395,10 @@ class _ArtistResultTile extends StatelessWidget {
                   ?.copyWith(fontWeight: FontWeight.w600),
             ),
             Text(
-              '粉丝 ${Formatters.playCount(artist.fansCount)}',
+              // 聚合搜索返回的歌手字段未必带粉丝数，缺失时不展示 0。
+              artist.fansCount > 0
+                  ? '粉丝 ${Formatters.playCount(artist.fansCount)}'
+                  : '歌手',
               style: Theme.of(context)
                   .textTheme
                   .bodySmall

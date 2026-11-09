@@ -13,13 +13,13 @@ import '../../../theme/app_spacing.dart';
 import '../../player/application/player_controller.dart';
 import '../../song/domain/song.dart';
 import '../application/library_providers.dart';
-import '../data/fake_library_data.dart';
 
 enum _LibraryTab { favorite, recent }
 
 /// 我的音乐（路由 `/library`）：收藏 / 最近播放。
 ///
-/// TODO(storage): 收藏与历史应来自本地 Hive（文档 §8），当前为假数据。
+/// 数据全部来自 [libraryProvider]（`LibraryRepository` 落盘 JSON），
+/// 不再引用任何假数据；收藏 / 取消收藏、清空记录都会立即持久化。
 class LibraryPage extends ConsumerStatefulWidget {
   const LibraryPage({super.key});
 
@@ -32,9 +32,13 @@ class _LibraryPageState extends ConsumerState<LibraryPage> {
 
   @override
   Widget build(BuildContext context) {
-    final List<Song> favorites = ref.watch(favoriteSongsProvider);
-    final List<Song> recents = ref.watch(recentSongsProvider);
-    final List<Song> current = _tab == _LibraryTab.favorite ? favorites : recents;
+    final LibraryState library = ref.watch(libraryProvider);
+    final LibraryController libraryController =
+        ref.read(libraryProvider.notifier);
+    final List<Song> favorites = library.favorites;
+    final List<Song> recents = library.recent;
+    final bool isFavoriteTab = _tab == _LibraryTab.favorite;
+    final List<Song> current = isFavoriteTab ? favorites : recents;
     final ThemeData theme = Theme.of(context);
 
     return PageContainer(
@@ -44,35 +48,66 @@ class _LibraryPageState extends ConsumerState<LibraryPage> {
           Text('我的音乐', style: theme.textTheme.headlineMedium),
           const SizedBox(height: AppSpacing.xs),
           Text(
-            '收藏与最近播放（骨架期示例数据，接入本地数据库后为真实记录）',
+            '收藏与最近播放，均保存在本机（.local 目录），无需登录',
             style: theme.textTheme.bodySmall
                 ?.copyWith(color: AppColors.textSecondary),
           ),
           const SizedBox(height: AppSpacing.lg),
-          SegmentedButton<_LibraryTab>(
-            showSelectedIcon: false,
-            segments: <ButtonSegment<_LibraryTab>>[
-              ButtonSegment<_LibraryTab>(
-                value: _LibraryTab.favorite,
-                icon: const Icon(Icons.favorite_rounded, size: 16),
-                label: Text('我喜欢的音乐 ${favorites.length}'),
+          Wrap(
+            spacing: AppSpacing.md,
+            runSpacing: AppSpacing.sm,
+            crossAxisAlignment: WrapCrossAlignment.center,
+            children: <Widget>[
+              SegmentedButton<_LibraryTab>(
+                showSelectedIcon: false,
+                segments: <ButtonSegment<_LibraryTab>>[
+                  ButtonSegment<_LibraryTab>(
+                    value: _LibraryTab.favorite,
+                    icon: const Icon(Icons.favorite_rounded, size: 16),
+                    label: Text('我喜欢的音乐 ${favorites.length}'),
+                  ),
+                  ButtonSegment<_LibraryTab>(
+                    value: _LibraryTab.recent,
+                    icon: const Icon(Icons.history_rounded, size: 16),
+                    label: Text('最近播放 ${recents.length}'),
+                  ),
+                ],
+                selected: <_LibraryTab>{_tab},
+                onSelectionChanged: (Set<_LibraryTab> selection) =>
+                    setState(() => _tab = selection.first),
               ),
-              ButtonSegment<_LibraryTab>(
-                value: _LibraryTab.recent,
-                icon: const Icon(Icons.history_rounded, size: 16),
-                label: Text('最近播放 ${recents.length}'),
-              ),
+              if (!isFavoriteTab && recents.isNotEmpty)
+                TextButton.icon(
+                  onPressed: () async {
+                    await libraryController.clearRecent();
+                    if (!context.mounted) {
+                      return;
+                    }
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('已清空最近播放记录'),
+                        duration: Duration(seconds: 2),
+                      ),
+                    );
+                  },
+                  icon: const Icon(Icons.delete_sweep_rounded, size: 16),
+                  label: const Text('清空记录'),
+                ),
             ],
-            selected: <_LibraryTab>{_tab},
-            onSelectionChanged: (Set<_LibraryTab> selection) =>
-                setState(() => _tab = selection.first),
           ),
           const SizedBox(height: AppSpacing.xl),
-          if (current.isEmpty)
+          if (library.isLoading)
+            const Padding(
+              padding: EdgeInsets.symmetric(vertical: AppSpacing.xxl),
+              child: Center(child: CircularProgressIndicator(strokeWidth: 2.5)),
+            )
+          else if (current.isEmpty)
             EmptyState(
-              title: _tab == _LibraryTab.favorite ? '还没有收藏歌曲' : '还没有播放记录',
-              description: '去发现页听听看，收藏后会出现在这里',
-              icon: _tab == _LibraryTab.favorite
+              title: isFavoriteTab ? '还没有收藏歌曲' : '还没有播放记录',
+              description: isFavoriteTab
+                  ? '在任意歌曲上点右侧爱心即可收藏，收藏会立即存到本机'
+                  : '去发现页听听看，播放过的歌曲会自动记录在这里',
+              icon: isFavoriteTab
                   ? Icons.favorite_border_rounded
                   : Icons.history_toggle_off_rounded,
               actionLabel: '去发现页',
@@ -80,7 +115,7 @@ class _LibraryPageState extends ConsumerState<LibraryPage> {
             )
           else ...<Widget>[
             SectionHeader(
-              title: _tab == _LibraryTab.favorite ? '收藏歌曲' : '最近播放',
+              title: isFavoriteTab ? '收藏歌曲' : '最近播放',
               subtitle: '共 ${current.length} 首',
               actionLabel: '全部播放',
               onActionTap: () => ref
@@ -91,15 +126,19 @@ class _LibraryPageState extends ConsumerState<LibraryPage> {
                   (MapEntry<int, Song> entry) => SongTile(
                     song: entry.value,
                     index: entry.key,
-                    trailing: _tab == _LibraryTab.recent
-                        ? Text(
-                            Formatters.relative(
-                              FakeLibraryData.recentTimeAt(entry.key),
-                            ),
+                    trailing: isFavoriteTab
+                        ? IconButton(
+                            tooltip: '取消收藏',
+                            onPressed: () =>
+                                libraryController.toggleFavorite(entry.value),
+                            icon: const Icon(Icons.favorite_rounded, size: 18),
+                            color: AppColors.primary,
+                          )
+                        : Text(
+                            Formatters.duration(entry.value.duration),
                             style: theme.textTheme.bodySmall
                                 ?.copyWith(color: AppColors.textTertiary),
-                          )
-                        : null,
+                          ),
                     onTap: () => ref
                         .read(playerControllerProvider.notifier)
                         .playQueue(current, startIndex: entry.key),

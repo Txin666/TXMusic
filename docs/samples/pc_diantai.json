@@ -1,0 +1,148 @@
+{
+ "status": 1,
+ "error_code": 0,
+ "data": {
+  "timestamp": 1794234410,
+  "config": {
+   "close_hotzone": 1
+  },
+  "data": [
+   {
+    "sort": 14,
+    "code": "http://adsfile.bssdlbig.kugou.com/d06be8970e9f8ad799abeb9ae39f0d67.jpg",
+    "id": 248396,
+    "isAd": true,
+    "jump_type": 6,
+    "title": "虚拟直播",
+    "type": 1,
+    "url": "https://fanxing.kugou.com/ether/transitPage.html?cid=30&randomNum=5",
+    "tongji": 0
+   },
+   {
+    "sort": 12,
+    "code": "http://adsfile.bssdlbig.kugou.com/eb559a3a31df15a6444be98a7c22da2d.jpg",
+    "id": 248395,
+    "isAd": true,
+    "jump_type": 6,
+    "title": "舞蹈直播",
+    "type": 1,
+    "url": "https://fanxing.kugou.com/ether/transitPage.html?cid=24&randomNum=5",
+    "tongji": 0
+   },
+   {
+    "sort": 11,
+    "code": "http://adsfile.bssdlbig.kugou.com/f3c12ebba14cf5d4842fe9f8ca4ca3a3.jpg",
+    "id": 298223,
+    "isAd": true,
+    "jump_type": 0,
+    "title": "HiFi",
+    "type": 1,
+    "url": "https://www.kugou.com/hifi/",
+    "tongji": 0
+   },
+   {
+    "sort": 10,
+    "code": "http://adsfile.bssdlbig.kugou.com/44802dda96e0c152f0badf570e911b7b.jpg",
+    "id": 248392,
+    "isAd": true,
+    "jump_type": 6,
+    "title": "游戏直播",
+    "type": 1,
+    "url": "https://fanxing.kugou.com/ether/transitPage.html?cid=6201&randomNum=15",
+    "tongji": 0
+   },
+   {
+    "sort": 9,
+    "code": "http://mdpfilebssdlbig.kugou.com/fecb69946cd7527e0ef67acbd2c8d284.jpg",
+    "tongji": 0,
+    "classid": 214395534,
+    "jump_type": 7,
+    "title": "三Z-STUDIO/HOYO-MiX- 绝区零-GAMBIT 险棋",
+    "type_id": "214395534",
+    "type": 1,
+    "id": 499713,
+    "url": "http://www2.kugou.kugou.com/yueku/v9/album/single/214395534-91.html",
+    "only_member": 0
+   },
+   {
+    "sort": 7,
+    "code": "http://mdpfilebssdlbig.kugou.com/1f50df0e8886b6412612bc2754e49e79.jpg",
+    "tongji": 0,
+    "classid": 0,
+    "jump_type": 0,
+    "title": "每日登录免费作歌",
+    "type_id": "https://vemus-h5.tencentmusic.com/vooactivity/voo/v-b551067c/index.html?clientType=pc&hreffrom=kugou",
+    "type": 1,
+    "id": 387877,
+    "url": "https://vemus-h5.tencentmusic.com/vooactivity/voo/v-b551067c/index.html?clientType=pc&hreffrom=kugou",
+    "only_member": 0
+   },
+   {
+    "sort": 6,
+    "code": "http://mdpfilebssdlbig.kugou.com/28c2c3a2ac222c11775bc865470baf11.jpg",
+    "tongji": 0,
+    "classid": 213940091,
+    "jump_type": 7,
+    "title": "张韶涵-《回旋》（《虚环》游戏推广曲）",
+    "type_id": "213940091",
+    "type": 1,
+    "id": 499975,
+    "url": "http://www2.kugou.kugou.com/yueku/v9/album/single/213940091-91.html",
+    "only_member": 0
+   },
+   {
+    "sort": 5,
+    "code": "http://mdpfilebssdlbig.kugou.com/3254799ffaafc6bb3aea884e3cdc35c0.jpg",
+    "tongji": 0,
+    "classid": 214089087,
+    "jump_type": 7,
+    "title": "马嘉祺-致年少的自己",
+    "type_id": "214089087",
+    "type": 1,
+    "id": 500157,
+    "url": "http://www2.kugou.kugou.com/yueku/v9/album/single/214089087-91.html",
+    "only_member": 0
+   },
+   {
+    "sort": 5,
+    "code": "http://mdpfilebssdlbig.kugou.com/5355f5fc303f0497e1f920bdf3d48f8c.jpg",
+    "tongji": 0,
+    "classid": 214088105,
+    "jump_type": 7,
+    "title": "CNBLUE-달리기",
+    "type_id": "214088105",
+    "type": 1,
+    "id": 500847,
+    "url": "http://www2.kugou.kugou.com/yueku/v9/album/single/214088105-91.html",
+    "only_member": 0
+   },
+   {
+    "sort": 2,
+    "code": "http://mdpfilebssdlbig.kugou.com/b02d9a744ab62fac2a041952a0fba757.jpg",
+    "tongji": 0,
+    "classid": 0,
+    "jump_type": 1,
+    "title": "NCT DREAM《DREAM AFTER DREAM》",
+    "type_id": "https://ep.kugou.com/html/mobile_commonchargeV3/index_446680.html?hreffrom=1",
+    "type": 1,
+    "id": 498223,
+    "url": "https://ep.kugou.com/html/mobile_commonchargeV3/index_446680.html?hreffrom=1",
+    "only_member": 0
+   },
+   {
+    "sort": 2,
+    "code": "http://mdpfilebssdlbig.kugou.com/cca69c120e15375dc11255c4eef54c81.jpg",
+    "tongji": 0,
+    "classid": 213951421,
+    "jump_type": 7,
+    "title": "蔡淇-青春燃 火不燃",
+    "type_id": "213951421",
+    "type": 1,
+    "id": 498767,
+    "url": "http://www2.kugou.kugou.com/yueku/v9/album/single/213951421-91.html",
+    "only_member": 0
+   }
+  ],
+  "timing_update_interval": 3600
+ }
+}

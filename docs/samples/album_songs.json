@@ -1,0 +1,373 @@
+{
+ "total": 3,
+ "error_code": 0,
+ "data": {
+  "total": 3,
+  "songs": [
+   {
+    "mvdata": [
+     {
+      "typ": 0,
+      "trk": "3",
+      "hash": "856A9BF6522105DDB68DF2AF29342967",
+      "id": "18564649"
+     }
+    ],
+    "extend": {
+     "has_obbligato": 1,
+     "cd_name": "",
+     "disc": 1,
+     "sort": 1
+    },
+    "trans_param": {
+     "init_pub_day": 30,
+     "ogg_128_hash": "59385E6D52DBE4418C5E278FF946657F",
+     "classmap": {
+      "attr0": 100663304
+     },
+     "language": "国语",
+     "cpy_attr0": 8224,
+     "musicpack_advance": 0,
+     "display": 0,
+     "display_rate": 0,
+     "cpy_map": "2",
+     "flags": {},
+     "provider": 2,
+     "qualitymap": {
+      "bits": "2800000c041080001100c074",
+      "attr0": 285261940,
+      "attr1": 136380416
+     },
+     "union_cover": "http://imge.kugou.com/stdmusic/{size}/20261106/20261106103502112276.jpg",
+     "ogg_320_filesize": 8600843,
+     "cid": 684711758,
+     "ogg_320_hash": "5AA888F941A343258FBBA2879FFA44A4",
+     "ogg_128_filesize": 2420220,
+     "ipmap": {
+      "attr0": 33554436,
+      "bits": "10000002000004"
+     },
+     "cpy_grade": 5,
+     "pay_block_tpl": 1,
+     "hash_multitrack": "2D8CB627E8EFCE60376036C10E8F6D95",
+     "cpy_level": 1
+    },
+    "copyright": {
+     "privilege_flac": 10,
+     "sale_mode_128_download": 4,
+     "viponly_tag": 0,
+     "privilege_128": 8,
+     "album_sale_url": "",
+     "privilege": 8,
+     "sale_mode_flac_download": 4,
+     "privilege_320": 10,
+     "sale_mode_320_download": 4,
+     "sale_mode_download": 4
+    },
+    "audio_info": {
+     "hash": "A3B55E0994914F97B97C496754E6D047",
+     "bitrate": 128,
+     "duration_flac": 203000,
+     "filesize_320": 8129502,
+     "filesize_flac": 25121632,
+     "duration_320": 203000,
+     "filesize_high": 45894898,
+     "hash_320": "880B8B5A70044D571D0889963DCFDA47",
+     "duration": 203000,
+     "duration_high": 203000,
+     "hash_high": "5FA7BF7E579C86BCFC2EDB07403549E3",
+     "hash_super": "",
+     "filesize": 3251918,
+     "hash_128": "A3B55E0994914F97B97C496754E6D047",
+     "bitrate_high": 1808,
+     "hash_flac": "3E0499CDA3D35A45FA6D025DE9576ABF",
+     "filesize_128": 3251918,
+     "duration_super": 0,
+     "bitrate_super": 0,
+     "filesize_super": 0,
+     "extname": "mp3",
+     "duration_128": 203000,
+     "extname_super": ""
+    },
+    "base": {
+     "is_publish": 1,
+     "album_id": 213940091,
+     "author_name": "张韶涵、虚环",
+     "audio_id": 1108962437,
+     "audio_name": "回旋",
+     "album_audio_id": 983092287
+    },
+    "album_info": {
+     "album_name": "回旋",
+     "cover": "http://imge.kugou.com/stdmusic/{size}/20261106/20261106103502112276.jpg"
+    },
+    "extra": {
+     "remark": ""
+    },
+    "deprecated": {
+     "cpy_grade": 5,
+     "video_hash": "856A9BF6522105DDB68DF2AF29342967",
+     "old_cpy": 0,
+     "pkg_price": 1,
+     "cid": 684711758,
+     "price": 200,
+     "display_rate": 0,
+     "hash_multitrack": "2D8CB627E8EFCE60376036C10E8F6D95",
+     "pay_type": 3,
+     "pay_block_tpl": 1,
+     "display": 0,
+     "type": "audio"
+    },
+    "authors": [
+     {
+      "author_name": "张韶涵",
+      "author_id": 6811
+     },
+     {
+      "author_name": "虚环",
+      "author_id": 23363560
+     }
+    ]
+   },
+   {
+    "mvdata": [],
+    "extend": {
+     "has_obbligato": 1,
+     "cd_name": "",
+     "disc": 1,
+     "sort": 2
+    },
+    "trans_param": {
+     "init_pub_day": 30,
+     "ogg_128_hash": "9732EB05CBC076E58EEBAFF1E642F5DB",
+     "classmap": {
+      "attr0": 100663304
+     },
+     "language": "伴奏",
+     "cpy_attr0": 8224,
+     "musicpack_advance": 0,
+     "display": 0,
+     "display_rate": 0,
+     "cpy_map": "2",
+     "flags": {},
+     "provider": 2,
+     "qualitymap": {
+      "bits": "74",
+      "attr0": 116,
+      "attr1": 0
+     },
+     "union_cover": "http://imge.kugou.com/stdmusic/{size}/20261106/20261106103502112276.jpg",
+     "ogg_320_filesize": 8566613,
+     "cid": 684711762,
+     "ogg_320_hash": "8FD768494F04CBAD6A628311D141AC67",
+     "ogg_128_filesize": 2486408,
+     "songname_suffix": "(伴奏)",
+     "cpy_grade": 5,
+     "pay_block_tpl": 1,
+     "ipmap": {
+      "attr0": 4,
+      "bits": "10000000000004"
+     },
+     "cpy_level": 1
+    },
+    "copyright": {
+     "privilege_flac": 10,
+     "sale_mode_128_download": 4,
+     "viponly_tag": 0,
+     "privilege_128": 8,
+     "album_sale_url": "",
+     "privilege": 8,
+     "sale_mode_flac_download": 4,
+     "privilege_320": 10,
+     "sale_mode_320_download": 4,
+     "sale_mode_download": 4
+    },
+    "audio_info": {
+     "hash": "6802B2C3B6BECA297046B11B2BFC3A8F",
+     "bitrate": 128,
+     "duration_flac": 203000,
+     "filesize_320": 8129502,
+     "filesize_flac": 23261475,
+     "duration_320": 203000,
+     "filesize_high": 43893733,
+     "hash_320": "8EF33739914850B19BD0C934290818F6",
+     "duration": 203000,
+     "duration_high": 203000,
+     "hash_high": "0DF91C7DA45C12C9B26FC42F80BB2672",
+     "hash_super": "",
+     "filesize": 3251918,
+     "hash_128": "6802B2C3B6BECA297046B11B2BFC3A8F",
+     "bitrate_high": 1729,
+     "hash_flac": "CEFA4A7E71AEF74B7275187E1FE9E1B6",
+     "filesize_128": 3251918,
+     "duration_super": 0,
+     "bitrate_super": 0,
+     "filesize_super": 0,
+     "extname": "mp3",
+     "duration_128": 203000,
+     "extname_super": ""
+    },
+    "base": {
+     "is_publish": 1,
+     "album_id": 213940091,
+     "author_name": "张韶涵、虚环",
+     "audio_id": 673308521,
+     "audio_name": "回旋 (伴奏)",
+     "album_audio_id": 983092293
+    },
+    "album_info": {
+     "album_name": "回旋",
+     "cover": "http://imge.kugou.com/stdmusic/{size}/20261106/20261106103502112276.jpg"
+    },
+    "extra": {
+     "remark": ""
+    },
+    "deprecated": {
+     "pay_block_tpl": 1,
+     "video_hash": "",
+     "old_cpy": 0,
+     "pkg_price": 1,
+     "cid": 684711762,
+     "price": 200,
+     "cpy_grade": 5,
+     "pay_type": 3,
+     "type": "audio",
+     "display": 0,
+     "display_rate": 0
+    },
+    "authors": [
+     {
+      "author_name": "张韶涵",
+      "author_id": 6811
+     },
+     {
+      "author_name": "虚环",
+      "author_id": 23363560
+     }
+    ]
+   },
+   {
+    "mvdata": [],
+    "extend": {
+     "has_obbligato": 1,
+     "cd_name": "",
+     "disc": 1,
+     "sort": 3
+    },
+    "trans_param": {
+     "init_pub_day": 30,
+     "ogg_128_hash": "35BDD13017C2A5B030B86639E369FCAF",
+     "classmap": {
+      "attr0": 100663304
+     },
+     "language": "伴奏",
+     "cpy_attr0": 8224,
+     "musicpack_advance": 0,
+     "display": 0,
+     "display_rate": 0,
+     "cpy_map": "2",
+     "flags": {},
+     "provider": 2,
+     "qualitymap": {
+      "bits": "74",
+      "attr0": 116,
+      "attr1": 0
+     },
+     "union_cover": "http://imge.kugou.com/stdmusic/{size}/20261106/20261106103502112276.jpg",
+     "ogg_320_filesize": 8666258,
+     "cid": 687011236,
+     "ogg_320_hash": "02B638F339228457A3CD321A8E316A8B",
+     "ogg_128_filesize": 2488675,
+     "songname_suffix": "(和声伴奏)",
+     "cpy_grade": 5,
+     "pay_block_tpl": 1,
+     "ipmap": {
+      "attr0": 4,
+      "bits": "10000000000004"
+     },
+     "cpy_level": 1
+    },
+    "copyright": {
+     "privilege_flac": 10,
+     "sale_mode_128_download": 4,
+     "viponly_tag": 0,
+     "privilege_128": 8,
+     "album_sale_url": "",
+     "privilege": 8,
+     "sale_mode_flac_download": 4,
+     "privilege_320": 10,
+     "sale_mode_320_download": 4,
+     "sale_mode_download": 4
+    },
+    "audio_info": {
+     "hash": "587B1CDC83705F5F9B0A4D9F686D8ABC",
+     "bitrate": 128,
+     "duration_flac": 203000,
+     "filesize_320": 8129502,
+     "filesize_flac": 23846394,
+     "duration_320": 203000,
+     "filesize_high": 44539459,
+     "hash_320": "D44D742CB267C52E99DC5B5B42717688",
+     "duration": 203000,
+     "duration_high": 203000,
+     "hash_high": "5903A8501BADF7A78EFF5CBA8CF9B6B1",
+     "hash_super": "",
+     "filesize": 3251918,
+     "hash_128": "587B1CDC83705F5F9B0A4D9F686D8ABC",
+     "bitrate_high": 1754,
+     "hash_flac": "219F1DB789D6E986199CE83A88DE3456",
+     "filesize_128": 3251918,
+     "duration_super": 0,
+     "bitrate_super": 0,
+     "filesize_super": 0,
+     "extname": "mp3",
+     "duration_128": 203000,
+     "extname_super": ""
+    },
+    "base": {
+     "is_publish": 1,
+     "album_id": 213940091,
+     "author_name": "张韶涵、虚环",
+     "audio_id": 673308521,
+     "audio_name": "回旋 (和声伴奏)",
+     "album_audio_id": 984493597
+    },
+    "album_info": {
+     "album_name": "回旋",
+     "cover": "http://imge.kugou.com/stdmusic/{size}/20261106/20261106103502112276.jpg"
+    },
+    "extra": {
+     "remark": ""
+    },
+    "deprecated": {
+     "pay_block_tpl": 1,
+     "video_hash": "",
+     "old_cpy": 0,
+     "pkg_price": 1,
+     "cid": 687011236,
+     "price": 200,
+     "cpy_grade": 5,
+     "pay_type": 3,
+     "type": "audio",
+     "display": 0,
+     "display_rate": 0
+    },
+    "authors": [
+     {
+      "author_name": "张韶涵",
+      "author_id": 6811
+     },
+     {
+      "author_name": "虚环",
+      "author_id": 23363560
+     }
+    ]
+   }
+  ]
+ },
+ "extra": {
+  "disc_cnt": 1
+ },
+ "status": 1,
+ "errmsg": ""
+}

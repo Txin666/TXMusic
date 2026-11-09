@@ -1,0 +1,73 @@
+{
+ "data": [
+  {
+   "tags": "电子,车载",
+   "status": 1,
+   "create_user_pic": "http://imge.kugou.com/kugouicon/165/20240220/20240220071202488769.jpg",
+   "is_pri": 0,
+   "pub_new": 1,
+   "is_drop": 0,
+   "list_create_userid": 19779498,
+   "is_publish": 1,
+   "musiclib_tags": [
+    {
+     "tag_id": 33,
+     "parent_id": 8,
+     "tag_name": "电子"
+    },
+    {
+     "tag_id": 63,
+     "parent_id": 5,
+     "tag_name": "车载"
+    }
+   ],
+   "pub_type": 2,
+   "is_featured": 1,
+   "publish_date": "2023-07-22",
+   "collect_total": 0,
+   "list_ver": 417,
+   "intro": "炸街精选，极致低音享受，自带压迫感的重低音电子！",
+   "type": 0,
+   "list_create_listid": 17,
+   "specialid": 6906430,
+   "radio_id": 0,
+   "source": 1,
+   "trans_param": {
+    "iden": 0
+   },
+   "sound": {
+    "id": "85",
+    "type": 5,
+    "args": ""
+   },
+   "listid": 17,
+   "is_def": 0,
+   "parent_global_collection_id": "collection_3_19779498_17_0",
+   "sound_quality": "",
+   "per_count": 0,
+   "plist": [],
+   "kq_talent": 1,
+   "create_time": 1689953837,
+   "is_per": 0,
+   "is_edit": 1,
+   "update_time": 1790353729,
+   "code": 1,
+   "count": 152,
+   "sort": 4,
+   "is_mine": 0,
+   "musiclib_id": 0,
+   "per_num": 0,
+   "create_user_gender": 1,
+   "number": 0,
+   "pic": "http://c1.kgimg.com/custom/{size}/20230915/20230915115137115794.jpg",
+   "list_create_username": "三月_",
+   "name": "车载（炸街硬曲）：缓缓而来的压迫感",
+   "is_custom_pic": 1,
+   "global_collection_id": "collection_3_19779498_17_0",
+   "heat": 0,
+   "list_create_gid": "collection_3_19779498_17_0"
+  }
+ ],
+ "status": 1,
+ "error_code": 0
+}

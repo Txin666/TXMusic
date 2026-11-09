@@ -23,10 +23,13 @@ class KugouApiException implements Exception {
 
 /// KuGouMusicApi 访问客户端。
 ///
-/// 统一处理三件容易踩坑的事（见 docs/API联调记录.md）：
+/// 统一处理四件容易踩坑的事（见 docs/API联调记录.md）：
 /// 1. 每个请求都带 `dfid` cookie，漏带会返回 error_code 152；
 /// 2. 追加毫秒时间戳，绕开服务端 2 分钟结果缓存；
-/// 3. 把 `status != 1` 或带 `errcode` 的响应统一收敛成 [KugouApiException]。
+/// 3. 部分接口（实测 `/search/complex`）响应体前后会拼一段 HTML 注释
+///    （`<!--KG_TAG_RES_START-->` / `<!--KG_TAG_RES_END-->`），先剥离再解析；
+/// 4. 把失败响应统一收敛成 [KugouApiException]，成功码兼容 `1` 与 `200`
+///    两套（`/lyric` 返回 `status=200`、`errcode=200`）。
 class KugouClient {
   KugouClient({
     KugouSession? session,
@@ -94,11 +97,19 @@ class KugouClient {
       );
     }
 
+    final String body = sanitizeBody(
+      utf8.decode(response.bodyBytes, allowMalformed: true),
+    );
+    if (body.isEmpty) {
+      throw KugouApiException('响应体为空', path: path);
+    }
+
     Object? decoded;
     try {
-      decoded = jsonDecode(utf8.decode(response.bodyBytes));
+      decoded = jsonDecode(body);
     } on Object catch (error) {
-      throw KugouApiException('响应解析失败：$error', path: path);
+      final String head = body.length > 60 ? '${body.substring(0, 60)}…' : body;
+      throw KugouApiException('响应解析失败：$error（响应开头：$head）', path: path);
     }
 
     if (decoded is! Map<String, dynamic>) {
@@ -112,24 +123,70 @@ class KugouClient {
     return decoded;
   }
 
+  /// 响应体清洗：部分接口会在 JSON 前后拼 HTML 注释标记
+  /// （实测 `/search/complex` 返回 `<!--KG_TAG_RES_START-->{...}<!--KG_TAG_RES_END-->`），
+  /// 直接 `jsonDecode` 会抛 FormatException 并让整页报错，这里先剥离注释与 BOM。
+  static String sanitizeBody(String body) {
+    String text = body.replaceFirst('\uFEFF', '').trim();
+    // 头部可能连续出现多段注释。
+    while (text.startsWith('<!--')) {
+      final int end = text.indexOf('-->');
+      if (end < 0) {
+        break;
+      }
+      text = text.substring(end + 3).trimLeft();
+    }
+    // 尾部同理。
+    while (text.endsWith('-->')) {
+      final int start = text.lastIndexOf('<!--');
+      if (start < 0) {
+        break;
+      }
+      text = text.substring(0, start).trimRight();
+    }
+    // 兜底：正文内部残留的注释也去掉（只删注释，不改动数据）。
+    if (text.contains('<!--')) {
+      text = text.replaceAll(RegExp(r'<!--[\s\S]*?-->'), '').trim();
+    }
+    return text;
+  }
+
   void _throwIfFailed(Map<String, dynamic> json, String path) {
     final Object? errcode = json['errcode'] ?? json['error_code'];
-    final bool hasErr = errcode != null && errcode.toString() != '0';
-    final bool badStatus = json.containsKey('status') &&
-        json['status'] != null &&
-        json['status'].toString() != '1';
+    final Object? status = json['status'];
+    final bool hasErr = !_isOkErrorCode(errcode);
+    final bool badStatus = !_isOkStatus(status);
 
     if (!hasErr && !badStatus) {
       return;
     }
 
-    final int? code = int.tryParse('${errcode ?? json['status']}');
-    final String raw = '${json['error_msg'] ?? json['msg'] ?? ''}';
+    final Object? rawCode = hasErr ? errcode : status;
+    final int? code = int.tryParse('$rawCode');
+    final String raw = '${json['error_msg'] ?? json['errmsg'] ?? json['msg'] ?? ''}';
     throw KugouApiException(
       _friendlyMessage(code, raw),
       path: path,
       code: code,
     );
+  }
+
+  /// 成功码：`errcode` / `error_code` 用 `0`，部分接口用 `200`（`/lyric`）。
+  static bool _isOkErrorCode(Object? value) {
+    if (value == null) {
+      return true;
+    }
+    final String text = value.toString().trim();
+    return text.isEmpty || text == '0' || text == '200';
+  }
+
+  /// 成功码：`status` 用 `1`，`/lyric`、`/search/lyric` 用 `200`。
+  static bool _isOkStatus(Object? value) {
+    if (value == null) {
+      return true;
+    }
+    final String text = value.toString().trim();
+    return text.isEmpty || text == '1' || text == '200';
   }
 
   /// 常见错误码翻译成人话，未知码保留原始信息方便排查。
