@@ -11,13 +11,13 @@ import '../../../shared/widgets/media_card.dart';
 import '../../../shared/widgets/page_container.dart';
 import '../../../shared/widgets/section_header.dart';
 import '../../../shared/widgets/song_tile.dart';
-import '../../../theme/app_colors.dart';
 import '../../../theme/app_spacing.dart';
 import '../../album/domain/album.dart';
 import '../../player/application/player_controller.dart';
 import '../../song/domain/song.dart';
 import '../application/artist_providers.dart';
 import '../domain/artist.dart';
+import '../../../theme/app_palette.dart';
 
 /// 歌手详情页（路由 `/artist/:id`）：简介 + 热门歌曲 + 专辑。
 ///
@@ -92,7 +92,7 @@ class ArtistDetailPage extends ConsumerWidget {
                         Text(
                           '歌手',
                           style: theme.textTheme.labelSmall
-                              ?.copyWith(color: AppColors.textSecondary),
+                              ?.copyWith(color: context.palette.textSecondary),
                         ),
                         const SizedBox(height: AppSpacing.xs),
                         Text(artist.name, style: theme.textTheme.displaySmall),
@@ -101,7 +101,7 @@ class ArtistDetailPage extends ConsumerWidget {
                           Text(
                             metaParts.join(' · '),
                             style: theme.textTheme.bodySmall
-                                ?.copyWith(color: AppColors.textSecondary),
+                                ?.copyWith(color: context.palette.textSecondary),
                           ),
                         ],
                         if (artist.bio.isNotEmpty) ...<Widget>[
@@ -111,7 +111,7 @@ class ArtistDetailPage extends ConsumerWidget {
                             maxLines: 4,
                             overflow: TextOverflow.ellipsis,
                             style: theme.textTheme.bodyMedium
-                                ?.copyWith(color: AppColors.textSecondary),
+                                ?.copyWith(color: context.palette.textSecondary),
                           ),
                         ],
                         const SizedBox(height: AppSpacing.lg),
@@ -284,7 +284,7 @@ class _ArtistLoading extends StatelessWidget {
               style: Theme.of(context)
                   .textTheme
                   .bodySmall
-                  ?.copyWith(color: AppColors.textSecondary),
+                  ?.copyWith(color: context.palette.textSecondary),
             ),
           ],
         ),

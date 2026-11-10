@@ -15,8 +15,8 @@ import '../features/rank/presentation/rank_page.dart';
 import '../features/search/presentation/search_page.dart';
 import '../features/settings/presentation/settings_page.dart';
 import '../features/shell/presentation/main_shell.dart';
-import '../theme/app_colors.dart';
 import '../theme/app_spacing.dart';
+import '../theme/app_palette.dart';
 import 'app_routes.dart';
 
 /// 全局路由（文档 §9.6）。
@@ -175,17 +175,17 @@ class _RouteErrorPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: context.palette.background,
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(AppSpacing.xl),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              const Icon(
+              Icon(
                 Icons.explore_off_rounded,
                 size: 40,
-                color: AppColors.textTertiary,
+                color: context.palette.textDisabled,
               ),
               const SizedBox(height: AppSpacing.md),
               Text('页面不存在', style: Theme.of(context).textTheme.titleMedium),
@@ -195,7 +195,7 @@ class _RouteErrorPage extends StatelessWidget {
                 style: Theme.of(context)
                     .textTheme
                     .bodySmall
-                    ?.copyWith(color: AppColors.textSecondary),
+                    ?.copyWith(color: context.palette.textSecondary),
               ),
               const SizedBox(height: AppSpacing.lg),
               FilledButton(

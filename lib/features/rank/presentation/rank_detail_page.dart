@@ -10,12 +10,12 @@ import '../../../shared/widgets/empty_state.dart';
 import '../../../shared/widgets/page_container.dart';
 import '../../../shared/widgets/section_header.dart';
 import '../../../shared/widgets/song_tile.dart';
-import '../../../theme/app_colors.dart';
 import '../../../theme/app_spacing.dart';
 import '../../player/application/player_controller.dart';
 import '../../song/domain/song.dart';
 import '../application/rank_providers.dart';
 import '../domain/rank_item.dart';
+import '../../../theme/app_palette.dart';
 
 /// 榜单详情页（路由 `/rank/:id`）。
 ///
@@ -162,7 +162,7 @@ class _DetailLoading extends StatelessWidget {
               style: Theme.of(context)
                   .textTheme
                   .bodySmall
-                  ?.copyWith(color: AppColors.textSecondary),
+                  ?.copyWith(color: context.palette.textSecondary),
             ),
           ],
         ),

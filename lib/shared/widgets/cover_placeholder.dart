@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../theme/app_colors.dart';
+import '../../theme/app_palette.dart';
 
 /// 占位封面：骨架期不加载网络图，用「文字指纹 → 渐变色」生成稳定视觉差异，
 /// 接入真实接口后替换为 `Image.network(coverUrl)` + 缓存（文档 §5 图片加载策略）。
@@ -50,7 +50,7 @@ class CoverPlaceholder extends StatelessWidget {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
-        border: Border.all(color: AppColors.border, width: 1),
+        border: Border.all(color: context.palette.divider, width: 1),
       ),
       alignment: Alignment.center,
       child: Column(

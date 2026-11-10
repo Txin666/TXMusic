@@ -15,6 +15,7 @@ import '../../player/application/player_controller.dart';
 import '../../song/domain/song.dart';
 import '../application/rank_providers.dart';
 import '../domain/rank_item.dart';
+import '../../../theme/app_palette.dart';
 
 /// 排行榜列表页：数据来自 `/rank/list`，三态渲染。
 class RankPage extends ConsumerWidget {
@@ -34,7 +35,7 @@ class RankPage extends ConsumerWidget {
           Text(
             '官方榜单定时更新，曲目与播放量均来自酷狗榜单接口',
             style: theme.textTheme.bodySmall
-                ?.copyWith(color: AppColors.textSecondary),
+                ?.copyWith(color: context.palette.textSecondary),
           ),
           const SizedBox(height: AppSpacing.xl),
           ranksAsync.when(
@@ -94,9 +95,9 @@ class _RankCard extends ConsumerWidget {
       margin: const EdgeInsets.only(bottom: AppSpacing.md),
       padding: const EdgeInsets.all(AppSpacing.lg),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: context.palette.surface,
         borderRadius: AppRadius.card,
-        border: Border.all(color: AppColors.divider),
+        border: Border.all(color: context.palette.divider),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -143,7 +144,7 @@ class _RankCard extends ConsumerWidget {
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: theme.textTheme.bodySmall
-                        ?.copyWith(color: AppColors.textSecondary),
+                        ?.copyWith(color: context.palette.textSecondary),
                   ),
                 ],
                 const SizedBox(height: AppSpacing.sm),
@@ -151,7 +152,7 @@ class _RankCard extends ConsumerWidget {
                   loading: () => Text(
                     '曲目加载中…',
                     style: theme.textTheme.bodySmall
-                        ?.copyWith(color: AppColors.textTertiary),
+                        ?.copyWith(color: context.palette.textDisabled),
                   ),
                   error: (Object error, StackTrace stack) => Text(
                     '曲目加载失败：${_describeError(error)}',
@@ -165,7 +166,7 @@ class _RankCard extends ConsumerWidget {
                       return Text(
                         '该榜单暂无曲目',
                         style: theme.textTheme.bodySmall
-                            ?.copyWith(color: AppColors.textTertiary),
+                            ?.copyWith(color: context.palette.textDisabled),
                       );
                     }
                     return Column(
@@ -192,8 +193,8 @@ class _RankCard extends ConsumerWidget {
                                           fontSize: 12,
                                           fontWeight: FontWeight.w700,
                                           color: entry.key == 0
-                                              ? AppColors.primary
-                                              : AppColors.textTertiary,
+                                              ? context.palette.emphasized
+                                              : context.palette.textDisabled,
                                         ),
                                       ),
                                     ),
@@ -211,7 +212,7 @@ class _RankCard extends ConsumerWidget {
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
                                       style: theme.textTheme.bodySmall?.copyWith(
-                                        color: AppColors.textSecondary,
+                                        color: context.palette.textSecondary,
                                       ),
                                     ),
                                   ],
@@ -261,12 +262,12 @@ class _Chip extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm, vertical: 2),
       decoration: BoxDecoration(
-        color: AppColors.surfaceHigh,
+        color: context.palette.surfaceHigh,
         borderRadius: BorderRadius.circular(AppRadius.pill),
       ),
       child: Text(
         text,
-        style: const TextStyle(fontSize: 10, color: AppColors.textSecondary),
+        style: TextStyle(fontSize: 10, color: context.palette.textSecondary),
       ),
     );
   }
@@ -294,7 +295,7 @@ class _RankLoading extends StatelessWidget {
               style: Theme.of(context)
                   .textTheme
                   .bodySmall
-                  ?.copyWith(color: AppColors.textSecondary),
+                  ?.copyWith(color: context.palette.textSecondary),
             ),
           ],
         ),

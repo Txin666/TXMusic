@@ -8,11 +8,11 @@ import '../../../shared/widgets/empty_state.dart';
 import '../../../shared/widgets/page_container.dart';
 import '../../../shared/widgets/section_header.dart';
 import '../../../shared/widgets/song_tile.dart';
-import '../../../theme/app_colors.dart';
 import '../../../theme/app_spacing.dart';
 import '../../player/application/player_controller.dart';
 import '../../song/domain/song.dart';
 import '../application/library_providers.dart';
+import '../../../theme/app_palette.dart';
 
 enum _LibraryTab { favorite, recent }
 
@@ -50,7 +50,7 @@ class _LibraryPageState extends ConsumerState<LibraryPage> {
           Text(
             '收藏与最近播放，均保存在本机（.local 目录），无需登录',
             style: theme.textTheme.bodySmall
-                ?.copyWith(color: AppColors.textSecondary),
+                ?.copyWith(color: context.palette.textSecondary),
           ),
           const SizedBox(height: AppSpacing.lg),
           Wrap(
@@ -132,12 +132,12 @@ class _LibraryPageState extends ConsumerState<LibraryPage> {
                             onPressed: () =>
                                 libraryController.toggleFavorite(entry.value),
                             icon: const Icon(Icons.favorite_rounded, size: 18),
-                            color: AppColors.primary,
+                            color: context.palette.emphasized,
                           )
                         : Text(
                             Formatters.duration(entry.value.duration),
                             style: theme.textTheme.bodySmall
-                                ?.copyWith(color: AppColors.textTertiary),
+                                ?.copyWith(color: context.palette.textDisabled),
                           ),
                     onTap: () => ref
                         .read(playerControllerProvider.notifier)

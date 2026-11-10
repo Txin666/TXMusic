@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../theme/app_colors.dart';
 import '../../theme/app_spacing.dart';
+import '../../theme/app_palette.dart';
 import 'cover_placeholder.dart';
 
 /// 通用媒体卡片（歌单 / 专辑 / 榜单）：
@@ -118,7 +119,7 @@ class _MediaCardState extends State<MediaCard> {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: theme.textTheme.bodySmall
-                      ?.copyWith(color: AppColors.textSecondary),
+                      ?.copyWith(color: context.palette.textSecondary),
                 ),
               ],
             ],

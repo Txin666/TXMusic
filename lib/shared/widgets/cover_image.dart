@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../theme/app_colors.dart';
+import '../../theme/app_palette.dart';
 import 'cover_placeholder.dart';
 
 /// 网络封面：加载失败或无地址时自动退回 [CoverPlaceholder] 渐变占位。
@@ -61,7 +61,7 @@ class CoverImage extends StatelessWidget {
             width: size,
             height: size,
             decoration: BoxDecoration(
-              color: AppColors.surfaceHigh,
+              color: context.palette.surfaceHigh,
               borderRadius: BorderRadius.circular(circle ? size / 2 : radius),
             ),
             alignment: Alignment.center,

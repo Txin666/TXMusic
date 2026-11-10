@@ -2,12 +2,14 @@
 AIGC:
     Label: "1"
     ContentProducer: 001191440300708461136T1XGW3
-    ProduceID: 504ce13ce28b6e0c6f1a433469ea3349_f40607dfdc4211f19232525400248c00
-    ReservedCode1: tZJnItGgb3bJZ3U4G3IPCRxcXbYgDIp+OQlwXL/Lexc1jm6GKv8Wib7JshKDLl18pPP391O8fgXRF79XynLC8mZb7vWF/qn6AV/s6GsdCtF/DWfecPZ5X+73ddqxGxKNRILQZl+rkDZGAaFGzMYu7B2buBGpnUkQBVeUBn5+CyIaizY/ilR2bvjGeM8=
+    ProduceID: 504ce13ce28b6e0c6f1a433469ea3349_0fcb6443dc9511f19280525400393706
+    ReservedCode1: Ou5S28TtW48thPXX40x1yszO7MiO33oWxUZJZ2qEThjB70FFfGs4ekgLvoC6K0kxxLF0ng4Z9PJhOak8ntEOV4UCjFpiWgQ2rwrWl94/1x9dfE5xjVI2Gd1EpKZvz2Uf5blRi1Z/k9rndoTJRns2JZJlsozh1u00MCuKEnTyR8rLl05LT87yXSmNzU8=
     ContentPropagator: 001191440300708461136T1XGW3
-    PropagateID: 504ce13ce28b6e0c6f1a433469ea3349_f40607dfdc4211f19232525400248c00
-    ReservedCode2: tZJnItGgb3bJZ3U4G3IPCRxcXbYgDIp+OQlwXL/Lexc1jm6GKv8Wib7JshKDLl18pPP391O8fgXRF79XynLC8mZb7vWF/qn6AV/s6GsdCtF/DWfecPZ5X+73ddqxGxKNRILQZl+rkDZGAaFGzMYu7B2buBGpnUkQBVeUBn5+CyIaizY/ilR2bvjGeM8=
+    PropagateID: 504ce13ce28b6e0c6f1a433469ea3349_0fcb6443dc9511f19280525400393706
+    ReservedCode2: Ou5S28TtW48thPXX40x1yszO7MiO33oWxUZJZ2qEThjB70FFfGs4ekgLvoC6K0kxxLF0ng4Z9PJhOak8ntEOV4UCjFpiWgQ2rwrWl94/1x9dfE5xjVI2Gd1EpKZvz2Uf5blRi1Z/k9rndoTJRns2JZJlsozh1u00MCuKEnTyR8rLl05LT87yXSmNzU8=
 ---
+
+
 
 # TX Music × KuGouMusicApi 真实接口联调记录
 
@@ -244,3 +246,4 @@ dfid 必须是登录时那一个（换新 dfid 也能识别登录态，但建议
 - 搜索历史未落盘（TODO: Hive）
 - 付费/VIP 曲 `502` 的 UI 降级（置灰 + "需 VIP" 提示）尚未做
 - 播放失败时已在迷你播放条副标题位置显示 `errorMessage`，但全屏播放页尚未展示
+*（内容由AI生成，仅供参考）*

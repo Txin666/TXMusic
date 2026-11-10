@@ -15,6 +15,7 @@ import '../../../library/application/library_providers.dart';
 import '../../../player/application/player_controller.dart';
 import '../../../player/domain/playback_state.dart';
 import '../../../song/domain/song.dart';
+import '../../../../theme/app_palette.dart';
 
 /// 底部播放控制条：与播放状态双向绑定，点击信息区进入播放详情页。
 class MiniPlayerBar extends ConsumerWidget {
@@ -41,9 +42,17 @@ class MiniPlayerBar extends ConsumerWidget {
 
     return Container(
       height: AppSpacing.nowPlayingBarHeight,
-      decoration: const BoxDecoration(
-        color: AppColors.surface,
-        border: Border(top: BorderSide(color: AppColors.divider)),
+      decoration: BoxDecoration(
+        color: context.palette.surface,
+        border: Border(top: BorderSide(color: context.palette.divider)),
+        // 浅色主题下白底播放条会和浅灰页面糊成一片，靠一道向上的投影分层。
+        boxShadow: <BoxShadow>[
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.06),
+            blurRadius: 14,
+            offset: const Offset(0, -2),
+          ),
+        ],
       ),
       child: song == null ? _buildIdle(context, ref) : _buildActive(context, ref, playback, controller),
     );
@@ -67,7 +76,7 @@ class MiniPlayerBar extends ConsumerWidget {
                 style: Theme.of(context)
                     .textTheme
                     .bodySmall
-                    ?.copyWith(color: AppColors.textSecondary),
+                    ?.copyWith(color: context.palette.textSecondary),
               ),
             ],
           ),
@@ -144,7 +153,7 @@ class MiniPlayerBar extends ConsumerWidget {
                                   ?.copyWith(
                                     color: playback.errorMessage != null
                                         ? AppColors.danger
-                                        : AppColors.textSecondary,
+                                        : context.palette.textSecondary,
                                   ),
                             ),
                           ],
@@ -181,7 +190,7 @@ class MiniPlayerBar extends ConsumerWidget {
                             : Icons.favorite_border_rounded,
                         size: 18,
                       ),
-                      color: liked ? AppColors.primary : AppColors.textTertiary,
+                      color: liked ? context.palette.emphasized : context.palette.textSecondary,
                     );
                   },
                 ),
@@ -190,7 +199,7 @@ class MiniPlayerBar extends ConsumerWidget {
                   tooltip: '上一首',
                   onPressed: controller.skipPrevious,
                   icon: const Icon(Icons.skip_previous_rounded, size: 24),
-                  color: AppColors.textPrimary,
+                  color: context.palette.textPrimary,
                 ),
                 const SizedBox(width: AppSpacing.xxs),
                 _PlayButton(playback: playback, controller: controller),
@@ -199,7 +208,7 @@ class MiniPlayerBar extends ConsumerWidget {
                   tooltip: '下一首',
                   onPressed: controller.skipNext,
                   icon: const Icon(Icons.skip_next_rounded, size: 24),
-                  color: AppColors.textPrimary,
+                  color: context.palette.textPrimary,
                 ),
                 const SizedBox(width: AppSpacing.sm),
                 IconButton(
@@ -207,8 +216,8 @@ class MiniPlayerBar extends ConsumerWidget {
                   onPressed: controller.cycleRepeatMode,
                   icon: Icon(_repeatIcon(playback.repeatMode), size: 18),
                   color: playback.repeatMode == RepeatMode.none
-                      ? AppColors.textTertiary
-                      : AppColors.primary,
+                      ? context.palette.textSecondary
+                      : context.palette.emphasized,
                 ),
                 const Spacer(),
                 Text(
@@ -216,7 +225,7 @@ class MiniPlayerBar extends ConsumerWidget {
                   style: Theme.of(context)
                       .textTheme
                       .labelSmall
-                      ?.copyWith(color: AppColors.textSecondary),
+                      ?.copyWith(color: context.palette.textSecondary),
                 ),
                 const SizedBox(width: AppSpacing.sm),
                 IconButton(
@@ -228,7 +237,7 @@ class MiniPlayerBar extends ConsumerWidget {
                         : Icons.volume_up_rounded,
                     size: 18,
                   ),
-                  color: AppColors.textSecondary,
+                  color: context.palette.textSecondary,
                 ),
                 SizedBox(
                   width: 84,
@@ -248,13 +257,13 @@ class MiniPlayerBar extends ConsumerWidget {
                   tooltip: '播放队列（${playback.queue.length}）',
                   onPressed: () => _showQueue(context, playback, controller),
                   icon: const Icon(Icons.queue_music_rounded, size: 19),
-                  color: AppColors.textSecondary,
+                  color: context.palette.textSecondary,
                 ),
                 IconButton(
                   tooltip: '播放详情',
                   onPressed: () => context.push(AppRoutes.player),
                   icon: const Icon(Icons.open_in_full_rounded, size: 18),
-                  color: AppColors.textSecondary,
+                  color: context.palette.textSecondary,
                 ),
               ],
             ),
@@ -282,7 +291,7 @@ class MiniPlayerBar extends ConsumerWidget {
   ) {
     showModalBottomSheet<void>(
       context: context,
-      backgroundColor: AppColors.surfaceAlt,
+      backgroundColor: context.palette.surfaceAlt,
       showDragHandle: true,
       builder: (BuildContext sheetContext) {
         return SafeArea(
@@ -314,7 +323,7 @@ class MiniPlayerBar extends ConsumerWidget {
                       leading: Text(
                         '${index + 1}'.padLeft(2, '0'),
                         style: TextStyle(
-                          color: active ? AppColors.primary : AppColors.textTertiary,
+                          color: active ? context.palette.emphasized : context.palette.textSecondary,
                           fontWeight: active ? FontWeight.w700 : FontWeight.w500,
                         ),
                       ),
@@ -323,7 +332,7 @@ class MiniPlayerBar extends ConsumerWidget {
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
-                          color: active ? AppColors.primary : AppColors.textPrimary,
+                          color: active ? context.palette.emphasized : context.palette.textPrimary,
                         ),
                       ),
                       subtitle: Text('${item.artist} · ${item.album}'),

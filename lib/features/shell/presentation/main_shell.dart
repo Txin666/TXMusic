@@ -4,8 +4,8 @@ import 'package:go_router/go_router.dart';
 
 import '../../../core/responsive/app_breakpoints.dart';
 import '../../../routing/app_routes.dart';
-import '../../../theme/app_colors.dart';
 import '../application/shell_state.dart';
+import '../../../theme/app_palette.dart';
 import 'widgets/app_side_nav.dart';
 import 'widgets/mini_player_bar.dart';
 import 'widgets/top_search_bar.dart';
@@ -30,7 +30,7 @@ class MainShell extends ConsumerWidget {
         shellState.navCollapsed || AppBreakpoints.navCollapsedByDefault(width);
 
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: context.palette.background,
       body: Row(
         children: <Widget>[
           AppSideNav(

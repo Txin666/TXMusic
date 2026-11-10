@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../theme/app_colors.dart';
 import '../../../../theme/app_spacing.dart';
 import '../../domain/discover_banner.dart';
+import '../../../../theme/app_palette.dart';
 
 /// 发现页顶部横幅：PageView + 指示点（骨架期不自动轮播，避免测试时干扰）。
 class DiscoverBannerCarousel extends StatefulWidget {
@@ -38,14 +39,18 @@ class _DiscoverBannerCarouselState extends State<DiscoverBannerCarousel> {
     return Column(
       children: <Widget>[
         SizedBox(
-          height: 176,
+          height: 188,
           child: PageView.builder(
             controller: _controller,
             itemCount: widget.banners.length,
             onPageChanged: (int index) => setState(() => _index = index),
             itemBuilder: (BuildContext context, int index) {
               final DiscoverBanner banner = widget.banners[index];
-              final List<Color> colors = AppColors.coverGradient(banner.id);
+              // 封面渐变里有偏亮的色（绿/橙/青），白字直接压上去对比不足，
+              // 统一压暗 30% 再叠白字，保证深浅两套主题下标题都可读。
+              final List<Color> colors = AppColors.coverGradient(banner.id)
+                  .map((Color c) => Color.lerp(c, Colors.black, 0.3)!)
+                  .toList(growable: false);
               return Padding(
                 padding: const EdgeInsets.only(right: AppSpacing.md),
                 child: _buildCard(context, banner, colors),
@@ -64,7 +69,7 @@ class _DiscoverBannerCarouselState extends State<DiscoverBannerCarousel> {
               width: active ? 18 : 6,
               height: 6,
               decoration: BoxDecoration(
-                color: active ? AppColors.primary : AppColors.surfaceHigh,
+                color: active ? AppColors.primary : context.palette.surfaceHigh,
                 borderRadius: BorderRadius.circular(3),
               ),
             );
@@ -87,9 +92,9 @@ class _DiscoverBannerCarouselState extends State<DiscoverBannerCarousel> {
               begin: Alignment.centerLeft,
               end: Alignment.centerRight,
             ),
-            border: Border.all(color: AppColors.border),
+            border: Border.all(color: context.palette.divider),
           ),
-          padding: const EdgeInsets.all(AppSpacing.xl),
+          padding: const EdgeInsets.all(AppSpacing.lg),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -112,7 +117,7 @@ class _DiscoverBannerCarouselState extends State<DiscoverBannerCarousel> {
                   ),
                 ),
               ),
-              const SizedBox(height: AppSpacing.md),
+              const SizedBox(height: AppSpacing.sm),
               Text(
                 banner.title,
                 maxLines: 1,
@@ -131,7 +136,7 @@ class _DiscoverBannerCarouselState extends State<DiscoverBannerCarousel> {
                       color: Colors.white.withValues(alpha: 0.82),
                     ),
               ),
-              const SizedBox(height: AppSpacing.lg),
+              const SizedBox(height: AppSpacing.md),
               Row(
                 children: <Widget>[
                   Container(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../theme/app_colors.dart';
 import '../../theme/app_spacing.dart';
+import '../../theme/app_palette.dart';
 
 /// 空态 / 占位提示（骨架期大量使用，避免出现纯白屏）。
 class EmptyState extends StatelessWidget {
@@ -37,11 +37,11 @@ class EmptyState extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(AppSpacing.lg),
               decoration: BoxDecoration(
-                color: AppColors.surfaceAlt,
+                color: context.palette.surfaceAlt,
                 shape: BoxShape.circle,
-                border: Border.all(color: AppColors.border),
+                border: Border.all(color: context.palette.divider),
               ),
-              child: Icon(icon, size: 28, color: AppColors.textTertiary),
+              child: Icon(icon, size: 28, color: context.palette.textDisabled),
             ),
             const SizedBox(height: AppSpacing.md),
             Text(
@@ -55,7 +55,7 @@ class EmptyState extends StatelessWidget {
                 description!,
                 textAlign: TextAlign.center,
                 style: theme.textTheme.bodySmall
-                    ?.copyWith(color: AppColors.textSecondary),
+                    ?.copyWith(color: context.palette.textSecondary),
               ),
             ],
             if (actionLabel != null) ...<Widget>[

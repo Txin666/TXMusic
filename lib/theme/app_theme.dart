@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'app_colors.dart';
+import 'app_palette.dart';
 import 'app_spacing.dart';
 import 'app_typography.dart';
 
@@ -16,12 +17,15 @@ class AppTheme {
   static ThemeData _build(Brightness brightness) {
     final bool isDark = brightness == Brightness.dark;
 
-    final Color bg = isDark ? AppColors.background : AppColors.lightBackground;
-    final Color surface = isDark ? AppColors.surface : AppColors.lightSurface;
-    final Color surfaceAlt = isDark ? AppColors.surfaceAlt : AppColors.lightSurfaceAlt;
-    final Color divider = isDark ? AppColors.divider : AppColors.lightDivider;
-    final Color textPrimary = isDark ? AppColors.textPrimary : AppColors.lightTextPrimary;
-    final Color textSecondary = isDark ? AppColors.textSecondary : AppColors.lightTextSecondary;
+    final AppPalette palette = isDark ? AppPalette.dark : AppPalette.light;
+
+    final Color bg = palette.background;
+    final Color surface = palette.surface;
+    final Color surfaceAlt = palette.surfaceAlt;
+    final Color surfaceHigh = palette.surfaceHigh;
+    final Color divider = palette.divider;
+    final Color textPrimary = palette.textPrimary;
+    final Color textSecondary = palette.textSecondary;
 
     final ColorScheme scheme = ColorScheme.fromSeed(
       seedColor: AppColors.primary,
@@ -46,6 +50,7 @@ class AppTheme {
       useMaterial3: true,
       brightness: brightness,
       colorScheme: scheme,
+      extensions: <ThemeExtension<dynamic>>[palette],
       fontFamily: AppTypography.fontFamily,
       fontFamilyFallback: AppTypography.fontFallback,
       scaffoldBackgroundColor: bg,
@@ -56,9 +61,18 @@ class AppTheme {
       iconTheme: IconThemeData(color: textSecondary, size: 20),
       cardTheme: CardThemeData(
         color: surface,
-        elevation: 0,
+        // 浅色主题靠一层很淡的投影把白卡片从浅灰页面里拎起来。
+        elevation: isDark ? 0 : 1.5,
+        shadowColor: Colors.black.withValues(alpha: 0.10),
+        surfaceTintColor: Colors.transparent,
         margin: EdgeInsets.zero,
         shape: const RoundedRectangleBorder(borderRadius: AppRadius.card),
+      ),
+      // 文字按钮默认取 primary 绿，在浅色背景上对比不足，浅色主题改用深绿强调色。
+      textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(
+          foregroundColor: isDark ? AppColors.primary : palette.emphasized,
+        ),
       ),
       appBarTheme: AppBarTheme(
         backgroundColor: Colors.transparent,
@@ -77,7 +91,7 @@ class AppTheme {
       sliderTheme: SliderThemeData(
         trackHeight: 3,
         activeTrackColor: AppColors.primary,
-        inactiveTrackColor: isDark ? AppColors.surfaceHigh : const Color(0xFFD9DAE3),
+        inactiveTrackColor: isDark ? surfaceHigh : const Color(0xFFD9DAE3),
         thumbColor: AppColors.primary,
         overlayColor: AppColors.primary.withValues(alpha: 0.16),
         thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 6, disabledThumbRadius: 4),
@@ -98,13 +112,13 @@ class AppTheme {
           if (states.contains(WidgetState.selected)) {
             return const Color(0xFF04120C);
           }
-          return isDark ? AppColors.textSecondary : Colors.white;
+          return isDark ? textSecondary : Colors.white;
         }),
         trackColor: WidgetStateProperty.resolveWith<Color>((Set<WidgetState> states) {
           if (states.contains(WidgetState.selected)) {
             return AppColors.primary;
           }
-          return isDark ? AppColors.surfaceHigh : const Color(0xFFD9DAE3);
+          return isDark ? surfaceHigh : const Color(0xFFD9DAE3);
         }),
       ),
       chipTheme: ChipThemeData(
@@ -117,7 +131,7 @@ class AppTheme {
       ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: isDark ? AppColors.surfaceAlt : AppColors.lightSurfaceAlt,
+        fillColor: surfaceAlt,
         hintStyle: textTheme.bodyMedium?.copyWith(color: textSecondary),
         contentPadding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg, vertical: AppSpacing.md),
         border: OutlineInputBorder(
@@ -134,14 +148,14 @@ class AppTheme {
         ),
       ),
       snackBarTheme: SnackBarThemeData(
-        backgroundColor: isDark ? AppColors.surfaceHigh : AppColors.lightTextPrimary,
+        backgroundColor: isDark ? surfaceHigh : textPrimary,
         contentTextStyle: textTheme.bodyMedium?.copyWith(color: Colors.white),
         behavior: SnackBarBehavior.floating,
         shape: const RoundedRectangleBorder(borderRadius: AppRadius.cover),
       ),
       tooltipTheme: TooltipThemeData(
         decoration: BoxDecoration(
-          color: isDark ? AppColors.surfaceHigh : AppColors.lightTextPrimary,
+          color: isDark ? surfaceHigh : textPrimary,
           borderRadius: AppRadius.cover,
         ),
         textStyle: textTheme.bodySmall?.copyWith(color: Colors.white),
@@ -151,12 +165,12 @@ class AppTheme {
         thickness: WidgetStateProperty.all(6),
         radius: const Radius.circular(3),
         thumbColor: WidgetStateProperty.all(
-          isDark ? AppColors.textDisabled.withValues(alpha: 0.35) : Colors.black26,
+          isDark ? palette.textDisabled.withValues(alpha: 0.35) : Colors.black26,
         ),
       ),
       progressIndicatorTheme: const ProgressIndicatorThemeData(color: AppColors.primary),
       dialogTheme: DialogThemeData(
-        backgroundColor: isDark ? AppColors.surfaceAlt : Colors.white,
+        backgroundColor: isDark ? surfaceAlt : Colors.white,
         shape: const RoundedRectangleBorder(borderRadius: AppRadius.panel),
       ),
     );

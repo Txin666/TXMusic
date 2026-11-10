@@ -16,6 +16,7 @@ import '../../lyric/domain/lyric_line.dart';
 import '../../player/application/player_controller.dart';
 import '../../player/domain/playback_state.dart';
 import '../../song/domain/song.dart';
+import '../../../theme/app_palette.dart';
 
 /// 播放详情页（路由 `/player`，脱离 Shell 全屏展示）。
 ///
@@ -50,11 +51,11 @@ class PlayerPage extends ConsumerWidget {
 
     return Scaffold(
       body: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
-            colors: <Color>[Color(0xFF12161A), AppColors.background],
+            colors: <Color>[context.palette.surfaceAlt, context.palette.background],
           ),
         ),
         child: SafeArea(
@@ -80,7 +81,7 @@ class PlayerPage extends ConsumerWidget {
                     Text(
                       '正在播放',
                       style: theme.textTheme.labelMedium
-                          ?.copyWith(color: AppColors.textSecondary),
+                          ?.copyWith(color: context.palette.textSecondary),
                     ),
                   ],
                 ),
@@ -117,7 +118,7 @@ class PlayerPage extends ConsumerWidget {
                             Text(
                               '${song.artist} · ${song.album}',
                               style: theme.textTheme.bodyMedium
-                                  ?.copyWith(color: AppColors.textSecondary),
+                                  ?.copyWith(color: context.palette.textSecondary),
                             ),
                           ],
                         ),
@@ -188,7 +189,7 @@ class _LyricPane extends StatelessWidget {
             Text(
               '正在加载歌词…',
               style: theme.textTheme.bodySmall
-                  ?.copyWith(color: AppColors.textSecondary),
+                  ?.copyWith(color: context.palette.textSecondary),
             ),
           ],
         ),
@@ -197,16 +198,16 @@ class _LyricPane extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            const Icon(
+            Icon(
               Icons.lyrics_outlined,
               size: 28,
-              color: AppColors.textTertiary,
+              color: context.palette.textDisabled,
             ),
             const SizedBox(height: AppSpacing.sm),
             Text(
               '歌词加载失败',
               style: theme.textTheme.bodyMedium
-                  ?.copyWith(color: AppColors.textSecondary),
+                  ?.copyWith(color: context.palette.textSecondary),
             ),
             const SizedBox(height: AppSpacing.xs),
             Text(
@@ -215,7 +216,7 @@ class _LyricPane extends StatelessWidget {
               maxLines: 3,
               overflow: TextOverflow.ellipsis,
               style: theme.textTheme.bodySmall
-                  ?.copyWith(color: AppColors.textTertiary),
+                  ?.copyWith(color: context.palette.textDisabled),
             ),
           ],
         ),
@@ -226,7 +227,7 @@ class _LyricPane extends StatelessWidget {
             child: Text(
               '暂无歌词',
               style: theme.textTheme.bodyMedium
-                  ?.copyWith(color: AppColors.textSecondary),
+                  ?.copyWith(color: context.palette.textSecondary),
             ),
           );
         }
@@ -249,8 +250,8 @@ class _LyricPane extends StatelessWidget {
                           : theme.textTheme.titleMedium)
                       ?.copyWith(
                     color: i == currentLine
-                        ? AppColors.primary
-                        : AppColors.textSecondary,
+                        ? context.palette.emphasized
+                        : context.palette.textSecondary,
                     fontWeight:
                         i == currentLine ? FontWeight.w700 : FontWeight.w400,
                   ) ??
@@ -296,13 +297,13 @@ class _TransportBar extends StatelessWidget {
               Text(
                 Formatters.duration(playback.position),
                 style: theme.textTheme.bodySmall
-                    ?.copyWith(color: AppColors.textTertiary),
+                    ?.copyWith(color: context.palette.textDisabled),
               ),
               const Spacer(),
               Text(
                 Formatters.duration(playback.duration),
                 style: theme.textTheme.bodySmall
-                    ?.copyWith(color: AppColors.textTertiary),
+                    ?.copyWith(color: context.palette.textDisabled),
               ),
             ],
           ),
@@ -319,8 +320,8 @@ class _TransportBar extends StatelessWidget {
                     ? Icons.repeat_one_rounded
                     : Icons.repeat_rounded,
                 color: playback.repeatMode == RepeatMode.none
-                    ? AppColors.textSecondary
-                    : AppColors.primary,
+                    ? context.palette.textSecondary
+                    : context.palette.emphasized,
               ),
             ),
             const SizedBox(width: AppSpacing.lg),
@@ -394,7 +395,7 @@ class _TransportBar extends StatelessWidget {
   void _showQueue(BuildContext context) {
     showModalBottomSheet<void>(
       context: context,
-      backgroundColor: AppColors.surfaceAlt,
+      backgroundColor: context.palette.surfaceAlt,
       showDragHandle: true,
       builder: (BuildContext sheetContext) {
         return SafeArea(

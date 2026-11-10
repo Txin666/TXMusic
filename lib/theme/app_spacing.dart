@@ -22,6 +22,12 @@ class AppSpacing {
   static const double sideNavWidth = 224;
   static const double sideNavCollapsedWidth = 76;
   static const double topBarHeight = 64;
+
+  /// 自绘标题栏高度（无边框窗口的拖拽区域）。
+  static const double titleBarHeight = 36;
+
+  /// 标题栏窗口按钮（最小化 / 最大化 / 关闭）宽度。
+  static const double windowButtonWidth = 46;
   static const double nowPlayingBarHeight = 84;
   static const double maxContentWidth = 1400;
 }

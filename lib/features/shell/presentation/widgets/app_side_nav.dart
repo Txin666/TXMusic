@@ -4,6 +4,7 @@ import '../../../../core/responsive/app_breakpoints.dart';
 import '../../../../routing/app_routes.dart';
 import '../../../../theme/app_colors.dart';
 import '../../../../theme/app_spacing.dart';
+import '../../../../theme/app_palette.dart';
 
 /// 单个导航项定义。
 class NavEntry {
@@ -87,9 +88,9 @@ class AppSideNav extends StatelessWidget {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 180),
       width: width,
-      decoration: const BoxDecoration(
-        color: AppColors.surface,
-        border: Border(right: BorderSide(color: AppColors.divider)),
+      decoration: BoxDecoration(
+        color: context.palette.surface,
+        border: Border(right: BorderSide(color: context.palette.divider)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -97,14 +98,14 @@ class AppSideNav extends StatelessWidget {
           _buildBrand(context),
           const SizedBox(height: AppSpacing.lg),
           if (!collapsed)
-            const Padding(
+            Padding(
               padding: EdgeInsets.fromLTRB(AppSpacing.lg, 0, AppSpacing.lg, AppSpacing.xs),
               child: Text(
                 '音乐库',
                 style: TextStyle(
                   fontSize: 11,
                   letterSpacing: 1.2,
-                  color: AppColors.textTertiary,
+                  color: context.palette.textSecondary,
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -112,14 +113,14 @@ class AppSideNav extends StatelessWidget {
           ...primary.map((NavEntry entry) => _buildItem(context, entry)),
           const SizedBox(height: AppSpacing.lg),
           if (!collapsed)
-            const Padding(
+            Padding(
               padding: EdgeInsets.fromLTRB(AppSpacing.lg, 0, AppSpacing.lg, AppSpacing.xs),
               child: Text(
                 '快捷入口',
                 style: TextStyle(
                   fontSize: 11,
                   letterSpacing: 1.2,
-                  color: AppColors.textTertiary,
+                  color: context.palette.textSecondary,
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -180,7 +181,7 @@ class AppSideNav extends StatelessWidget {
                     style: Theme.of(context)
                         .textTheme
                         .labelSmall
-                        ?.copyWith(color: AppColors.textTertiary),
+                        ?.copyWith(color: context.palette.textSecondary),
                   ),
                 ],
               ),
@@ -189,7 +190,7 @@ class AppSideNav extends StatelessWidget {
               tooltip: '收起导航',
               onPressed: onToggle,
               icon: const Icon(Icons.chevron_left_rounded, size: 18),
-              color: AppColors.textTertiary,
+              color: context.palette.textSecondary,
             ),
           ] else
             const SizedBox.shrink(),
@@ -205,7 +206,7 @@ class AppSideNav extends StatelessWidget {
       child: Tooltip(
         message: collapsed ? entry.label : '',
         child: Material(
-          color: active ? AppColors.surfaceHigh : Colors.transparent,
+          color: active ? context.palette.surfaceHigh : Colors.transparent,
           borderRadius: BorderRadius.circular(AppRadius.sm),
           child: InkWell(
             borderRadius: BorderRadius.circular(AppRadius.sm),
@@ -221,7 +222,7 @@ class AppSideNav extends StatelessWidget {
                   Icon(
                     active ? entry.activeIcon : entry.icon,
                     size: 20,
-                    color: active ? AppColors.primary : AppColors.textSecondary,
+                    color: active ? context.palette.emphasized : context.palette.textSecondary,
                   ),
                   if (!collapsed) ...<Widget>[
                     const SizedBox(width: AppSpacing.md),
@@ -230,7 +231,7 @@ class AppSideNav extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 13,
                         fontWeight: active ? FontWeight.w700 : FontWeight.w500,
-                        color: active ? AppColors.textPrimary : AppColors.textSecondary,
+                        color: active ? context.palette.textPrimary : context.palette.textSecondary,
                       ),
                     ),
                   ],
@@ -262,15 +263,15 @@ class AppSideNav extends StatelessWidget {
                 mainAxisAlignment:
                     collapsed ? MainAxisAlignment.center : MainAxisAlignment.start,
                 children: <Widget>[
-                  const Icon(Icons.subtitles_outlined, size: 20, color: AppColors.textSecondary),
+                  Icon(Icons.subtitles_outlined, size: 20, color: context.palette.textSecondary),
                   if (!collapsed) ...<Widget>[
                     const SizedBox(width: AppSpacing.md),
-                    const Text(
+                    Text(
                       '桌面歌词',
                       style: TextStyle(
                         fontSize: 13,
                         fontWeight: FontWeight.w500,
-                        color: AppColors.textSecondary,
+                        color: context.palette.textSecondary,
                       ),
                     ),
                   ],
@@ -291,11 +292,11 @@ class AppSideNav extends StatelessWidget {
               tooltip: '展开导航',
               onPressed: onToggle,
               icon: const Icon(Icons.chevron_right_rounded, size: 18),
-              color: AppColors.textTertiary,
+              color: context.palette.textDisabled,
             )
           : Row(
               children: <Widget>[
-                const Icon(Icons.info_outline_rounded, size: 14, color: AppColors.textTertiary),
+                Icon(Icons.info_outline_rounded, size: 14, color: context.palette.textDisabled),
                 const SizedBox(width: AppSpacing.xs),
                 Expanded(
                   child: Text(
@@ -305,7 +306,7 @@ class AppSideNav extends StatelessWidget {
                     style: Theme.of(context)
                         .textTheme
                         .labelSmall
-                        ?.copyWith(color: AppColors.textTertiary),
+                        ?.copyWith(color: context.palette.textDisabled),
                   ),
                 ),
               ],

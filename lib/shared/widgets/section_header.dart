@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../theme/app_colors.dart';
 import '../../theme/app_spacing.dart';
+import '../../theme/app_palette.dart';
 
 /// 区块标题：标题 + 可选副标题 + 可选右侧操作。
 class SectionHeader extends StatelessWidget {
@@ -44,7 +44,7 @@ class SectionHeader extends StatelessWidget {
                     style: Theme.of(context)
                         .textTheme
                         .bodySmall
-                        ?.copyWith(color: AppColors.textSecondary),
+                        ?.copyWith(color: context.palette.textSecondary),
                   ),
                 ],
               ],

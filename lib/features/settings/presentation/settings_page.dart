@@ -10,6 +10,7 @@ import '../../../shared/widgets/page_container.dart';
 import '../../../theme/app_colors.dart';
 import '../../../theme/app_spacing.dart';
 import '../application/settings_controller.dart';
+import '../../../theme/app_palette.dart';
 
 /// 设置页（路由 `/settings`）：外观 / 播放 / 桌面歌词 / 关于。
 ///
@@ -35,7 +36,7 @@ class SettingsPage extends ConsumerWidget {
           Text(
             '骨架期设置仅内存生效，持久化在文档 §8 接入',
             style: theme.textTheme.bodySmall
-                ?.copyWith(color: AppColors.textSecondary),
+                ?.copyWith(color: context.palette.textSecondary),
           ),
           const SizedBox(height: AppSpacing.xl),
           _SettingSection(
@@ -44,12 +45,12 @@ class SettingsPage extends ConsumerWidget {
               if (session.isLoggedIn)
                 ListTile(
                   contentPadding: EdgeInsets.zero,
-                  leading: const CircleAvatar(
+                  leading: CircleAvatar(
                     backgroundColor: AppColors.primaryDim,
-                    child: Icon(
+                    child: const Icon(
                       Icons.person_rounded,
                       size: 18,
-                      color: AppColors.textPrimary,
+                      color: Colors.white,
                     ),
                   ),
                   title: Text(
@@ -74,12 +75,12 @@ class SettingsPage extends ConsumerWidget {
               else
                 ListTile(
                   contentPadding: EdgeInsets.zero,
-                  leading: const CircleAvatar(
-                    backgroundColor: AppColors.surfaceAlt,
+                  leading: CircleAvatar(
+                    backgroundColor: context.palette.surfaceAlt,
                     child: Icon(
                       Icons.person_outline_rounded,
                       size: 18,
-                      color: AppColors.textSecondary,
+                      color: context.palette.textSecondary,
                     ),
                   ),
                   title: const Text('未登录 · 游客模式'),
@@ -221,9 +222,9 @@ class _SettingSection extends StatelessWidget {
           vertical: AppSpacing.sm,
         ),
         decoration: BoxDecoration(
-          color: AppColors.surface,
+          color: context.palette.surface,
           borderRadius: BorderRadius.circular(AppRadius.md),
-          border: Border.all(color: AppColors.border),
+          border: Border.all(color: context.palette.divider),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -235,7 +236,7 @@ class _SettingSection extends StatelessWidget {
                 style: Theme.of(context)
                     .textTheme
                     .titleSmall
-                    ?.copyWith(color: AppColors.primary),
+                    ?.copyWith(color: context.palette.emphasized),
               ),
             ),
             ...children,

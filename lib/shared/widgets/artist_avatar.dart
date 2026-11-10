@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../theme/app_colors.dart';
 import '../../theme/app_spacing.dart';
+import '../../theme/app_palette.dart';
 
 /// 圆形歌手头像（骨架期用首字 + 渐变占位）。
 class ArtistAvatar extends StatelessWidget {
@@ -39,7 +40,7 @@ class ArtistAvatar extends StatelessWidget {
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
-                  border: Border.all(color: AppColors.border),
+                  border: Border.all(color: context.palette.divider),
                 ),
                 alignment: Alignment.center,
                 child: Text(
@@ -69,7 +70,7 @@ class ArtistAvatar extends StatelessWidget {
                   style: Theme.of(context)
                       .textTheme
                       .labelSmall
-                      ?.copyWith(color: AppColors.textTertiary),
+                      ?.copyWith(color: context.palette.textDisabled),
                 ),
             ],
           ),

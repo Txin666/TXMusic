@@ -10,7 +10,6 @@ import '../../../shared/widgets/empty_state.dart';
 import '../../../shared/widgets/page_container.dart';
 import '../../../shared/widgets/section_header.dart';
 import '../../../shared/widgets/song_tile.dart';
-import '../../../theme/app_colors.dart';
 import '../../../theme/app_spacing.dart';
 import '../../player/application/player_controller.dart';
 import '../../playlist/domain/playlist.dart';
@@ -18,6 +17,7 @@ import '../../rank/domain/rank_item.dart';
 import '../../song/domain/song.dart';
 import '../application/discover_providers.dart';
 import '../domain/discover_banner.dart';
+import '../../../theme/app_palette.dart';
 import 'widgets/discover_banner_carousel.dart';
 
 /// 发现 / 推荐首页。
@@ -122,7 +122,7 @@ class _DiscoverContent extends ConsumerWidget {
                 style: Theme.of(context)
                     .textTheme
                     .bodySmall
-                    ?.copyWith(color: AppColors.textTertiary),
+                    ?.copyWith(color: context.palette.textDisabled),
               ),
             ),
           const SizedBox(height: AppSpacing.xl),
@@ -186,7 +186,7 @@ class _DiscoverContent extends ConsumerWidget {
                 style: Theme.of(context)
                     .textTheme
                     .bodySmall
-                    ?.copyWith(color: AppColors.textSecondary),
+                    ?.copyWith(color: context.palette.textSecondary),
               ),
             ],
           ),
@@ -247,7 +247,7 @@ class _PlaylistCard extends StatelessWidget {
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: theme.textTheme.bodySmall
-                  ?.copyWith(color: AppColors.textSecondary),
+                  ?.copyWith(color: context.palette.textSecondary),
             ),
           ],
         ),
@@ -274,9 +274,9 @@ class _RankRow extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: AppSpacing.md),
       padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: context.palette.surface,
         borderRadius: AppRadius.card,
-        border: Border.all(color: AppColors.divider),
+        border: Border.all(color: context.palette.divider),
       ),
       child: Row(
         children: <Widget>[
@@ -305,7 +305,7 @@ class _RankRow extends StatelessWidget {
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: theme.textTheme.bodySmall
-                        ?.copyWith(color: AppColors.textSecondary),
+                        ?.copyWith(color: context.palette.textSecondary),
                   ),
                 ],
               ],
@@ -344,7 +344,7 @@ class _DiscoverLoading extends StatelessWidget {
               style: Theme.of(context)
                   .textTheme
                   .bodySmall
-                  ?.copyWith(color: AppColors.textSecondary),
+                  ?.copyWith(color: context.palette.textSecondary),
             ),
           ],
         ),

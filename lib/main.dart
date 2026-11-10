@@ -8,10 +8,12 @@ import 'package:go_router/go_router.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:window_manager/window_manager.dart';
 
+import 'core/desktop/desktop_host.dart';
 import 'core/network/kugou_providers.dart';
 import 'core/network/kugou_session.dart';
 import 'features/settings/application/settings_controller.dart';
 import 'routing/app_router.dart';
+import 'shared/widgets/app_window_frame.dart';
 import 'theme/app_colors.dart';
 import 'theme/app_theme.dart';
 
@@ -20,7 +22,7 @@ import 'theme/app_theme.dart';
 /// 职责：
 /// 1. 初始化 media_kit 音频引擎（libmpv）；
 /// 2. 从 `.local/kugou_cookie.json` 恢复酷狗登录态，游客态也能启动；
-/// 3. 桌面窗口初始化（尺寸 / 最小尺寸 / 标题），仅桌面平台执行；
+/// 3. 桌面窗口初始化：无边框（自绘标题栏）+ 关闭收进托盘；
 /// 4. 挂载 [ProviderScope]，全局状态与路由实例只创建一次；
 /// 5. 按设置项切换主题（默认深色），路由交给 GoRouter。
 Future<void> main() async {
@@ -50,8 +52,8 @@ Future<void> main() async {
   );
 }
 
-/// Windows / macOS / Linux 窗口初始化：播放器默认给一个偏宽的横屏窗口。
-/// 托盘、快捷键、桌面歌词窗口等能力见文档 §7，待后续里程碑接入。
+/// 桌面窗口初始化：去掉系统标题栏（改由 [WindowTitleBar] 自绘），
+/// 关闭按钮由 [DesktopHost] 拦截为「收进托盘」。
 Future<void> _setupDesktopWindow() async {
   if (kIsWeb) {
     return;
@@ -69,8 +71,10 @@ Future<void> _setupDesktopWindow() async {
       minimumSize: Size(1024, 680),
       center: true,
       title: 'TX Music',
+      // 初始底色按默认主题（深色）设定；运行期由 AppWindowFrame 依据
+      // 当前主题的 palette.background 通过 DesktopHost 动态同步。
       backgroundColor: AppColors.background,
-      titleBarStyle: TitleBarStyle.normal,
+      titleBarStyle: TitleBarStyle.hidden,
       skipTaskbar: false,
     );
     await windowManager.waitUntilReadyToShow(options, () async {
@@ -100,6 +104,11 @@ class TxMusicApp extends ConsumerWidget {
       theme: AppTheme.light(),
       darkTheme: AppTheme.dark(),
       themeMode: themeMode,
+      scaffoldMessengerKey: DesktopHost.instance.messengerKey,
+      // 所有路由统一叠加自绘标题栏，避免逐页改动。
+      builder: (BuildContext context, Widget? child) => AppWindowFrame(
+        child: child ?? const SizedBox.shrink(),
+      ),
       locale: const Locale('zh', 'CN'),
       supportedLocales: const <Locale>[Locale('zh', 'CN'), Locale('en')],
       localizationsDelegates: const <LocalizationsDelegate<Object>>[

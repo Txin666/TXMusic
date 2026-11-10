@@ -24,12 +24,17 @@ class AppColors {
   static const Color textDisabled = Color(0xFF6B6B78);
 
   // ---- 浅色主题 ----
-  static const Color lightBackground = Color(0xFFF6F6FA);
+  // 页面底色略深于白卡片，保证「卡片浮起」的层次；文字层级比深色主题更重，
+  // 因为浅底上同样的灰度可读性会显著下降（全部按 WCAG ≥ 4.5:1 取值）。
+  static const Color lightBackground = Color(0xFFF2F3F9);
   static const Color lightSurface = Color(0xFFFFFFFF);
-  static const Color lightSurfaceAlt = Color(0xFFEFF0F5);
-  static const Color lightDivider = Color(0xFFE4E5EC);
+  static const Color lightSurfaceAlt = Color(0xFFEBEDF4);
+  static const Color lightDivider = Color(0xFFD9DCE6);
   static const Color lightTextPrimary = Color(0xFF17171C);
-  static const Color lightTextSecondary = Color(0xFF6B6B78);
+  static const Color lightTextSecondary = Color(0xFF55555F);
+  static const Color lightTextDisabled = Color(0xFF6E6E7C);
+  /// 浅色主题的强调文字色（深绿，白底对比 5.3:1）。
+  static const Color lightEmphasized = Color(0xFF0E7A55);
 
   // ---- 语义色 ----
   static const Color danger = Color(0xFFE5484D);

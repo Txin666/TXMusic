@@ -13,6 +13,7 @@ import '../../lyric/domain/lyric_line.dart';
 import '../../player/application/player_controller.dart';
 import '../../player/domain/playback_state.dart';
 import '../../song/domain/song.dart';
+import '../../../theme/app_palette.dart';
 
 /// 桌面歌词独立窗口占位页（路由 `/desktop-lyric`）。
 ///
@@ -78,16 +79,16 @@ class DesktopLyricPage extends ConsumerWidget {
                       Text(
                         '桌面歌词 · 独立窗口占位',
                         style: theme.textTheme.labelMedium
-                            ?.copyWith(color: AppColors.textSecondary),
+                            ?.copyWith(color: context.palette.textSecondary),
                       ),
                       const Spacer(),
                       IconButton(
                         tooltip: '返回主界面',
                         onPressed: () => context.go(AppRoutes.discover),
-                        icon: const Icon(
+                        icon: Icon(
                           Icons.close_rounded,
                           size: 18,
-                          color: AppColors.textSecondary,
+                          color: context.palette.textSecondary,
                         ),
                       ),
                     ],
@@ -121,7 +122,7 @@ class DesktopLyricPage extends ConsumerWidget {
                               _describeError(lyricsAsync.error!),
                               textAlign: TextAlign.center,
                               style: theme.textTheme.bodySmall
-                                  ?.copyWith(color: AppColors.textSecondary),
+                                  ?.copyWith(color: context.palette.textSecondary),
                             ),
                           ],
                           const SizedBox(height: AppSpacing.md),
@@ -130,7 +131,7 @@ class DesktopLyricPage extends ConsumerWidget {
                                 ? '未播放'
                                 : '${song.title} · ${song.artist}',
                             style: theme.textTheme.bodySmall
-                                ?.copyWith(color: AppColors.textSecondary),
+                                ?.copyWith(color: context.palette.textSecondary),
                           ),
                         ],
                       ),

@@ -12,6 +12,7 @@ import '../../../theme/app_colors.dart';
 import '../../../theme/app_spacing.dart';
 import '../application/auth_controller.dart';
 import '../data/kugou_login_api.dart';
+import '../../../theme/app_palette.dart';
 
 /// 应用内自助扫码登录页（路由 `/login`）。
 ///
@@ -65,7 +66,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     });
 
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: context.palette.background,
       body: SafeArea(
         child: Column(
           children: <Widget>[
@@ -127,14 +128,14 @@ class _LoginPageState extends ConsumerState<LoginPage> {
         Text(
           session.userid.isEmpty ? 'userid 未知' : 'userid ${session.userid}',
           style: theme.textTheme.bodySmall
-              ?.copyWith(color: AppColors.textSecondary),
+              ?.copyWith(color: context.palette.textSecondary),
         ),
         const SizedBox(height: AppSpacing.sm),
         Text(
           '登录态仅保存在本机 .local/kugou_cookie.json，可解锁全曲与高音质。',
           textAlign: TextAlign.center,
           style: theme.textTheme.bodySmall
-              ?.copyWith(color: AppColors.textTertiary),
+              ?.copyWith(color: context.palette.textDisabled),
         ),
         const SizedBox(height: AppSpacing.xl),
         OutlinedButton.icon(
@@ -174,7 +175,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
           '打开手机酷狗 App → 扫一扫，确认后自动登录',
           textAlign: TextAlign.center,
           style: theme.textTheme.bodySmall
-              ?.copyWith(color: AppColors.textSecondary),
+              ?.copyWith(color: context.palette.textSecondary),
         ),
         const SizedBox(height: AppSpacing.xl),
         Container(
@@ -183,7 +184,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(AppRadius.md),
-            border: Border.all(color: AppColors.border),
+            border: Border.all(color: context.palette.divider),
           ),
           alignment: Alignment.center,
           child: _buildQrBody(theme, auth, qr),
@@ -197,7 +198,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 ? AppColors.danger
                 : expired
                     ? AppColors.vip
-                    : AppColors.textSecondary,
+                    : context.palette.textSecondary,
           ),
         ),
         const SizedBox(height: AppSpacing.lg),
@@ -223,7 +224,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
           '二维码仅用于本机登录，登录态保存在本地；未登录时仍可浏览与 60 秒试听。',
           textAlign: TextAlign.center,
           style: theme.textTheme.bodySmall
-              ?.copyWith(color: AppColors.textTertiary),
+              ?.copyWith(color: context.palette.textDisabled),
         ),
       ],
     );
@@ -254,17 +255,17 @@ class _LoginPageState extends ConsumerState<LoginPage> {
             gaplessPlayback: true,
             errorBuilder: (BuildContext context, Object error,
                 StackTrace? stack) {
-              return const Icon(Icons.qr_code_2_rounded,
-                  size: 72, color: AppColors.textTertiary);
+              return Icon(Icons.qr_code_2_rounded,
+                  size: 72, color: context.palette.textDisabled);
             },
           ),
         );
       }
     }
-    return const Icon(
+    return Icon(
       Icons.qr_code_2_rounded,
       size: 72,
-      color: AppColors.textTertiary,
+      color: context.palette.textDisabled,
     );
   }
 

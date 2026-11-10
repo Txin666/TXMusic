@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../theme/app_colors.dart';
 import '../../theme/app_spacing.dart';
+import '../../theme/app_palette.dart';
 import 'cover_placeholder.dart';
 
 /// 详情页顶部通用区块：封面 + 类型 + 标题 + 元信息 + 操作按钮。
@@ -51,13 +51,13 @@ class DetailHero extends StatelessWidget {
                   vertical: 2,
                 ),
                 decoration: BoxDecoration(
-                  color: AppColors.surfaceHigh,
+                  color: context.palette.surfaceHigh,
                   borderRadius: BorderRadius.circular(AppRadius.xs),
                 ),
                 child: Text(
                   typeLabel,
                   style: theme.textTheme.labelSmall
-                      ?.copyWith(color: AppColors.textSecondary),
+                      ?.copyWith(color: context.palette.textSecondary),
                 ),
               ),
               const SizedBox(height: AppSpacing.sm),
@@ -72,7 +72,7 @@ class DetailHero extends StatelessWidget {
                 Text(
                   meta!,
                   style: theme.textTheme.bodySmall
-                      ?.copyWith(color: AppColors.textSecondary),
+                      ?.copyWith(color: context.palette.textSecondary),
                 ),
               ],
               if (description != null && description!.isNotEmpty) ...<Widget>[
@@ -82,7 +82,7 @@ class DetailHero extends StatelessWidget {
                   maxLines: 3,
                   overflow: TextOverflow.ellipsis,
                   style: theme.textTheme.bodyMedium
-                      ?.copyWith(color: AppColors.textSecondary),
+                      ?.copyWith(color: context.palette.textSecondary),
                 ),
               ],
               const SizedBox(height: AppSpacing.lg),

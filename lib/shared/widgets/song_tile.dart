@@ -4,6 +4,7 @@ import '../../features/song/domain/song.dart';
 import '../../theme/app_colors.dart';
 import '../../theme/app_spacing.dart';
 import '../../core/utils/formatters.dart';
+import '../../theme/app_palette.dart';
 import 'cover_placeholder.dart';
 
 /// 通用歌曲行：榜单 / 歌单 / 专辑 / 搜索结果 / 我的音乐共用。
@@ -49,7 +50,7 @@ class SongTile extends StatelessWidget {
           ),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(AppRadius.md),
-            color: highlight ? AppColors.surfaceHigh : Colors.transparent,
+            color: highlight ? context.palette.surfaceHigh : Colors.transparent,
           ),
           child: Row(
             children: <Widget>[
@@ -59,7 +60,7 @@ class SongTile extends StatelessWidget {
                   child: Text(
                     '${index! + 1}'.padLeft(2, '0'),
                     style: theme.textTheme.bodySmall?.copyWith(
-                      color: index! < 3 ? AppColors.primary : AppColors.textTertiary,
+                      color: index! < 3 ? context.palette.emphasized : context.palette.textDisabled,
                       fontWeight: index! < 3 ? FontWeight.w700 : FontWeight.w500,
                     ),
                   ),
@@ -82,7 +83,7 @@ class SongTile extends StatelessWidget {
                             overflow: TextOverflow.ellipsis,
                             style: theme.textTheme.bodyMedium?.copyWith(
                               fontWeight: FontWeight.w600,
-                              color: highlight ? AppColors.primary : AppColors.textPrimary,
+                              color: highlight ? context.palette.emphasized : context.palette.textPrimary,
                             ),
                           ),
                         ),
@@ -98,7 +99,7 @@ class SongTile extends StatelessWidget {
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: theme.textTheme.bodySmall
-                          ?.copyWith(color: AppColors.textSecondary),
+                          ?.copyWith(color: context.palette.textSecondary),
                     ),
                   ],
                 ),
@@ -110,14 +111,14 @@ class SongTile extends StatelessWidget {
                 Text(
                   Formatters.duration(song.duration),
                   style: theme.textTheme.bodySmall
-                      ?.copyWith(color: AppColors.textTertiary),
+                      ?.copyWith(color: context.palette.textDisabled),
                 ),
               if (onPlayTap != null)
                 IconButton(
                   tooltip: '播放',
                   onPressed: onPlayTap,
                   icon: const Icon(Icons.play_circle_outline_rounded, size: 22),
-                  color: AppColors.textSecondary,
+                  color: context.palette.textSecondary,
                 ),
             ],
           ),

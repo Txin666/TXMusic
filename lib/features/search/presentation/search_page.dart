@@ -11,7 +11,6 @@ import '../../../shared/widgets/media_card.dart';
 import '../../../shared/widgets/page_container.dart';
 import '../../../shared/widgets/section_header.dart';
 import '../../../shared/widgets/song_tile.dart';
-import '../../../theme/app_colors.dart';
 import '../../../theme/app_spacing.dart';
 import '../../album/domain/album.dart';
 import '../../artist/domain/artist.dart';
@@ -19,6 +18,7 @@ import '../../player/application/player_controller.dart';
 import '../../playlist/domain/playlist.dart';
 import '../../song/domain/song.dart';
 import '../application/search_controller.dart';
+import '../../../theme/app_palette.dart';
 
 /// 错误文案统一取 [KugouApiException.message]，避免把堆栈抛给用户。
 String _describeError(Object error) =>
@@ -279,7 +279,7 @@ class _IdleView extends ConsumerWidget {
                       child: Text(
                         '热搜加载失败：${_describeError(error)}',
                         style: theme.textTheme.bodySmall
-                            ?.copyWith(color: AppColors.textSecondary),
+                            ?.copyWith(color: context.palette.textSecondary),
                       ),
                     ),
                     TextButton(
@@ -296,7 +296,7 @@ class _IdleView extends ConsumerWidget {
                     child: Text(
                       '暂时没有热搜数据，直接输入关键词搜索吧',
                       style: theme.textTheme.bodySmall
-                          ?.copyWith(color: AppColors.textSecondary),
+                          ?.copyWith(color: context.palette.textSecondary),
                     ),
                   );
                 }
@@ -312,8 +312,8 @@ class _IdleView extends ConsumerWidget {
                           '${entry.key + 1}'.padLeft(2, '0'),
                           style: theme.textTheme.bodySmall?.copyWith(
                             color: entry.key < 3
-                                ? AppColors.primary
-                                : AppColors.textTertiary,
+                                ? context.palette.emphasized
+                                : context.palette.textDisabled,
                             fontWeight: FontWeight.w700,
                           ),
                         ),
@@ -345,21 +345,21 @@ class _DegradeNotice extends StatelessWidget {
         vertical: AppSpacing.sm,
       ),
       decoration: BoxDecoration(
-        color: AppColors.surfaceAlt,
+        color: context.palette.surfaceAlt,
         borderRadius: BorderRadius.circular(AppRadius.md),
-        border: Border.all(color: AppColors.divider),
+        border: Border.all(color: context.palette.divider),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          const Icon(Icons.info_outline_rounded,
-              size: 16, color: AppColors.textTertiary),
+          Icon(Icons.info_outline_rounded,
+              size: 16, color: context.palette.textDisabled),
           const SizedBox(width: AppSpacing.sm),
           Expanded(
             child: Text(
               text,
               style: theme.textTheme.bodySmall
-                  ?.copyWith(color: AppColors.textSecondary),
+                  ?.copyWith(color: context.palette.textSecondary),
             ),
           ),
         ],
@@ -402,7 +402,7 @@ class _ArtistResultTile extends StatelessWidget {
               style: Theme.of(context)
                   .textTheme
                   .bodySmall
-                  ?.copyWith(color: AppColors.textSecondary),
+                  ?.copyWith(color: context.palette.textSecondary),
             ),
           ],
         ),

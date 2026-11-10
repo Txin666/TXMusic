@@ -3,9 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../routing/app_routes.dart';
-import '../../../../theme/app_colors.dart';
 import '../../../../theme/app_spacing.dart';
 import '../../../search/application/search_controller.dart';
+import '../../../../theme/app_palette.dart';
 
 /// 顶部栏：返回 + 全局搜索框 + 右侧快捷操作。
 /// 搜索框回车即跳转搜索页并触发检索（真实接口接入点见 search_controller 的 TODO）。
@@ -46,9 +46,9 @@ class _TopSearchBarState extends ConsumerState<TopSearchBar> {
     return Container(
       height: AppSpacing.topBarHeight,
       padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
-      decoration: const BoxDecoration(
-        color: AppColors.background,
-        border: Border(bottom: BorderSide(color: AppColors.divider)),
+      decoration: BoxDecoration(
+        color: context.palette.background,
+        border: Border(bottom: BorderSide(color: context.palette.divider)),
       ),
       child: Row(
         children: <Widget>[
@@ -56,13 +56,13 @@ class _TopSearchBarState extends ConsumerState<TopSearchBar> {
             tooltip: canPop ? '返回' : '已在首页',
             onPressed: canPop ? () => context.pop() : null,
             icon: const Icon(Icons.arrow_back_ios_new_rounded, size: 16),
-            color: AppColors.textSecondary,
+            color: context.palette.textSecondary,
           ),
           IconButton(
             tooltip: '前进（骨架期未实现）',
             onPressed: null,
             icon: const Icon(Icons.arrow_forward_ios_rounded, size: 16),
-            color: AppColors.textTertiary,
+            color: context.palette.textDisabled,
           ),
           const SizedBox(width: AppSpacing.md),
           ConstrainedBox(
@@ -84,7 +84,7 @@ class _TopSearchBarState extends ConsumerState<TopSearchBar> {
                   isDense: true,
                   hintText: '搜索歌曲、歌手、歌单',
                   prefixIcon: const Icon(Icons.search_rounded, size: 18),
-                  prefixIconColor: AppColors.textTertiary,
+                  prefixIconColor: context.palette.textSecondary,
                   suffixIcon: _controller.text.isEmpty
                       ? null
                       : IconButton(
@@ -112,17 +112,17 @@ class _TopSearchBarState extends ConsumerState<TopSearchBar> {
           Container(
             width: 30,
             height: 30,
-            decoration: const BoxDecoration(
-              color: AppColors.surfaceHigh,
+            decoration: BoxDecoration(
+              color: context.palette.surfaceHigh,
               shape: BoxShape.circle,
             ),
             alignment: Alignment.center,
-            child: const Text(
+            child: Text(
               'TX',
               style: TextStyle(
                 fontSize: 11,
                 fontWeight: FontWeight.w700,
-                color: AppColors.textSecondary,
+                color: context.palette.textSecondary,
               ),
             ),
           ),
@@ -149,7 +149,7 @@ class _ActionIcon extends StatelessWidget {
       tooltip: tooltip,
       onPressed: onPressed,
       icon: Icon(icon, size: 19),
-      color: AppColors.textSecondary,
+      color: context.palette.textSecondary,
     );
   }
 }
