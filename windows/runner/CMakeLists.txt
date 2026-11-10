@@ -9,6 +9,7 @@ project(runner LANGUAGES CXX)
 add_executable(${BINARY_NAME} WIN32
   "flutter_window.cpp"
   "main.cpp"
+  "tray_panel_native.cpp"
   "utils.cpp"
   "win32_window.cpp"
   "${FLUTTER_MANAGED_DIR}/generated_plugin_registrant.cc"
@@ -33,8 +34,20 @@ target_compile_definitions(${BINARY_NAME} PRIVATE "NOMINMAX")
 # Add dependency libraries and include directories. Add any application-specific
 # dependencies here.
 target_link_libraries(${BINARY_NAME} PRIVATE flutter flutter_wrapper_app)
+# 用 flutter::PluginRegistrarManager 拿子引擎的 registrar，相关实现符号在
+# wrapper_plugin 里（插件里能编译通过是因为它自带依赖，runner 需要显式链接）。
+target_link_libraries(${BINARY_NAME} PRIVATE flutter_wrapper_plugin)
 target_link_libraries(${BINARY_NAME} PRIVATE "dwmapi.lib")
+target_link_libraries(${BINARY_NAME} PRIVATE "comctl32.lib")
+# GetDpiForMonitor：把面板的逻辑坐标换算成物理像素。
+target_link_libraries(${BINARY_NAME} PRIVATE "shcore.lib")
 target_include_directories(${BINARY_NAME} PRIVATE "${CMAKE_SOURCE_DIR}")
+
+# 源码含中文注释，统一按 UTF-8 解析；否则 MSVC 按系统代码页（GBK）读源码时，
+# 注释末尾的 UTF-8 字节会把下一行一起吞掉，报出一堆莫名其妙的类型缺失。
+if (MSVC)
+  target_compile_options(${BINARY_NAME} PRIVATE "/utf-8")
+endif()
 
 # Run the Flutter tool portions of the build. This must not be removed.
 add_dependencies(${BINARY_NAME} flutter_assemble)

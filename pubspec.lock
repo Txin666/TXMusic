@@ -89,6 +89,14 @@ packages:
       url: "https://mirrors.cloud.tencent.com/dart-pub/"
     source: hosted
     version: "1.1.6"
+  desktop_multi_window:
+    dependency: "direct main"
+    description:
+      name: desktop_multi_window
+      sha256: "6a82209dfd29279258515157e5c08612542ebf7bfb3b55fb1dfcd32c076eea4d"
+      url: "https://mirrors.cloud.tencent.com/dart-pub/"
+    source: hosted
+    version: "0.3.1"
   fake_async:
     dependency: transitive
     description:
@@ -414,7 +422,7 @@ packages:
     source: hosted
     version: "2.0.7"
   screen_retriever:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: screen_retriever
       sha256: ace919117a7520c13a50a6259e60c4a0d4cbe98809468792a91b5c5adada2aa6
@@ -594,6 +602,14 @@ packages:
       url: "https://mirrors.cloud.tencent.com/dart-pub/"
     source: hosted
     version: "0.5.2"
+  windows_taskbar:
+    dependency: "direct main"
+    description:
+      name: windows_taskbar
+      sha256: "204edfdb280a7053febdf50fc9b49b3c007255bd8a83c082d10c174ec6548f33"
+      url: "https://mirrors.cloud.tencent.com/dart-pub/"
+    source: hosted
+    version: "1.1.2"
   yaml:
     dependency: transitive
     description:

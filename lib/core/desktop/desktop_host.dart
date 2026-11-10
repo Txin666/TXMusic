@@ -6,13 +6,15 @@ import 'package:flutter/material.dart';
 import 'package:tray_manager/tray_manager.dart' as tray;
 import 'package:window_manager/window_manager.dart';
 
-/// 桌面壳层原生能力宿主：无边框窗口控制、关闭进托盘、系统托盘菜单。
+import 'taskbar_thumbnail_toolbar.dart';
+
+/// 桌面壳层原生能力宿主：无边框窗口控制、关闭进托盘、系统托盘图标。
 ///
 /// 设计约束：
 /// - 所有原生调用都包在 try/catch 里：`flutter test` 环境没有 window_manager /
 ///   tray_manager 的原生实现，异常不能影响 UI 与既有测试；
-/// - 托盘菜单的播放控制通过回调注入，宿主本身不依赖 Riverpod，
-///   避免 core 层反向依赖 features 层；
+/// - 托盘不再挂原生菜单，点击只回调上层弹自定义面板，播放控制一律走面板或
+///   任务栏缩略图按钮，宿主本身不依赖 Riverpod；
 /// - 只有「退出 TX Music」会真正结束进程，关闭按钮一律收进托盘。
 class DesktopHost with WindowListener {
   DesktopHost._();
@@ -49,8 +51,6 @@ class DesktopHost with WindowListener {
   bool _quitting = false;
 
   tray.TrayIcon? _trayIcon;
-  tray.Menu? _trayMenu;
-  final List<tray.MenuItem> _trayMenuItems = <tray.MenuItem>[];
 
   /// 窗口收进托盘后的提示回调（由 UI 层注入，用于弹 SnackBar）。
   VoidCallback? onMinimizedToTray;
@@ -170,6 +170,8 @@ class DesktopHost with WindowListener {
     _quitting = true;
 
     _disposeTray();
+    // 任务栏缩略图按钮属于窗口的 COM 扩展，退出前摘掉避免任务栏残留。
+    await TaskbarThumbnailToolbar.reset();
 
     if (isSupported) {
       try {
@@ -187,14 +189,13 @@ class DesktopHost with WindowListener {
 
   // ---------------------------------------------------------------- 托盘
 
-  /// 创建系统托盘：图标 + 中文菜单 + 左键唤回窗口。
+  /// 创建系统托盘：只有图标与提示，不再挂原生菜单。
   ///
-  /// [onTogglePlayPause] / [onSkipPrevious] / [onSkipNext] 由 UI 层接到
-  /// `playerController`，这里只负责菜单项与点击派发。
+  /// 点击托盘图标（左右键均可）时回调 [onTrayIconClicked]，并带上托盘图标的
+  /// 屏幕坐标（[tray.TrayManager.getBounds]，逻辑像素），供自定义面板贴到
+  /// 托盘图标正上方；取不到坐标时传 null，由面板自行兜底定位。
   Future<void> initTray({
-    required VoidCallback onTogglePlayPause,
-    required VoidCallback onSkipPrevious,
-    required VoidCallback onSkipNext,
+    required void Function(Rect? trayBounds) onTrayIconClicked,
   }) async {
     if (!isSupported || _trayReady) {
       return;
@@ -216,25 +217,12 @@ class DesktopHost with WindowListener {
         icon.icon = image;
       }
       icon.setTooltip('TX Music');
-      // Windows 原生实现默认不自动弹菜单，这里显式绑定右键。
-      icon.setContextMenuTrigger(tray.ContextMenuTrigger.rightClicked);
-
-      final tray.Menu? menu = tray.Menu.create();
-      if (menu != null) {
-        _trayMenu = menu;
-        _addMenuItem(menu, '显示主窗口', () => unawaited(showWindow()));
-        menu.addSeparator();
-        _addMenuItem(menu, '播放/暂停', onTogglePlayPause);
-        _addMenuItem(menu, '上一首', onSkipPrevious);
-        _addMenuItem(menu, '下一首', onSkipNext);
-        menu.addSeparator();
-        _addMenuItem(menu, '退出 TX Music', () => unawaited(quitApp()));
-        icon.setContextMenu(menu);
-      }
 
       icon.addListener((tray.TrayIconEvent event) {
-        if (event is tray.TrayIconClickedEvent) {
-          unawaited(showWindow());
+        // 左键与右键都弹自定义面板：原生右键菜单已移除，右键若无反应会像坏了。
+        if (event is tray.TrayIconClickedEvent ||
+            event is tray.TrayIconRightClickedEvent) {
+          unawaited(_handleTrayClick(onTrayIconClicked));
         }
       });
 
@@ -246,21 +234,22 @@ class DesktopHost with WindowListener {
     }
   }
 
-  void _addMenuItem(tray.Menu menu, String label, VoidCallback onSelected) {
-    final tray.MenuItem? item = tray.MenuItem.createWithLabelAndType(
-      label,
-      tray.MenuItemType.normal,
-    );
-    if (item == null) {
-      return;
-    }
-    item.addListener((tray.MenuEvent event) {
-      if (event is tray.MenuItemClickedEvent) {
-        onSelected();
+  Future<void> _handleTrayClick(
+    void Function(Rect? trayBounds) onTrayIconClicked,
+  ) async {
+    Rect? bounds;
+    try {
+      final tray.TrayIcon? icon = _trayIcon;
+      if (icon != null) {
+        final raw = icon.getBounds();
+        if (raw.width > 0 && raw.height > 0) {
+          bounds = Rect.fromLTWH(raw.x, raw.y, raw.width, raw.height);
+        }
       }
-    });
-    _trayMenuItems.add(item);
-    menu.addItem(item);
+    } on Object catch (error) {
+      debugPrint('读取托盘图标坐标失败: $error');
+    }
+    onTrayIconClicked(bounds);
   }
 
   void _disposeTray() {
@@ -273,22 +262,6 @@ class DesktopHost with WindowListener {
     } on Object catch (error) {
       debugPrint('托盘图标释放失败: $error');
     }
-
-    for (final tray.MenuItem item in _trayMenuItems) {
-      try {
-        item.dispose();
-      } on Object catch (error) {
-        debugPrint('托盘菜单项释放失败: $error');
-      }
-    }
-    _trayMenuItems.clear();
-
-    try {
-      _trayMenu?.dispose();
-    } on Object catch (error) {
-      debugPrint('托盘菜单释放失败: $error');
-    }
-    _trayMenu = null;
   }
 
   // ------------------------------------------------------ WindowListener

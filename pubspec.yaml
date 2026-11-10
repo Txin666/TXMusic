@@ -44,6 +44,10 @@ dependencies:
   media_kit: ^1.2.0
   media_kit_libs_windows_audio: ^1.0.8
   tray_manager: ^0.8.3
+  desktop_multi_window: ^0.3.1
+  windows_taskbar: ^1.1.2
+  # 托盘面板定位：需要多显示器的工作区矩形，避免贴边越界。
+  screen_retriever: ^0.2.2
 
 dev_dependencies:
   flutter_test:
@@ -68,8 +72,13 @@ flutter:
   uses-material-design: true
 
   # 托盘图标：与 windows/runner/resources/app_icon.ico 同源。
+  # 任务栏缩略图工具栏按钮需要 ico（Windows 只吃图标资源，不吃 png）。
   assets:
     - assets/icons/tray.ico
+    - assets/icons/taskbar_prev.ico
+    - assets/icons/taskbar_play.ico
+    - assets/icons/taskbar_pause.ico
+    - assets/icons/taskbar_next.ico
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

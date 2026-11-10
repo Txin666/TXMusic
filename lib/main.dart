@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
@@ -9,6 +10,8 @@ import 'package:media_kit/media_kit.dart';
 import 'package:window_manager/window_manager.dart';
 
 import 'core/desktop/desktop_host.dart';
+import 'core/desktop/panel/tray_panel_host.dart';
+import 'core/desktop/panel/tray_panel_window.dart';
 import 'core/network/kugou_providers.dart';
 import 'core/network/kugou_session.dart';
 import 'features/settings/application/settings_controller.dart';
@@ -25,8 +28,16 @@ import 'theme/app_theme.dart';
 /// 3. 桌面窗口初始化：无边框（自绘标题栏）+ 关闭收进托盘；
 /// 4. 挂载 [ProviderScope]，全局状态与路由实例只创建一次；
 /// 5. 按设置项切换主题（默认深色），路由交给 GoRouter。
-Future<void> main() async {
+Future<void> main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // 托盘悬浮面板是 desktop_multi_window 拉起的独立引擎：只跑面板 UI，
+  // 不初始化音频引擎与登录态，省下整套 libmpv 内存与启动耗时。
+  if (!kIsWeb && await TrayPanelHost.currentPanelController() != null) {
+    await runTrayPanelWindow();
+    return;
+  }
+
   MediaKit.ensureInitialized();
 
   final KugouSession session = await KugouSession.load();
@@ -37,6 +48,15 @@ Future<void> main() async {
   );
 
   await _setupDesktopWindow();
+
+  if (!kIsWeb && Platform.environment['TX_PANEL_AUTOTEST'] == '1') {
+    unawaited(
+      Future<void>.delayed(
+        const Duration(seconds: 4),
+        () => TrayPanelHost.instance.toggle(),
+      ),
+    );
+  }
 
   runApp(
     ProviderScope(
