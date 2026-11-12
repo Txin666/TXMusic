@@ -47,19 +47,41 @@ class SongUrlResolver {
       },
     );
 
-    final List<Uri> urls = _uriList(json['url']);
-    final List<Uri> backups = _uriList(json['backupUrl']);
-    final List<Uri> merged = <Uri>[...urls, ...backups];
+    Map<String, dynamic> source = json;
+    List<Uri> merged = _collectUris(source);
+
+    // 付费曲兜底：`/song/url` 拿不到直链时会带回 auth 凭证，
+    // 此时用 `/song/url/auth` 换一次正式音源（概念版会员态可成功）。
+    if (merged.isEmpty) {
+      final String auth = '${source['auth'] ?? ''}'.trim();
+      if (auth.isNotEmpty) {
+        source = await _client.getJson(
+          '/song/url/auth',
+          query: <String, dynamic>{
+            'hash': song.hash,
+            if (song.albumId.isNotEmpty) 'album_id': song.albumId,
+            'auth': auth,
+            'quality': quality,
+          },
+        );
+        merged = _collectUris(source);
+      }
+    }
+
     if (merged.isEmpty) {
       throw const KugouApiException('该歌曲无可用音源（可能为付费曲）');
     }
 
-    final int seconds = _int(json['timeLength']);
+    final int seconds = _int(source['timeLength']);
     return ResolvedAudio(
       url: merged.first,
       backups: merged.skip(1).toList(growable: false),
       duration: seconds > 0 ? Duration(seconds: seconds) : song.duration,
     );
+  }
+
+  static List<Uri> _collectUris(Map<String, dynamic> json) {
+    return <Uri>[..._uriList(json['url']), ..._uriList(json['backupUrl'])];
   }
 
   static List<Uri> _uriList(Object? raw) {

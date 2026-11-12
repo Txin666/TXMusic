@@ -30,14 +30,12 @@ class AppSideNav extends StatelessWidget {
     required this.collapsed,
     required this.onToggle,
     required this.onNavigate,
-    required this.onOpenDesktopLyric,
   });
 
   final String currentPath;
   final bool collapsed;
   final VoidCallback onToggle;
   final ValueChanged<String> onNavigate;
-  final VoidCallback onOpenDesktopLyric;
 
   static const List<NavEntry> primary = <NavEntry>[
     NavEntry(
@@ -126,7 +124,6 @@ class AppSideNav extends StatelessWidget {
               ),
             ),
           _buildItem(context, searchEntry),
-          _buildDesktopLyricEntry(context),
           const Spacer(),
           _buildFooter(context),
         ],
@@ -232,46 +229,6 @@ class AppSideNav extends StatelessWidget {
                         fontSize: 13,
                         fontWeight: active ? FontWeight.w700 : FontWeight.w500,
                         color: active ? context.palette.textPrimary : context.palette.textSecondary,
-                      ),
-                    ),
-                  ],
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildDesktopLyricEntry(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm, vertical: 2),
-      child: Tooltip(
-        message: collapsed ? '桌面歌词' : '',
-        child: Material(
-          color: Colors.transparent,
-          borderRadius: BorderRadius.circular(AppRadius.sm),
-          child: InkWell(
-            borderRadius: BorderRadius.circular(AppRadius.sm),
-            onTap: onOpenDesktopLyric,
-            child: Container(
-              height: 42,
-              padding: EdgeInsets.symmetric(horizontal: collapsed ? 0 : AppSpacing.md),
-              alignment: collapsed ? Alignment.center : Alignment.centerLeft,
-              child: Row(
-                mainAxisAlignment:
-                    collapsed ? MainAxisAlignment.center : MainAxisAlignment.start,
-                children: <Widget>[
-                  Icon(Icons.subtitles_outlined, size: 20, color: context.palette.textSecondary),
-                  if (!collapsed) ...<Widget>[
-                    const SizedBox(width: AppSpacing.md),
-                    Text(
-                      '桌面歌词',
-                      style: TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.w500,
-                        color: context.palette.textSecondary,
                       ),
                     ),
                   ],

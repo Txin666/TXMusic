@@ -7,7 +7,6 @@ import '../features/artist/presentation/artist_detail_page.dart';
 import '../features/auth/presentation/login_page.dart';
 import '../features/discover/presentation/discover_page.dart';
 import '../features/library/presentation/library_page.dart';
-import '../features/lyric/presentation/desktop_lyric_page.dart';
 import '../features/player/presentation/player_page.dart';
 import '../features/playlist/presentation/playlist_detail_page.dart';
 import '../features/rank/presentation/rank_detail_page.dart';
@@ -24,8 +23,7 @@ import 'app_routes.dart';
 /// 结构约定：
 /// - 主流程页面统一挂在 [ShellRoute] 下，由 [MainShell] 提供侧边导航 / 顶部搜索 / 底部播放条，
 ///   切换页面时 Shell 不重建，播放状态与播放条保持连续。
-/// - 播放详情页与桌面歌词页脱离 Shell：播放详情自身即全屏播放界面，
-///   桌面歌词后续由 `window_manager` 作为独立无边框窗口承载（见文档 §7.2）。
+/// - 播放详情页脱离 Shell：其自身即全屏播放界面，避免播放条重复渲染。
 class AppRouter {
   const AppRouter._();
 
@@ -121,10 +119,6 @@ class AppRouter {
         GoRoute(
           path: AppRoutes.player,
           pageBuilder: _fadePage(const PlayerPage()),
-        ),
-        GoRoute(
-          path: AppRoutes.desktopLyric,
-          pageBuilder: _fadePage(const DesktopLyricPage()),
         ),
         GoRoute(
           path: AppRoutes.login,

@@ -38,9 +38,20 @@ class KugouSession {
       userid.isNotEmpty && token.isNotEmpty && cookie.isNotEmpty;
 
   /// 实际下发给接口的 cookie 头：优先使用文件里的完整 cookie 串。
+  ///
+  /// 统一规整为 `k=v;k=v` 的紧凑格式：服务端 `cookieToJson` 只按 `;` 切分，
+  /// 若留 `; ` 这种分隔会产生带前导空格的键名，导致 token/userid 取不到值，
+  /// 上游随即返回 20002 / 20010（表现为「HTTP 502」）。
   String get cookieHeader {
     if (cookie.isNotEmpty) {
-      return cookie;
+      final List<String> normalized = cookie
+          .split(';')
+          .map((String item) => item.trim())
+          .where((String item) => item.isNotEmpty && item.contains('='))
+          .toList();
+      if (normalized.isNotEmpty) {
+        return normalized.join(';');
+      }
     }
     final List<String> parts = <String>[];
     if (dfid.isNotEmpty) {
@@ -52,7 +63,7 @@ class KugouSession {
     if (token.isNotEmpty) {
       parts.add('token=$token');
     }
-    return parts.join('; ');
+    return parts.join(';');
   }
 
   KugouSession copyWith({

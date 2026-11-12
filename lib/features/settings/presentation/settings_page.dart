@@ -9,10 +9,11 @@ import '../../../routing/app_routes.dart';
 import '../../../shared/widgets/page_container.dart';
 import '../../../theme/app_colors.dart';
 import '../../../theme/app_spacing.dart';
+import '../../vip/application/daily_vip_controller.dart';
 import '../application/settings_controller.dart';
 import '../../../theme/app_palette.dart';
 
-/// 设置页（路由 `/settings`）：外观 / 播放 / 桌面歌词 / 关于。
+/// 设置页（路由 `/settings`）：账号 / 外观 / 播放 / 关于。
 ///
 /// 骨架期所有开关仅作用于内存态；TODO(storage): 接入 Hive settings box（文档 §8）。
 class SettingsPage extends ConsumerWidget {
@@ -24,6 +25,7 @@ class SettingsPage extends ConsumerWidget {
     final SettingsController controller =
         ref.read(settingsControllerProvider.notifier);
     final KugouSession session = ref.watch(kugouSessionProvider);
+    final DailyVipState vipState = ref.watch(dailyVipControllerProvider);
     final ThemeData theme = Theme.of(context);
 
     return PageContainer(
@@ -84,12 +86,63 @@ class SettingsPage extends ConsumerWidget {
                     ),
                   ),
                   title: const Text('未登录 · 游客模式'),
-                  subtitle: const Text('登录后可解锁全曲播放与高音质，仅 60 秒试听'),
+                  subtitle: const Text('手机号 / 微信扫码 / QQ 扫码 / 酷狗扫码，登录后解锁全曲与高音质'),
                   trailing: FilledButton(
                     onPressed: () => context.go(AppRoutes.login),
                     child: const Text('登录'),
                   ),
                 ),
+            ],
+          ),
+          _SettingSection(
+            title: '每日 VIP',
+            children: <Widget>[
+              SwitchListTile(
+                contentPadding: EdgeInsets.zero,
+                title: const Text('登录后自动领取'),
+                subtitle: const Text(
+                  '概念版听歌任务：每天首次启动或登录成功时自动领取 1 天 VIP',
+                ),
+                value: vipState.autoClaim,
+                onChanged: (bool value) => ref
+                    .read(dailyVipControllerProvider.notifier)
+                    .setAutoClaim(value),
+              ),
+              ListTile(
+                contentPadding: EdgeInsets.zero,
+                title: Text(
+                  vipState.busy
+                      ? '正在领取…'
+                      : (vipState.lastMessage.isEmpty
+                          ? '尚未领取'
+                          : vipState.lastMessage),
+                ),
+                subtitle: Text(
+                  <String>[
+                    if (vipState.lastClaimDate.isNotEmpty)
+                      '上次领取：${vipState.lastClaimDate}',
+                    if (vipState.snapshot.isVip) vipState.snapshot.summary,
+                  ].join(' · '),
+                ),
+                trailing: TextButton(
+                  onPressed: (!session.isLoggedIn || vipState.busy)
+                      ? null
+                      : () async {
+                          await ref
+                              .read(dailyVipControllerProvider.notifier)
+                              .claimNow();
+                          if (!context.mounted) {
+                            return;
+                          }
+                          final DailyVipState latest =
+                              ref.read(dailyVipControllerProvider);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text(latest.lastMessage)),
+                          );
+                        },
+                  child: const Text('立即领取'),
+                ),
+              ),
             ],
           ),
           _SettingSection(
@@ -160,25 +213,6 @@ class SettingsPage extends ConsumerWidget {
                 subtitle: const Text('当前歌曲结束后按队列继续'),
                 value: settings.autoPlayNext,
                 onChanged: controller.setAutoPlayNext,
-              ),
-            ],
-          ),
-          _SettingSection(
-            title: '桌面歌词',
-            children: <Widget>[
-              SwitchListTile(
-                contentPadding: EdgeInsets.zero,
-                title: const Text('启用桌面歌词'),
-                subtitle: const Text('独立置顶悬浮窗，需 window_manager 多窗口支持'),
-                value: settings.desktopLyricEnabled,
-                onChanged: controller.setDesktopLyricEnabled,
-              ),
-              ListTile(
-                contentPadding: EdgeInsets.zero,
-                title: const Text('打开桌面歌词窗口'),
-                subtitle: const Text('骨架期以全屏占位页演示布局'),
-                trailing: const Icon(Icons.open_in_new_rounded, size: 18),
-                onTap: () => context.go(AppRoutes.desktopLyric),
               ),
             ],
           ),

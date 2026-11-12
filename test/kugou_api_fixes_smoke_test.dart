@@ -94,7 +94,7 @@ void main() {
     final LyricDocument doc = await KugouLyricApi(client).load(song);
     print('[lyric] hash=${song.hash} lines=${doc.lines.length} '
         'firstLines=${doc.lines.take(3).map((dynamic l) => l.text).toList()}');
-    expect(doc.lines, isNotEmpty, reason: '播放页/桌面歌词需要逐行歌词');
+    expect(doc.lines, isNotEmpty, reason: '播放页需要逐行歌词');
     expect(doc.lines.first.text, isNotEmpty);
     expect(doc.raw, contains('['));
   });

@@ -6,28 +6,24 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class SettingsState {
   const SettingsState({
     this.themeMode = ThemeMode.dark,
-    this.desktopLyricEnabled = false,
     this.showLyricOnBar = true,
     this.audioQuality = AudioQuality.high,
     this.autoPlayNext = true,
   });
 
   final ThemeMode themeMode;
-  final bool desktopLyricEnabled;
   final bool showLyricOnBar;
   final AudioQuality audioQuality;
   final bool autoPlayNext;
 
   SettingsState copyWith({
     ThemeMode? themeMode,
-    bool? desktopLyricEnabled,
     bool? showLyricOnBar,
     AudioQuality? audioQuality,
     bool? autoPlayNext,
   }) {
     return SettingsState(
       themeMode: themeMode ?? this.themeMode,
-      desktopLyricEnabled: desktopLyricEnabled ?? this.desktopLyricEnabled,
       showLyricOnBar: showLyricOnBar ?? this.showLyricOnBar,
       audioQuality: audioQuality ?? this.audioQuality,
       autoPlayNext: autoPlayNext ?? this.autoPlayNext,
@@ -53,7 +49,7 @@ extension AudioQualityX on AudioQuality {
   }
 }
 
-/// 设置编排：主题、桌面歌词、音质等。
+/// 设置编排：主题、播放、音质等。
 /// TODO(storage): 落地时写入 Hive `settings` box（`services/storage/dao/settings_dao.dart`）。
 class SettingsController extends Notifier<SettingsState> {
   @override
@@ -61,9 +57,6 @@ class SettingsController extends Notifier<SettingsState> {
 
   void setThemeMode(ThemeMode mode) =>
       state = state.copyWith(themeMode: mode);
-
-  void setDesktopLyricEnabled(bool enabled) =>
-      state = state.copyWith(desktopLyricEnabled: enabled);
 
   void setShowLyricOnBar(bool enabled) =>
       state = state.copyWith(showLyricOnBar: enabled);

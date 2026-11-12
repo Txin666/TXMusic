@@ -63,8 +63,53 @@ class KugouClient {
     String path, {
     Map<String, dynamic>? query,
     bool requireData = false,
+    bool lenient = false,
   }) async {
     final Uri uri = buildUri(path, query);
+    final http.Response response = await _send(
+      () => _http.get(uri, headers: _headers()),
+      path: path,
+    );
+    return _decode(
+      response,
+      path: path,
+      requireData: requireData,
+      lenient: lenient,
+    );
+  }
+
+  /// POST 请求（JSON body）。
+  ///
+  /// 概念版青年任务（每日领 VIP / 听歌上报）都是 POST，故单独提供；
+  /// 复用与 GET 完全一致的 cookie、时间戳与错误码收敛逻辑。
+  Future<Map<String, dynamic>> postJson(
+    String path, {
+    Map<String, dynamic>? query,
+    Object? body,
+    bool requireData = false,
+    bool lenient = false,
+  }) async {
+    final Uri uri = buildUri(path, query);
+    final Map<String, String> headers = _headers()
+      ..['Content-Type'] = 'application/json; charset=utf-8';
+    final http.Response response = await _send(
+      () => _http.post(
+        uri,
+        headers: headers,
+        body: jsonEncode(body ?? const <String, dynamic>{}),
+      ),
+      path: path,
+    );
+    return _decode(
+      response,
+      path: path,
+      requireData: requireData,
+      lenient: lenient,
+    );
+  }
+
+  /// 公共请求头：`dfid` / `userid` / `token` 全在 cookie 里，漏带会返回 152。
+  Map<String, String> _headers() {
     final Map<String, String> headers = <String, String>{
       'Accept': 'application/json',
     };
@@ -72,12 +117,16 @@ class KugouClient {
     if (cookie.isNotEmpty) {
       headers['Cookie'] = cookie;
     }
+    return headers;
+  }
 
-    http.Response response;
+  /// 发出请求并把网络层异常收敛成 [KugouApiException]。
+  Future<http.Response> _send(
+    Future<http.Response> Function() run, {
+    required String path,
+  }) async {
     try {
-      response = await _http
-          .get(uri, headers: headers)
-          .timeout(KugouConfig.requestTimeout);
+      return await run().timeout(KugouConfig.requestTimeout);
     } on TimeoutException {
       throw KugouApiException('请求超时，检查 KuGouMusicApi 服务是否在运行', path: path);
     } on SocketException catch (error) {
@@ -88,8 +137,35 @@ class KugouClient {
     } on Object catch (error) {
       throw KugouApiException('网络异常：$error', path: path);
     }
+  }
+
+  /// 状态码 / 响应体 / 业务错误码的统一解析。
+  Map<String, dynamic> _decode(
+    http.Response response, {
+    required String path,
+    required bool requireData,
+    required bool lenient,
+  }) {
+    final String body = sanitizeBody(
+      utf8.decode(response.bodyBytes, allowMalformed: true),
+    );
 
     if (response.statusCode != 200) {
+      // KuGouMusicApi 把上游业务失败统一折叠成 HTTP 502，
+      // 真实错误码只留在 body 里（如 `{"status":0,"error_code":131001}` 已领）。
+      // 因此先解析 body，能解析成对象就按业务码处理，解析不出来才报 HTTP 错误。
+      final Object? failure = body.isEmpty ? null : _tryDecodeJson(body);
+      if (failure is Map<String, dynamic>) {
+        if (!lenient) {
+          _throwIfFailed(failure, path);
+        }
+        if (requireData && failure['data'] == null) {
+          throw KugouApiException('响应缺少 data 字段', path: path);
+        }
+        if (lenient) {
+          return failure;
+        }
+      }
       throw KugouApiException(
         'HTTP ${response.statusCode}',
         path: path,
@@ -97,9 +173,6 @@ class KugouClient {
       );
     }
 
-    final String body = sanitizeBody(
-      utf8.decode(response.bodyBytes, allowMalformed: true),
-    );
     if (body.isEmpty) {
       throw KugouApiException('响应体为空', path: path);
     }
@@ -116,7 +189,9 @@ class KugouClient {
       throw KugouApiException('响应结构异常（非 JSON 对象）', path: path);
     }
 
-    _throwIfFailed(decoded, path);
+    if (!lenient) {
+      _throwIfFailed(decoded, path);
+    }
     if (requireData && decoded['data'] == null) {
       throw KugouApiException('响应缺少 data 字段', path: path);
     }
@@ -149,6 +224,15 @@ class KugouClient {
       text = text.replaceAll(RegExp(r'<!--[\s\S]*?-->'), '').trim();
     }
     return text;
+  }
+
+  /// 宽松解析：失败返回 null，交给调用方决定报什么错。
+  static Object? _tryDecodeJson(String body) {
+    try {
+      return jsonDecode(body);
+    } on Object {
+      return null;
+    }
   }
 
   void _throwIfFailed(Map<String, dynamic> json, String path) {
@@ -198,6 +282,12 @@ class KugouClient {
         return '需要 free_part=1 参数，或该曲目无版权/需付费';
       case 20010:
         return '歌曲 hash 无效';
+      case 20002:
+        return '参数无效或登录态与平台不匹配（概念版需重登）';
+      case 131001:
+        return '今日 VIP 已领取，明天再来';
+      case 304003:
+        return '领取日期非法（上游要求次日日期）';
       case 502:
         return '版权受限或无可用音源（付费曲）';
       default:

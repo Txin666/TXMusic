@@ -22,7 +22,6 @@ class AppRoutes {
 
   // 独立窗口 / 全屏页（脱离 Shell，避免播放详情页重复渲染播放条）
   static const String player = '/player';
-  static const String desktopLyric = '/desktop-lyric';
 
   /// 应用内自助扫码登录页（脱离 Shell，独立全屏页）。
   static const String login = '/login';

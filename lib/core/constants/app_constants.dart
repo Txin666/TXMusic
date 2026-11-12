@@ -11,8 +11,4 @@ class AppConstants {
   static const double defaultWindowHeight = 860;
   static const double minWindowWidth = 1000;
   static const double minWindowHeight = 640;
-
-  /// 桌面歌词悬浮窗默认尺寸（文档 §7 桌面歌词窗口）。
-  static const double desktopLyricWidth = 900;
-  static const double desktopLyricHeight = 190;
 }

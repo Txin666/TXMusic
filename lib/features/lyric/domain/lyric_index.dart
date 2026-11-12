@@ -1,6 +1,6 @@
 import 'lyric_line.dart';
 
-/// 歌词高亮行定位（域层纯函数，供播放详情页与桌面歌词消费）。
+/// 歌词高亮行定位（域层纯函数，供播放详情页消费）。
 class LyricIndex {
   const LyricIndex._();
 

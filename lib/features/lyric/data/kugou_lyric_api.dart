@@ -114,7 +114,7 @@ class KugouLyricApi {
       return LyricDocument.empty;
     }
     // 实测 `/lyric?decode=true` 的 `content` 仍是 base64 串（`decodeContent`
-    // 也可能缺失），这里做兜底解码，否则播放页与桌面歌词拿不到逐行歌词。
+    // 也可能缺失），这里做兜底解码，否则播放页拿不到逐行歌词。
     return LyricDocument.parse(decodeIfBase64(text));
   }
 

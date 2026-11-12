@@ -74,7 +74,6 @@ void main() {
     expect(container.read(appRouterProvider).routeInformationParser, isNotNull);
     expect(AppRoutes.navDestinations, contains(AppRoutes.discover));
     expect(AppRoutes.player, '/player');
-    expect(AppRoutes.desktopLyric, '/desktop-lyric');
   });
 
   test('DiscoverFeed 桩数据可被读取（验证 FutureProvider 覆盖生效）', () async {

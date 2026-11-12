@@ -96,6 +96,5 @@ void main() {
     expect(container.read(appRouterProvider).routeInformationParser, isNotNull);
     expect(AppRoutes.navDestinations, contains(AppRoutes.discover));
     expect(AppRoutes.player, '/player');
-    expect(AppRoutes.desktopLyric, '/desktop-lyric');
   });
 }

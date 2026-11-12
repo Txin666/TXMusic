@@ -10,9 +10,8 @@ import '../../../../theme/app_palette.dart';
 /// 顶部栏：返回 + 全局搜索框 + 右侧快捷操作。
 /// 搜索框回车即跳转搜索页并触发检索（真实接口接入点见 search_controller 的 TODO）。
 class TopSearchBar extends ConsumerStatefulWidget {
-  const TopSearchBar({super.key, required this.onOpenDesktopLyric});
+  const TopSearchBar({super.key});
 
-  final VoidCallback onOpenDesktopLyric;
 
   @override
   ConsumerState<TopSearchBar> createState() => _TopSearchBarState();
@@ -98,11 +97,6 @@ class _TopSearchBarState extends ConsumerState<TopSearchBar> {
             ),
           ),
           const Spacer(),
-          _ActionIcon(
-            tooltip: '桌面歌词',
-            icon: Icons.subtitles_outlined,
-            onPressed: widget.onOpenDesktopLyric,
-          ),
           _ActionIcon(
             tooltip: '设置',
             icon: Icons.tune_rounded,

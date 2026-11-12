@@ -10,6 +10,7 @@ import '../../features/playlist/data/kugou_playlist_api.dart';
 import '../../features/rank/data/kugou_rank_api.dart';
 import '../../features/search/data/kugou_search_api.dart';
 import '../../features/song/data/kugou_song_api.dart';
+import '../../features/vip/data/kugou_vip_api.dart';
 import '../audio/i_audio_engine.dart';
 import '../audio/media_kit_audio_engine.dart';
 import 'kugou_client.dart';
@@ -112,6 +113,11 @@ final Provider<KugouLyricApi> kugouLyricApiProvider = Provider<KugouLyricApi>(
 /// 扫码登录接口。
 final Provider<KugouLoginApi> kugouLoginApiProvider = Provider<KugouLoginApi>(
   (Ref ref) => KugouLoginApi(ref.watch(kugouClientProvider)),
+);
+
+/// 概念版 VIP 接口（每日领取 / 权益查询）。
+final Provider<KugouVipApi> kugouVipApiProvider = Provider<KugouVipApi>(
+  (Ref ref) => KugouVipApi(ref.watch(kugouClientProvider)),
 );
 
 /// 音源解析器。
