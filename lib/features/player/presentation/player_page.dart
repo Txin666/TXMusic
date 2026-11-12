@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../core/utils/formatters.dart';
 import '../../../routing/app_routes.dart';
-import '../../../shared/widgets/cover_placeholder.dart';
+import '../../../shared/widgets/cover_image.dart';
 import '../../../shared/widgets/empty_state.dart';
 import '../../../shared/widgets/playback_error_banner.dart';
 import '../../../shared/widgets/song_tile.dart';
@@ -101,8 +101,9 @@ class PlayerPage extends ConsumerWidget {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            CoverPlaceholder(
+                            CoverImage(
                               seed: song.album,
+                              url: song.coverUrl,
                               size: 320,
                               radius: AppRadius.lg,
                               icon: Icons.album_rounded,

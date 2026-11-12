@@ -39,6 +39,7 @@ class TrayPanelState {
     this.title = '',
     this.artist = '',
     this.album = '',
+    this.coverUrl = '',
     this.isPlaying = false,
     this.isLoading = false,
     this.positionMs = 0,
@@ -56,6 +57,9 @@ class TrayPanelState {
   final String title;
   final String artist;
   final String album;
+
+  /// 封面网络地址（主引擎已规范化），面板侧独立引擎自行加载。
+  final String coverUrl;
   final bool isPlaying;
   final bool isLoading;
   final int positionMs;
@@ -77,6 +81,7 @@ class TrayPanelState {
         'title': title,
         'artist': artist,
         'album': album,
+        'coverUrl': coverUrl,
         'isPlaying': isPlaying,
         'isLoading': isLoading,
         'positionMs': positionMs,
@@ -101,6 +106,7 @@ class TrayPanelState {
       title: asString(json['title']),
       artist: asString(json['artist']),
       album: asString(json['album']),
+      coverUrl: asString(json['coverUrl']),
       isPlaying: asBool(json['isPlaying']),
       isLoading: asBool(json['isLoading']),
       positionMs: asInt(json['positionMs']),

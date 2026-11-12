@@ -5,7 +5,7 @@ import '../../theme/app_colors.dart';
 import '../../theme/app_spacing.dart';
 import '../../core/utils/formatters.dart';
 import '../../theme/app_palette.dart';
-import 'cover_placeholder.dart';
+import 'cover_image.dart';
 
 /// 通用歌曲行：榜单 / 歌单 / 专辑 / 搜索结果 / 我的音乐共用。
 /// 仅负责展示与回调，不直接依赖播放 Provider（保持共享层无业务状态）。
@@ -66,7 +66,12 @@ class SongTile extends StatelessWidget {
                   ),
                 ),
               if (showCover) ...<Widget>[
-                CoverPlaceholder(seed: song.album, size: dense ? 36 : 44, radius: 8),
+                CoverImage(
+                  seed: song.album,
+                  url: song.coverUrl,
+                  size: dense ? 36 : 44,
+                  radius: 8,
+                ),
                 const SizedBox(width: AppSpacing.sm),
               ],
               Expanded(

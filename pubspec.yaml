@@ -1,4 +1,4 @@
-name: txmusic
+﻿name: txmusic
 description: "A new Flutter project."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -39,15 +39,17 @@ dependencies:
   flutter_riverpod: ^3.5.0
   go_router: ^18.1.3
   window_manager: ^0.5.1
-  # 真实音频链路：KuGouMusicApi 为 HTTP 服务，音频由 media_kit 直连播放。
+  # 鐪熷疄闊抽閾捐矾锛欿uGouMusicApi 涓?HTTP 鏈嶅姟锛岄煶棰戠敱 media_kit 鐩磋繛鎾斁銆?
   http: ^1.2.2
   media_kit: ^1.2.0
   media_kit_libs_windows_audio: ^1.0.8
   tray_manager: ^0.8.3
   desktop_multi_window: ^0.3.1
   windows_taskbar: ^1.1.2
-  # 托盘面板定位：需要多显示器的工作区矩形，避免贴边越界。
+  # 鎵樼洏闈㈡澘瀹氫綅锛氶渶瑕佸鏄剧ず鍣ㄧ殑宸ヤ綔鍖虹煩褰紝閬垮厤璐磋竟瓒婄晫銆?
   screen_retriever: ^0.2.2
+  # 封面图片：磁盘缓存（文档 §5 图片加载策略）
+  cached_network_image: ^3.4.1
 
 dev_dependencies:
   flutter_test:
@@ -71,8 +73,8 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
-  # 托盘图标：与 windows/runner/resources/app_icon.ico 同源。
-  # 任务栏缩略图工具栏按钮需要 ico（Windows 只吃图标资源，不吃 png）。
+  # 鎵樼洏鍥炬爣锛氫笌 windows/runner/resources/app_icon.ico 鍚屾簮銆?
+  # 浠诲姟鏍忕缉鐣ュ浘宸ュ叿鏍忔寜閽渶瑕?ico锛圵indows 鍙悆鍥炬爣璧勬簮锛屼笉鍚?png锛夈€?
   assets:
     - assets/icons/tray.ico
     - assets/icons/taskbar_prev.ico
@@ -105,3 +107,4 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+

@@ -16,6 +16,8 @@ class JsonUtils {
     'deprecated',
     'trans_param',
     'privilege_download',
+    // `user_history` 把歌曲塞在 `songs[].info` 里，放最后避免通用名误命中
+    'info',
   ];
 
   static Map<String, dynamic>? asMap(Object? value) {

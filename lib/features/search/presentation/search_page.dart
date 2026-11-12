@@ -166,6 +166,7 @@ class _SearchPageState extends ConsumerState<SearchPage> {
                       (Playlist playlist) => MediaCard(
                         title: playlist.title,
                         seed: playlist.title,
+                        coverUrl: playlist.coverUrl,
                         subtitle: '${playlist.songCount} 首 · '
                             '${Formatters.playCount(playlist.playCount)}',
                         onTap: () => context
@@ -209,6 +210,7 @@ class _SearchPageState extends ConsumerState<SearchPage> {
                       (Album album) => MediaCard(
                         title: album.title,
                         seed: album.title,
+                        coverUrl: album.coverUrl,
                         subtitle: album.artist.isEmpty
                             ? '${album.trackCount} 首'
                             : '${album.artist} · ${album.trackCount} 首',
@@ -383,7 +385,11 @@ class _ArtistResultTile extends StatelessWidget {
         width: 168,
         child: Column(
           children: <Widget>[
-            ArtistAvatar(name: artist.name, size: 120),
+            ArtistAvatar(
+                        name: artist.name,
+                        avatarUrl: artist.avatarUrl,
+                        size: 120,
+                      ),
             const SizedBox(height: AppSpacing.sm),
             Text(
               artist.name,

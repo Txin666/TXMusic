@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 
 import '../../theme/app_spacing.dart';
 import '../../theme/app_palette.dart';
-import 'cover_placeholder.dart';
+import 'cover_image.dart';
 
 /// 详情页顶部通用区块：封面 + 类型 + 标题 + 元信息 + 操作按钮。
-/// 歌单 / 专辑 / 歌手 / 榜单详情共用，保证骨架期视觉一致。
+/// 歌单 / 专辑 / 歌手 / 榜单详情共用，视觉保持一致。
 class DetailHero extends StatelessWidget {
   const DetailHero({
     super.key,
     required this.seed,
+    this.coverUrl,
     required this.title,
     required this.typeLabel,
     this.meta,
@@ -22,6 +23,9 @@ class DetailHero extends StatelessWidget {
   });
 
   final String seed;
+
+  /// 网络封面地址；为空或不合法时自动退回渐变占位。
+  final String? coverUrl;
   final String title;
   final String typeLabel;
   final String? meta;
@@ -39,7 +43,13 @@ class DetailHero extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: <Widget>[
-        CoverPlaceholder(seed: seed, size: 196, radius: AppRadius.md, icon: icon),
+        CoverImage(
+          seed: seed,
+          url: coverUrl,
+          size: 196,
+          radius: AppRadius.md,
+          icon: icon,
+        ),
         const SizedBox(width: AppSpacing.xl),
         Expanded(
           child: Column(

@@ -86,6 +86,7 @@ class PlaylistDetailPage extends ConsumerWidget {
             children: <Widget>[
               DetailHero(
                 seed: playlist.title,
+                coverUrl: playlist.coverUrl,
                 title: playlist.title,
                 typeLabel: '歌单',
                 icon: Icons.queue_music_rounded,

@@ -136,6 +136,7 @@ class _AppWindowFrameState extends ConsumerState<AppWindowFrame> {
         title: song?.title ?? '',
         artist: song?.artist ?? '',
         album: song?.album ?? '',
+        coverUrl: song?.coverUrl ?? '',
         isPlaying: snapshot.isPlaying,
         isLoading: snapshot.isLoading,
         positionMs: snapshot.position.inMilliseconds,

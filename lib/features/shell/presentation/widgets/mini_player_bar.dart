@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 import '../../../../core/network/kugou_client.dart';
 import '../../../../routing/app_routes.dart';
 import '../../../../core/utils/formatters.dart';
+import '../../../../shared/widgets/cover_image.dart';
 import '../../../../shared/widgets/cover_placeholder.dart';
 import '../../../../theme/app_colors.dart';
 import '../../../../theme/app_spacing.dart';
@@ -125,7 +126,12 @@ class MiniPlayerBar extends ConsumerWidget {
                   borderRadius: BorderRadius.circular(10),
                   child: Row(
                     children: <Widget>[
-                      CoverPlaceholder(seed: song.album, size: 52, radius: 10),
+                      CoverImage(
+                        seed: song.album,
+                        url: song.coverUrl,
+                        size: 52,
+                        radius: 10,
+                      ),
                       const SizedBox(width: AppSpacing.md),
                       SizedBox(
                         width: 190,

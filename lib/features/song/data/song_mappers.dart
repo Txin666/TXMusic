@@ -62,12 +62,17 @@ class SongMappers {
   ];
 
   static const List<String> _coverKeys = <String>[
+    // 真实位置勘误：歌手/专辑/歌单里的歌，封面多数只出现在
+    // `trans_param.union_cover` 或 `album_info.sizable_cover`，
+    // 顶层没有 `cover`，漏了这两个键会导致整片列表无封面。
+    'union_cover',
     'sizable_cover',
     'Image',
     'img',
     'imgurl',
     'cover_url',
     'sizable_avatar',
+    'album_img',
     'cover',
     'album_cover',
   ];

@@ -3,15 +3,16 @@ import 'package:flutter/material.dart';
 import '../../theme/app_colors.dart';
 import '../../theme/app_spacing.dart';
 import '../../theme/app_palette.dart';
-import 'cover_placeholder.dart';
+import 'cover_image.dart';
 
 /// 通用媒体卡片（歌单 / 专辑 / 榜单）：
-/// 骨架期封面为本地渐变，接入接口后把 [CoverPlaceholder] 换成网络图即可。
+/// 封面走 [CoverImage]（磁盘缓存 + 失败回落渐变占位）。
 class MediaCard extends StatefulWidget {
   const MediaCard({
     super.key,
     required this.title,
     required this.seed,
+    this.coverUrl,
     this.subtitle,
     this.badge,
     this.width = 168,
@@ -22,6 +23,9 @@ class MediaCard extends StatefulWidget {
 
   final String title;
   final String seed;
+
+  /// 网络封面地址；为空或不合法时自动退回渐变占位。
+  final String? coverUrl;
   final String? subtitle;
   final String? badge;
   final double width;
@@ -53,8 +57,9 @@ class _MediaCardState extends State<MediaCard> {
             children: <Widget>[
               Stack(
                 children: <Widget>[
-                  CoverPlaceholder(
+                  CoverImage(
                     seed: widget.seed,
+                    url: widget.coverUrl,
                     size: widget.width,
                     radius: AppRadius.sm,
                     icon: widget.icon,

@@ -83,7 +83,11 @@ class ArtistDetailPage extends ConsumerWidget {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  ArtistAvatar(name: artist.name, size: 128),
+                  ArtistAvatar(
+                name: artist.name,
+                avatarUrl: artist.avatarUrl,
+                size: 128,
+              ),
                   const SizedBox(width: AppSpacing.xl),
                   Expanded(
                     child: Column(
@@ -235,6 +239,7 @@ class ArtistDetailPage extends ConsumerWidget {
                           (Album album) => MediaCard(
                             title: album.title,
                             seed: album.title,
+                            coverUrl: album.coverUrl,
                             subtitle: album.releaseDate,
                             icon: Icons.album_rounded,
                             onTap: () =>

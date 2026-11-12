@@ -74,6 +74,7 @@ class AlbumDetailPage extends ConsumerWidget {
             children: <Widget>[
               DetailHero(
                 seed: album.title,
+                coverUrl: album.coverUrl,
                 title: album.title,
                 typeLabel: '专辑',
                 icon: Icons.album_rounded,

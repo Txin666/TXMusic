@@ -67,6 +67,7 @@ class RankDetailPage extends ConsumerWidget {
             children: <Widget>[
               DetailHero(
                 seed: rank.title,
+                coverUrl: rank.coverUrl,
                 title: rank.title,
                 typeLabel: '排行榜',
                 icon: Icons.leaderboard_rounded,

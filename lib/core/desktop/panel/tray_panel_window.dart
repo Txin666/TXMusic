@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math' as math;
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -276,7 +277,10 @@ class _TrayPanelViewState extends State<TrayPanelView> {
         children: <Widget>[
           Row(
             children: <Widget>[
-              _PanelCover(seed: _state.album.isEmpty ? _state.title : _state.album),
+              _PanelCover(
+                seed: _state.album.isEmpty ? _state.title : _state.album,
+                url: _state.coverUrl,
+              ),
               const SizedBox(width: 12),
               Expanded(
                 child: Column(
@@ -448,12 +452,15 @@ class _TrayPanelViewState extends State<TrayPanelView> {
   }
 }
 
-/// 方形封面：面板是独立引擎，拿不到主窗口的主题与网络图缓存，
-/// 沿用「文字指纹 → 渐变」的占位逻辑保持一致观感。
+/// 方形封面：面板是独立引擎，拿不到主窗口的主题扩展，网络图自己加载自己缓存；
+/// 地址为空或加载失败时退回「文字指纹 → 渐变」占位，保证观感不塌。
 class _PanelCover extends StatelessWidget {
-  const _PanelCover({required this.seed});
+  const _PanelCover({required this.seed, this.url});
 
   final String seed;
+
+  /// 主引擎推来的封面地址（已补 `{size}` 与 https）。
+  final String? url;
 
   static const List<List<Color>> _palettes = <List<Color>>[
     <Color>[Color(0xFF1DB954), Color(0xFF0B3D2C)],
@@ -473,26 +480,47 @@ class _PanelCover extends StatelessWidget {
     return _palettes[hash % _palettes.length];
   }
 
+  Widget get _fallback => Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12),
+          gradient: LinearGradient(
+            colors: _colors,
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+        ),
+        alignment: Alignment.center,
+        child: Icon(
+          Icons.music_note_rounded,
+          size: 22,
+          color: Colors.white.withValues(alpha: 0.92),
+        ),
+      );
+
   @override
   Widget build(BuildContext context) {
+    final String src = (url ?? '').trim();
     return Container(
       width: 54,
       height: 54,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
-        gradient: LinearGradient(
-          colors: _colors,
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
         border: Border.all(color: const Color(0x1FFFFFFF)),
       ),
-      alignment: Alignment.center,
-      child: Icon(
-        Icons.music_note_rounded,
-        size: 22,
-        color: Colors.white.withValues(alpha: 0.92),
-      ),
+      clipBehavior: Clip.antiAlias,
+      child: src.isEmpty
+          ? _fallback
+          : CachedNetworkImage(
+              imageUrl: src,
+              width: 54,
+              height: 54,
+              fit: BoxFit.cover,
+              fadeInDuration: const Duration(milliseconds: 120),
+              fadeOutDuration: Duration.zero,
+              placeholder: (BuildContext context, String _) => _fallback,
+              errorWidget: (BuildContext context, String _, Object error) =>
+                  _fallback,
+            ),
     );
   }
 }

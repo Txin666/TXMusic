@@ -1,12 +1,15 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
+import '../../core/utils/asset_url.dart';
 import '../../theme/app_palette.dart';
 import 'cover_placeholder.dart';
 
-/// 网络封面：加载失败或无地址时自动退回 [CoverPlaceholder] 渐变占位。
+/// 网络封面：磁盘缓存 + 加载态 + 失败自动退回 [CoverPlaceholder] 渐变占位。
 ///
-/// 真实接口的封面多为 `imge.kugou.com` 模板串，偶发 403/超时属于常态，
-/// 这里统一兜底，避免列表里出现破图方块。
+/// 开发文档 §5 图片加载策略：封面统一走 `CachedNetworkImage`，避免列表滚动反复请求；
+/// 地址先经 [AssetUrl.normalize] 补 `{size}` 与 https，偶发 403/超时直接兜底，
+/// 列表里不出现破图红块。
 class CoverImage extends StatelessWidget {
   const CoverImage({
     super.key,
@@ -17,6 +20,7 @@ class CoverImage extends StatelessWidget {
     this.icon = Icons.music_note_rounded,
     this.label,
     this.circle = false,
+    this.fit = BoxFit.cover,
   });
 
   final String seed;
@@ -26,10 +30,12 @@ class CoverImage extends StatelessWidget {
   final IconData icon;
   final String? label;
   final bool circle;
+  final BoxFit fit;
 
   @override
   Widget build(BuildContext context) {
-    final String? src = url;
+    final BorderRadius borderRadius =
+        BorderRadius.circular(circle ? size / 2 : radius);
     final Widget fallback = CoverPlaceholder(
       seed: seed,
       size: size,
@@ -37,41 +43,42 @@ class CoverImage extends StatelessWidget {
       icon: icon,
       label: label,
     );
-    if (src == null || src.isEmpty) {
+
+    final String? src = AssetUrl.normalize(
+      url,
+      size: AssetUrl.sizeFor(size),
+    );
+    if (src == null) {
       return fallback;
     }
+
+    final int cachePx = (size * MediaQuery.devicePixelRatioOf(context)).round();
+
     return ClipRRect(
-      borderRadius: BorderRadius.circular(circle ? size / 2 : radius),
-      child: Image.network(
-        src,
+      borderRadius: borderRadius,
+      child: CachedNetworkImage(
+        imageUrl: src,
         width: size,
         height: size,
-        fit: BoxFit.cover,
-        errorBuilder: (BuildContext context, Object error, StackTrace? stack) =>
-            fallback,
-        loadingBuilder: (
-          BuildContext context,
-          Widget child,
-          ImageChunkEvent? progress,
-        ) {
-          if (progress == null) {
-            return child;
-          }
-          return Container(
-            width: size,
-            height: size,
-            decoration: BoxDecoration(
-              color: context.palette.surfaceHigh,
-              borderRadius: BorderRadius.circular(circle ? size / 2 : radius),
+        fit: fit,
+        memCacheWidth: cachePx > 0 ? cachePx : null,
+        fadeInDuration: const Duration(milliseconds: 120),
+        fadeOutDuration: Duration.zero,
+        placeholder: (BuildContext context, String _) => Container(
+          width: size,
+          height: size,
+          color: context.palette.surfaceHigh,
+          alignment: Alignment.center,
+          child: SizedBox(
+            width: 16,
+            height: 16,
+            child: CircularProgressIndicator(
+              strokeWidth: 2,
+              color: context.palette.textDisabled,
             ),
-            alignment: Alignment.center,
-            child: const SizedBox(
-              width: 16,
-              height: 16,
-              child: CircularProgressIndicator(strokeWidth: 2),
-            ),
-          );
-        },
+          ),
+        ),
+        errorWidget: (BuildContext context, String _, Object error) => fallback,
       ),
     );
   }
