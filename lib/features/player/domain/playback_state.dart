@@ -1,7 +1,15 @@
 import '../../song/domain/song.dart';
 
 /// 播放状态枚举（对应文档 §3.2 player/domain/playback_state.dart）。
-enum PlaybackStatus { idle, loadingUrl, buffering, playing, paused, completed, error }
+enum PlaybackStatus {
+  idle,
+  loadingUrl,
+  buffering,
+  playing,
+  paused,
+  completed,
+  error,
+}
 
 /// 循环模式。
 enum RepeatMode { none, all, one }

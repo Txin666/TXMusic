@@ -86,8 +86,9 @@ class AppSideNav extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double width =
-        collapsed ? AppSpacing.sideNavCollapsedWidth : AppSpacing.sideNavWidth;
+    final double width = collapsed
+        ? AppSpacing.sideNavCollapsedWidth
+        : AppSpacing.sideNavWidth;
 
     return AnimatedContainer(
       duration: const Duration(milliseconds: 180),
@@ -103,7 +104,12 @@ class AppSideNav extends StatelessWidget {
           const SizedBox(height: AppSpacing.lg),
           if (!collapsed)
             Padding(
-              padding: EdgeInsets.fromLTRB(AppSpacing.lg, 0, AppSpacing.lg, AppSpacing.xs),
+              padding: EdgeInsets.fromLTRB(
+                AppSpacing.lg,
+                0,
+                AppSpacing.lg,
+                AppSpacing.xs,
+              ),
               child: Text(
                 '音乐库',
                 style: TextStyle(
@@ -118,7 +124,12 @@ class AppSideNav extends StatelessWidget {
           const SizedBox(height: AppSpacing.lg),
           if (!collapsed)
             Padding(
-              padding: EdgeInsets.fromLTRB(AppSpacing.lg, 0, AppSpacing.lg, AppSpacing.xs),
+              padding: EdgeInsets.fromLTRB(
+                AppSpacing.lg,
+                0,
+                AppSpacing.lg,
+                AppSpacing.xs,
+              ),
               child: Text(
                 '快捷入口',
                 style: TextStyle(
@@ -162,7 +173,11 @@ class AppSideNav extends StatelessWidget {
               borderRadius: BorderRadius.circular(9),
             ),
             alignment: Alignment.center,
-            child: const Icon(Icons.graphic_eq_rounded, size: 18, color: Color(0xFF04120C)),
+            child: const Icon(
+              Icons.graphic_eq_rounded,
+              size: 18,
+              color: Color(0xFF04120C),
+            ),
           ),
           if (!collapsed) ...<Widget>[
             const SizedBox(width: AppSpacing.sm),
@@ -173,17 +188,15 @@ class AppSideNav extends StatelessWidget {
                   Text(
                     'TX MUSIC',
                     style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                          letterSpacing: 1.4,
-                          fontWeight: FontWeight.w800,
-                        ),
+                      letterSpacing: 1.4,
+                      fontWeight: FontWeight.w800,
+                    ),
                   ),
                   Text(
                     'Windows 桌面播放器',
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: Theme.of(context)
-                        .textTheme
-                        .labelSmall
+                    style: Theme.of(context).textTheme.labelSmall
                         ?.copyWith(color: context.palette.textSecondary),
                   ),
                 ],
@@ -205,7 +218,10 @@ class AppSideNav extends StatelessWidget {
   Widget _buildItem(BuildContext context, NavEntry entry) {
     final bool active = _isActive(entry.path);
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm, vertical: 2),
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppSpacing.sm,
+        vertical: 2,
+      ),
       child: Tooltip(
         message: collapsed ? entry.label : '',
         child: Material(
@@ -216,16 +232,21 @@ class AppSideNav extends StatelessWidget {
             onTap: () => onNavigate(entry.path),
             child: Container(
               height: 42,
-              padding: EdgeInsets.symmetric(horizontal: collapsed ? 0 : AppSpacing.md),
+              padding: EdgeInsets.symmetric(
+                horizontal: collapsed ? 0 : AppSpacing.md,
+              ),
               alignment: collapsed ? Alignment.center : Alignment.centerLeft,
               child: Row(
-                mainAxisAlignment:
-                    collapsed ? MainAxisAlignment.center : MainAxisAlignment.start,
+                mainAxisAlignment: collapsed
+                    ? MainAxisAlignment.center
+                    : MainAxisAlignment.start,
                 children: <Widget>[
                   Icon(
                     active ? entry.activeIcon : entry.icon,
                     size: 20,
-                    color: active ? context.palette.emphasized : context.palette.textSecondary,
+                    color: active
+                        ? context.palette.emphasized
+                        : context.palette.textSecondary,
                   ),
                   if (!collapsed) ...<Widget>[
                     const SizedBox(width: AppSpacing.md),
@@ -234,7 +255,9 @@ class AppSideNav extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 13,
                         fontWeight: active ? FontWeight.w700 : FontWeight.w500,
-                        color: active ? context.palette.textPrimary : context.palette.textSecondary,
+                        color: active
+                            ? context.palette.textPrimary
+                            : context.palette.textSecondary,
                       ),
                     ),
                   ],
@@ -259,16 +282,18 @@ class AppSideNav extends StatelessWidget {
             )
           : Row(
               children: <Widget>[
-                Icon(Icons.info_outline_rounded, size: 14, color: context.palette.textDisabled),
+                Icon(
+                  Icons.info_outline_rounded,
+                  size: 14,
+                  color: context.palette.textDisabled,
+                ),
                 const SizedBox(width: AppSpacing.xs),
                 Expanded(
                   child: Text(
                     'UI 骨架版 v0.1',
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: Theme.of(context)
-                        .textTheme
-                        .labelSmall
+                    style: Theme.of(context).textTheme.labelSmall
                         ?.copyWith(color: context.palette.textDisabled),
                   ),
                 ),

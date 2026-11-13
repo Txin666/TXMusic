@@ -11,8 +11,8 @@ import '../domain/user_profile.dart';
 /// - 需要手动刷新时调用 `ref.invalidate(userProfileProvider)`。
 final FutureProvider<UserProfile?> userProfileProvider =
     FutureProvider<UserProfile?>((Ref ref) async {
-  if (!ref.watch(kugouSessionProvider).isLoggedIn) {
-    return null;
-  }
-  return ref.watch(kugouUserApiProvider).load();
-});
+      if (!ref.watch(kugouSessionProvider).isLoggedIn) {
+        return null;
+      }
+      return ref.watch(kugouUserApiProvider).load();
+    });

@@ -18,6 +18,7 @@ import '../features/shell/presentation/main_shell.dart';
 import '../theme/app_spacing.dart';
 import '../theme/app_palette.dart';
 import 'app_routes.dart';
+import 'navigation_observer.dart';
 
 /// 全局路由（文档 §9.6）。
 ///
@@ -28,10 +29,15 @@ import 'app_routes.dart';
 class AppRouter {
   const AppRouter._();
 
-  static GoRouter build() {
+  static GoRouter build({
+    List<NavigatorObserver> observers = const <NavigatorObserver>[],
+  }) {
     return GoRouter(
       initialLocation: AppRoutes.discover,
       debugLogDiagnostics: false,
+      // 前进 / 后退历史需要感知 `context.push` 入栈（go 之外的导航），
+      // 由 [navigationLocationObserverProvider] 注入，测试可自行替换。
+      observers: observers,
       redirect: (BuildContext context, GoRouterState state) {
         // 根路径统一落到发现页，避免出现空路由。
         if (state.uri.path == '/') {
@@ -41,11 +47,7 @@ class AppRouter {
       },
       routes: <RouteBase>[
         ShellRoute(
-          builder: (
-            BuildContext context,
-            GoRouterState state,
-            Widget child,
-          ) {
+          builder: (BuildContext context, GoRouterState state, Widget child) {
             return MainShell(
               currentPath: state.uri.path,
               child: KeyedSubtree(
@@ -137,24 +139,33 @@ class AppRouter {
   }
 
   /// 统一的淡入淡出转场：桌面端切换更轻，避免默认滑动在宽屏上观感突兀。
-  static Page<void> Function(BuildContext, GoRouterState) _fadePage(Widget page) {
+  static Page<void> Function(BuildContext, GoRouterState) _fadePage(
+    Widget page,
+  ) {
     return (BuildContext context, GoRouterState state) {
       return CustomTransitionPage<void>(
         key: state.pageKey,
+        // 显式带上路由名：Navigator 的 Route.settings.name 默认是空，
+        // 而「前进 / 后退」历史靠它识别 `context.push` 打开的详情页。
+        name: state.uri.toString(),
         child: page,
         transitionDuration: const Duration(milliseconds: 160),
         reverseTransitionDuration: const Duration(milliseconds: 120),
-        transitionsBuilder: (
-          BuildContext context,
-          Animation<double> animation,
-          Animation<double> secondaryAnimation,
-          Widget child,
-        ) {
-          return FadeTransition(
-            opacity: CurvedAnimation(parent: animation, curve: Curves.easeOut),
-            child: child,
-          );
-        },
+        transitionsBuilder:
+            (
+              BuildContext context,
+              Animation<double> animation,
+              Animation<double> secondaryAnimation,
+              Widget child,
+            ) {
+              return FadeTransition(
+                opacity: CurvedAnimation(
+                  parent: animation,
+                  curve: Curves.easeOut,
+                ),
+                child: child,
+              );
+            },
       );
     };
   }
@@ -162,7 +173,11 @@ class AppRouter {
 
 /// 路由级全局实例：`ProviderScope` 内只创建一次，避免重建导致路由栈丢失。
 final Provider<GoRouter> appRouterProvider = Provider<GoRouter>(
-  (Ref ref) => AppRouter.build(),
+  (Ref ref) => AppRouter.build(
+    observers: <NavigatorObserver>[
+      ref.watch(navigationLocationObserverProvider),
+    ],
+  ),
 );
 
 /// 未匹配路径兜底页：保证任何情况都不出现白屏。
@@ -191,9 +206,7 @@ class _RouteErrorPage extends StatelessWidget {
               const SizedBox(height: AppSpacing.xs),
               Text(
                 location,
-                style: Theme.of(context)
-                    .textTheme
-                    .bodySmall
+                style: Theme.of(context).textTheme.bodySmall
                     ?.copyWith(color: context.palette.textSecondary),
               ),
               const SizedBox(height: AppSpacing.lg),

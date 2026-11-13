@@ -27,7 +27,10 @@ class KugouUserApi {
         _get('/user/detail'),
         _get('/user/info'),
         _get('/user/grade/info'),
-        _get('/user/vip/detail', query: <String, dynamic>{'busi_type': 'concept'}),
+        _get(
+          '/user/vip/detail',
+          query: <String, dynamic>{'busi_type': 'concept'},
+        ),
         _get('/user/listen'),
       ],
     );
@@ -43,7 +46,11 @@ class KugouUserApi {
       userid: _str(info, <String>['userid'], detail).isEmpty
           ? _client.session.userid
           : _str(info, <String>['userid'], detail),
-      nickname: _str(detail, <String>['nickname', 'k_nickname', 'username'], info),
+      nickname: _str(detail, <String>[
+        'nickname',
+        'k_nickname',
+        'username',
+      ], info),
       avatarUrl: _str(detail, <String>['pic', 'k_pic'], info),
       signature: _str(info, <String>['signature']),
       // 性别：`/user/detail` 的 gender 优先，缺失（0）时回落到 `/user/info` 的 sex。
@@ -97,9 +104,12 @@ class KugouUserApi {
     List<String> keys, [
     Map<String, dynamic>? fallback,
   ]) {
-    Object? value = JsonUtils.pick(_data(json), keys) ?? JsonUtils.pick(json, keys);
+    Object? value =
+        JsonUtils.pick(_data(json), keys) ?? JsonUtils.pick(json, keys);
     if ((value == null || '$value'.trim().isEmpty) && fallback != null) {
-      value = JsonUtils.pick(_data(fallback), keys) ?? JsonUtils.pick(fallback, keys);
+      value =
+          JsonUtils.pick(_data(fallback), keys) ??
+          JsonUtils.pick(fallback, keys);
     }
     return value;
   }
@@ -131,7 +141,10 @@ class KugouUserApi {
   }
 
   /// `province` + `city`：两者都为空时返回空串。
-  static String _region(Map<String, dynamic> info, Map<String, dynamic> detail) {
+  static String _region(
+    Map<String, dynamic> info,
+    Map<String, dynamic> detail,
+  ) {
     final String province = _str(info, <String>['province'], detail);
     final String city = _str(info, <String>['city'], detail);
     if (province.isEmpty && city.isEmpty) {
@@ -158,7 +171,8 @@ class KugouUserApi {
   static List<String> _bindings(Map<String, dynamic> info) {
     final Map<String, dynamic> data = _data(info);
     final Map<String, dynamic>? third =
-        JsonUtils.asMap(data['third_info']) ?? JsonUtils.asMap(info['third_info']);
+        JsonUtils.asMap(data['third_info']) ??
+        JsonUtils.asMap(info['third_info']);
     if (third == null || third.isEmpty) {
       return const <String>[];
     }

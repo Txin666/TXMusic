@@ -17,8 +17,7 @@ class KugouApiException implements Exception {
   final int? code;
 
   @override
-  String toString() =>
-      'KugouApiException(${path ?? '-'} code=$code): $message';
+  String toString() => 'KugouApiException(${path ?? '-'} code=$code): $message';
 }
 
 /// KuGouMusicApi 访问客户端。
@@ -31,16 +30,14 @@ class KugouApiException implements Exception {
 /// 4. 把失败响应统一收敛成 [KugouApiException]，成功码兼容 `1` 与 `200`
 ///    两套（`/lyric` 返回 `status=200`、`errcode=200`）。
 class KugouClient {
-  KugouClient({
-    KugouSession? session,
-    http.Client? httpClient,
-    String? baseUrl,
-  })  : session = session ?? KugouSession.guest,
-        _http = httpClient ?? http.Client(),
-        _baseUrl = baseUrl ?? (session?.baseUrl ?? KugouConfig.baseUrl);
+  KugouClient({KugouSession? session, http.Client? httpClient, String? baseUrl})
+    : session = session ?? KugouSession.guest,
+      _http = httpClient ?? http.Client(),
+      _baseUrl = baseUrl ?? (session?.baseUrl ?? KugouConfig.baseUrl);
 
   final http.Client _http;
   final String _baseUrl;
+
   /// 当前登录态（可在运行期替换，例如扫码登录成功后）。
   KugouSession session;
 
@@ -247,7 +244,8 @@ class KugouClient {
 
     final Object? rawCode = hasErr ? errcode : status;
     final int? code = int.tryParse('$rawCode');
-    final String raw = '${json['error_msg'] ?? json['errmsg'] ?? json['msg'] ?? ''}';
+    final String raw =
+        '${json['error_msg'] ?? json['errmsg'] ?? json['msg'] ?? ''}';
     throw KugouApiException(
       _friendlyMessage(code, raw),
       path: path,

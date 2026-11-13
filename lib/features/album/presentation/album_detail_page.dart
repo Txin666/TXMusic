@@ -29,8 +29,12 @@ class AlbumDetailPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final AsyncValue<Album?> albumAsync = ref.watch(albumDetailProvider(albumId));
-    final AsyncValue<List<Song>> songsAsync = ref.watch(albumSongsProvider(albumId));
+    final AsyncValue<Album?> albumAsync = ref.watch(
+      albumDetailProvider(albumId),
+    );
+    final AsyncValue<List<Song>> songsAsync = ref.watch(
+      albumSongsProvider(albumId),
+    );
 
     return PageContainer(
       child: albumAsync.when(
@@ -83,8 +87,8 @@ class AlbumDetailPage extends ConsumerWidget {
                 onPrimaryTap: songs.isEmpty
                     ? null
                     : () => ref
-                        .read(playerControllerProvider.notifier)
-                        .playQueue(songs),
+                          .read(playerControllerProvider.notifier)
+                          .playQueue(songs),
                 secondaryLabel: canOpenArtist ? '查看歌手' : null,
                 onSecondaryTap: canOpenArtist
                     ? () => context.push(AppRoutes.artistDetail(album.artistId))
@@ -106,7 +110,8 @@ class AlbumDetailPage extends ConsumerWidget {
                   description: _describeError(error),
                   icon: Icons.music_off_rounded,
                   actionLabel: '重试',
-                  onActionTap: () => ref.invalidate(albumSongsProvider(albumId)),
+                  onActionTap: () =>
+                      ref.invalidate(albumSongsProvider(albumId)),
                   compact: true,
                 ),
                 data: (List<Song> list) {
@@ -171,9 +176,7 @@ class _DetailLoading extends StatelessWidget {
             const SizedBox(height: AppSpacing.md),
             Text(
               label,
-              style: Theme.of(context)
-                  .textTheme
-                  .bodySmall
+              style: Theme.of(context).textTheme.bodySmall
                   ?.copyWith(color: context.palette.textSecondary),
             ),
           ],

@@ -18,10 +18,7 @@ class KugouPlaylistApi {
   final KugouClient _client;
 
   /// 推荐歌单（`/top/playlist`），发现页与"歌单广场"共用。
-  Future<List<Playlist>> topPlaylists({
-    int page = 1,
-    int pageSize = 20,
-  }) async {
+  Future<List<Playlist>> topPlaylists({int page = 1, int pageSize = 20}) async {
     final Map<String, dynamic> json = await _client.getJson(
       '/top/playlist',
       query: <String, dynamic>{'page': page, 'pagesize': pageSize},
@@ -70,15 +67,76 @@ class KugouPlaylistApi {
   }
 
   /// 歌单曲目（`/playlist/track/all?id=<global_collection_id>`）。
+  ///
+  /// **翻页约束（实测）**：上游是分页接口，`data.count` 才是歌单真实曲目数，
+  /// 只请求 `page: 1` 时最多只能拿到 `pagesize` 首（默认 100），大歌单会被
+  /// 静默截断。传 `fetchAll: true` 时按 `count` 自动翻页拉全（单页上限
+  /// `_maxPageSize = 300`），并跨页按 hash 去重 —— 页内去重会把重复曲目
+  /// 剔掉，所以最终条数可能略小于 `count`，这是正常现象。
   Future<List<Song>> songs(
     String id, {
     int page = 1,
     int pageSize = 100,
+    bool fetchAll = false,
   }) async {
     final String collectionId = normalizeCollectionId(id);
     if (collectionId.isEmpty) {
       return const <Song>[];
     }
+    if (!fetchAll) {
+      final Map<String, dynamic>? data = await _fetchPage(
+        collectionId,
+        page,
+        pageSize,
+      );
+      if (data == null) {
+        return const <Song>[];
+      }
+      return SongMappers.listFrom(data['songs'], dedupe: true);
+    }
+
+    final List<Song> songs = <Song>[];
+    final Set<String> seen = <String>{};
+    int total = 0;
+    for (int current = 1; current <= _maxPages; current++) {
+      final Map<String, dynamic>? data = await _fetchPage(
+        collectionId,
+        current,
+        _maxPageSize,
+      );
+      if (data == null) {
+        break;
+      }
+      total = JsonUtils.integer(data['count'], fallback: total);
+      final List<Song> pageSongs = SongMappers.listFrom(data['songs']);
+      if (pageSongs.isEmpty) {
+        break;
+      }
+      for (final Song song in pageSongs) {
+        if (seen.add(song.hash)) {
+          songs.add(song);
+        }
+      }
+      // count 已知时按页码算终点；未知时靠空页兜底。
+      if (total > 0 && current >= (total / _maxPageSize).ceil()) {
+        break;
+      }
+    }
+    return songs;
+  }
+
+  /// 上游单页上限：`pagesize` 超过 300 不会返回更多，直接按 300 分页。
+  static const int _maxPageSize = 300;
+
+  /// 翻页保护上限，防止上游 `count` 异常时无限请求。
+  static const int _maxPages = 60;
+
+  /// 拉取单页曲目；ID 形态错误（502）或 `data` 为空时返回 null。
+  Future<Map<String, dynamic>?> _fetchPage(
+    String collectionId,
+    int page,
+    int pageSize,
+  ) async {
     final Map<String, dynamic> json;
     try {
       json = await _client.getJson(
@@ -92,15 +150,11 @@ class KugouPlaylistApi {
     } on KugouApiException catch (error) {
       // 传错 ID（如 specialid）会 502：降级为空曲目，由页面提示暂无曲目。
       if (error.code == 502) {
-        return const <Song>[];
+        return null;
       }
       rethrow;
     }
-    final Map<String, dynamic>? data = JsonUtils.asMap(json['data']);
-    if (data == null) {
-      return const <Song>[];
-    }
-    return SongMappers.listFrom(data['songs'], dedupe: true);
+    return JsonUtils.asMap(json['data']);
   }
 
   /// 统一 ID 形态：只保留 `global_collection_id`。

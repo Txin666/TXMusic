@@ -148,7 +148,9 @@ class _CaptionButtonState extends State<_CaptionButton> {
               widget.icon,
               size: 15,
               color: _hovered
-                  ? (widget.hoverColor != null ? Colors.white : palette.textPrimary)
+                  ? (widget.hoverColor != null
+                        ? Colors.white
+                        : palette.textPrimary)
                   : palette.textSecondary,
             ),
           ),

@@ -113,8 +113,7 @@ class TxMusicApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final ThemeMode themeMode =
-        ref.watch(settingsControllerProvider).themeMode;
+    final ThemeMode themeMode = ref.watch(settingsControllerProvider).themeMode;
     final GoRouter router = ref.watch(appRouterProvider);
 
     return MaterialApp.router(
@@ -126,9 +125,8 @@ class TxMusicApp extends ConsumerWidget {
       themeMode: themeMode,
       scaffoldMessengerKey: DesktopHost.instance.messengerKey,
       // 所有路由统一叠加自绘标题栏，避免逐页改动。
-      builder: (BuildContext context, Widget? child) => AppWindowFrame(
-        child: child ?? const SizedBox.shrink(),
-      ),
+      builder: (BuildContext context, Widget? child) =>
+          AppWindowFrame(child: child ?? const SizedBox.shrink()),
       locale: const Locale('zh', 'CN'),
       supportedLocales: const <Locale>[Locale('zh', 'CN'), Locale('en')],
       localizationsDelegates: const <LocalizationsDelegate<Object>>[

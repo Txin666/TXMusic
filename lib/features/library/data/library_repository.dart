@@ -40,7 +40,9 @@ class LibraryRepository {
   }
 
   Future<void> clearRecent() async {
-    await LocalStore.writeJson(recentFile, <String, dynamic>{'songs': <Object>[]});
+    await LocalStore.writeJson(recentFile, <String, dynamic>{
+      'songs': <Object>[],
+    });
   }
 
   Future<List<Song>> _load(String name) async {

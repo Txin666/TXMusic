@@ -30,7 +30,12 @@ class Album {
 
   static Album? fromJson(Map<String, dynamic> json) {
     final String id = JsonUtils.str(
-      JsonUtils.pick(json, const <String>['album_id', 'albumid', 'AlbumID', 'id']),
+      JsonUtils.pick(json, const <String>[
+        'album_id',
+        'albumid',
+        'AlbumID',
+        'id',
+      ]),
     );
     if (id.isEmpty) {
       return null;
@@ -38,35 +43,55 @@ class Album {
     return Album(
       id: id,
       title: JsonUtils.str(
-        JsonUtils.pick(json, const <String>['album_name', 'albumname', 'AlbumName', 'name']),
+        JsonUtils.pick(json, const <String>[
+          'album_name',
+          'albumname',
+          'AlbumName',
+          'name',
+        ]),
         fallback: '未知专辑',
       ),
       artist: JsonUtils.str(
+        // `/search/complex` 的 album 分组歌手在 `singer`（单数）字段。
         JsonUtils.pick(json, const <String>[
           'author_name',
           'singername',
           'singer_name',
           'SingerName',
+          'singer',
         ]),
       ),
       artistId: JsonUtils.str(
         JsonUtils.pick(json, const <String>['author_id', 'singer_id']),
       ),
       releaseDate: JsonUtils.str(
-        JsonUtils.pick(json, const <String>['publish_date', 'publish_time', 'publishtime']),
+        JsonUtils.pick(json, const <String>[
+          'publish_date',
+          'publish_time',
+          'publishtime',
+        ]),
       ),
       intro: JsonUtils.str(
         JsonUtils.pick(json, const <String>['intro', 'description']),
       ),
       coverUrl: JsonUtils.cover(
-        JsonUtils.pick(json, const <String>['sizable_cover', 'imgurl', 'cover', 'img']),
+        JsonUtils.pick(json, const <String>[
+          'sizable_cover',
+          'imgurl',
+          'cover',
+          'img',
+        ]),
         size: 480,
       ),
       playCount: JsonUtils.integer(
         JsonUtils.pick(json, const <String>['heat', 'play_count', 'playcount']),
       ),
       trackCount: JsonUtils.integer(
-        JsonUtils.pick(json, const <String>['song_count', 'songcount', 'count']),
+        JsonUtils.pick(json, const <String>[
+          'song_count',
+          'songcount',
+          'count',
+        ]),
       ),
     );
   }

@@ -74,9 +74,9 @@ class _TrayPanelViewState extends State<TrayPanelView> {
         .setMethodCallHandler(_handleUiCall)
         .then((_) => _notifyReady())
         .catchError((Object error) {
-      debugPrint('托盘面板 UI 通道注册失败：$error');
-      _notifyReady();
-    });
+          debugPrint('托盘面板 UI 通道注册失败：$error');
+          _notifyReady();
+        });
   }
 
   @override
@@ -122,7 +122,8 @@ class _TrayPanelViewState extends State<TrayPanelView> {
   /// 显示面板。窗口位置由主窗口算好（子引擎没有 screen_retriever），这里只把
   /// 矩形交给原生 SetWindowPos。
   Future<void> _present(Map<dynamic, dynamic> arguments) async {
-    final List<double> rect = _parseRect(arguments['rect']) ??
+    final List<double> rect =
+        _parseRect(arguments['rect']) ??
         <double>[
           0,
           0,
@@ -165,10 +166,10 @@ class _TrayPanelViewState extends State<TrayPanelView> {
 
   Future<void> _dispatch(TrayPanelAction action, [num? value]) async {
     try {
-      await TrayPanelHost.hostChannel.invokeMethod<void>('action', <String, dynamic>{
-        'action': action.name,
-        'value': value,
-      });
+      await TrayPanelHost.hostChannel.invokeMethod<void>(
+        'action',
+        <String, dynamic>{'action': action.name, 'value': value},
+      );
     } on Object catch (error) {
       debugPrint('托盘面板动作发送失败：$error');
     }
@@ -196,10 +197,16 @@ class _TrayPanelViewState extends State<TrayPanelView> {
       bindings: <ShortcutActivator, VoidCallback>{
         const SingleActivator(LogicalKeyboardKey.space): () =>
             _dispatch(TrayPanelAction.togglePlayPause),
-        const SingleActivator(LogicalKeyboardKey.arrowLeft, control: true):
-            () => _dispatch(TrayPanelAction.skipPrevious),
-        const SingleActivator(LogicalKeyboardKey.arrowRight, control: true):
-            () => _dispatch(TrayPanelAction.skipNext),
+        const SingleActivator(
+          LogicalKeyboardKey.arrowLeft,
+          control: true,
+        ): () =>
+            _dispatch(TrayPanelAction.skipPrevious),
+        const SingleActivator(
+          LogicalKeyboardKey.arrowRight,
+          control: true,
+        ): () =>
+            _dispatch(TrayPanelAction.skipNext),
         const SingleActivator(LogicalKeyboardKey.keyM, control: true): () =>
             _dispatch(TrayPanelAction.showMainWindow),
         const SingleActivator(LogicalKeyboardKey.keyL, control: true): () =>
@@ -253,7 +260,11 @@ class _TrayPanelViewState extends State<TrayPanelView> {
               Column(
                 children: <Widget>[
                   _buildPlayerSection(),
-                  const Divider(height: 1, thickness: 1, color: Color(0x14FFFFFF)),
+                  const Divider(
+                    height: 1,
+                    thickness: 1,
+                    color: Color(0x14FFFFFF),
+                  ),
                   Expanded(child: _buildActionList()),
                 ],
               ),
@@ -267,8 +278,9 @@ class _TrayPanelViewState extends State<TrayPanelView> {
   Widget _buildPlayerSection() {
     final int durationMs = math.max(_state.durationMs, 0);
     final double maxValue = durationMs <= 0 ? 1 : durationMs.toDouble();
-    final double sliderValue =
-        (_dragPositionMs ?? _state.positionMs).toDouble().clamp(0, maxValue);
+    final double sliderValue = (_dragPositionMs ?? _state.positionMs)
+        .toDouble()
+        .clamp(0, maxValue);
 
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 16, 16, 12),
@@ -331,8 +343,8 @@ class _TrayPanelViewState extends State<TrayPanelView> {
                 value: sliderValue,
                 max: maxValue,
                 onChanged: _state.hasSong
-                    ? (double value) => setState(
-                        () => _dragPositionMs = value.round())
+                    ? (double value) =>
+                          setState(() => _dragPositionMs = value.round())
                     : null,
                 onChangeEnd: _state.hasSong
                     ? (double value) {
@@ -398,47 +410,49 @@ class _TrayPanelViewState extends State<TrayPanelView> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-        _PanelActionTile(
-          icon: Icons.open_in_new_rounded,
-          label: '显示主窗口',
-          shortcut: 'Ctrl+M',
-          onTap: () => _dispatch(TrayPanelAction.showMainWindow),
-        ),
-        _PanelActionTile(
-          icon: _state.liked
-              ? Icons.favorite_rounded
-              : Icons.favorite_border_rounded,
-          iconColor: _state.liked ? _accent : null,
-          label: _state.liked ? '取消收藏' : '收藏当前歌曲',
-          shortcut: 'Ctrl+L',
-          enabled: hasSong,
-          onTap: () => _dispatch(TrayPanelAction.toggleFavorite),
-        ),
-        _PanelActionTile(
-          icon: Icons.repeat_rounded,
-          iconColor: _state.repeatActive ? _accent : null,
-          label: '播放模式 · ${_state.repeatLabel}',
-          shortcut: 'Ctrl+R',
-          onTap: () => _dispatch(TrayPanelAction.cycleRepeatMode),
-        ),
-        _PanelActionTile(
-          icon: Icons.queue_music_rounded,
-          label: _state.favoriteCount > 0 ? '我喜欢（${_state.favoriteCount}）' : '我喜欢',
-          shortcut: 'Ctrl+F',
-          onTap: () => _dispatch(TrayPanelAction.openLibrary),
-        ),
-        _PanelActionTile(
-          icon: Icons.tune_rounded,
-          label: '设置',
-          onTap: () => _dispatch(TrayPanelAction.openSettings),
-        ),
-        _PanelActionTile(
-          icon: Icons.power_settings_new_rounded,
-          label: '退出 TX Music',
-          shortcut: 'Ctrl+Q',
-          danger: true,
-          onTap: () => _dispatch(TrayPanelAction.quit),
-        ),
+          _PanelActionTile(
+            icon: Icons.open_in_new_rounded,
+            label: '显示主窗口',
+            shortcut: 'Ctrl+M',
+            onTap: () => _dispatch(TrayPanelAction.showMainWindow),
+          ),
+          _PanelActionTile(
+            icon: _state.liked
+                ? Icons.favorite_rounded
+                : Icons.favorite_border_rounded,
+            iconColor: _state.liked ? _accent : null,
+            label: _state.liked ? '取消收藏' : '收藏当前歌曲',
+            shortcut: 'Ctrl+L',
+            enabled: hasSong,
+            onTap: () => _dispatch(TrayPanelAction.toggleFavorite),
+          ),
+          _PanelActionTile(
+            icon: Icons.repeat_rounded,
+            iconColor: _state.repeatActive ? _accent : null,
+            label: '播放模式 · ${_state.repeatLabel}',
+            shortcut: 'Ctrl+R',
+            onTap: () => _dispatch(TrayPanelAction.cycleRepeatMode),
+          ),
+          _PanelActionTile(
+            icon: Icons.queue_music_rounded,
+            label: _state.favoriteCount > 0
+                ? '我喜欢（${_state.favoriteCount}）'
+                : '我喜欢',
+            shortcut: 'Ctrl+F',
+            onTap: () => _dispatch(TrayPanelAction.openLibrary),
+          ),
+          _PanelActionTile(
+            icon: Icons.tune_rounded,
+            label: '设置',
+            onTap: () => _dispatch(TrayPanelAction.openSettings),
+          ),
+          _PanelActionTile(
+            icon: Icons.power_settings_new_rounded,
+            label: '退出 TX Music',
+            shortcut: 'Ctrl+Q',
+            danger: true,
+            onTap: () => _dispatch(TrayPanelAction.quit),
+          ),
         ],
       ),
     );
@@ -475,27 +489,29 @@ class _PanelCover extends StatelessWidget {
     if (seed.isEmpty) {
       return _palettes.first;
     }
-    final int hash =
-        seed.codeUnits.fold<int>(0, (int sum, int unit) => sum + unit);
+    final int hash = seed.codeUnits.fold<int>(
+      0,
+      (int sum, int unit) => sum + unit,
+    );
     return _palettes[hash % _palettes.length];
   }
 
   Widget get _fallback => Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12),
-          gradient: LinearGradient(
-            colors: _colors,
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-        ),
-        alignment: Alignment.center,
-        child: Icon(
-          Icons.music_note_rounded,
-          size: 22,
-          color: Colors.white.withValues(alpha: 0.92),
-        ),
-      );
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(12),
+      gradient: LinearGradient(
+        colors: _colors,
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+      ),
+    ),
+    alignment: Alignment.center,
+    child: Icon(
+      Icons.music_note_rounded,
+      size: 22,
+      color: Colors.white.withValues(alpha: 0.92),
+    ),
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -666,14 +682,15 @@ class _PanelActionTileState extends State<_PanelActionTile> {
     final Color labelColor = widget.danger
         ? _danger
         : widget.enabled
-            ? _textPrimary
-            : const Color(0x66F1F4F5);
-    final Color icColor = widget.iconColor ??
+        ? _textPrimary
+        : const Color(0x66F1F4F5);
+    final Color icColor =
+        widget.iconColor ??
         (widget.danger
             ? _danger
             : widget.enabled
-                ? const Color(0xFFC9D3D6)
-                : const Color(0x66F1F4F5));
+            ? const Color(0xFFC9D3D6)
+            : const Color(0x66F1F4F5));
 
     return MouseRegion(
       cursor: widget.enabled

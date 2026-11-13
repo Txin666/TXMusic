@@ -66,8 +66,9 @@ class DetailHero extends StatelessWidget {
                 ),
                 child: Text(
                   typeLabel,
-                  style: theme.textTheme.labelSmall
-                      ?.copyWith(color: context.palette.textSecondary),
+                  style: theme.textTheme.labelSmall?.copyWith(
+                    color: context.palette.textSecondary,
+                  ),
                 ),
               ),
               const SizedBox(height: AppSpacing.sm),
@@ -81,8 +82,9 @@ class DetailHero extends StatelessWidget {
                 const SizedBox(height: AppSpacing.xs),
                 Text(
                   meta!,
-                  style: theme.textTheme.bodySmall
-                      ?.copyWith(color: context.palette.textSecondary),
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    color: context.palette.textSecondary,
+                  ),
                 ),
               ],
               if (description != null && description!.isNotEmpty) ...<Widget>[
@@ -91,8 +93,9 @@ class DetailHero extends StatelessWidget {
                   description!,
                   maxLines: 3,
                   overflow: TextOverflow.ellipsis,
-                  style: theme.textTheme.bodyMedium
-                      ?.copyWith(color: context.palette.textSecondary),
+                  style: theme.textTheme.bodyMedium?.copyWith(
+                    color: context.palette.textSecondary,
+                  ),
                 ),
               ],
               const SizedBox(height: AppSpacing.lg),

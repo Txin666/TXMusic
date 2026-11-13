@@ -100,7 +100,8 @@ class UserProfile {
   }
 
   /// 累计听歌时长。
-  Duration get listenDuration => Duration(seconds: listenSeconds < 0 ? 0 : listenSeconds);
+  Duration get listenDuration =>
+      Duration(seconds: listenSeconds < 0 ? 0 : listenSeconds);
 
   bool get hasListenDuration => listenSeconds > 0;
 

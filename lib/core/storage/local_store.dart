@@ -61,11 +61,11 @@ class LocalStore {
       final Map<String, dynamic>? map = decoded is Map<String, dynamic>
           ? decoded
           : (decoded is Map
-              ? decoded.map<String, dynamic>(
-                  (Object? key, Object? value) =>
-                      MapEntry<String, dynamic>('$key', value),
-                )
-              : null);
+                ? decoded.map<String, dynamic>(
+                    (Object? key, Object? value) =>
+                        MapEntry<String, dynamic>('$key', value),
+                  )
+                : null);
       return map ?? <String, dynamic>{};
     } on Object catch (error) {
       debugPrint('读取本地数据失败($name): $error');

@@ -76,7 +76,9 @@ class _AppWindowFrameState extends ConsumerState<AppWindowFrame> {
 
   /// 面板动作统一入口：面板只负责 UI，真正的播放/导航都在主引擎执行。
   void _handlePanelAction(TrayPanelAction action, num? value) {
-    final PlayerController controller = ref.read(playerControllerProvider.notifier);
+    final PlayerController controller = ref.read(
+      playerControllerProvider.notifier,
+    );
     switch (action) {
       case TrayPanelAction.togglePlayPause:
         controller.togglePlayPause();
@@ -180,12 +182,16 @@ class _AppWindowFrameState extends ConsumerState<AppWindowFrame> {
   @override
   Widget build(BuildContext context) {
     // 播放状态 / 收藏变化都推给托盘面板与任务栏按钮，面板不在前台时只更新缓存。
-    ref.listen<PlaybackSnapshot>(playerControllerProvider,
-        (PlaybackSnapshot? previous, PlaybackSnapshot next) {
+    ref.listen<PlaybackSnapshot>(playerControllerProvider, (
+      PlaybackSnapshot? previous,
+      PlaybackSnapshot next,
+    ) {
       unawaited(_syncPanelState(next));
     });
-    ref.listen<LibraryState>(libraryProvider,
-        (LibraryState? previous, LibraryState next) {
+    ref.listen<LibraryState>(libraryProvider, (
+      LibraryState? previous,
+      LibraryState next,
+    ) {
       unawaited(_syncPanelState(ref.read(playerControllerProvider)));
     });
 

@@ -54,8 +54,9 @@ class EmptyState extends StatelessWidget {
               Text(
                 description!,
                 textAlign: TextAlign.center,
-                style: theme.textTheme.bodySmall
-                    ?.copyWith(color: context.palette.textSecondary),
+                style: theme.textTheme.bodySmall?.copyWith(
+                  color: context.palette.textSecondary,
+                ),
               ),
             ],
             if (actionLabel != null) ...<Widget>[

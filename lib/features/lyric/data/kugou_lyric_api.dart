@@ -36,10 +36,8 @@ class LyricDocument {
         final int minutes = int.tryParse(match.group(1) ?? '0') ?? 0;
         final int seconds = int.tryParse(match.group(2) ?? '0') ?? 0;
         final String rawMs = match.group(3) ?? '0';
-        final int millis = int.tryParse(
-              rawMs.padRight(3, '0').substring(0, 3),
-            ) ??
-            0;
+        final int millis =
+            int.tryParse(rawMs.padRight(3, '0').substring(0, 3)) ?? 0;
         lines.add(
           LyricLine(
             Duration(minutes: minutes, seconds: seconds, milliseconds: millis),
@@ -73,7 +71,8 @@ class KugouLyricApi {
           'keywords': '${song.title} ${song.artist}'.trim(),
         },
       );
-      final Object? candidates = search['candidates'] ??
+      final Object? candidates =
+          search['candidates'] ??
           JsonUtils.asMap(search['data'])?['candidates'];
       final List<Map<String, dynamic>> list = JsonUtils.asMapList(candidates);
       if (list.isEmpty) {

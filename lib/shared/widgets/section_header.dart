@@ -33,17 +33,14 @@ class SectionHeader extends StatelessWidget {
               children: <Widget>[
                 Text(
                   title,
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.w700,
-                      ),
+                  style: Theme.of(context).textTheme.titleMedium
+                      ?.copyWith(fontWeight: FontWeight.w700),
                 ),
                 if (subtitle != null) ...<Widget>[
                   const SizedBox(height: 2),
                   Text(
                     subtitle!,
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodySmall
+                    style: Theme.of(context).textTheme.bodySmall
                         ?.copyWith(color: context.palette.textSecondary),
                   ),
                 ],
@@ -51,10 +48,7 @@ class SectionHeader extends StatelessWidget {
             ),
           ),
           if (actionLabel != null)
-            TextButton(
-              onPressed: onActionTap,
-              child: Text(actionLabel!),
-            ),
+            TextButton(onPressed: onActionTap, child: Text(actionLabel!)),
         ],
       ),
     );

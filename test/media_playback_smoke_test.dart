@@ -41,23 +41,27 @@ void main() {
 
       final List<Duration> positions = <Duration>[];
       final List<String> errors = <String>[];
-      final StreamSubscription<Duration> sub =
-          player.stream.position.listen(positions.add);
-      final StreamSubscription<String> errSub =
-          player.stream.error.listen(errors.add);
+      final StreamSubscription<Duration> sub = player.stream.position.listen(
+        positions.add,
+      );
+      final StreamSubscription<String> errSub = player.stream.error.listen(
+        errors.add,
+      );
 
       try {
         final List<Song> songs = await api.search('晴天 周杰伦', pageSize: 5);
-        final ResolvedAudio audio =
-            await SongUrlResolver(client).resolve(songs.first);
+        final ResolvedAudio audio = await SongUrlResolver(client)
+            .resolve(songs.first);
 
         await player.open(Media(audio.url.toString()), play: true);
         await Future<void>.delayed(const Duration(seconds: 6));
 
         // ignore: avoid_print
-        print('[playback] libmpv=$libmpvPath duration=${player.state.duration} '
-            'positions=${positions.map((Duration p) => p.inMilliseconds).toList()} '
-            'errors=$errors');
+        print(
+          '[playback] libmpv=$libmpvPath duration=${player.state.duration} '
+          'positions=${positions.map((Duration p) => p.inMilliseconds).toList()} '
+          'errors=$errors',
+        );
 
         expect(player.state.duration.inSeconds, greaterThan(0));
         expect(positions, isNotEmpty);
@@ -74,7 +78,7 @@ void main() {
     // 不应让环境缺失被判定为代码失败。
     skip: libmpvPath == null
         ? '当前环境无法加载 libmpv-2.dll，跳过真实解码冒烟测试'
-            '（把可用的 build\\windows\\x64\\runner\\Debug 加入 PATH 后可运行）'
+              '（把可用的 build\\windows\\x64\\runner\\Debug 加入 PATH 后可运行）'
         : null,
     timeout: const Timeout(Duration(seconds: 120)),
   );

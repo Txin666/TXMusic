@@ -32,6 +32,8 @@ class SearchHistoryRepository {
   }
 
   Future<void> clear() async {
-    await LocalStore.writeJson(fileName, <String, dynamic>{'keywords': <Object>[]});
+    await LocalStore.writeJson(fileName, <String, dynamic>{
+      'keywords': <Object>[],
+    });
   }
 }

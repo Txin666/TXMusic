@@ -63,10 +63,20 @@ class Artist {
         size: 240,
       ),
       fansCount: JsonUtils.integer(
-        JsonUtils.pick(json, const <String>['fansnums', 'fans', 'fanscount']),
+        // `/search/complex` 的 author 分组用大驼峰 `FansNum`。
+        JsonUtils.pick(json, const <String>[
+          'FansNum',
+          'fansnums',
+          'fans',
+          'fanscount',
+        ]),
       ),
       songCount: JsonUtils.integer(
-        JsonUtils.pick(json, const <String>['song_count', 'audio_count', 'AudioCount']),
+        JsonUtils.pick(json, const <String>[
+          'song_count',
+          'audio_count',
+          'AudioCount',
+        ]),
       ),
       albumCount: JsonUtils.integer(
         JsonUtils.pick(json, const <String>['album_count', 'AlbumCount']),

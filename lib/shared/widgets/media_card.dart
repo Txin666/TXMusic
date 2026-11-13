@@ -115,7 +115,9 @@ class _MediaCardState extends State<MediaCard> {
                 widget.title,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
-                style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
+                style: theme.textTheme.bodyMedium?.copyWith(
+                  fontWeight: FontWeight.w600,
+                ),
               ),
               if (widget.subtitle != null) ...<Widget>[
                 const SizedBox(height: 2),
@@ -123,8 +125,9 @@ class _MediaCardState extends State<MediaCard> {
                   widget.subtitle!,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: theme.textTheme.bodySmall
-                      ?.copyWith(color: context.palette.textSecondary),
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    color: context.palette.textSecondary,
+                  ),
                 ),
               ],
             ],

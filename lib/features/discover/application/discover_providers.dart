@@ -24,8 +24,7 @@ class DiscoverFeed {
   /// 热门榜单（`/rank/list` 前几个）。
   final List<RankItem> ranks;
 
-  bool get isEmpty =>
-      dailySongs.isEmpty && playlists.isEmpty && ranks.isEmpty;
+  bool get isEmpty => dailySongs.isEmpty && playlists.isEmpty && ranks.isEmpty;
 }
 
 /// 发现页一次性并发拉取三个区块，任一区块失败不影响其它区块渲染。

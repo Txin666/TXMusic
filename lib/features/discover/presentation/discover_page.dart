@@ -103,7 +103,9 @@ class _DiscoverContent extends ConsumerWidget {
                 .read(playerControllerProvider.notifier)
                 .playQueue(dailySongs),
           ),
-          ...dailySongs.take(10).map(
+          ...dailySongs
+              .take(10)
+              .map(
                 (Song song) => SongTile(
                   song: song,
                   onTap: () => ref
@@ -119,9 +121,7 @@ class _DiscoverContent extends ConsumerWidget {
               padding: const EdgeInsets.only(top: AppSpacing.xs),
               child: Text(
                 '仅展示前 10 首，点击「播放全部」收听 ${dailySongs.length} 首',
-                style: Theme.of(context)
-                    .textTheme
-                    .bodySmall
+                style: Theme.of(context).textTheme.bodySmall
                     ?.copyWith(color: context.palette.textDisabled),
               ),
             ),
@@ -157,15 +157,19 @@ class _DiscoverContent extends ConsumerWidget {
     );
   }
 
-  Widget _buildGreeting(BuildContext context, WidgetRef ref, List<Song> dailySongs) {
+  Widget _buildGreeting(
+    BuildContext context,
+    WidgetRef ref,
+    List<Song> dailySongs,
+  ) {
     final DateTime now = DateTime.now();
     final String greeting = now.hour < 6
         ? '凌晨好'
         : now.hour < 12
-            ? '早上好'
-            : now.hour < 18
-                ? '下午好'
-                : '晚上好';
+        ? '早上好'
+        : now.hour < 18
+        ? '下午好'
+        : '晚上好';
 
     return Row(
       crossAxisAlignment: CrossAxisAlignment.end,
@@ -183,9 +187,7 @@ class _DiscoverContent extends ConsumerWidget {
                 dailySongs.isEmpty
                     ? '${Formatters.date(now)} · 今日推荐正在更新'
                     : '${Formatters.date(now)} · 今日为你准备了 ${dailySongs.length} 首推荐',
-                style: Theme.of(context)
-                    .textTheme
-                    .bodySmall
+                style: Theme.of(context).textTheme.bodySmall
                     ?.copyWith(color: context.palette.textSecondary),
               ),
             ],
@@ -195,8 +197,8 @@ class _DiscoverContent extends ConsumerWidget {
           onPressed: dailySongs.isEmpty
               ? null
               : () => ref
-                  .read(playerControllerProvider.notifier)
-                  .playQueue(dailySongs),
+                    .read(playerControllerProvider.notifier)
+                    .playQueue(dailySongs),
           icon: const Icon(Icons.play_arrow_rounded, size: 18),
           label: const Text('播放每日推荐'),
         ),
@@ -238,16 +240,18 @@ class _PlaylistCard extends StatelessWidget {
               playlist.title,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
-              style: theme.textTheme.bodyMedium
-                  ?.copyWith(fontWeight: FontWeight.w600),
+              style: theme.textTheme.bodyMedium?.copyWith(
+                fontWeight: FontWeight.w600,
+              ),
             ),
             const SizedBox(height: 2),
             Text(
               subtitle,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: theme.textTheme.bodySmall
-                  ?.copyWith(color: context.palette.textSecondary),
+              style: theme.textTheme.bodySmall?.copyWith(
+                color: context.palette.textSecondary,
+              ),
             ),
           ],
         ),
@@ -304,8 +308,9 @@ class _RankRow extends StatelessWidget {
                     meta,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: theme.textTheme.bodySmall
-                        ?.copyWith(color: context.palette.textSecondary),
+                    style: theme.textTheme.bodySmall?.copyWith(
+                      color: context.palette.textSecondary,
+                    ),
                   ),
                 ],
               ],
@@ -341,9 +346,7 @@ class _DiscoverLoading extends StatelessWidget {
             const SizedBox(height: AppSpacing.md),
             Text(
               '正在加载推荐内容…',
-              style: Theme.of(context)
-                  .textTheme
-                  .bodySmall
+              style: Theme.of(context).textTheme.bodySmall
                   ?.copyWith(color: context.palette.textSecondary),
             ),
           ],

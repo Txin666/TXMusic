@@ -24,25 +24,25 @@ const List<LoginMethod> _methodOrder = <LoginMethod>[
 
 extension _LoginMethodUi on LoginMethod {
   String get label => switch (this) {
-        LoginMethod.sms => '手机登录',
-        LoginMethod.wechat => '微信扫码',
-        LoginMethod.qq => 'QQ 扫码',
-        LoginMethod.kugouQr => '酷狗扫码',
-      };
+    LoginMethod.sms => '手机登录',
+    LoginMethod.wechat => '微信扫码',
+    LoginMethod.qq => 'QQ 扫码',
+    LoginMethod.kugouQr => '酷狗扫码',
+  };
 
   IconData get icon => switch (this) {
-        LoginMethod.sms => Icons.smartphone_rounded,
-        LoginMethod.wechat => Icons.chat_bubble_rounded,
-        LoginMethod.qq => Icons.forum_rounded,
-        LoginMethod.kugouQr => Icons.qr_code_2_rounded,
-      };
+    LoginMethod.sms => Icons.smartphone_rounded,
+    LoginMethod.wechat => Icons.chat_bubble_rounded,
+    LoginMethod.qq => Icons.forum_rounded,
+    LoginMethod.kugouQr => Icons.qr_code_2_rounded,
+  };
 
   String get scanHint => switch (this) {
-        LoginMethod.sms => '',
-        LoginMethod.wechat => '打开微信 → 扫一扫，确认授权后自动登录',
-        LoginMethod.qq => '打开手机 QQ → 扫一扫，确认后自动登录',
-        LoginMethod.kugouQr => '打开手机酷狗 App → 扫一扫，确认后自动登录',
-      };
+    LoginMethod.sms => '',
+    LoginMethod.wechat => '打开微信 → 扫一扫，确认授权后自动登录',
+    LoginMethod.qq => '打开手机 QQ → 扫一扫，确认后自动登录',
+    LoginMethod.kugouQr => '打开手机酷狗 App → 扫一扫，确认后自动登录',
+  };
 }
 
 /// 账号登录页（路由 `/login`）：手机验证码 / 微信扫码 / QQ 扫码 / 酷狗扫码。
@@ -89,8 +89,10 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     final KugouSession session = ref.watch(kugouSessionProvider);
 
     // 登录成功：提示后退回设置页（登录态已由 AuthController 落盘）。
-    ref.listen<AuthState>(authControllerProvider,
-        (AuthState? previous, AuthState next) {
+    ref.listen<AuthState>(authControllerProvider, (
+      AuthState? previous,
+      AuthState next,
+    ) {
       if (next.phase == AuthPhase.success &&
           previous?.phase != AuthPhase.success) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -161,8 +163,11 @@ class _LoginPageState extends ConsumerState<LoginPage> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         const SizedBox(height: AppSpacing.xl),
-        const Icon(Icons.check_circle_rounded,
-            size: 56, color: AppColors.primary),
+        const Icon(
+          Icons.check_circle_rounded,
+          size: 56,
+          color: AppColors.primary,
+        ),
         const SizedBox(height: AppSpacing.md),
         Text(
           session.nickname.isEmpty ? '已登录' : session.nickname,
@@ -172,15 +177,17 @@ class _LoginPageState extends ConsumerState<LoginPage> {
         const SizedBox(height: AppSpacing.xs),
         Text(
           session.userid.isEmpty ? 'userid 未知' : 'userid ${session.userid}',
-          style: theme.textTheme.bodySmall
-              ?.copyWith(color: context.palette.textSecondary),
+          style: theme.textTheme.bodySmall?.copyWith(
+            color: context.palette.textSecondary,
+          ),
         ),
         const SizedBox(height: AppSpacing.sm),
         Text(
           '登录态仅保存在本机 .local/kugou_cookie.json，可解锁全曲与高音质。',
           textAlign: TextAlign.center,
-          style: theme.textTheme.bodySmall
-              ?.copyWith(color: context.palette.textDisabled),
+          style: theme.textTheme.bodySmall?.copyWith(
+            color: context.palette.textDisabled,
+          ),
         ),
         const SizedBox(height: AppSpacing.xl),
         OutlinedButton.icon(
@@ -189,9 +196,8 @@ class _LoginPageState extends ConsumerState<LoginPage> {
             if (!context.mounted) {
               return;
             }
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('已退出登录，当前为游客模式')),
-            );
+            ScaffoldMessenger.of(context)
+                .showSnackBar(const SnackBar(content: Text('已退出登录，当前为游客模式')));
           },
           icon: const Icon(Icons.logout_rounded, size: 18),
           label: const Text('退出登录'),
@@ -220,8 +226,9 @@ class _LoginPageState extends ConsumerState<LoginPage> {
         Text(
           '选择一种登录方式，全程在本机完成，账号密码不经过本软件',
           textAlign: TextAlign.center,
-          style: theme.textTheme.bodySmall
-              ?.copyWith(color: context.palette.textSecondary),
+          style: theme.textTheme.bodySmall?.copyWith(
+            color: context.palette.textSecondary,
+          ),
         ),
         const SizedBox(height: AppSpacing.lg),
         Wrap(
@@ -236,7 +243,9 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   if (!selected) {
                     return;
                   }
-                  ref.read(authControllerProvider.notifier).selectMethod(method);
+                  ref
+                      .read(authControllerProvider.notifier)
+                      .selectMethod(method);
                 },
                 avatar: Icon(
                   method.icon,
@@ -258,8 +267,9 @@ class _LoginPageState extends ConsumerState<LoginPage> {
         Text(
           '未登录仍可浏览与 60 秒试听；登录态只保存在本地，可随时退出。',
           textAlign: TextAlign.center,
-          style: theme.textTheme.bodySmall
-              ?.copyWith(color: context.palette.textDisabled),
+          style: theme.textTheme.bodySmall?.copyWith(
+            color: context.palette.textDisabled,
+          ),
         ),
         const SizedBox(height: AppSpacing.sm),
         Center(
@@ -274,19 +284,16 @@ class _LoginPageState extends ConsumerState<LoginPage> {
 
   // ------------------------------------------------------------ 扫码面板
 
-  Widget _buildQrPane(
-    BuildContext context,
-    ThemeData theme,
-    AuthState auth,
-  ) {
+  Widget _buildQrPane(BuildContext context, ThemeData theme, AuthState auth) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
         Text(
           auth.method.scanHint,
           textAlign: TextAlign.center,
-          style: theme.textTheme.bodySmall
-              ?.copyWith(color: context.palette.textSecondary),
+          style: theme.textTheme.bodySmall?.copyWith(
+            color: context.palette.textSecondary,
+          ),
         ),
         const SizedBox(height: AppSpacing.md),
         Center(
@@ -306,8 +313,9 @@ class _LoginPageState extends ConsumerState<LoginPage> {
         Text(
           _statusLabel(auth),
           textAlign: TextAlign.center,
-          style: theme.textTheme.bodyMedium
-              ?.copyWith(color: _statusColor(context, auth)),
+          style: theme.textTheme.bodyMedium?.copyWith(
+            color: _statusColor(context, auth),
+          ),
         ),
         const SizedBox(height: AppSpacing.md),
         Center(
@@ -356,23 +364,19 @@ class _LoginPageState extends ConsumerState<LoginPage> {
         gaplessPlayback: true,
         errorBuilder:
             (BuildContext context, Object error, StackTrace? stackTrace) {
-          return Icon(
-            Icons.qr_code_2_rounded,
-            size: 72,
-            color: context.palette.textDisabled,
-          );
-        },
+              return Icon(
+                Icons.qr_code_2_rounded,
+                size: 72,
+                color: context.palette.textDisabled,
+              );
+            },
       ),
     );
   }
 
   // ------------------------------------------------------------ 手机登录
 
-  Widget _buildSmsForm(
-    BuildContext context,
-    ThemeData theme,
-    AuthState auth,
-  ) {
+  Widget _buildSmsForm(BuildContext context, ThemeData theme, AuthState auth) {
     final bool canSend = !auth.isBusy && auth.countdown == 0;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -420,8 +424,8 @@ class _LoginPageState extends ConsumerState<LoginPage> {
               child: OutlinedButton(
                 onPressed: canSend
                     ? () => ref
-                        .read(authControllerProvider.notifier)
-                        .sendSmsCode(_mobile.text)
+                          .read(authControllerProvider.notifier)
+                          .sendSmsCode(_mobile.text)
                     : null,
                 child: Text(
                   auth.countdown > 0 ? '${auth.countdown}s 后重发' : '发送验证码',
@@ -445,25 +449,26 @@ class _LoginPageState extends ConsumerState<LoginPage> {
         Text(
           _statusLabel(auth),
           textAlign: TextAlign.center,
-          style: theme.textTheme.bodySmall
-              ?.copyWith(color: _statusColor(context, auth)),
+          style: theme.textTheme.bodySmall?.copyWith(
+            color: _statusColor(context, auth),
+          ),
         ),
         const SizedBox(height: AppSpacing.xs),
         Text(
           '验证码由酷狗官方短信下发，本软件不做任何代收或转发。',
           textAlign: TextAlign.center,
-          style: theme.textTheme.bodySmall
-              ?.copyWith(color: context.palette.textDisabled),
+          style: theme.textTheme.bodySmall?.copyWith(
+            color: context.palette.textDisabled,
+          ),
         ),
       ],
     );
   }
 
   void _submitSms(AuthState auth) {
-    ref.read(authControllerProvider.notifier).loginWithSms(
-          mobile: _mobile.text,
-          code: _code.text,
-        );
+    ref
+        .read(authControllerProvider.notifier)
+        .loginWithSms(mobile: _mobile.text, code: _code.text);
   }
 
   // ------------------------------------------------------------ 公共
@@ -473,8 +478,9 @@ class _LoginPageState extends ConsumerState<LoginPage> {
       return null;
     }
     final int index = base64Text.indexOf('base64,');
-    final String raw =
-        index >= 0 ? base64Text.substring(index + 7) : base64Text;
+    final String raw = index >= 0
+        ? base64Text.substring(index + 7)
+        : base64Text;
     try {
       return base64Decode(raw);
     } on FormatException {

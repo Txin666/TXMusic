@@ -105,8 +105,9 @@ class TrayPanelHost {
       case 'action':
         final Object? raw = call.arguments;
         if (raw is Map) {
-          final TrayPanelAction? action =
-              trayPanelActionFromName('${raw['action']}');
+          final TrayPanelAction? action = trayPanelActionFromName(
+            '${raw['action']}',
+          );
           final Object? value = raw['value'];
           if (action != null) {
             _onAction?.call(action, value is num ? value : null);
@@ -162,12 +163,7 @@ class TrayPanelHost {
       final Rect bounds = await _computeBounds(trayBounds);
       debugPrint('[panel] show rect=$bounds');
       await uiChannel.invokeMethod<void>('show', <String, dynamic>{
-        'rect': <double>[
-          bounds.left,
-          bounds.top,
-          bounds.width,
-          bounds.height,
-        ],
+        'rect': <double>[bounds.left, bounds.top, bounds.width, bounds.height],
       });
     } on Object catch (error) {
       _visible = false;
@@ -243,10 +239,14 @@ class TrayPanelHost {
       }
     }
 
-    final double maxX =
-        math.max(workArea.left + gap, workArea.right - size.width - gap);
-    final double maxY =
-        math.max(workArea.top + gap, workArea.bottom - size.height - gap);
+    final double maxX = math.max(
+      workArea.left + gap,
+      workArea.right - size.width - gap,
+    );
+    final double maxY = math.max(
+      workArea.top + gap,
+      workArea.bottom - size.height - gap,
+    );
     x = x.clamp(workArea.left + gap, maxX);
     y = y.clamp(workArea.top + gap, maxY);
 

@@ -33,7 +33,10 @@ class CoverPlaceholder extends StatelessWidget {
     if (seed.isEmpty) {
       return _palettes.first;
     }
-    final int hash = seed.codeUnits.fold<int>(0, (int sum, int unit) => sum + unit);
+    final int hash = seed.codeUnits.fold<int>(
+      0,
+      (int sum, int unit) => sum + unit,
+    );
     return _palettes[hash % _palettes.length];
   }
 
@@ -56,7 +59,11 @@ class CoverPlaceholder extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          Icon(icon, size: size * 0.28, color: Colors.white.withValues(alpha: 0.9)),
+          Icon(
+            icon,
+            size: size * 0.28,
+            color: Colors.white.withValues(alpha: 0.9),
+          ),
           if (label != null) ...<Widget>[
             const SizedBox(height: 6),
             Padding(

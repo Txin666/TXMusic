@@ -38,8 +38,10 @@ class KugouConfig {
     Directory dir = Directory.current;
     // build\windows\x64\runner\Debug 距工程根有 5 层，留足余量。
     for (int depth = 0; depth < 9; depth++) {
-      candidates.add('${dir.path}${Platform.pathSeparator}.local'
-          '${Platform.pathSeparator}kugou_cookie.json');
+      candidates.add(
+        '${dir.path}${Platform.pathSeparator}.local'
+        '${Platform.pathSeparator}kugou_cookie.json',
+      );
       final Directory parent = dir.parent;
       if (parent.path == dir.path) {
         break;

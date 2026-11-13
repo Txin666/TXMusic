@@ -63,8 +63,9 @@ class SearchState {
       keyword: keyword ?? this.keyword,
       history: history ?? this.history,
       songs: clearResults ? const <Song>[] : (songs ?? this.songs),
-      playlists:
-          clearResults ? const <Playlist>[] : (playlists ?? this.playlists),
+      playlists: clearResults
+          ? const <Playlist>[]
+          : (playlists ?? this.playlists),
       artists: clearResults ? const <Artist>[] : (artists ?? this.artists),
       albums: clearResults ? const <Album>[] : (albums ?? this.albums),
       isLoading: isLoading ?? this.isLoading,
@@ -80,8 +81,7 @@ class SearchState {
 ///   仅作分区补充，失败静默降级为只有单曲，分区数据为空时 UI 隐藏分区）；
 /// - 历史：`SearchHistoryRepository`（`.local/search_history.json`）。
 class SearchPageController extends Notifier<SearchState> {
-  static const SearchHistoryRepository _history =
-      SearchHistoryRepository();
+  static const SearchHistoryRepository _history = SearchHistoryRepository();
 
   int _requestId = 0;
 
@@ -125,8 +125,9 @@ class SearchPageController extends Notifier<SearchState> {
     unawaited(_remember(key));
 
     try {
-      final SearchBundle bundle =
-          await ref.read(kugouSearchApiProvider).bundle(key);
+      final SearchBundle bundle = await ref
+          .read(kugouSearchApiProvider)
+          .bundle(key);
       if (request != _requestId) {
         return;
       }
@@ -137,9 +138,9 @@ class SearchPageController extends Notifier<SearchState> {
         albums: bundle.albums,
         isLoading: false,
         clearError: true,
-        notice: bundle.partitionsAvailable
-            ? null
-            : '歌单 / 歌手 / 专辑分区接口当前不可用（/search/complex 返回 error_code 152），已展示单曲结果',
+        notice: bundle.partitionsFailed
+            ? '歌单 / 专辑 / 歌手分区接口本次请求失败，已降级只展示单曲结果'
+            : null,
       );
     } on KugouApiException catch (error) {
       if (request != _requestId) {
@@ -184,10 +185,12 @@ class SearchPageController extends Notifier<SearchState> {
 }
 
 final searchPageControllerProvider =
-    NotifierProvider<SearchPageController, SearchState>(SearchPageController.new);
+    NotifierProvider<SearchPageController, SearchState>(
+      SearchPageController.new,
+    );
 
 /// 热搜关键词（真实 `/search/hot/detail`），搜索页空态展示。
 final FutureProvider<List<String>> hotKeywordsProvider =
     FutureProvider<List<String>>(
-  (Ref ref) => ref.watch(kugouSearchApiProvider).hotKeywords(),
-);
+      (Ref ref) => ref.watch(kugouSearchApiProvider).hotKeywords(),
+    );

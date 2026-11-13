@@ -29,7 +29,9 @@ class RankDetailPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final AsyncValue<RankItem?> rankAsync = ref.watch(rankItemProvider(rankId));
-    final AsyncValue<List<Song>> songsAsync = ref.watch(rankSongsProvider(rankId));
+    final AsyncValue<List<Song>> songsAsync = ref.watch(
+      rankSongsProvider(rankId),
+    );
 
     return PageContainer(
       child: rankAsync.when(
@@ -58,7 +60,8 @@ class RankDetailPage extends ConsumerWidget {
           final List<Song> songs = songsAsync.value ?? const <Song>[];
           final List<String> metaParts = <String>[
             if (rank.updateNote.isNotEmpty) rank.updateNote,
-            if (rank.playCount > 0) '${Formatters.playCount(rank.playCount)}次播放',
+            if (rank.playCount > 0)
+              '${Formatters.playCount(rank.playCount)}次播放',
             if (songs.isNotEmpty) '${songs.length} 首',
           ];
 
@@ -76,8 +79,8 @@ class RankDetailPage extends ConsumerWidget {
                 onPrimaryTap: songs.isEmpty
                     ? null
                     : () => ref
-                        .read(playerControllerProvider.notifier)
-                        .playQueue(songs),
+                          .read(playerControllerProvider.notifier)
+                          .playQueue(songs),
               ),
               const SizedBox(height: AppSpacing.xl),
               SectionHeader(
@@ -160,9 +163,7 @@ class _DetailLoading extends StatelessWidget {
             const SizedBox(height: AppSpacing.md),
             Text(
               label,
-              style: Theme.of(context)
-                  .textTheme
-                  .bodySmall
+              style: Theme.of(context).textTheme.bodySmall
                   ?.copyWith(color: context.palette.textSecondary),
             ),
           ],

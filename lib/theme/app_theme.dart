@@ -27,19 +27,20 @@ class AppTheme {
     final Color textPrimary = palette.textPrimary;
     final Color textSecondary = palette.textSecondary;
 
-    final ColorScheme scheme = ColorScheme.fromSeed(
-      seedColor: AppColors.primary,
-      brightness: brightness,
-    ).copyWith(
-      primary: AppColors.primary,
-      secondary: AppColors.secondary,
-      tertiary: AppColors.accent,
-      surface: surface,
-      error: AppColors.danger,
-      onSurface: textPrimary,
-      onPrimary: isDark ? const Color(0xFF04120C) : Colors.white,
-      surfaceContainerHighest: surfaceAlt,
-    );
+    final ColorScheme scheme =
+        ColorScheme.fromSeed(
+          seedColor: AppColors.primary,
+          brightness: brightness,
+        ).copyWith(
+          primary: AppColors.primary,
+          secondary: AppColors.secondary,
+          tertiary: AppColors.accent,
+          surface: surface,
+          error: AppColors.danger,
+          onSurface: textPrimary,
+          onPrimary: isDark ? const Color(0xFF04120C) : Colors.white,
+          surfaceContainerHighest: surfaceAlt,
+        );
 
     final TextTheme textTheme = AppTypography.textTheme(
       primaryText: textPrimary,
@@ -94,7 +95,10 @@ class AppTheme {
         inactiveTrackColor: isDark ? surfaceHigh : const Color(0xFFD9DAE3),
         thumbColor: AppColors.primary,
         overlayColor: AppColors.primary.withValues(alpha: 0.16),
-        thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 6, disabledThumbRadius: 4),
+        thumbShape: const RoundSliderThumbShape(
+          enabledThumbRadius: 6,
+          disabledThumbRadius: 4,
+        ),
         overlayShape: const RoundSliderOverlayShape(overlayRadius: 14),
         trackShape: const RoundedRectSliderTrackShape(),
       ),
@@ -108,13 +112,17 @@ class AppTheme {
         unselectedLabelStyle: textTheme.bodyMedium,
       ),
       switchTheme: SwitchThemeData(
-        thumbColor: WidgetStateProperty.resolveWith<Color>((Set<WidgetState> states) {
+        thumbColor: WidgetStateProperty.resolveWith<Color>((
+          Set<WidgetState> states,
+        ) {
           if (states.contains(WidgetState.selected)) {
             return const Color(0xFF04120C);
           }
           return isDark ? textSecondary : Colors.white;
         }),
-        trackColor: WidgetStateProperty.resolveWith<Color>((Set<WidgetState> states) {
+        trackColor: WidgetStateProperty.resolveWith<Color>((
+          Set<WidgetState> states,
+        ) {
           if (states.contains(WidgetState.selected)) {
             return AppColors.primary;
           }
@@ -126,14 +134,22 @@ class AppTheme {
         selectedColor: AppColors.primary.withValues(alpha: 0.18),
         side: BorderSide(color: divider),
         labelStyle: textTheme.bodyMedium,
-        padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm, vertical: AppSpacing.xxs),
-        shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(AppRadius.pill))),
+        padding: const EdgeInsets.symmetric(
+          horizontal: AppSpacing.sm,
+          vertical: AppSpacing.xxs,
+        ),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(AppRadius.pill)),
+        ),
       ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
         fillColor: surfaceAlt,
         hintStyle: textTheme.bodyMedium?.copyWith(color: textSecondary),
-        contentPadding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg, vertical: AppSpacing.md),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: AppSpacing.lg,
+          vertical: AppSpacing.md,
+        ),
         border: OutlineInputBorder(
           borderRadius: const BorderRadius.all(Radius.circular(AppRadius.pill)),
           borderSide: BorderSide.none,
@@ -165,10 +181,14 @@ class AppTheme {
         thickness: WidgetStateProperty.all(6),
         radius: const Radius.circular(3),
         thumbColor: WidgetStateProperty.all(
-          isDark ? palette.textDisabled.withValues(alpha: 0.35) : Colors.black26,
+          isDark
+              ? palette.textDisabled.withValues(alpha: 0.35)
+              : Colors.black26,
         ),
       ),
-      progressIndicatorTheme: const ProgressIndicatorThemeData(color: AppColors.primary),
+      progressIndicatorTheme: const ProgressIndicatorThemeData(
+        color: AppColors.primary,
+      ),
       dialogTheme: DialogThemeData(
         backgroundColor: isDark ? surfaceAlt : Colors.white,
         shape: const RoundedRectangleBorder(borderRadius: AppRadius.panel),

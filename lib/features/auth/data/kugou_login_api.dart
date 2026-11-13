@@ -27,16 +27,15 @@ class LoginCredential {
   final String vipToken;
 
   /// `userid` 可能是 `0`（服务端兜底值），不能当作有效登录。
-  bool get isValid =>
-      token.isNotEmpty && userid.isNotEmpty && userid != '0';
+  bool get isValid => token.isNotEmpty && userid.isNotEmpty && userid != '0';
 
   Map<String, dynamic> toJson() => <String, dynamic>{
-        'token': token,
-        'userid': userid,
-        'nickname': nickname,
-        'vip_type': vipType,
-        'vip_token': vipToken,
-      };
+    'token': token,
+    'userid': userid,
+    'nickname': nickname,
+    'vip_type': vipType,
+    'vip_token': vipToken,
+  };
 }
 
 /// 酷狗 App 扫码会话：key 用于轮询，base64 直接渲染。
@@ -305,9 +304,7 @@ class KugouLoginApi {
     if (status == 1) {
       return;
     }
-    throw KugouApiException(
-      _errorText(json, fallback: '验证码发送失败，请稍后重试'),
-    );
+    throw KugouApiException(_errorText(json, fallback: '验证码发送失败，请稍后重试'));
   }
 
   /// 手机号 + 验证码登录（`/login/cellphone`）。
@@ -322,9 +319,7 @@ class KugouLoginApi {
     );
     final int status = JsonUtils.integer(json['status'], fallback: -1);
     if (status != 1) {
-      throw KugouApiException(
-        _errorText(json, fallback: '登录失败：验证码错误或已过期'),
-      );
+      throw KugouApiException(_errorText(json, fallback: '登录失败：验证码错误或已过期'));
     }
     return _credentialFrom(json);
   }
@@ -384,9 +379,7 @@ class KugouLoginApi {
     );
     final int status = JsonUtils.integer(json['status'], fallback: -1);
     if (status != 1) {
-      throw KugouApiException(
-        _errorText(json, fallback: '微信授权已失效，请刷新二维码重试'),
-      );
+      throw KugouApiException(_errorText(json, fallback: '微信授权已失效，请刷新二维码重试'));
     }
     return _credentialFrom(json);
   }
@@ -402,9 +395,7 @@ class KugouLoginApi {
     final String base64 = JsonUtils.str(json['qrcode']);
     final String qrsig = JsonUtils.str(json['qrsig']);
     if (base64.isEmpty || qrsig.isEmpty) {
-      throw KugouApiException(
-        _errorText(json, fallback: 'QQ 二维码生成失败'),
-      );
+      throw KugouApiException(_errorText(json, fallback: 'QQ 二维码生成失败'));
     }
     return QqQrSession(
       imageBase64: base64,
@@ -438,10 +429,7 @@ class KugouLoginApi {
     final String raw = JsonUtils.str(json['status']);
     final QqScanStatus status = QqScanStatus.fromCode(raw);
     if (status == QqScanStatus.confirmed) {
-      return QqCheckResult(
-        status: status,
-        credential: _credentialFrom(json),
-      );
+      return QqCheckResult(status: status, credential: _credentialFrom(json));
     }
     return QqCheckResult(
       status: status,

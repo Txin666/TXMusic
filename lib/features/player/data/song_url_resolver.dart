@@ -30,10 +30,7 @@ class SongUrlResolver {
 
   final KugouClient _client;
 
-  Future<ResolvedAudio> resolve(
-    Song song, {
-    String quality = '128',
-  }) async {
+  Future<ResolvedAudio> resolve(Song song, {String quality = '128'}) async {
     if (!song.canResolve) {
       throw const KugouApiException('该歌曲缺少 hash，无法解析音源');
     }

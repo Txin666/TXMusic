@@ -77,23 +77,23 @@ class TrayPanelState {
   String get displayArtist => hasSong ? artist : '从主窗口挑一首歌开始';
 
   Map<String, dynamic> toJson() => <String, dynamic>{
-        'hasSong': hasSong,
-        'title': title,
-        'artist': artist,
-        'album': album,
-        'coverUrl': coverUrl,
-        'isPlaying': isPlaying,
-        'isLoading': isLoading,
-        'positionMs': positionMs,
-        'durationMs': durationMs,
-        'liked': liked,
-        'repeatLabel': repeatLabel,
-        'repeatActive': repeatActive,
-        'favoriteCount': favoriteCount,
-        'volume': volume,
-        'muted': muted,
-        'errorMessage': errorMessage,
-      };
+    'hasSong': hasSong,
+    'title': title,
+    'artist': artist,
+    'album': album,
+    'coverUrl': coverUrl,
+    'isPlaying': isPlaying,
+    'isLoading': isLoading,
+    'positionMs': positionMs,
+    'durationMs': durationMs,
+    'liked': liked,
+    'repeatLabel': repeatLabel,
+    'repeatActive': repeatActive,
+    'favoriteCount': favoriteCount,
+    'volume': volume,
+    'muted': muted,
+    'errorMessage': errorMessage,
+  };
 
   factory TrayPanelState.fromJson(Map<dynamic, dynamic> json) {
     int asInt(Object? value) => value is num ? value.toInt() : 0;
@@ -119,8 +119,9 @@ class TrayPanelState {
       favoriteCount: asInt(json['favoriteCount']),
       volume: asDouble(json['volume']),
       muted: asBool(json['muted']),
-      errorMessage:
-          json['errorMessage'] is String ? json['errorMessage'] as String : null,
+      errorMessage: json['errorMessage'] is String
+          ? json['errorMessage'] as String
+          : null,
     );
   }
 }

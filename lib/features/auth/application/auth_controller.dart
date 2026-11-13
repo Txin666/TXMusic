@@ -237,17 +237,11 @@ class AuthController extends Notifier<AuthState> {
     try {
       await ref.read(kugouLoginApiProvider).sendSmsCode(mobile.trim());
       _startCountdown(60);
-      state = state.copyWith(
-        phase: AuthPhase.idle,
-        message: '验证码已发送，请查收短信',
-      );
+      state = state.copyWith(phase: AuthPhase.idle, message: '验证码已发送，请查收短信');
     } on KugouApiException catch (error) {
       state = state.copyWith(phase: AuthPhase.error, message: error.message);
     } on Object catch (error) {
-      state = state.copyWith(
-        phase: AuthPhase.error,
-        message: '验证码发送失败：$error',
-      );
+      state = state.copyWith(phase: AuthPhase.error, message: '验证码发送失败：$error');
     }
   }
 
@@ -544,8 +538,7 @@ class AuthController extends Notifier<AuthState> {
       'token=${credential.token}',
       if (credential.vipType.isNotEmpty && credential.vipType != '0')
         'vip_type=${credential.vipType}',
-      if (credential.vipToken.isNotEmpty)
-        'vip_token=${credential.vipToken}',
+      if (credential.vipToken.isNotEmpty) 'vip_token=${credential.vipToken}',
     ].join('; ');
 
     final KugouSession logged = current.copyWith(
@@ -567,9 +560,7 @@ class AuthController extends Notifier<AuthState> {
 
     // 登录成功即触发一次「每日领 VIP」：概念版听歌任务一天一领，
     // 内部做了日期幂等，重复调用不会重复请求接口。
-    unawaited(
-      ref.read(dailyVipControllerProvider.notifier).claimIfNeeded(),
-    );
+    unawaited(ref.read(dailyVipControllerProvider.notifier).claimIfNeeded());
   }
 }
 

@@ -67,8 +67,9 @@ void main() {
 
     test('copyWith 与 lerp 不丢字段', () {
       const AppPalette palette = AppPalette.light;
-      final AppPalette changed =
-          palette.copyWith(textPrimary: const Color(0xFF000000));
+      final AppPalette changed = palette.copyWith(
+        textPrimary: const Color(0xFF000000),
+      );
       expect(changed.textPrimary, const Color(0xFF000000));
       expect(changed.background, palette.background);
 

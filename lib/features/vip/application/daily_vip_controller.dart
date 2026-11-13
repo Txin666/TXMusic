@@ -101,8 +101,7 @@ class DailyVipController extends Notifier<DailyVipState> {
     }
     _booted = true;
 
-    final Map<String, dynamic> json =
-        await LocalStore.readJson(_fileName);
+    final Map<String, dynamic> json = await LocalStore.readJson(_fileName);
     if (json.isNotEmpty) {
       state = state.copyWith(
         autoClaim: json['auto_claim'] != false,
@@ -112,8 +111,8 @@ class DailyVipController extends Notifier<DailyVipState> {
         lastSuccess: json['last_success'] == true,
         lastSteps: (json['last_steps'] is List)
             ? (json['last_steps'] as List<Object?>)
-                .map<String>((Object? item) => '$item')
-                .toList(growable: false)
+                  .map<String>((Object? item) => '$item')
+                  .toList(growable: false)
             : const <String>[],
       );
     }
@@ -232,7 +231,5 @@ class DailyVipController extends Notifier<DailyVipState> {
 }
 
 final NotifierProvider<DailyVipController, DailyVipState>
-    dailyVipControllerProvider =
-    NotifierProvider<DailyVipController, DailyVipState>(
-  DailyVipController.new,
-);
+dailyVipControllerProvider =
+    NotifierProvider<DailyVipController, DailyVipState>(DailyVipController.new);

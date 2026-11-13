@@ -142,5 +142,6 @@ class AppPalette extends ThemeExtension<AppPalette> {
 
 /// 组件里读语义色的快捷入口：`context.palette.surface`。
 extension AppPaletteContext on BuildContext {
-  AppPalette get palette => Theme.of(this).extension<AppPalette>() ?? AppPalette.dark;
+  AppPalette get palette =>
+      Theme.of(this).extension<AppPalette>() ?? AppPalette.dark;
 }

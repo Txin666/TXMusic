@@ -25,12 +25,16 @@ class MiniPlayerBar extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final PlaybackSnapshot playback = ref.watch(playerControllerProvider);
-    final PlayerController controller = ref.read(playerControllerProvider.notifier);
+    final PlayerController controller = ref.read(
+      playerControllerProvider.notifier,
+    );
     final Song? song = playback.currentSong;
 
     // 切歌时写入真实「最近播放」（`.local/recent.json`），失败曲目不计入。
-    ref.listen<PlaybackSnapshot>(playerControllerProvider,
-        (PlaybackSnapshot? previous, PlaybackSnapshot next) {
+    ref.listen<PlaybackSnapshot>(playerControllerProvider, (
+      PlaybackSnapshot? previous,
+      PlaybackSnapshot next,
+    ) {
       final Song? current = next.currentSong;
       if (current == null || next.errorMessage != null) {
         return;
@@ -55,7 +59,9 @@ class MiniPlayerBar extends ConsumerWidget {
           ),
         ],
       ),
-      child: song == null ? _buildIdle(context, ref) : _buildActive(context, ref, playback, controller),
+      child: song == null
+          ? _buildIdle(context, ref)
+          : _buildActive(context, ref, playback, controller),
     );
   }
 
@@ -74,9 +80,7 @@ class MiniPlayerBar extends ConsumerWidget {
               const SizedBox(height: 2),
               Text(
                 '从发现页或榜单选择一首歌开始',
-                style: Theme.of(context)
-                    .textTheme
-                    .bodySmall
+                style: Theme.of(context).textTheme.bodySmall
                     ?.copyWith(color: context.palette.textSecondary),
               ),
             ],
@@ -118,7 +122,10 @@ class MiniPlayerBar extends ConsumerWidget {
         ),
         Expanded(
           child: Padding(
-            padding: const EdgeInsets.only(left: AppSpacing.lg, right: AppSpacing.lg),
+            padding: const EdgeInsets.only(
+              left: AppSpacing.lg,
+              right: AppSpacing.lg,
+            ),
             child: Row(
               children: <Widget>[
                 InkWell(
@@ -153,9 +160,7 @@ class MiniPlayerBar extends ConsumerWidget {
                                       '${Formatters.duration(playback.duration)}',
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodySmall
+                              style: Theme.of(context).textTheme.bodySmall
                                   ?.copyWith(
                                     color: playback.errorMessage != null
                                         ? AppColors.danger
@@ -172,8 +177,9 @@ class MiniPlayerBar extends ConsumerWidget {
                 Builder(
                   builder: (BuildContext buttonContext) {
                     // 收藏态来自真实 LibraryController（落盘 `.local/favorites.json`）。
-                    final bool liked =
-                        ref.watch(libraryProvider).isFavorite(song.hash);
+                    final bool liked = ref
+                        .watch(libraryProvider)
+                        .isFavorite(song.hash);
                     return IconButton(
                       tooltip: liked ? '取消收藏' : '收藏',
                       onPressed: () async {
@@ -196,7 +202,9 @@ class MiniPlayerBar extends ConsumerWidget {
                             : Icons.favorite_border_rounded,
                         size: 18,
                       ),
-                      color: liked ? context.palette.emphasized : context.palette.textSecondary,
+                      color: liked
+                          ? context.palette.emphasized
+                          : context.palette.textSecondary,
                     );
                   },
                 ),
@@ -228,9 +236,7 @@ class MiniPlayerBar extends ConsumerWidget {
                 const Spacer(),
                 Text(
                   Formatters.duration(playback.position),
-                  style: Theme.of(context)
-                      .textTheme
-                      .labelSmall
+                  style: Theme.of(context).textTheme.labelSmall
                       ?.copyWith(color: context.palette.textSecondary),
                 ),
                 const SizedBox(width: AppSpacing.sm),
@@ -250,8 +256,12 @@ class MiniPlayerBar extends ConsumerWidget {
                   child: SliderTheme(
                     data: SliderTheme.of(context).copyWith(
                       trackHeight: 2,
-                      thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 4),
-                      overlayShape: const RoundSliderOverlayShape(overlayRadius: 8),
+                      thumbShape: const RoundSliderThumbShape(
+                        enabledThumbRadius: 4,
+                      ),
+                      overlayShape: const RoundSliderOverlayShape(
+                        overlayRadius: 8,
+                      ),
                     ),
                     child: Slider(
                       value: playback.muted ? 0 : playback.volume,
@@ -329,8 +339,12 @@ class MiniPlayerBar extends ConsumerWidget {
                       leading: Text(
                         '${index + 1}'.padLeft(2, '0'),
                         style: TextStyle(
-                          color: active ? context.palette.emphasized : context.palette.textSecondary,
-                          fontWeight: active ? FontWeight.w700 : FontWeight.w500,
+                          color: active
+                              ? context.palette.emphasized
+                              : context.palette.textSecondary,
+                          fontWeight: active
+                              ? FontWeight.w700
+                              : FontWeight.w500,
                         ),
                       ),
                       title: Text(
@@ -338,7 +352,9 @@ class MiniPlayerBar extends ConsumerWidget {
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
-                          color: active ? context.palette.emphasized : context.palette.textPrimary,
+                          color: active
+                              ? context.palette.emphasized
+                              : context.palette.textPrimary,
                         ),
                       ),
                       subtitle: Text('${item.artist} · ${item.album}'),
@@ -386,7 +402,9 @@ class _PlayButton extends StatelessWidget {
                   ),
                 )
               : Icon(
-                  playback.isPlaying ? Icons.pause_rounded : Icons.play_arrow_rounded,
+                  playback.isPlaying
+                      ? Icons.pause_rounded
+                      : Icons.play_arrow_rounded,
                   size: 24,
                   color: const Color(0xFF04120C),
                 ),

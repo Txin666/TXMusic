@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../../../core/network/kugou_providers.dart';
 import '../../../../core/network/kugou_session.dart';
 import '../../../../routing/app_routes.dart';
+import '../../../../routing/navigation_history.dart';
 import '../../../../shared/widgets/cover_image.dart';
 import '../../../../theme/app_spacing.dart';
 import '../../../profile/application/profile_providers.dart';
@@ -39,12 +40,18 @@ class _TopSearchBarState extends ConsumerState<TopSearchBar> {
     }
     ref.read(searchPageControllerProvider.notifier).search(keyword);
     _focusNode.unfocus();
-    context.go(AppRoutes.search);
+    context.go('${AppRoutes.search}?q=${Uri.encodeQueryComponent(keyword)}');
   }
 
   @override
   Widget build(BuildContext context) {
-    final bool canPop = context.canPop();
+    // 前进 / 后退改走自建历史栈：go_router 的 go 不入栈，canPop 在 Shell 内基本恒为 false。
+    final NavigationHistoryState history = ref.watch(navigationHistoryProvider);
+    final bool canGoBack = history.canGoBack;
+    final bool canGoForward = history.canGoForward;
+    final NavigationHistoryController historyController = ref.read(
+      navigationHistoryProvider.notifier,
+    );
 
     return Container(
       height: AppSpacing.topBarHeight,
@@ -56,16 +63,20 @@ class _TopSearchBarState extends ConsumerState<TopSearchBar> {
       child: Row(
         children: <Widget>[
           IconButton(
-            tooltip: canPop ? '返回' : '已在首页',
-            onPressed: canPop ? () => context.pop() : null,
+            tooltip: canGoBack ? '后退（Alt+←）' : '没有可后退的页面',
+            onPressed: canGoBack ? historyController.goBack : null,
             icon: const Icon(Icons.arrow_back_ios_new_rounded, size: 16),
-            color: context.palette.textSecondary,
+            color: canGoBack
+                ? context.palette.textSecondary
+                : context.palette.textDisabled,
           ),
           IconButton(
-            tooltip: '前进（骨架期未实现）',
-            onPressed: null,
+            tooltip: canGoForward ? '前进（Alt+→）' : '没有可前进的页面',
+            onPressed: canGoForward ? historyController.goForward : null,
             icon: const Icon(Icons.arrow_forward_ios_rounded, size: 16),
-            color: context.palette.textDisabled,
+            color: canGoForward
+                ? context.palette.textSecondary
+                : context.palette.textDisabled,
           ),
           const SizedBox(width: AppSpacing.md),
           ConstrainedBox(
@@ -129,8 +140,9 @@ class _AccountAvatar extends ConsumerWidget {
     final UserProfile? profile = ref.watch(userProfileProvider).value;
 
     final bool loggedIn = session.isLoggedIn;
-    final String nickname =
-        profile?.nickname.isNotEmpty == true ? profile!.nickname : session.nickname;
+    final String nickname = profile?.nickname.isNotEmpty == true
+        ? profile!.nickname
+        : session.nickname;
     final String avatarUrl = profile?.avatarUrl ?? '';
 
     return Tooltip(

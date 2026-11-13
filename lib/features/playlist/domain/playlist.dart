@@ -71,16 +71,33 @@ class Playlist {
       id: id,
       title: title,
       creator: JsonUtils.str(
-        JsonUtils.pick(json, const <String>['nickname', 'username', 'list_create_username']),
+        JsonUtils.pick(json, const <String>[
+          'nickname',
+          'username',
+          'list_create_username',
+        ]),
       ),
       description: JsonUtils.str(
-        JsonUtils.pick(json, const <String>['intro', 'description', 'list_create_listen_count']),
+        JsonUtils.pick(json, const <String>[
+          'intro',
+          'description',
+          'list_create_listen_count',
+        ]),
       ),
       playCount: JsonUtils.integer(
-        JsonUtils.pick(json, const <String>['play_count', 'playcount', 'total_play_count']),
+        JsonUtils.pick(json, const <String>[
+          'play_count',
+          'playcount',
+          'total_play_count',
+        ]),
       ),
       trackCount: JsonUtils.integer(
-        JsonUtils.pick(json, const <String>['song_count', 'count', 'songcount', 'percount']),
+        JsonUtils.pick(json, const <String>[
+          'song_count',
+          'count',
+          'songcount',
+          'percount',
+        ]),
       ),
       coverUrl: JsonUtils.cover(
         JsonUtils.pick(json, const <String>['img', 'imgurl', 'pic', 'cover']),
@@ -88,7 +105,11 @@ class Playlist {
       ),
       tags: _tags(json),
       updateTime: JsonUtils.str(
-        JsonUtils.pick(json, const <String>['update_time', 'publishtime']),
+        JsonUtils.pick(json, const <String>[
+          'update_time',
+          'publishtime',
+          'publish_time',
+        ]),
       ),
     );
   }
@@ -111,6 +132,10 @@ class Playlist {
     if (flat.isEmpty) {
       return const <String>[];
     }
-    return flat.split(',').map((String item) => item.trim()).where((String item) => item.isNotEmpty).toList();
+    return flat
+        .split(',')
+        .map((String item) => item.trim())
+        .where((String item) => item.isNotEmpty)
+        .toList();
   }
 }

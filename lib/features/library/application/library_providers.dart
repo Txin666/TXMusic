@@ -46,7 +46,11 @@ class LibraryController extends Notifier<LibraryState> {
   Future<void> _restore() async {
     final List<Song> favorites = await _repository.loadFavorites();
     final List<Song> recent = await _repository.loadRecent();
-    state = LibraryState(favorites: favorites, recent: recent, isLoading: false);
+    state = LibraryState(
+      favorites: favorites,
+      recent: recent,
+      isLoading: false,
+    );
   }
 
   Future<void> refresh() => _restore();
@@ -73,6 +77,6 @@ final NotifierProvider<LibraryController, LibraryState> libraryProvider =
 /// 收藏状态快速查询（播放条 / 列表页共用）。
 final Provider<bool Function(String hash)> isFavoriteProvider =
     Provider<bool Function(String hash)>((Ref ref) {
-  final LibraryState state = ref.watch(libraryProvider);
-  return state.isFavorite;
-});
+      final LibraryState state = ref.watch(libraryProvider);
+      return state.isFavorite;
+    });

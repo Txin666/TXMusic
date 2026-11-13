@@ -34,8 +34,9 @@ class RankPage extends ConsumerWidget {
           const SizedBox(height: AppSpacing.xs),
           Text(
             '官方榜单定时更新，曲目与播放量均来自酷狗榜单接口',
-            style: theme.textTheme.bodySmall
-                ?.copyWith(color: context.palette.textSecondary),
+            style: theme.textTheme.bodySmall?.copyWith(
+              color: context.palette.textSecondary,
+            ),
           ),
           const SizedBox(height: AppSpacing.xl),
           ranksAsync.when(
@@ -84,7 +85,9 @@ class _RankCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final ThemeData theme = Theme.of(context);
-    final AsyncValue<List<Song>> songsAsync = ref.watch(rankSongsProvider(rank.id));
+    final AsyncValue<List<Song>> songsAsync = ref.watch(
+      rankSongsProvider(rank.id),
+    );
     final List<Song> songs = songsAsync.value ?? const <Song>[];
     final String meta = <String>[
       if (rank.playCount > 0) '${Formatters.playCount(rank.playCount)}次播放',
@@ -122,7 +125,8 @@ class _RankCard extends ConsumerWidget {
                   children: <Widget>[
                     Flexible(
                       child: InkWell(
-                        onTap: () => context.push(AppRoutes.rankDetail(rank.id)),
+                        onTap: () =>
+                            context.push(AppRoutes.rankDetail(rank.id)),
                         child: Text(
                           rank.title,
                           maxLines: 1,
@@ -143,30 +147,34 @@ class _RankCard extends ConsumerWidget {
                     meta,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: theme.textTheme.bodySmall
-                        ?.copyWith(color: context.palette.textSecondary),
+                    style: theme.textTheme.bodySmall?.copyWith(
+                      color: context.palette.textSecondary,
+                    ),
                   ),
                 ],
                 const SizedBox(height: AppSpacing.sm),
                 songsAsync.when(
                   loading: () => Text(
                     '曲目加载中…',
-                    style: theme.textTheme.bodySmall
-                        ?.copyWith(color: context.palette.textDisabled),
+                    style: theme.textTheme.bodySmall?.copyWith(
+                      color: context.palette.textDisabled,
+                    ),
                   ),
                   error: (Object error, StackTrace stack) => Text(
                     '曲目加载失败：${_describeError(error)}',
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: theme.textTheme.bodySmall
-                        ?.copyWith(color: AppColors.danger),
+                    style: theme.textTheme.bodySmall?.copyWith(
+                      color: AppColors.danger,
+                    ),
                   ),
                   data: (List<Song> list) {
                     if (list.isEmpty) {
                       return Text(
                         '该榜单暂无曲目',
-                        style: theme.textTheme.bodySmall
-                            ?.copyWith(color: context.palette.textDisabled),
+                        style: theme.textTheme.bodySmall?.copyWith(
+                          color: context.palette.textDisabled,
+                        ),
                       );
                     }
                     return Column(
@@ -211,9 +219,11 @@ class _RankCard extends ConsumerWidget {
                                       entry.value.artist,
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
-                                      style: theme.textTheme.bodySmall?.copyWith(
-                                        color: context.palette.textSecondary,
-                                      ),
+                                      style: theme.textTheme.bodySmall
+                                          ?.copyWith(
+                                            color:
+                                                context.palette.textSecondary,
+                                          ),
                                     ),
                                   ],
                                 ),
@@ -234,8 +244,8 @@ class _RankCard extends ConsumerWidget {
                 onPressed: songs.isEmpty
                     ? null
                     : () => ref
-                        .read(playerControllerProvider.notifier)
-                        .playQueue(songs),
+                          .read(playerControllerProvider.notifier)
+                          .playQueue(songs),
                 icon: const Icon(Icons.play_arrow_rounded, size: 18),
                 label: const Text('播放'),
               ),
@@ -260,7 +270,10 @@ class _Chip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm, vertical: 2),
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppSpacing.sm,
+        vertical: 2,
+      ),
       decoration: BoxDecoration(
         color: context.palette.surfaceHigh,
         borderRadius: BorderRadius.circular(AppRadius.pill),
@@ -292,9 +305,7 @@ class _RankLoading extends StatelessWidget {
             const SizedBox(height: AppSpacing.md),
             Text(
               '正在加载榜单…',
-              style: Theme.of(context)
-                  .textTheme
-                  .bodySmall
+              style: Theme.of(context).textTheme.bodySmall
                   ?.copyWith(color: context.palette.textSecondary),
             ),
           ],

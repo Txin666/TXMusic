@@ -76,18 +76,18 @@ class Song {
   }
 
   Map<String, dynamic> toJson() => <String, dynamic>{
-        'id': id,
-        'title': title,
-        'artist': artist,
-        'artistId': artistId,
-        'album': album,
-        'albumId': albumId,
-        'durationMs': duration.inMilliseconds,
-        'coverUrl': coverUrl,
-        'hash': hash,
-        'isVip': isVip,
-        'privilege': privilege,
-      };
+    'id': id,
+    'title': title,
+    'artist': artist,
+    'artistId': artistId,
+    'album': album,
+    'albumId': albumId,
+    'durationMs': duration.inMilliseconds,
+    'coverUrl': coverUrl,
+    'hash': hash,
+    'isVip': isVip,
+    'privilege': privilege,
+  };
 
   static Song? fromJson(Object? raw) {
     if (raw is! Map) {
@@ -104,7 +104,9 @@ class Song {
       artistId: '${raw['artistId'] ?? ''}',
       album: '${raw['album'] ?? ''}',
       albumId: '${raw['albumId'] ?? ''}',
-      duration: Duration(milliseconds: int.tryParse('${raw['durationMs'] ?? 0}') ?? 0),
+      duration: Duration(
+        milliseconds: int.tryParse('${raw['durationMs'] ?? 0}') ?? 0,
+      ),
       coverUrl: raw['coverUrl']?.toString(),
       hash: hash,
       isVip: raw['isVip'] == true,

@@ -5,6 +5,7 @@ import '../../features/artist/data/kugou_artist_api.dart';
 import '../../features/auth/data/kugou_login_api.dart';
 import '../../features/discover/data/kugou_discover_api.dart';
 import '../../features/lyric/data/kugou_lyric_api.dart';
+import '../../features/library/data/kugou_library_api.dart';
 import '../../features/player/data/song_url_resolver.dart';
 import '../../features/playlist/data/kugou_playlist_api.dart';
 import '../../features/profile/data/kugou_user_api.dart';
@@ -52,20 +53,19 @@ class KugouSessionController extends Notifier<KugouSession> {
 
 /// 登录态：默认游客态，`main()` 通过 `overrideWith` 注入真实值。
 final NotifierProvider<KugouSessionController, KugouSession>
-    kugouSessionProvider =
-    NotifierProvider<KugouSessionController, KugouSession>(
+kugouSessionProvider = NotifierProvider<KugouSessionController, KugouSession>(
   KugouSessionController.new,
 );
 
 /// 接口客户端：持有 dfid / cookie，负责时间戳与错误码收敛。
-final Provider<KugouClient> kugouClientProvider = Provider<KugouClient>(
-  (Ref ref) {
-    final KugouSession session = ref.watch(kugouSessionProvider);
-    final KugouClient client = KugouClient(session: session);
-    ref.onDispose(client.dispose);
-    return client;
-  },
-);
+final Provider<KugouClient> kugouClientProvider = Provider<KugouClient>((
+  Ref ref,
+) {
+  final KugouSession session = ref.watch(kugouSessionProvider);
+  final KugouClient client = KugouClient(session: session);
+  ref.onDispose(client.dispose);
+  return client;
+});
 
 /// 歌曲接口（搜索歌曲 / 歌曲映射）。
 final Provider<KugouSongApi> kugouSongApiProvider = Provider<KugouSongApi>(
@@ -75,14 +75,14 @@ final Provider<KugouSongApi> kugouSongApiProvider = Provider<KugouSongApi>(
 /// 聚合搜索（歌曲 + 歌单 + 歌手 + 专辑 + 热搜词）。
 final Provider<KugouSearchApi> kugouSearchApiProvider =
     Provider<KugouSearchApi>(
-  (Ref ref) => KugouSearchApi(ref.watch(kugouClientProvider)),
-);
+      (Ref ref) => KugouSearchApi(ref.watch(kugouClientProvider)),
+    );
 
 /// 歌单接口。
 final Provider<KugouPlaylistApi> kugouPlaylistApiProvider =
     Provider<KugouPlaylistApi>(
-  (Ref ref) => KugouPlaylistApi(ref.watch(kugouClientProvider)),
-);
+      (Ref ref) => KugouPlaylistApi(ref.watch(kugouClientProvider)),
+    );
 
 /// 专辑接口。
 final Provider<KugouAlbumApi> kugouAlbumApiProvider = Provider<KugouAlbumApi>(
@@ -92,8 +92,8 @@ final Provider<KugouAlbumApi> kugouAlbumApiProvider = Provider<KugouAlbumApi>(
 /// 歌手接口。
 final Provider<KugouArtistApi> kugouArtistApiProvider =
     Provider<KugouArtistApi>(
-  (Ref ref) => KugouArtistApi(ref.watch(kugouClientProvider)),
-);
+      (Ref ref) => KugouArtistApi(ref.watch(kugouClientProvider)),
+    );
 
 /// 排行榜接口。
 final Provider<KugouRankApi> kugouRankApiProvider = Provider<KugouRankApi>(
@@ -103,8 +103,8 @@ final Provider<KugouRankApi> kugouRankApiProvider = Provider<KugouRankApi>(
 /// 发现页接口（每日推荐等）。
 final Provider<KugouDiscoverApi> kugouDiscoverApiProvider =
     Provider<KugouDiscoverApi>(
-  (Ref ref) => KugouDiscoverApi(ref.watch(kugouClientProvider)),
-);
+      (Ref ref) => KugouDiscoverApi(ref.watch(kugouClientProvider)),
+    );
 
 /// 歌词接口。
 final Provider<KugouLyricApi> kugouLyricApiProvider = Provider<KugouLyricApi>(
@@ -121,6 +121,12 @@ final Provider<KugouUserApi> kugouUserApiProvider = Provider<KugouUserApi>(
   (Ref ref) => KugouUserApi(ref.watch(kugouClientProvider)),
 );
 
+/// 「我的音乐」用户维度接口（我创建/收藏的歌单、已购专辑）。
+final Provider<KugouLibraryApi> kugouLibraryApiProvider =
+    Provider<KugouLibraryApi>(
+      (Ref ref) => KugouLibraryApi(ref.watch(kugouClientProvider)),
+    );
+
 /// 概念版 VIP 接口（每日领取 / 权益查询）。
 final Provider<KugouVipApi> kugouVipApiProvider = Provider<KugouVipApi>(
   (Ref ref) => KugouVipApi(ref.watch(kugouClientProvider)),
@@ -129,14 +135,14 @@ final Provider<KugouVipApi> kugouVipApiProvider = Provider<KugouVipApi>(
 /// 音源解析器。
 final Provider<SongUrlResolver> songUrlResolverProvider =
     Provider<SongUrlResolver>(
-  (Ref ref) => SongUrlResolver(ref.watch(kugouClientProvider)),
-);
+      (Ref ref) => SongUrlResolver(ref.watch(kugouClientProvider)),
+    );
 
 /// 音频引擎：全局单例，生命周期跟随 ProviderScope。
-final Provider<AudioEngine> audioEngineProvider = Provider<AudioEngine>(
-  (Ref ref) {
-    final MediaKitAudioEngine engine = MediaKitAudioEngine();
-    ref.onDispose(engine.dispose);
-    return engine;
-  },
-);
+final Provider<AudioEngine> audioEngineProvider = Provider<AudioEngine>((
+  Ref ref,
+) {
+  final MediaKitAudioEngine engine = MediaKitAudioEngine();
+  ref.onDispose(engine.dispose);
+  return engine;
+});

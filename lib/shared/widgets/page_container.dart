@@ -21,7 +21,8 @@ class PageContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double width = MediaQuery.sizeOf(context).width;
-    final EdgeInsetsGeometry effectivePadding = padding ??
+    final EdgeInsetsGeometry effectivePadding =
+        padding ??
         (AppBreakpoints.fromWidth(width) == AppWindowSize.compact
             ? AppSpacing.pageCompact
             : AppSpacing.page);
@@ -41,10 +42,6 @@ class PageContainer extends StatelessWidget {
       return content;
     }
 
-    return Scrollbar(
-      child: SingleChildScrollView(
-        child: content,
-      ),
-    );
+    return Scrollbar(child: SingleChildScrollView(child: content));
   }
 }

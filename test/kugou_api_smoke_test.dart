@@ -21,7 +21,11 @@ void main() {
 
   test('dfid/登录态可从 .local 恢复', () async {
     final KugouSession session = await KugouSession.load();
-    expect(session.dfid, isNotEmpty, reason: '缺少 dfid，检查 .local/kugou_cookie.json');
+    expect(
+      session.dfid,
+      isNotEmpty,
+      reason: '缺少 dfid，检查 .local/kugou_cookie.json',
+    );
     expect(session.cookieHeader, contains('dfid='));
   });
 

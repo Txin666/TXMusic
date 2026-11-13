@@ -15,6 +15,10 @@ final playlistDetailProvider = FutureProvider.family<Playlist?, String>(
 );
 
 /// 歌单曲目（`/playlist/track/all`）。
+///
+/// 必须 `fetchAll: true`：上游分页，单页最多 300 首，歌单详情页只拿第一页会
+/// 把大歌单（如 330 首的「我喜欢」）截断成 100 首。
 final playlistSongsProvider = FutureProvider.family<List<Song>, String>(
-  (Ref ref, String id) => ref.watch(kugouPlaylistApiProvider).songs(id),
+  (Ref ref, String id) =>
+      ref.watch(kugouPlaylistApiProvider).songs(id, fetchAll: true),
 );

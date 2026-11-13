@@ -18,7 +18,9 @@ final lyricDocumentProvider = FutureProvider.family<LyricDocument, LyricKey>((
   Ref ref,
   LyricKey key,
 ) {
-  return ref.watch(kugouLyricApiProvider).load(
+  return ref
+      .watch(kugouLyricApiProvider)
+      .load(
         Song(
           id: key.hash,
           title: key.title,
@@ -33,7 +35,8 @@ final lyricLinesProvider = FutureProvider.family<List<LyricLine>, LyricKey>((
   Ref ref,
   LyricKey key,
 ) async {
-  final LyricDocument document =
-      await ref.watch(lyricDocumentProvider(key).future);
+  final LyricDocument document = await ref.watch(
+    lyricDocumentProvider(key).future,
+  );
   return document.lines;
 });

@@ -19,6 +19,7 @@ import '../../playlist/domain/playlist.dart';
 import '../../song/domain/song.dart';
 import '../application/search_controller.dart';
 import '../../../theme/app_palette.dart';
+import 'widgets/search_suggestion_field.dart';
 
 /// 错误文案统一取 [KugouApiException.message]，避免把堆栈抛给用户。
 String _describeError(Object error) =>
@@ -37,41 +38,103 @@ class SearchPage extends ConsumerStatefulWidget {
   ConsumerState<SearchPage> createState() => _SearchPageState();
 }
 
-class _SearchPageState extends ConsumerState<SearchPage> {
+class _SearchPageState extends ConsumerState<SearchPage>
+    with SingleTickerProviderStateMixin {
   late final TextEditingController _controller;
+
+  /// 结果分类 tab：单曲 / 专辑 / 歌单 / 歌手。
+  late final TabController _tabController;
 
   @override
   void initState() {
     super.initState();
     _controller = TextEditingController(text: widget.initialQuery ?? '');
+    _tabController = TabController(
+      length: _SearchTab.values.length,
+      vsync: this,
+    )..addListener(_handleTabChanged);
     final String query = (widget.initialQuery ?? '').trim();
     if (query.isNotEmpty) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        ref.read(searchPageControllerProvider.notifier).search(query);
+      WidgetsBinding.instance.addPostFrameCallback((_) async {
+        await ref.read(searchPageControllerProvider.notifier).search(query);
+        if (mounted) {
+          _ensureTabHasData();
+        }
       });
     }
   }
 
+  /// tab 切换后重建内容区（TabBar 自身负责指示器动画，内容需手动刷新）。
+  void _handleTabChanged() {
+    if (_tabController.indexIsChanging || !mounted) {
+      return;
+    }
+    setState(() {});
+  }
+
   @override
   void dispose() {
+    _tabController
+      ..removeListener(_handleTabChanged)
+      ..dispose();
     _controller.dispose();
     super.dispose();
   }
 
-  void _submit(String value) {
-    ref.read(searchPageControllerProvider.notifier).search(value);
+  /// 上一次提交的关键词与时间，用于吃掉「回车 + 联想确认」之类的重复触发。
+  String _lastSubmitted = '';
+  DateTime? _lastSubmittedAt;
+
+  Future<void> _submit(String value) async {
     final String key = value.trim();
     if (key.isNotEmpty) {
+      // 回车确认联想词与 onSelected 可能在同一帧内各触发一次，做一次极短窗口去重。
+      final DateTime now = DateTime.now();
+      final DateTime? last = _lastSubmittedAt;
+      if (key == _lastSubmitted &&
+          last != null &&
+          now.difference(last) < const Duration(milliseconds: 400)) {
+        return;
+      }
+      _lastSubmitted = key;
+      _lastSubmittedAt = now;
       // 把关键词同步到地址栏，方便前进/后退与分享（文档 §9.4 路由参数化）。
       context.go('${AppRoutes.search}?q=${Uri.encodeQueryComponent(key)}');
+    }
+    await ref.read(searchPageControllerProvider.notifier).search(value);
+    if (!mounted) {
+      return;
+    }
+    _ensureTabHasData();
+  }
+
+  /// 搜索完成后，若当前 tab 没有结果而其他分类有结果，自动切到第一个有内容
+  /// 的分类，避免用户停在"该分类无结果"的空页上。
+  void _ensureTabHasData() {
+    final SearchState state = ref.read(searchPageControllerProvider);
+    final List<int> counts = <int>[
+      state.songs.length,
+      state.albums.length,
+      state.playlists.length,
+      state.artists.length,
+    ];
+    final int current = _tabController.index;
+    if (current < counts.length && counts[current] > 0) {
+      return;
+    }
+    final int first = counts.indexWhere((int count) => count > 0);
+    if (first >= 0 && first != current) {
+      _tabController.animateTo(first);
+      setState(() {});
     }
   }
 
   @override
   Widget build(BuildContext context) {
     final SearchState state = ref.watch(searchPageControllerProvider);
-    final SearchPageController controller =
-        ref.read(searchPageControllerProvider.notifier);
+    final SearchPageController controller = ref.read(
+      searchPageControllerProvider.notifier,
+    );
     final ThemeData theme = Theme.of(context);
 
     return PageContainer(
@@ -80,19 +143,15 @@ class _SearchPageState extends ConsumerState<SearchPage> {
         children: <Widget>[
           Text('搜索', style: theme.textTheme.headlineMedium),
           const SizedBox(height: AppSpacing.lg),
-          TextField(
+          SearchSuggestionField(
             controller: _controller,
-            textInputAction: TextInputAction.search,
-            onSubmitted: _submit,
+            hintText: '搜索歌曲 / 歌手 / 歌单',
             onChanged: controller.updateKeyword,
-            decoration: InputDecoration(
-              hintText: '搜索歌曲 / 歌手 / 歌单',
-              prefixIcon: const Icon(Icons.search_rounded, size: 20),
-              suffixIcon: IconButton(
-                tooltip: '搜索',
-                icon: const Icon(Icons.arrow_forward_rounded, size: 20),
-                onPressed: () => _submit(_controller.text),
-              ),
+            onSubmitted: _submit,
+            suffixIcon: IconButton(
+              tooltip: '搜索',
+              icon: const Icon(Icons.arrow_forward_rounded, size: 20),
+              onPressed: () => _submit(_controller.text),
             ),
           ),
           const SizedBox(height: AppSpacing.xl),
@@ -135,93 +194,206 @@ class _SearchPageState extends ConsumerState<SearchPage> {
               _DegradeNotice(text: state.notice!),
               const SizedBox(height: AppSpacing.md),
             ],
-            if (state.songs.isNotEmpty) ...<Widget>[
-              SectionHeader(
-                title: '单曲',
-                subtitle: '${state.songs.length} 条结果',
-              ),
-              ...state.songs.asMap().entries.map(
-                    (MapEntry<int, Song> entry) => SongTile(
-                      song: entry.value,
-                      onTap: () => ref
-                          .read(playerControllerProvider.notifier)
-                          .playQueue(state.songs, startIndex: entry.key),
-                      onPlayTap: () => ref
-                          .read(playerControllerProvider.notifier)
-                          .playQueue(state.songs, startIndex: entry.key),
-                    ),
-                  ),
-              const SizedBox(height: AppSpacing.xl),
-            ],
-            if (state.playlists.isNotEmpty) ...<Widget>[
-              SectionHeader(
-                title: '歌单',
-                subtitle: '${state.playlists.length} 条结果',
-              ),
-              Wrap(
-                spacing: AppSpacing.lg,
-                runSpacing: AppSpacing.lg,
-                children: state.playlists
-                    .map(
-                      (Playlist playlist) => MediaCard(
-                        title: playlist.title,
-                        seed: playlist.title,
-                        coverUrl: playlist.coverUrl,
-                        subtitle: '${playlist.songCount} 首 · '
-                            '${Formatters.playCount(playlist.playCount)}',
-                        onTap: () => context
-                            .go(AppRoutes.playlistDetail(playlist.id)),
-                      ),
-                    )
-                    .toList(growable: false),
-              ),
-              const SizedBox(height: AppSpacing.xl),
-            ],
-            if (state.artists.isNotEmpty) ...<Widget>[
-              SectionHeader(
-                title: '歌手',
-                subtitle: '${state.artists.length} 条结果',
-              ),
-              Wrap(
-                spacing: AppSpacing.lg,
-                runSpacing: AppSpacing.lg,
-                children: state.artists
-                    .map(
-                      (Artist artist) => _ArtistResultTile(
-                        artist: artist,
-                        onTap: () =>
-                            context.go(AppRoutes.artistDetail(artist.id)),
-                      ),
-                    )
-                    .toList(growable: false),
-              ),
-              const SizedBox(height: AppSpacing.xl),
-            ],
-            if (state.albums.isNotEmpty) ...<Widget>[
-              SectionHeader(
-                title: '专辑',
-                subtitle: '${state.albums.length} 条结果',
-              ),
-              Wrap(
-                spacing: AppSpacing.lg,
-                runSpacing: AppSpacing.lg,
-                children: state.albums
-                    .map(
-                      (Album album) => MediaCard(
-                        title: album.title,
-                        seed: album.title,
-                        coverUrl: album.coverUrl,
-                        subtitle: album.artist.isEmpty
-                            ? '${album.trackCount} 首'
-                            : '${album.artist} · ${album.trackCount} 首',
-                        icon: Icons.album_rounded,
-                        onTap: () => context.go(AppRoutes.albumDetail(album.id)),
-                      ),
-                    )
-                    .toList(growable: false),
-              ),
-            ],
+            _SearchResultTabs(
+              controller: _tabController,
+              counts: <int>[
+                state.songs.length,
+                state.albums.length,
+                state.playlists.length,
+                state.artists.length,
+              ],
+            ),
+            const SizedBox(height: AppSpacing.lg),
+            ..._buildTabBody(state),
           ],
+        ],
+      ),
+    );
+  }
+
+  /// 当前 tab 对应的结果列表；该分类无数据时给出空态提示。
+  List<Widget> _buildTabBody(SearchState state) {
+    final _SearchTab tab = _SearchTab.values[_tabController.index];
+    switch (tab) {
+      case _SearchTab.songs:
+        if (state.songs.isEmpty) {
+          return <Widget>[_EmptyTabHint(tab: tab, keyword: state.keyword)];
+        }
+        return state.songs
+            .asMap()
+            .entries
+            .map(
+              (MapEntry<int, Song> entry) => SongTile(
+                song: entry.value,
+                onTap: () => ref
+                    .read(playerControllerProvider.notifier)
+                    .playQueue(state.songs, startIndex: entry.key),
+                onPlayTap: () => ref
+                    .read(playerControllerProvider.notifier)
+                    .playQueue(state.songs, startIndex: entry.key),
+              ),
+            )
+            .toList(growable: false);
+      case _SearchTab.albums:
+        if (state.albums.isEmpty) {
+          return <Widget>[_EmptyTabHint(tab: tab, keyword: state.keyword)];
+        }
+        return <Widget>[
+          Wrap(
+            spacing: AppSpacing.lg,
+            runSpacing: AppSpacing.lg,
+            children: state.albums
+                .map(
+                  (Album album) => MediaCard(
+                    title: album.title,
+                    seed: album.title,
+                    coverUrl: album.coverUrl,
+                    subtitle: album.artist.isEmpty
+                        ? '${album.trackCount} 首'
+                        : '${album.artist} · ${album.trackCount} 首',
+                    icon: Icons.album_rounded,
+                    onTap: () => context.go(AppRoutes.albumDetail(album.id)),
+                  ),
+                )
+                .toList(growable: false),
+          ),
+        ];
+      case _SearchTab.playlists:
+        if (state.playlists.isEmpty) {
+          return <Widget>[_EmptyTabHint(tab: tab, keyword: state.keyword)];
+        }
+        return <Widget>[
+          Wrap(
+            spacing: AppSpacing.lg,
+            runSpacing: AppSpacing.lg,
+            children: state.playlists
+                .map(
+                  (Playlist playlist) => MediaCard(
+                    title: playlist.title,
+                    seed: playlist.title,
+                    coverUrl: playlist.coverUrl,
+                    subtitle:
+                        '${playlist.songCount} 首 · '
+                        '${Formatters.playCount(playlist.playCount)}',
+                    onTap: () =>
+                        context.go(AppRoutes.playlistDetail(playlist.id)),
+                  ),
+                )
+                .toList(growable: false),
+          ),
+        ];
+      case _SearchTab.artists:
+        if (state.artists.isEmpty) {
+          return <Widget>[_EmptyTabHint(tab: tab, keyword: state.keyword)];
+        }
+        return <Widget>[
+          Wrap(
+            spacing: AppSpacing.lg,
+            runSpacing: AppSpacing.lg,
+            children: state.artists
+                .map(
+                  (Artist artist) => _ArtistResultTile(
+                    artist: artist,
+                    onTap: () => context.go(AppRoutes.artistDetail(artist.id)),
+                  ),
+                )
+                .toList(growable: false),
+          ),
+        ];
+    }
+  }
+}
+
+/// 搜索结果分类（顶部 tab 顺序即此枚举顺序）。
+enum _SearchTab {
+  songs('单曲', Icons.music_note_rounded),
+  albums('专辑', Icons.album_rounded),
+  playlists('歌单', Icons.queue_music_rounded),
+  artists('歌手', Icons.person_rounded);
+
+  const _SearchTab(this.label, this.icon);
+
+  final String label;
+  final IconData icon;
+}
+
+/// 结果区顶部分类 tab（单曲 / 专辑 / 歌单 / 歌手），带数量徽标。
+class _SearchResultTabs extends StatelessWidget {
+  const _SearchResultTabs({required this.controller, required this.counts});
+
+  final TabController controller;
+  final List<int> counts;
+
+  @override
+  Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    return Material(
+      color: Colors.transparent,
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          border: Border(bottom: BorderSide(color: context.palette.divider)),
+        ),
+        child: TabBar(
+          controller: controller,
+          isScrollable: true,
+          dividerColor: Colors.transparent,
+          indicatorSize: TabBarIndicatorSize.label,
+          labelStyle: theme.textTheme.titleSmall?.copyWith(
+            fontWeight: FontWeight.w700,
+          ),
+          unselectedLabelStyle: theme.textTheme.titleSmall,
+          unselectedLabelColor: context.palette.textSecondary,
+          tabs: _SearchTab.values
+              .asMap()
+              .entries
+              .map((MapEntry<int, _SearchTab> entry) {
+                final int count = entry.key < counts.length
+                    ? counts[entry.key]
+                    : 0;
+                return Tab(
+                  height: 44,
+                  text: count > 0
+                      ? '${entry.value.label} $count'
+                      : entry.value.label,
+                );
+              })
+              .toList(growable: false),
+        ),
+      ),
+    );
+  }
+}
+
+/// 某个分类下没有结果时的占位提示。
+class _EmptyTabHint extends StatelessWidget {
+  const _EmptyTabHint({required this.tab, required this.keyword});
+
+  final _SearchTab tab;
+  final String keyword;
+
+  @override
+  Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: AppSpacing.xxl),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Icon(tab.icon, size: 32, color: context.palette.textDisabled),
+          const SizedBox(height: AppSpacing.md),
+          Text(
+            '「$keyword」没有${tab.label}结果',
+            style: theme.textTheme.bodyMedium?.copyWith(
+              color: context.palette.textSecondary,
+            ),
+          ),
+          const SizedBox(height: AppSpacing.sm),
+          Text(
+            '可以切换到其他分类看看',
+            style: theme.textTheme.bodySmall?.copyWith(
+              color: context.palette.textDisabled,
+            ),
+          ),
         ],
       ),
     );
@@ -268,10 +440,14 @@ class _IdleView extends ConsumerWidget {
           ),
         const SizedBox(height: AppSpacing.xxl),
         const SectionHeader(title: '热搜榜', subtitle: '来自酷狗实时热搜'),
-        ref.watch(hotKeywordsProvider).when(
+        ref
+            .watch(hotKeywordsProvider)
+            .when(
               loading: () => const Padding(
                 padding: EdgeInsets.symmetric(vertical: AppSpacing.xl),
-                child: Center(child: CircularProgressIndicator(strokeWidth: 2.5)),
+                child: Center(
+                  child: CircularProgressIndicator(strokeWidth: 2.5),
+                ),
               ),
               error: (Object error, StackTrace stackTrace) => Padding(
                 padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
@@ -280,8 +456,9 @@ class _IdleView extends ConsumerWidget {
                     Expanded(
                       child: Text(
                         '热搜加载失败：${_describeError(error)}',
-                        style: theme.textTheme.bodySmall
-                            ?.copyWith(color: context.palette.textSecondary),
+                        style: theme.textTheme.bodySmall?.copyWith(
+                          color: context.palette.textSecondary,
+                        ),
                       ),
                     ),
                     TextButton(
@@ -294,37 +471,49 @@ class _IdleView extends ConsumerWidget {
               data: (List<String> keywords) {
                 if (keywords.isEmpty) {
                   return Padding(
-                    padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
+                    padding: const EdgeInsets.symmetric(
+                      vertical: AppSpacing.md,
+                    ),
                     child: Text(
                       '暂时没有热搜数据，直接输入关键词搜索吧',
-                      style: theme.textTheme.bodySmall
-                          ?.copyWith(color: context.palette.textSecondary),
+                      style: theme.textTheme.bodySmall?.copyWith(
+                        color: context.palette.textSecondary,
+                      ),
                     ),
                   );
                 }
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: keywords.asMap().entries.map(
-                    (MapEntry<int, String> entry) => ListTile(
-                      onTap: () => onPick(entry.value),
-                      contentPadding: EdgeInsets.zero,
-                      leading: SizedBox(
-                        width: 24,
-                        child: Text(
-                          '${entry.key + 1}'.padLeft(2, '0'),
-                          style: theme.textTheme.bodySmall?.copyWith(
-                            color: entry.key < 3
-                                ? context.palette.emphasized
-                                : context.palette.textDisabled,
-                            fontWeight: FontWeight.w700,
+                  children: keywords
+                      .asMap()
+                      .entries
+                      .map(
+                        (MapEntry<int, String> entry) => ListTile(
+                          onTap: () => onPick(entry.value),
+                          contentPadding: EdgeInsets.zero,
+                          leading: SizedBox(
+                            width: 24,
+                            child: Text(
+                              '${entry.key + 1}'.padLeft(2, '0'),
+                              style: theme.textTheme.bodySmall?.copyWith(
+                                color: entry.key < 3
+                                    ? context.palette.emphasized
+                                    : context.palette.textDisabled,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                          ),
+                          title: Text(
+                            entry.value,
+                            style: theme.textTheme.bodyMedium,
+                          ),
+                          trailing: const Icon(
+                            Icons.north_east_rounded,
+                            size: 15,
                           ),
                         ),
-                      ),
-                      title:
-                          Text(entry.value, style: theme.textTheme.bodyMedium),
-                      trailing: const Icon(Icons.north_east_rounded, size: 15),
-                    ),
-                  ).toList(growable: false),
+                      )
+                      .toList(growable: false),
                 );
               },
             ),
@@ -354,14 +543,18 @@ class _DegradeNotice extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Icon(Icons.info_outline_rounded,
-              size: 16, color: context.palette.textDisabled),
+          Icon(
+            Icons.info_outline_rounded,
+            size: 16,
+            color: context.palette.textDisabled,
+          ),
           const SizedBox(width: AppSpacing.sm),
           Expanded(
             child: Text(
               text,
-              style: theme.textTheme.bodySmall
-                  ?.copyWith(color: context.palette.textSecondary),
+              style: theme.textTheme.bodySmall?.copyWith(
+                color: context.palette.textSecondary,
+              ),
             ),
           ),
         ],
@@ -386,18 +579,16 @@ class _ArtistResultTile extends StatelessWidget {
         child: Column(
           children: <Widget>[
             ArtistAvatar(
-                        name: artist.name,
-                        avatarUrl: artist.avatarUrl,
-                        size: 120,
-                      ),
+              name: artist.name,
+              avatarUrl: artist.avatarUrl,
+              size: 120,
+            ),
             const SizedBox(height: AppSpacing.sm),
             Text(
               artist.name,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyMedium
+              style: Theme.of(context).textTheme.bodyMedium
                   ?.copyWith(fontWeight: FontWeight.w600),
             ),
             Text(
@@ -405,9 +596,7 @@ class _ArtistResultTile extends StatelessWidget {
               artist.fansCount > 0
                   ? '粉丝 ${Formatters.playCount(artist.fansCount)}'
                   : '歌手',
-              style: Theme.of(context)
-                  .textTheme
-                  .bodySmall
+              style: Theme.of(context).textTheme.bodySmall
                   ?.copyWith(color: context.palette.textSecondary),
             ),
           ],

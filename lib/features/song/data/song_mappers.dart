@@ -79,16 +79,16 @@ class SongMappers {
 
   /// 单条 JSON → [Song]；缺 hash 的条目（无音源）返回 null。
   static Song? fromJson(Map<String, dynamic> json) {
-    final String hash = JsonUtils.str(
-      JsonUtils.pick(json, _hashKeys),
-    );
+    final String hash = JsonUtils.str(JsonUtils.pick(json, _hashKeys));
     if (hash.isEmpty) {
       return null;
     }
 
     String title = JsonUtils.str(JsonUtils.pick(json, _titleKeys));
     String artist = _artistText(json);
-    final String filename = JsonUtils.str(JsonUtils.pick(json, const <String>['filename']));
+    final String filename = JsonUtils.str(
+      JsonUtils.pick(json, const <String>['filename']),
+    );
     if (title.contains(' - ') && filename.isNotEmpty) {
       title = title.split(' - ').last.trim();
     }
@@ -97,7 +97,11 @@ class SongMappers {
     }
 
     final int privilege = JsonUtils.integer(
-      JsonUtils.pick(json, const <String>['privilege', 'Privilege', 'pay_type']),
+      JsonUtils.pick(json, const <String>[
+        'privilege',
+        'Privilege',
+        'pay_type',
+      ]),
     );
 
     return Song(
@@ -125,10 +129,7 @@ class SongMappers {
   }
 
   /// 列表 JSON → `List<Song>`，自动剔除无 hash 的脏数据。
-  static List<Song> listFrom(
-    Object? raw, {
-    bool dedupe = false,
-  }) {
+  static List<Song> listFrom(Object? raw, {bool dedupe = false}) {
     final List<Song> songs = <Song>[];
     final Set<String> seen = <String>{};
     for (final Map<String, dynamic> item in JsonUtils.asMapList(raw)) {
@@ -150,7 +151,11 @@ class SongMappers {
     if (flat.isNotEmpty) {
       return flat;
     }
-    for (final String key in const <String>['authors', 'singerinfo', 'singers']) {
+    for (final String key in const <String>[
+      'authors',
+      'singerinfo',
+      'singers',
+    ]) {
       final Object? raw = json[key];
       if (raw is! List) {
         continue;
@@ -158,7 +163,11 @@ class SongMappers {
       final List<String> names = <String>[];
       for (final Map<String, dynamic> singer in JsonUtils.asMapList(raw)) {
         final String name = JsonUtils.str(
-          JsonUtils.pick(singer, const <String>['name', 'author_name', 'singer_name']),
+          JsonUtils.pick(singer, const <String>[
+            'name',
+            'author_name',
+            'singer_name',
+          ]),
         );
         if (name.isNotEmpty) {
           names.add(name);
@@ -179,14 +188,22 @@ class SongMappers {
     if (flat.isNotEmpty) {
       return flat;
     }
-    for (final String key in const <String>['authors', 'singerinfo', 'singers']) {
+    for (final String key in const <String>[
+      'authors',
+      'singerinfo',
+      'singers',
+    ]) {
       final Object? raw = json[key];
       if (raw is! List) {
         continue;
       }
       for (final Map<String, dynamic> singer in JsonUtils.asMapList(raw)) {
         final String id = JsonUtils.str(
-          JsonUtils.pick(singer, const <String>['id', 'author_id', 'singer_id']),
+          JsonUtils.pick(singer, const <String>[
+            'id',
+            'author_id',
+            'singer_id',
+          ]),
         );
         if (id.isNotEmpty) {
           return id;

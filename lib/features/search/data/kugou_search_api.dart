@@ -14,6 +14,7 @@ class SearchBundle {
     this.artists = const <Artist>[],
     this.albums = const <Album>[],
     this.partitionsAvailable = false,
+    this.partitionsFailed = false,
   });
 
   final List<Song> songs;
@@ -23,10 +24,15 @@ class SearchBundle {
 
   /// 分区（歌单/歌手/专辑）是否拿到真实数据。
   ///
-  /// 实测 `/search/complex` 恒返回 `error_code 152 Parameter Error`，
-  /// 而 `/search/playlist`、`/search/author`、`/search/album` 都只回歌曲
-  /// 列表，无法支撑分区，因此分区数据缺失时为 false，UI 隐藏分区而不是报错。
+  /// 实测 `/search/complex` 会按 `type` 分组返回 `song` / `mv` / `collect`
+  /// （歌单）/ `album` / `author` 等分组，分区数据可正常解析；只有当该接口
+  /// 请求失败（[partitionsFailed] 为 true）或关键词本身没有分类结果时
+  /// 这里才会是 false。
   final bool partitionsAvailable;
+
+  /// 分区接口是否请求失败（只有真失败才提示降级，避免"没有专辑结果"
+  /// 被误报成"分区接口不可用"）。
+  final bool partitionsFailed;
 
   bool get isEmpty =>
       songs.isEmpty && playlists.isEmpty && artists.isEmpty && albums.isEmpty;
@@ -63,11 +69,13 @@ class KugouSearchApi {
     );
 
     SearchBundle partitions = const SearchBundle();
+    bool partitionsFailed = false;
     try {
       partitions = await complex(key, page: page, pageSize: pageSize);
     } on Object {
-      // 分区接口不可用（实测 152 / 解析异常 / 超时）：降级为只有单曲。
+      // 分区接口不可用（152 / 解析异常 / 超时）：降级为只有单曲并标记失败。
       partitions = const SearchBundle();
+      partitionsFailed = true;
     }
 
     return SearchBundle(
@@ -75,9 +83,11 @@ class KugouSearchApi {
       playlists: partitions.playlists,
       artists: partitions.artists,
       albums: partitions.albums,
-      partitionsAvailable: partitions.playlists.isNotEmpty ||
+      partitionsAvailable:
+          partitions.playlists.isNotEmpty ||
           partitions.artists.isNotEmpty ||
           partitions.albums.isNotEmpty,
+      partitionsFailed: partitionsFailed,
     );
   }
 
@@ -137,12 +147,15 @@ class KugouSearchApi {
     final List<Artist> artists = <Artist>[];
     final List<Album> albums = <Album>[];
 
-    for (final Map<String, dynamic> group in JsonUtils.asMapList(data['lists'])) {
+    for (final Map<String, dynamic> group in JsonUtils.asMapList(
+      data['lists'],
+    )) {
       final String type = JsonUtils.str(
         JsonUtils.pick(group, const <String>['type']),
       ).toLowerCase();
-      final List<Map<String, dynamic>> items =
-          JsonUtils.asMapList(group['lists']);
+      final List<Map<String, dynamic>> items = JsonUtils.asMapList(
+        group['lists'],
+      );
       if (items.isNotEmpty) {
         for (final Map<String, dynamic> item in items) {
           _dispatchByType(type, item, songs, playlists, artists, albums);
@@ -158,27 +171,128 @@ class KugouSearchApi {
       playlists: playlists,
       artists: artists,
       albums: albums,
-      partitionsAvailable: playlists.isNotEmpty ||
-          artists.isNotEmpty ||
-          albums.isNotEmpty,
+      partitionsAvailable:
+          playlists.isNotEmpty || artists.isNotEmpty || albums.isNotEmpty,
     );
   }
 
   /// 热搜关键词（默认展示在搜索页空态）。
+  ///
+  /// 实测真实结构：`data.list` 是**分组**数组，形如
+  /// `[{ name: '热搜榜', keywords: [{ keyword: '慌啥子嘛', reason: '...' }, ...] }]`。
+  /// 早期实现把 `keywords` 当成字符串键去 pick，`List.toString()` 会把整个
+  /// 数组摊成一串 JSON 样文本，于是热搜榜每一项都渲染成长长的一行 `[{...}]`。
+  /// 正确做法是展开分组内层数组，逐个取 `keyword`。
   Future<List<String>> hotKeywords() async {
-    final Map<String, dynamic> json = await _client.getJson('/search/hot/detail');
+    final Map<String, dynamic> json = await _client.getJson(
+      '/search/hot/detail',
+    );
     final Map<String, dynamic>? data = JsonUtils.asMap(json['data']);
-    final Object? list = data?['list'] ?? json['list'];
+    final Object? raw = data?['list'] ?? json['list'];
+    return parseHotKeywords(raw);
+  }
+
+  /// 解析热搜分组数组 → 纯关键词列表（纯函数，便于单测/回归）。
+  static List<String> parseHotKeywords(Object? raw) {
     final List<String> keywords = <String>[];
-    for (final Map<String, dynamic> item in JsonUtils.asMapList(list)) {
-      final String word = JsonUtils.str(
-        JsonUtils.pick(item, const <String>['keywords', 'keyword', 'name', 'word']),
-      );
-      if (word.isNotEmpty && !keywords.contains(word)) {
-        keywords.add(word);
+    if (raw is! List) {
+      return keywords;
+    }
+    for (final Object? node in raw) {
+      // 兜底：个别接口直接回纯字符串数组。
+      if (node is String) {
+        _addKeyword(<String, dynamic>{'keyword': node}, keywords);
+        continue;
       }
+      final Map<String, dynamic>? group = JsonUtils.asMap(node);
+      if (group == null) {
+        continue;
+      }
+      final List<Map<String, dynamic>> nested = JsonUtils.asMapList(
+        group['keywords'],
+      );
+      if (nested.isNotEmpty) {
+        for (final Map<String, dynamic> item in nested) {
+          _addKeyword(item, keywords);
+        }
+        continue;
+      }
+      _addKeyword(group, keywords);
     }
     return keywords;
+  }
+
+  /// 从单条热搜项取关键词，注意**不要**再 pick `keywords`（那是数组）。
+  static void _addKeyword(Map<String, dynamic> item, List<String> out) {
+    final String word = JsonUtils.str(
+      JsonUtils.pick(item, const <String>['keyword', 'word', 'name', 'reason']),
+    );
+    if (word.isNotEmpty && !out.contains(word)) {
+      out.add(word);
+    }
+  }
+
+  /// 搜索联想（`/search/suggest`），供搜索框自动补全使用。
+  ///
+  /// 实测真实结构：`data` 是**分组数组**，每组形如
+  /// `{ LableName: '', RecordCount: 10, RecordDatas: [{ HintInfo: '周杰伦 晴天', ... }] }`，
+  /// 其中 `LableName` 为空的一桶是纯关键词联想，后面还有 `MV` / `专辑` 等分桶。
+  /// 自动补全只取纯关键词桶，取不到再退回全部分桶，避免联想列表里混进
+  /// 「歌手 - 歌名」这种带分隔符的条目。
+  Future<List<String>> suggest(String keyword, {int limit = 10}) async {
+    final String key = keyword.trim();
+    if (key.isEmpty || limit <= 0) {
+      return const <String>[];
+    }
+    final Map<String, dynamic> json = await _client.getJson(
+      '/search/suggest',
+      query: <String, dynamic>{'keywords': key},
+    );
+    return parseSuggest(json['data'], limit: limit);
+  }
+
+  /// 解析联想分组数组 → 去重后的关键词列表（纯函数，便于单测/回归）。
+  static List<String> parseSuggest(Object? raw, {int limit = 10}) {
+    if (raw is! List || limit <= 0) {
+      return const <String>[];
+    }
+
+    final List<String> primary = <String>[];
+    final List<String> fallback = <String>[];
+
+    for (final Object? node in raw) {
+      final Map<String, dynamic>? group = JsonUtils.asMap(node);
+      if (group == null) {
+        continue;
+      }
+      final bool isPrimary = JsonUtils.str(group['LableName']).trim().isEmpty;
+      final List<String> bucket = isPrimary ? primary : fallback;
+      for (final Map<String, dynamic> item in JsonUtils.asMapList(
+        group['RecordDatas'],
+      )) {
+        final String word = JsonUtils.str(
+          JsonUtils.pick(item, const <String>[
+            'HintInfo',
+            'hint_info',
+            'keyword',
+          ]),
+        ).trim();
+        if (word.isNotEmpty && !bucket.contains(word)) {
+          bucket.add(word);
+        }
+      }
+    }
+
+    final List<String> merged = <String>[];
+    for (final String word in <String>[...primary, ...fallback]) {
+      if (merged.length >= limit) {
+        break;
+      }
+      if (!merged.contains(word)) {
+        merged.add(word);
+      }
+    }
+    return merged;
   }
 
   void _dispatchByType(

@@ -29,7 +29,9 @@ class ProfilePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final ThemeData theme = Theme.of(context);
     final KugouSession session = ref.watch(kugouSessionProvider);
-    final AsyncValue<UserProfile?> profileState = ref.watch(userProfileProvider);
+    final AsyncValue<UserProfile?> profileState = ref.watch(
+      userProfileProvider,
+    );
     final UserProfile profile = profileState.value ?? UserProfile.empty;
     final bool loggedIn = session.isLoggedIn;
     final bool refreshing = profileState.isLoading;
@@ -50,8 +52,9 @@ class ProfilePage extends ConsumerWidget {
                     const SizedBox(height: AppSpacing.xs),
                     Text(
                       '头像、乐龄、听歌时长与登录信息，均取自已登录的酷狗账号',
-                      style: theme.textTheme.bodySmall
-                          ?.copyWith(color: context.palette.textSecondary),
+                      style: theme.textTheme.bodySmall?.copyWith(
+                        color: context.palette.textSecondary,
+                      ),
                     ),
                   ],
                 ),
@@ -78,7 +81,11 @@ class ProfilePage extends ConsumerWidget {
               color: AppColors.danger,
               text: '资料接口请求失败：${profileState.error}',
             ),
-          _ProfileHeader(profile: profile, session: session, loading: refreshing),
+          _ProfileHeader(
+            profile: profile,
+            session: session,
+            loading: refreshing,
+          ),
           const SizedBox(height: AppSpacing.xl),
           SectionHeader(
             title: '音乐数据',
@@ -144,8 +151,9 @@ class ProfilePage extends ConsumerWidget {
                   children: <Widget>[
                     Text(
                       'Lv.${profile.grade}',
-                      style: theme.textTheme.titleMedium
-                          ?.copyWith(color: context.palette.emphasized),
+                      style: theme.textTheme.titleMedium?.copyWith(
+                        color: context.palette.emphasized,
+                      ),
                     ),
                     const SizedBox(width: AppSpacing.sm),
                     Expanded(
@@ -162,8 +170,9 @@ class ProfilePage extends ConsumerWidget {
                     const SizedBox(width: AppSpacing.sm),
                     Text(
                       'Lv.${profile.grade + 1}',
-                      style: theme.textTheme.titleMedium
-                          ?.copyWith(color: context.palette.textSecondary),
+                      style: theme.textTheme.titleMedium?.copyWith(
+                        color: context.palette.textSecondary,
+                      ),
                     ),
                   ],
                 ),
@@ -171,14 +180,16 @@ class ProfilePage extends ConsumerWidget {
                 Text(
                   '还差 ${profile.gradeGap} 成长值升到 Lv.${profile.grade + 1}'
                   '（资料完整度 ${profile.finishPercent}%）',
-                  style: theme.textTheme.bodySmall
-                      ?.copyWith(color: context.palette.textSecondary),
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    color: context.palette.textSecondary,
+                  ),
                 ),
               ] else
                 Text(
                   '暂无等级数据：登录后听歌一段时间即可累计成长值',
-                  style: theme.textTheme.bodySmall
-                      ?.copyWith(color: context.palette.textSecondary),
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    color: context.palette.textSecondary,
+                  ),
                 ),
             ],
           ),
@@ -212,22 +223,21 @@ class ProfilePage extends ConsumerWidget {
                 value: profile.registeredAt == null
                     ? ''
                     : '${Formatters.date(profile.registeredAt!)}'
-                        '（乐龄 ${profile.listenAgeDays} 天）',
+                          '（乐龄 ${profile.listenAgeDays} 天）',
               ),
-              _InfoRow(
-                label: '绑定手机',
-                value: _maskMobile(profile.loginMobile),
-              ),
+              _InfoRow(label: '绑定手机', value: _maskMobile(profile.loginMobile)),
               _InfoRow(
                 label: '第三方账号',
-                value: profile.bindings.isEmpty ? '' : profile.bindings.join('、'),
+                value: profile.bindings.isEmpty
+                    ? ''
+                    : profile.bindings.join('、'),
               ),
               _InfoRow(
                 label: '会员状态',
                 value: profile.isVip
                     ? (profile.vipSummary.isEmpty
-                        ? 'VIP 生效中'
-                        : 'VIP · ${profile.vipSummary}')
+                          ? 'VIP 生效中'
+                          : 'VIP · ${profile.vipSummary}')
                     : '未开通 VIP',
               ),
             ],
@@ -237,22 +247,48 @@ class ProfilePage extends ConsumerWidget {
             '数据来源：本地 KuGouMusicApi（/user/detail、/user/info、/user/grade/info、'
             '/user/vip/detail、/user/listen），未登录不请求接口；空白项代表该账号未设置或'
             '接口未回传，不做任何假数据填充。',
-            style: theme.textTheme.bodySmall
-                ?.copyWith(color: context.palette.textDisabled),
+            style: theme.textTheme.bodySmall?.copyWith(
+              color: context.palette.textDisabled,
+            ),
           ),
         ],
       ),
     );
   }
 
+  /// 退出登录：先弹二次确认，避免误触直接把本地登录凭证清掉。
   Future<void> _signOut(BuildContext context, WidgetRef ref) async {
+    final bool? confirmed = await showDialog<bool>(
+      context: context,
+      builder: (BuildContext dialogContext) => AlertDialog(
+        icon: const Icon(Icons.logout_rounded, color: AppColors.danger),
+        title: const Text('确定要退出登录吗？'),
+        content: const Text(
+          '退出后会清除本地登录凭证，音质与全曲试听将回到游客模式（60 秒试听），'
+          '重新登录需要再次扫码或账号验证。',
+        ),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () => Navigator.of(dialogContext).pop(false),
+            child: const Text('取消'),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.of(dialogContext).pop(true),
+            style: FilledButton.styleFrom(backgroundColor: AppColors.danger),
+            child: const Text('退出登录'),
+          ),
+        ],
+      ),
+    );
+    if (confirmed != true || !context.mounted) {
+      return;
+    }
     await ref.read(kugouSessionProvider.notifier).signOut();
     if (!context.mounted) {
       return;
     }
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('已退出登录，当前为游客模式')),
-    );
+    ScaffoldMessenger.of(context)
+        .showSnackBar(const SnackBar(content: Text('已退出登录，当前为游客模式')));
   }
 
   /// 乐龄文案：注册天数为 0（今天注册）时也给明确反馈。
@@ -351,14 +387,14 @@ class _ProfileHeader extends StatelessWidget {
                   children: <Widget>[
                     Text(nickname, style: theme.textTheme.headlineSmall),
                     if (profile.grade > 0)
-                      _Badge(text: 'Lv.${profile.grade}', color: AppColors.primary),
+                      _Badge(
+                        text: 'Lv.${profile.grade}',
+                        color: AppColors.primary,
+                      ),
                     if (profile.isVip)
                       _Badge(text: 'VIP', color: AppColors.accent),
                     if (!loggedIn)
-                      _Badge(
-                        text: '游客',
-                        color: context.palette.textSecondary,
-                      ),
+                      _Badge(text: '游客', color: context.palette.textSecondary),
                   ],
                 ),
                 const SizedBox(height: AppSpacing.xs),
@@ -366,8 +402,9 @@ class _ProfileHeader extends StatelessWidget {
                   profile.signature.isNotEmpty
                       ? profile.signature
                       : (loggedIn ? '还没有设置个性签名' : '登录后可查看头像、乐龄与听歌数据'),
-                  style: theme.textTheme.bodyMedium
-                      ?.copyWith(color: context.palette.textSecondary),
+                  style: theme.textTheme.bodyMedium?.copyWith(
+                    color: context.palette.textSecondary,
+                  ),
                 ),
                 const SizedBox(height: AppSpacing.sm),
                 Wrap(
@@ -375,9 +412,15 @@ class _ProfileHeader extends StatelessWidget {
                   runSpacing: AppSpacing.xs,
                   children: <Widget>[
                     if (profile.region.isNotEmpty)
-                      _MetaItem(icon: Icons.location_on_outlined, text: profile.region),
+                      _MetaItem(
+                        icon: Icons.location_on_outlined,
+                        text: profile.region,
+                      ),
                     if (loggedIn)
-                      _MetaItem(icon: Icons.wc_rounded, text: profile.genderLabel),
+                      _MetaItem(
+                        icon: Icons.wc_rounded,
+                        text: profile.genderLabel,
+                      ),
                     if (profile.registeredAt != null)
                       _MetaItem(
                         icon: Icons.event_outlined,
@@ -424,9 +467,7 @@ class _Badge extends StatelessWidget {
       ),
       child: Text(
         text,
-        style: Theme.of(context)
-            .textTheme
-            .labelSmall
+        style: Theme.of(context).textTheme.labelSmall
             ?.copyWith(color: color, fontWeight: FontWeight.w600),
       ),
     );
@@ -448,9 +489,7 @@ class _MetaItem extends StatelessWidget {
         const SizedBox(width: AppSpacing.xxs),
         Text(
           text,
-          style: Theme.of(context)
-              .textTheme
-              .bodySmall
+          style: Theme.of(context).textTheme.bodySmall
               ?.copyWith(color: context.palette.textSecondary),
         ),
       ],
@@ -495,8 +534,9 @@ class _StatTile extends StatelessWidget {
               Expanded(
                 child: Text(
                   label,
-                  style: theme.textTheme.bodySmall
-                      ?.copyWith(color: context.palette.textSecondary),
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    color: context.palette.textSecondary,
+                  ),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -518,8 +558,9 @@ class _StatTile extends StatelessWidget {
             const SizedBox(height: AppSpacing.xxs),
             Text(
               hint!,
-              style: theme.textTheme.bodySmall
-                  ?.copyWith(color: context.palette.textDisabled),
+              style: theme.textTheme.bodySmall?.copyWith(
+                color: context.palette.textDisabled,
+              ),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
@@ -560,8 +601,9 @@ class _Panel extends StatelessWidget {
               Expanded(
                 child: Text(
                   title,
-                  style: theme.textTheme.titleSmall
-                      ?.copyWith(color: context.palette.emphasized),
+                  style: theme.textTheme.titleSmall?.copyWith(
+                    color: context.palette.emphasized,
+                  ),
                 ),
               ),
               ?action,
@@ -601,8 +643,9 @@ class _InfoRow extends StatelessWidget {
             width: 96,
             child: Text(
               label,
-              style: theme.textTheme.bodySmall
-                  ?.copyWith(color: context.palette.textSecondary),
+              style: theme.textTheme.bodySmall?.copyWith(
+                color: context.palette.textSecondary,
+              ),
             ),
           ),
           const SizedBox(width: AppSpacing.sm),
@@ -613,8 +656,8 @@ class _InfoRow extends StatelessWidget {
                 color: empty
                     ? context.palette.textDisabled
                     : (highlight
-                        ? context.palette.emphasized
-                        : context.palette.textPrimary),
+                          ? context.palette.emphasized
+                          : context.palette.textPrimary),
                 fontWeight: highlight ? FontWeight.w600 : null,
               ),
             ),
@@ -656,9 +699,7 @@ class _NoticeBar extends StatelessWidget {
           Expanded(
             child: Text(
               text,
-              style: Theme.of(context)
-                  .textTheme
-                  .bodySmall
+              style: Theme.of(context).textTheme.bodySmall
                   ?.copyWith(color: color),
             ),
           ),

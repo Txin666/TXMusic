@@ -128,14 +128,14 @@ class KugouSession {
   }
 
   Map<String, dynamic> toJson() => <String, dynamic>{
-        'cookie': cookie,
-        'dfid': dfid,
-        'userid': userid,
-        'token': token,
-        'nickname': nickname,
-        'base_url': baseUrl,
-        'saved_at': DateTime.now().toIso8601String(),
-      };
+    'cookie': cookie,
+    'dfid': dfid,
+    'userid': userid,
+    'token': token,
+    'nickname': nickname,
+    'base_url': baseUrl,
+    'saved_at': DateTime.now().toIso8601String(),
+  };
 
   /// 把当前登录态写回 `.local/kugou_cookie.json`（扫码登录成功后调用）。
   ///

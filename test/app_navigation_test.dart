@@ -20,10 +20,7 @@ Future<void> _pumpApp(WidgetTester tester) async {
 
   // 全部数据与音频引擎经 overrides 注入，测试不触碰真实接口与 media_kit 原生库。
   await tester.pumpWidget(
-    ProviderScope(
-      overrides: buildTestOverrides(),
-      child: const TxMusicApp(),
-    ),
+    ProviderScope(overrides: buildTestOverrides(), child: const TxMusicApp()),
   );
   await tester.pumpAndSettle();
 }

@@ -10,11 +10,7 @@ import '../../../core/network/kugou_client.dart';
 /// 影响主流程。
 @immutable
 class VipSnapshot {
-  const VipSnapshot({
-    this.isVip = false,
-    this.vipLabel = '',
-    this.expireAt,
-  });
+  const VipSnapshot({this.isVip = false, this.vipLabel = '', this.expireAt});
 
   final bool isVip;
 
@@ -33,7 +29,8 @@ class VipSnapshot {
       return 'VIP 生效中';
     }
     final DateTime end = expireAt!;
-    final String text = '${end.year}-${_two(end.month)}-${_two(end.day)} '
+    final String text =
+        '${end.year}-${_two(end.month)}-${_two(end.day)} '
         '${_two(end.hour)}:${_two(end.minute)}';
     return 'VIP 到期 $text';
   }
@@ -62,12 +59,16 @@ class VipSnapshot {
     final int ts = JsonUtils.integer(rawExpire);
     if (ts > 0) {
       // 秒 / 毫秒两套时间戳都出现过。
-      expireAt = DateTime.fromMillisecondsSinceEpoch(ts > 100000000000 ? ts : ts * 1000);
+      expireAt = DateTime.fromMillisecondsSinceEpoch(
+        ts > 100000000000 ? ts : ts * 1000,
+      );
     }
 
     final String label = JsonUtils.str(rawType);
-    final bool flagByType = label.isNotEmpty && label != '0' && label != 'false';
-    final bool flagByTime = expireAt != null && expireAt.isAfter(DateTime.now());
+    final bool flagByType =
+        label.isNotEmpty && label != '0' && label != 'false';
+    final bool flagByTime =
+        expireAt != null && expireAt.isAfter(DateTime.now());
 
     return VipSnapshot(
       isVip: flagByTime || (flagByType && expireAt == null),
@@ -254,12 +255,12 @@ class KugouVipApi {
     }
 
     final Object? rawError = json['error_code'] ?? json['errcode'];
-    final bool hasErrorCode =
-        rawError != null && '$rawError'.trim().isNotEmpty;
+    final bool hasErrorCode = rawError != null && '$rawError'.trim().isNotEmpty;
     final int? errorCode = hasErrorCode ? JsonUtils.integer(rawError) : null;
     final int statusFlag = JsonUtils.integer(json['status']);
-    final String rawMessage =
-        JsonUtils.str(json['error_msg'] ?? json['errmsg'] ?? json['msg']);
+    final String rawMessage = JsonUtils.str(
+      json['error_msg'] ?? json['errmsg'] ?? json['msg'],
+    );
     steps.add(
       '领取接口：error_code=${errorCode ?? '-'} status=$statusFlag'
       '${rawMessage.isEmpty ? '' : ' · $rawMessage'}',
@@ -290,11 +291,7 @@ class KugouVipApi {
   ///
   /// 优先级：文案命中（已领取 / 未登录）→ `error_code` → `status` 标志位。
   /// `status` 在酷狗接口里 1 表示成功、0 表示失败，缺 `error_code` 时以它为准。
-  static DailyVipStatus _judge(
-    int? errorCode,
-    int statusFlag,
-    String message,
-  ) {
+  static DailyVipStatus _judge(int? errorCode, int statusFlag, String message) {
     final String text = message.toLowerCase();
     if (text.contains('已领取') ||
         text.contains('已经领取') ||
@@ -302,9 +299,7 @@ class KugouVipApi {
         text.contains('already')) {
       return DailyVipStatus.alreadyClaimed;
     }
-    if (text.contains('登录') ||
-        text.contains('token') ||
-        errorCode == 31001) {
+    if (text.contains('登录') || text.contains('token') || errorCode == 31001) {
       return DailyVipStatus.needLogin;
     }
     // 131001：该日期的天卡已领过，等价于「今天已经领完了」。

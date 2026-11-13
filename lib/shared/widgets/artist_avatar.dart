@@ -37,7 +37,10 @@ class ArtistAvatar extends StatelessWidget {
   }
 
   Widget _buildContent() {
-    final String? src = AssetUrl.normalize(avatarUrl, size: AssetUrl.sizeFor(size));
+    final String? src = AssetUrl.normalize(
+      avatarUrl,
+      size: AssetUrl.sizeFor(size),
+    );
     if (src == null) {
       return _buildFallback();
     }
@@ -87,18 +90,15 @@ class ArtistAvatar extends StatelessWidget {
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      fontWeight: FontWeight.w600,
-                    ),
+                style: Theme.of(context).textTheme.bodyMedium
+                    ?.copyWith(fontWeight: FontWeight.w600),
               ),
               if (subtitle != null)
                 Text(
                   subtitle!,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: Theme.of(context)
-                      .textTheme
-                      .labelSmall
+                  style: Theme.of(context).textTheme.labelSmall
                       ?.copyWith(color: context.palette.textDisabled),
                 ),
             ],

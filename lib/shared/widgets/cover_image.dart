@@ -34,8 +34,9 @@ class CoverImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final BorderRadius borderRadius =
-        BorderRadius.circular(circle ? size / 2 : radius);
+    final BorderRadius borderRadius = BorderRadius.circular(
+      circle ? size / 2 : radius,
+    );
     final Widget fallback = CoverPlaceholder(
       seed: seed,
       size: size,
@@ -44,10 +45,7 @@ class CoverImage extends StatelessWidget {
       label: label,
     );
 
-    final String? src = AssetUrl.normalize(
-      url,
-      size: AssetUrl.sizeFor(size),
-    );
+    final String? src = AssetUrl.normalize(url, size: AssetUrl.sizeFor(size));
     if (src == null) {
       return fallback;
     }

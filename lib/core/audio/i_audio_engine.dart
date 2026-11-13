@@ -16,39 +16,39 @@ class AudioEngineEvent {
   });
 
   const AudioEngineEvent.position(Duration value)
-      : type = AudioEngineEventType.position,
-        position = value,
-        duration = Duration.zero,
-        playing = false,
-        message = null;
+    : type = AudioEngineEventType.position,
+      position = value,
+      duration = Duration.zero,
+      playing = false,
+      message = null;
 
   const AudioEngineEvent.duration(Duration value)
-      : type = AudioEngineEventType.duration,
-        position = Duration.zero,
-        duration = value,
-        playing = false,
-        message = null;
+    : type = AudioEngineEventType.duration,
+      position = Duration.zero,
+      duration = value,
+      playing = false,
+      message = null;
 
   const AudioEngineEvent.playing(bool value)
-      : type = AudioEngineEventType.playing,
-        position = Duration.zero,
-        duration = Duration.zero,
-        playing = value,
-        message = null;
+    : type = AudioEngineEventType.playing,
+      position = Duration.zero,
+      duration = Duration.zero,
+      playing = value,
+      message = null;
 
   const AudioEngineEvent.completed()
-      : type = AudioEngineEventType.completed,
-        position = Duration.zero,
-        duration = Duration.zero,
-        playing = false,
-        message = null;
+    : type = AudioEngineEventType.completed,
+      position = Duration.zero,
+      duration = Duration.zero,
+      playing = false,
+      message = null;
 
   const AudioEngineEvent.error(String value)
-      : type = AudioEngineEventType.error,
-        position = Duration.zero,
-        duration = Duration.zero,
-        playing = false,
-        message = value;
+    : type = AudioEngineEventType.error,
+      position = Duration.zero,
+      duration = Duration.zero,
+      playing = false,
+      message = value;
 
   final AudioEngineEventType type;
   final Duration position;

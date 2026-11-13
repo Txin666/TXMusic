@@ -29,8 +29,9 @@ class PlayerPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final PlaybackSnapshot playback = ref.watch(playerControllerProvider);
-    final PlayerController controller =
-        ref.read(playerControllerProvider.notifier);
+    final PlayerController controller = ref.read(
+      playerControllerProvider.notifier,
+    );
     final ThemeData theme = Theme.of(context);
 
     if (!playback.hasSong) {
@@ -46,8 +47,9 @@ class PlayerPage extends ConsumerWidget {
     }
 
     final Song song = playback.currentSong!;
-    final AsyncValue<List<LyricLine>> lyricsAsync =
-        ref.watch(lyricLinesProvider(lyricKeyOf(song)));
+    final AsyncValue<List<LyricLine>> lyricsAsync = ref.watch(
+      lyricLinesProvider(lyricKeyOf(song)),
+    );
 
     return Scaffold(
       body: Container(
@@ -55,7 +57,10 @@ class PlayerPage extends ConsumerWidget {
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
-            colors: <Color>[context.palette.surfaceAlt, context.palette.background],
+            colors: <Color>[
+              context.palette.surfaceAlt,
+              context.palette.background,
+            ],
           ),
         ),
         child: SafeArea(
@@ -80,8 +85,9 @@ class PlayerPage extends ConsumerWidget {
                     const SizedBox(width: AppSpacing.sm),
                     Text(
                       '正在播放',
-                      style: theme.textTheme.labelMedium
-                          ?.copyWith(color: context.palette.textSecondary),
+                      style: theme.textTheme.labelMedium?.copyWith(
+                        color: context.palette.textSecondary,
+                      ),
                     ),
                   ],
                 ),
@@ -118,8 +124,9 @@ class PlayerPage extends ConsumerWidget {
                             const SizedBox(height: AppSpacing.xs),
                             Text(
                               '${song.artist} · ${song.album}',
-                              style: theme.textTheme.bodyMedium
-                                  ?.copyWith(color: context.palette.textSecondary),
+                              style: theme.textTheme.bodyMedium?.copyWith(
+                                color: context.palette.textSecondary,
+                              ),
                             ),
                           ],
                         ),
@@ -127,8 +134,7 @@ class PlayerPage extends ConsumerWidget {
                       Expanded(
                         flex: 5,
                         child: Padding(
-                          padding:
-                              const EdgeInsets.only(left: AppSpacing.xxl),
+                          padding: const EdgeInsets.only(left: AppSpacing.xxl),
                           child: _LyricPane(
                             lyricsAsync: lyricsAsync,
                             position: playback.position,
@@ -189,8 +195,9 @@ class _LyricPane extends StatelessWidget {
             const SizedBox(height: AppSpacing.md),
             Text(
               '正在加载歌词…',
-              style: theme.textTheme.bodySmall
-                  ?.copyWith(color: context.palette.textSecondary),
+              style: theme.textTheme.bodySmall?.copyWith(
+                color: context.palette.textSecondary,
+              ),
             ),
           ],
         ),
@@ -207,8 +214,9 @@ class _LyricPane extends StatelessWidget {
             const SizedBox(height: AppSpacing.sm),
             Text(
               '歌词加载失败',
-              style: theme.textTheme.bodyMedium
-                  ?.copyWith(color: context.palette.textSecondary),
+              style: theme.textTheme.bodyMedium?.copyWith(
+                color: context.palette.textSecondary,
+              ),
             ),
             const SizedBox(height: AppSpacing.xs),
             Text(
@@ -216,8 +224,9 @@ class _LyricPane extends StatelessWidget {
               textAlign: TextAlign.center,
               maxLines: 3,
               overflow: TextOverflow.ellipsis,
-              style: theme.textTheme.bodySmall
-                  ?.copyWith(color: context.palette.textDisabled),
+              style: theme.textTheme.bodySmall?.copyWith(
+                color: context.palette.textDisabled,
+              ),
             ),
           ],
         ),
@@ -227,8 +236,9 @@ class _LyricPane extends StatelessWidget {
           return Center(
             child: Text(
               '暂无歌词',
-              style: theme.textTheme.bodyMedium
-                  ?.copyWith(color: context.palette.textSecondary),
+              style: theme.textTheme.bodyMedium?.copyWith(
+                color: context.palette.textSecondary,
+              ),
             ),
           );
         }
@@ -246,16 +256,18 @@ class _LyricPane extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(vertical: AppSpacing.sm),
                 child: AnimatedDefaultTextStyle(
                   duration: const Duration(milliseconds: 200),
-                  style: (i == currentLine
-                          ? theme.textTheme.headlineSmall
-                          : theme.textTheme.titleMedium)
-                      ?.copyWith(
-                    color: i == currentLine
-                        ? context.palette.emphasized
-                        : context.palette.textSecondary,
-                    fontWeight:
-                        i == currentLine ? FontWeight.w700 : FontWeight.w400,
-                  ) ??
+                  style:
+                      (i == currentLine
+                              ? theme.textTheme.headlineSmall
+                              : theme.textTheme.titleMedium)
+                          ?.copyWith(
+                            color: i == currentLine
+                                ? context.palette.emphasized
+                                : context.palette.textSecondary,
+                            fontWeight: i == currentLine
+                                ? FontWeight.w700
+                                : FontWeight.w400,
+                          ) ??
                       const TextStyle(),
                   child: Text(lyrics[i].text),
                 ),
@@ -297,14 +309,16 @@ class _TransportBar extends StatelessWidget {
             children: <Widget>[
               Text(
                 Formatters.duration(playback.position),
-                style: theme.textTheme.bodySmall
-                    ?.copyWith(color: context.palette.textDisabled),
+                style: theme.textTheme.bodySmall?.copyWith(
+                  color: context.palette.textDisabled,
+                ),
               ),
               const Spacer(),
               Text(
                 Formatters.duration(playback.duration),
-                style: theme.textTheme.bodySmall
-                    ?.copyWith(color: context.palette.textDisabled),
+                style: theme.textTheme.bodySmall?.copyWith(
+                  color: context.palette.textDisabled,
+                ),
               ),
             ],
           ),
@@ -426,8 +440,10 @@ class _TransportBar extends StatelessWidget {
                         dense: true,
                         highlight: index == playback.queueIndex,
                         onTap: () {
-                          controller.playQueue(playback.queue,
-                              startIndex: index);
+                          controller.playQueue(
+                            playback.queue,
+                            startIndex: index,
+                          );
                           Navigator.of(sheetContext).pop();
                         },
                       );

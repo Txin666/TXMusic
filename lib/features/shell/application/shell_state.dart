@@ -20,5 +20,6 @@ class ShellController extends Notifier<ShellState> {
       state = state.copyWith(navCollapsed: collapsed);
 }
 
-final shellControllerProvider =
-    NotifierProvider<ShellController, ShellState>(ShellController.new);
+final shellControllerProvider = NotifierProvider<ShellController, ShellState>(
+  ShellController.new,
+);

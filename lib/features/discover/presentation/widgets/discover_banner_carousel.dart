@@ -21,7 +21,9 @@ class DiscoverBannerCarousel extends StatefulWidget {
 }
 
 class _DiscoverBannerCarouselState extends State<DiscoverBannerCarousel> {
-  late final PageController _controller = PageController(viewportFraction: 0.86);
+  late final PageController _controller = PageController(
+    viewportFraction: 0.86,
+  );
   int _index = 0;
 
   @override
@@ -79,7 +81,11 @@ class _DiscoverBannerCarouselState extends State<DiscoverBannerCarousel> {
     );
   }
 
-  Widget _buildCard(BuildContext context, DiscoverBanner banner, List<Color> colors) {
+  Widget _buildCard(
+    BuildContext context,
+    DiscoverBanner banner,
+    List<Color> colors,
+  ) {
     return MouseRegion(
       cursor: SystemMouseCursors.click,
       child: GestureDetector(
@@ -123,18 +129,17 @@ class _DiscoverBannerCarouselState extends State<DiscoverBannerCarousel> {
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w700,
-                    ),
+                  color: Colors.white,
+                  fontWeight: FontWeight.w700,
+                ),
               ),
               const SizedBox(height: AppSpacing.xs),
               Text(
                 banner.subtitle,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
-                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: Colors.white.withValues(alpha: 0.82),
-                    ),
+                style: Theme.of(context).textTheme.bodySmall
+                    ?.copyWith(color: Colors.white.withValues(alpha: 0.82)),
               ),
               const SizedBox(height: AppSpacing.md),
               Row(
@@ -151,7 +156,11 @@ class _DiscoverBannerCarouselState extends State<DiscoverBannerCarousel> {
                     child: const Row(
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
-                        Icon(Icons.play_arrow_rounded, size: 16, color: Color(0xFF04120C)),
+                        Icon(
+                          Icons.play_arrow_rounded,
+                          size: 16,
+                          color: Color(0xFF04120C),
+                        ),
                         SizedBox(width: 4),
                         Text(
                           '立即播放',

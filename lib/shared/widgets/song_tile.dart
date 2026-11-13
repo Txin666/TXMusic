@@ -36,7 +36,9 @@ class SongTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    final String subtitle = showAlbum ? '${song.artist} · ${song.album}' : song.artist;
+    final String subtitle = showAlbum
+        ? '${song.artist} · ${song.album}'
+        : song.artist;
 
     return Material(
       color: Colors.transparent,
@@ -60,8 +62,12 @@ class SongTile extends StatelessWidget {
                   child: Text(
                     '${index! + 1}'.padLeft(2, '0'),
                     style: theme.textTheme.bodySmall?.copyWith(
-                      color: index! < 3 ? context.palette.emphasized : context.palette.textDisabled,
-                      fontWeight: index! < 3 ? FontWeight.w700 : FontWeight.w500,
+                      color: index! < 3
+                          ? context.palette.emphasized
+                          : context.palette.textDisabled,
+                      fontWeight: index! < 3
+                          ? FontWeight.w700
+                          : FontWeight.w500,
                     ),
                   ),
                 ),
@@ -88,7 +94,9 @@ class SongTile extends StatelessWidget {
                             overflow: TextOverflow.ellipsis,
                             style: theme.textTheme.bodyMedium?.copyWith(
                               fontWeight: FontWeight.w600,
-                              color: highlight ? context.palette.emphasized : context.palette.textPrimary,
+                              color: highlight
+                                  ? context.palette.emphasized
+                                  : context.palette.textPrimary,
                             ),
                           ),
                         ),
@@ -103,8 +111,9 @@ class SongTile extends StatelessWidget {
                       subtitle,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: theme.textTheme.bodySmall
-                          ?.copyWith(color: context.palette.textSecondary),
+                      style: theme.textTheme.bodySmall?.copyWith(
+                        color: context.palette.textSecondary,
+                      ),
                     ),
                   ],
                 ),
@@ -115,8 +124,9 @@ class SongTile extends StatelessWidget {
               else
                 Text(
                   Formatters.duration(song.duration),
-                  style: theme.textTheme.bodySmall
-                      ?.copyWith(color: context.palette.textDisabled),
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    color: context.palette.textDisabled,
+                  ),
                 ),
               if (onPlayTap != null)
                 IconButton(
@@ -143,11 +153,18 @@ class _VipBadge extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppColors.vip.withValues(alpha: 0.18),
         borderRadius: BorderRadius.circular(4),
-        border: Border.all(color: AppColors.vip.withValues(alpha: 0.6), width: 0.8),
+        border: Border.all(
+          color: AppColors.vip.withValues(alpha: 0.6),
+          width: 0.8,
+        ),
       ),
       child: const Text(
         'VIP',
-        style: TextStyle(fontSize: 9, color: AppColors.vip, fontWeight: FontWeight.w700),
+        style: TextStyle(
+          fontSize: 9,
+          color: AppColors.vip,
+          fontWeight: FontWeight.w700,
+        ),
       ),
     );
   }

@@ -33,6 +33,7 @@ class AppColors {
   static const Color lightTextPrimary = Color(0xFF17171C);
   static const Color lightTextSecondary = Color(0xFF55555F);
   static const Color lightTextDisabled = Color(0xFF6E6E7C);
+
   /// 浅色主题的强调文字色（深绿，白底对比 5.3:1）。
   static const Color lightEmphasized = Color(0xFF0E7A55);
 

@@ -11,7 +11,9 @@ class KugouDiscoverApi {
 
   /// 每日推荐（`/everyday/recommend`，按用户口味下发，未登录为热播推荐）。
   Future<List<Song>> dailyRecommend() async {
-    final Map<String, dynamic> json = await _client.getJson('/everyday/recommend');
+    final Map<String, dynamic> json = await _client.getJson(
+      '/everyday/recommend',
+    );
     final Map<String, dynamic>? data = JsonUtils.asMap(json['data']);
     final Object? raw = data?['song_list'] ?? data?['songs'] ?? data?['info'];
     return SongMappers.listFrom(raw, dedupe: true);

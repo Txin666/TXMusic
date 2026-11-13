@@ -14,8 +14,14 @@ class AppSpacing {
   static const double huge = 48;
 
   /// 页面统一内边距。
-  static const EdgeInsets page = EdgeInsets.symmetric(horizontal: 32, vertical: 24);
-  static const EdgeInsets pageCompact = EdgeInsets.symmetric(horizontal: 16, vertical: 16);
+  static const EdgeInsets page = EdgeInsets.symmetric(
+    horizontal: 32,
+    vertical: 24,
+  );
+  static const EdgeInsets pageCompact = EdgeInsets.symmetric(
+    horizontal: 16,
+    vertical: 16,
+  );
   static const EdgeInsets card = EdgeInsets.all(12);
 
   // ---- 骨架尺寸 ----

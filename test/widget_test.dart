@@ -52,7 +52,9 @@ void main() {
     expect(find.text('推荐内容加载失败'), findsNothing);
   });
 
-  testWidgets('音频引擎经 ProviderScope 覆盖为假实现，播放器可正常初始化', (WidgetTester tester) async {
+  testWidgets('音频引擎经 ProviderScope 覆盖为假实现，播放器可正常初始化', (
+    WidgetTester tester,
+  ) async {
     final FakeAudioEngine engine = await _pumpApp(tester);
 
     final ProviderContainer container = ProviderScope.containerOf(

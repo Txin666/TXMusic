@@ -46,8 +46,9 @@ class PlaybackErrorBanner extends StatelessWidget {
               message,
               maxLines: compact ? 1 : 2,
               overflow: TextOverflow.ellipsis,
-              style: theme.textTheme.bodySmall
-                  ?.copyWith(color: AppColors.danger),
+              style: theme.textTheme.bodySmall?.copyWith(
+                color: AppColors.danger,
+              ),
             ),
           ),
           if (onRetry != null) ...<Widget>[
@@ -56,9 +57,7 @@ class PlaybackErrorBanner extends StatelessWidget {
               onPressed: onRetry,
               style: TextButton.styleFrom(
                 foregroundColor: AppColors.danger,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: AppSpacing.xs,
-                ),
+                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.xs),
                 minimumSize: const Size(0, 28),
                 tapTargetSize: MaterialTapTargetSize.shrinkWrap,
               ),

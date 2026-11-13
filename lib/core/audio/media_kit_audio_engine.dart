@@ -27,27 +27,37 @@ class MediaKitAudioEngine implements AudioEngine {
   Stream<AudioEngineEvent> get events => _events.stream;
 
   void _bind() {
-    _subs.add(_player.stream.position.listen((Duration value) {
-      _emit(AudioEngineEvent.position(value));
-    }));
-    _subs.add(_player.stream.duration.listen((Duration value) {
-      if (value > Duration.zero) {
-        _emit(AudioEngineEvent.duration(value));
-      }
-    }));
-    _subs.add(_player.stream.playing.listen((bool value) {
-      _emit(AudioEngineEvent.playing(value));
-    }));
-    _subs.add(_player.stream.completed.listen((bool value) {
-      if (value) {
-        _emit(const AudioEngineEvent.completed());
-      }
-    }));
-    _subs.add(_player.stream.error.listen((String value) {
-      if (value.isNotEmpty) {
-        _emit(AudioEngineEvent.error(value));
-      }
-    }));
+    _subs.add(
+      _player.stream.position.listen((Duration value) {
+        _emit(AudioEngineEvent.position(value));
+      }),
+    );
+    _subs.add(
+      _player.stream.duration.listen((Duration value) {
+        if (value > Duration.zero) {
+          _emit(AudioEngineEvent.duration(value));
+        }
+      }),
+    );
+    _subs.add(
+      _player.stream.playing.listen((bool value) {
+        _emit(AudioEngineEvent.playing(value));
+      }),
+    );
+    _subs.add(
+      _player.stream.completed.listen((bool value) {
+        if (value) {
+          _emit(const AudioEngineEvent.completed());
+        }
+      }),
+    );
+    _subs.add(
+      _player.stream.error.listen((String value) {
+        if (value.isNotEmpty) {
+          _emit(AudioEngineEvent.error(value));
+        }
+      }),
+    );
   }
 
   void _emit(AudioEngineEvent event) {

@@ -33,12 +33,15 @@ class ArtistDetailPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final AsyncValue<Artist?> artistAsync =
-        ref.watch(artistDetailProvider(artistId));
-    final AsyncValue<List<Song>> songsAsync =
-        ref.watch(artistSongsProvider(artistId));
-    final AsyncValue<List<Album>> albumsAsync =
-        ref.watch(artistAlbumsProvider(artistId));
+    final AsyncValue<Artist?> artistAsync = ref.watch(
+      artistDetailProvider(artistId),
+    );
+    final AsyncValue<List<Song>> songsAsync = ref.watch(
+      artistSongsProvider(artistId),
+    );
+    final AsyncValue<List<Album>> albumsAsync = ref.watch(
+      artistAlbumsProvider(artistId),
+    );
     final ThemeData theme = Theme.of(context);
 
     return PageContainer(
@@ -84,10 +87,10 @@ class ArtistDetailPage extends ConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   ArtistAvatar(
-                name: artist.name,
-                avatarUrl: artist.avatarUrl,
-                size: 128,
-              ),
+                    name: artist.name,
+                    avatarUrl: artist.avatarUrl,
+                    size: 128,
+                  ),
                   const SizedBox(width: AppSpacing.xl),
                   Expanded(
                     child: Column(
@@ -95,8 +98,9 @@ class ArtistDetailPage extends ConsumerWidget {
                       children: <Widget>[
                         Text(
                           '歌手',
-                          style: theme.textTheme.labelSmall
-                              ?.copyWith(color: context.palette.textSecondary),
+                          style: theme.textTheme.labelSmall?.copyWith(
+                            color: context.palette.textSecondary,
+                          ),
                         ),
                         const SizedBox(height: AppSpacing.xs),
                         Text(artist.name, style: theme.textTheme.displaySmall),
@@ -104,8 +108,9 @@ class ArtistDetailPage extends ConsumerWidget {
                           const SizedBox(height: AppSpacing.xs),
                           Text(
                             metaParts.join(' · '),
-                            style: theme.textTheme.bodySmall
-                                ?.copyWith(color: context.palette.textSecondary),
+                            style: theme.textTheme.bodySmall?.copyWith(
+                              color: context.palette.textSecondary,
+                            ),
                           ),
                         ],
                         if (artist.bio.isNotEmpty) ...<Widget>[
@@ -114,8 +119,9 @@ class ArtistDetailPage extends ConsumerWidget {
                             artist.bio,
                             maxLines: 4,
                             overflow: TextOverflow.ellipsis,
-                            style: theme.textTheme.bodyMedium
-                                ?.copyWith(color: context.palette.textSecondary),
+                            style: theme.textTheme.bodyMedium?.copyWith(
+                              color: context.palette.textSecondary,
+                            ),
                           ),
                         ],
                         const SizedBox(height: AppSpacing.lg),
@@ -125,18 +131,21 @@ class ArtistDetailPage extends ConsumerWidget {
                               onPressed: songs.isEmpty
                                   ? null
                                   : () => ref
-                                      .read(playerControllerProvider.notifier)
-                                      .playQueue(songs),
-                              icon: const Icon(Icons.play_arrow_rounded,
-                                  size: 18),
+                                        .read(playerControllerProvider.notifier)
+                                        .playQueue(songs),
+                              icon: const Icon(
+                                Icons.play_arrow_rounded,
+                                size: 18,
+                              ),
                               label: const Text('播放热门歌曲'),
                             ),
                             const SizedBox(width: AppSpacing.md),
                             OutlinedButton.icon(
                               onPressed: songsAsync.isLoading
                                   ? null
-                                  : () =>
-                                      ref.invalidate(artistSongsProvider(artistId)),
+                                  : () => ref.invalidate(
+                                      artistSongsProvider(artistId),
+                                    ),
                               icon: const Icon(Icons.refresh_rounded, size: 18),
                               label: const Text('刷新'),
                             ),
@@ -164,7 +173,8 @@ class ArtistDetailPage extends ConsumerWidget {
                   description: _describeError(error),
                   icon: Icons.music_off_rounded,
                   actionLabel: '重试',
-                  onActionTap: () => ref.invalidate(artistSongsProvider(artistId)),
+                  onActionTap: () =>
+                      ref.invalidate(artistSongsProvider(artistId)),
                   compact: true,
                 ),
                 data: (List<Song> list) {
@@ -216,7 +226,8 @@ class ArtistDetailPage extends ConsumerWidget {
                   description: _describeError(error),
                   icon: Icons.album_outlined,
                   actionLabel: '重试',
-                  onActionTap: () => ref.invalidate(artistAlbumsProvider(artistId)),
+                  onActionTap: () =>
+                      ref.invalidate(artistAlbumsProvider(artistId)),
                   compact: true,
                 ),
                 data: (List<Album> list) {
@@ -286,9 +297,7 @@ class _ArtistLoading extends StatelessWidget {
             const SizedBox(height: AppSpacing.md),
             Text(
               label,
-              style: Theme.of(context)
-                  .textTheme
-                  .bodySmall
+              style: Theme.of(context).textTheme.bodySmall
                   ?.copyWith(color: context.palette.textSecondary),
             ),
           ],

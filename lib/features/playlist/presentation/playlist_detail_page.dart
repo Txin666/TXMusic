@@ -34,7 +34,8 @@ class PlaylistDetailPage extends ConsumerWidget {
       return PageContainer(
         child: EmptyState(
           title: '该歌单暂不支持查看',
-          description: '此歌单没有返回 global_collection_id（当前 ID：$playlistId），'
+          description:
+              '此歌单没有返回 global_collection_id（当前 ID：$playlistId），'
               '酷狗详情接口不支持用 specialid 查询。可换一个推荐歌单再试。',
           icon: Icons.queue_music_rounded,
           actionLabel: '返回发现页',
@@ -43,10 +44,12 @@ class PlaylistDetailPage extends ConsumerWidget {
       );
     }
 
-    final AsyncValue<Playlist?> playlistAsync =
-        ref.watch(playlistDetailProvider(playlistId));
-    final AsyncValue<List<Song>> songsAsync =
-        ref.watch(playlistSongsProvider(playlistId));
+    final AsyncValue<Playlist?> playlistAsync = ref.watch(
+      playlistDetailProvider(playlistId),
+    );
+    final AsyncValue<List<Song>> songsAsync = ref.watch(
+      playlistSongsProvider(playlistId),
+    );
 
     return PageContainer(
       child: playlistAsync.when(
@@ -77,7 +80,10 @@ class PlaylistDetailPage extends ConsumerWidget {
             if (playlist.creator.isNotEmpty) playlist.creator,
             if (playlist.playCount > 0)
               '${Formatters.playCount(playlist.playCount)}次播放',
-            if (songs.isNotEmpty) '${songs.length} 首' else if (playlist.songCount > 0) '${playlist.songCount} 首',
+            if (songs.isNotEmpty)
+              '${songs.length} 首'
+            else if (playlist.songCount > 0)
+              '${playlist.songCount} 首',
             if (playlist.updateTime.isNotEmpty) '更新于 ${playlist.updateTime}',
           ];
 
@@ -95,8 +101,8 @@ class PlaylistDetailPage extends ConsumerWidget {
                 onPrimaryTap: songs.isEmpty
                     ? null
                     : () => ref
-                        .read(playerControllerProvider.notifier)
-                        .playQueue(songs),
+                          .read(playerControllerProvider.notifier)
+                          .playQueue(songs),
                 secondaryLabel: '电台/收藏',
                 onSecondaryTap: () {
                   ScaffoldMessenger.of(context).showSnackBar(
@@ -194,9 +200,7 @@ class _TagChip extends StatelessWidget {
       ),
       child: Text(
         text,
-        style: Theme.of(context)
-            .textTheme
-            .bodySmall
+        style: Theme.of(context).textTheme.bodySmall
             ?.copyWith(color: context.palette.textSecondary),
       ),
     );
@@ -224,9 +228,7 @@ class _DetailLoading extends StatelessWidget {
             const SizedBox(height: AppSpacing.md),
             Text(
               label,
-              style: Theme.of(context)
-                  .textTheme
-                  .bodySmall
+              style: Theme.of(context).textTheme.bodySmall
                   ?.copyWith(color: context.palette.textSecondary),
             ),
           ],

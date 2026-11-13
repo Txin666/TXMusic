@@ -193,7 +193,9 @@ List<Override> buildTestOverrides({FakeAudioEngine? engine}) {
       }
       return null;
     }),
-    rankSongsProvider.overrideWith((Ref ref, String rankId) async => kTestSongs),
+    rankSongsProvider.overrideWith(
+      (Ref ref, String rankId) async => kTestSongs,
+    ),
     hotKeywordsProvider.overrideWith(
       (Ref ref) async => const <String>['周杰伦', '晴天', '华语流行'],
     ),

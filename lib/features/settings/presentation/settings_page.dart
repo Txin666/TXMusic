@@ -21,8 +21,9 @@ class SettingsPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final SettingsState settings = ref.watch(settingsControllerProvider);
-    final SettingsController controller =
-        ref.read(settingsControllerProvider.notifier);
+    final SettingsController controller = ref.read(
+      settingsControllerProvider.notifier,
+    );
     final KugouSession session = ref.watch(kugouSessionProvider);
     final DailyVipState vipState = ref.watch(dailyVipControllerProvider);
     final ThemeData theme = Theme.of(context);
@@ -36,8 +37,9 @@ class SettingsPage extends ConsumerWidget {
           const SizedBox(height: AppSpacing.xs),
           Text(
             '外观、播放等本地设置；账号与登录信息已迁至「个人信息」页',
-            style: theme.textTheme.bodySmall
-                ?.copyWith(color: context.palette.textSecondary),
+            style: theme.textTheme.bodySmall?.copyWith(
+              color: context.palette.textSecondary,
+            ),
           ),
           const SizedBox(height: AppSpacing.xl),
           _SettingSection(
@@ -46,9 +48,7 @@ class SettingsPage extends ConsumerWidget {
               SwitchListTile(
                 contentPadding: EdgeInsets.zero,
                 title: const Text('登录后自动领取'),
-                subtitle: const Text(
-                  '概念版听歌任务：每天首次启动或登录成功时自动领取 1 天 VIP',
-                ),
+                subtitle: const Text('概念版听歌任务：每天首次启动或登录成功时自动领取 1 天 VIP'),
                 value: vipState.autoClaim,
                 onChanged: (bool value) => ref
                     .read(dailyVipControllerProvider.notifier)
@@ -60,8 +60,8 @@ class SettingsPage extends ConsumerWidget {
                   vipState.busy
                       ? '正在领取…'
                       : (vipState.lastMessage.isEmpty
-                          ? '尚未领取'
-                          : vipState.lastMessage),
+                            ? '尚未领取'
+                            : vipState.lastMessage),
                 ),
                 subtitle: Text(
                   <String>[
@@ -80,8 +80,9 @@ class SettingsPage extends ConsumerWidget {
                           if (!context.mounted) {
                             return;
                           }
-                          final DailyVipState latest =
-                              ref.read(dailyVipControllerProvider);
+                          final DailyVipState latest = ref.read(
+                            dailyVipControllerProvider,
+                          );
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(content: Text(latest.lastMessage)),
                           );
@@ -140,10 +141,11 @@ class SettingsPage extends ConsumerWidget {
                   underline: const SizedBox.shrink(),
                   items: AudioQuality.values
                       .map(
-                        (AudioQuality quality) => DropdownMenuItem<AudioQuality>(
-                          value: quality,
-                          child: Text(quality.label),
-                        ),
+                        (AudioQuality quality) =>
+                            DropdownMenuItem<AudioQuality>(
+                              value: quality,
+                              child: Text(quality.label),
+                            ),
                       )
                       .toList(growable: false),
                   onChanged: (AudioQuality? quality) {
@@ -172,9 +174,9 @@ class SettingsPage extends ConsumerWidget {
                   '版本 ${AppConstants.appVersion} · ${AppConstants.appSlogan}',
                 ),
                 trailing: TextButton(
-                  onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('骨架期暂未接入检查更新')),
-                  ),
+                  onPressed: () => ScaffoldMessenger.of(
+                    context,
+                  ).showSnackBar(const SnackBar(content: Text('骨架期暂未接入检查更新'))),
                   child: const Text('检查更新'),
                 ),
               ),
@@ -213,9 +215,7 @@ class _SettingSection extends StatelessWidget {
               padding: const EdgeInsets.only(top: AppSpacing.sm),
               child: Text(
                 title,
-                style: Theme.of(context)
-                    .textTheme
-                    .titleSmall
+                style: Theme.of(context).textTheme.titleSmall
                     ?.copyWith(color: context.palette.emphasized),
               ),
             ),
