@@ -57,6 +57,12 @@ class AppSideNav extends StatelessWidget {
       activeIcon: Icons.library_music_rounded,
     ),
     NavEntry(
+      path: AppRoutes.profile,
+      label: '个人信息',
+      icon: Icons.person_outline_rounded,
+      activeIcon: Icons.person_rounded,
+    ),
+    NavEntry(
       path: AppRoutes.settings,
       label: '设置',
       icon: Icons.settings_outlined,

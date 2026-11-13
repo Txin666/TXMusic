@@ -7,6 +7,7 @@ import '../../features/discover/data/kugou_discover_api.dart';
 import '../../features/lyric/data/kugou_lyric_api.dart';
 import '../../features/player/data/song_url_resolver.dart';
 import '../../features/playlist/data/kugou_playlist_api.dart';
+import '../../features/profile/data/kugou_user_api.dart';
 import '../../features/rank/data/kugou_rank_api.dart';
 import '../../features/search/data/kugou_search_api.dart';
 import '../../features/song/data/kugou_song_api.dart';
@@ -113,6 +114,11 @@ final Provider<KugouLyricApi> kugouLyricApiProvider = Provider<KugouLyricApi>(
 /// 扫码登录接口。
 final Provider<KugouLoginApi> kugouLoginApiProvider = Provider<KugouLoginApi>(
   (Ref ref) => KugouLoginApi(ref.watch(kugouClientProvider)),
+);
+
+/// 个人信息接口（头像 / 乐龄 / 听歌时长 / 等级 / 登录绑定信息）。
+final Provider<KugouUserApi> kugouUserApiProvider = Provider<KugouUserApi>(
+  (Ref ref) => KugouUserApi(ref.watch(kugouClientProvider)),
 );
 
 /// 概念版 VIP 接口（每日领取 / 权益查询）。

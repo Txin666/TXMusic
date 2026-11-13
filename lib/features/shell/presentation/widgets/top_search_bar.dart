@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../core/network/kugou_providers.dart';
+import '../../../../core/network/kugou_session.dart';
 import '../../../../routing/app_routes.dart';
+import '../../../../shared/widgets/cover_image.dart';
 import '../../../../theme/app_spacing.dart';
+import '../../../profile/application/profile_providers.dart';
+import '../../../profile/domain/user_profile.dart';
 import '../../../search/application/search_controller.dart';
 import '../../../../theme/app_palette.dart';
 
@@ -11,7 +16,6 @@ import '../../../../theme/app_palette.dart';
 /// 搜索框回车即跳转搜索页并触发检索（真实接口接入点见 search_controller 的 TODO）。
 class TopSearchBar extends ConsumerStatefulWidget {
   const TopSearchBar({super.key});
-
 
   @override
   ConsumerState<TopSearchBar> createState() => _TopSearchBarState();
@@ -91,7 +95,9 @@ class _TopSearchBarState extends ConsumerState<TopSearchBar> {
                           icon: const Icon(Icons.close_rounded, size: 16),
                           onPressed: () => setState(_controller.clear),
                         ),
-                  contentPadding: const EdgeInsets.symmetric(vertical: AppSpacing.sm),
+                  contentPadding: const EdgeInsets.symmetric(
+                    vertical: AppSpacing.sm,
+                  ),
                 ),
               ),
             ),
@@ -103,24 +109,63 @@ class _TopSearchBarState extends ConsumerState<TopSearchBar> {
             onPressed: () => context.go(AppRoutes.settings),
           ),
           const SizedBox(width: AppSpacing.sm),
-          Container(
-            width: 30,
-            height: 30,
-            decoration: BoxDecoration(
-              color: context.palette.surfaceHigh,
-              shape: BoxShape.circle,
-            ),
-            alignment: Alignment.center,
-            child: Text(
-              'TX',
-              style: TextStyle(
-                fontSize: 11,
-                fontWeight: FontWeight.w700,
-                color: context.palette.textSecondary,
-              ),
-            ),
-          ),
+          const _AccountAvatar(),
         ],
+      ),
+    );
+  }
+}
+
+/// 右上角账号头像：登录后显示酷狗真实头像，未登录退化为占位人像。
+///
+/// 点击统一 `go(AppRoutes.profile)`：已登录进个人信息页，未登录该页会给出登录入口，
+/// 因此不需要在这里再分流一次登录页。
+class _AccountAvatar extends ConsumerWidget {
+  const _AccountAvatar();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final KugouSession session = ref.watch(kugouSessionProvider);
+    final UserProfile? profile = ref.watch(userProfileProvider).value;
+
+    final bool loggedIn = session.isLoggedIn;
+    final String nickname =
+        profile?.nickname.isNotEmpty == true ? profile!.nickname : session.nickname;
+    final String avatarUrl = profile?.avatarUrl ?? '';
+
+    return Tooltip(
+      message: loggedIn
+          ? (nickname.isEmpty ? '个人信息' : '$nickname · 个人信息')
+          : '未登录 · 前往个人信息页登录',
+      child: InkWell(
+        onTap: () => context.go(AppRoutes.profile),
+        customBorder: const CircleBorder(),
+        child: avatarUrl.isNotEmpty
+            ? CoverImage(
+                seed: nickname.isEmpty
+                    ? (session.userid.isEmpty ? 'TX' : session.userid)
+                    : nickname,
+                url: avatarUrl,
+                size: 30,
+                circle: true,
+                icon: Icons.person_rounded,
+              )
+            : Container(
+                width: 30,
+                height: 30,
+                decoration: BoxDecoration(
+                  color: context.palette.surfaceHigh,
+                  shape: BoxShape.circle,
+                ),
+                alignment: Alignment.center,
+                child: Icon(
+                  loggedIn
+                      ? Icons.person_rounded
+                      : Icons.person_outline_rounded,
+                  size: 18,
+                  color: context.palette.textSecondary,
+                ),
+              ),
       ),
     );
   }

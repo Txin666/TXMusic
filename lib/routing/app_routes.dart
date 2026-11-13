@@ -6,6 +6,9 @@ class AppRoutes {
   static const String discover = '/discover';
   static const String rank = '/rank';
   static const String library = '/library';
+
+  /// 个人信息（头像 / 乐龄 / 听歌时长 / 登录信息，独立页）。
+  static const String profile = '/profile';
   static const String settings = '/settings';
   static const String search = '/search';
 
@@ -31,6 +34,7 @@ class AppRoutes {
     discover,
     rank,
     library,
+    profile,
     settings,
   ];
 }

@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../../core/constants/app_constants.dart';
 import '../../../core/network/kugou_providers.dart';
 import '../../../core/network/kugou_session.dart';
-import '../../../routing/app_routes.dart';
 import '../../../shared/widgets/page_container.dart';
-import '../../../theme/app_colors.dart';
 import '../../../theme/app_spacing.dart';
 import '../../vip/application/daily_vip_controller.dart';
 import '../application/settings_controller.dart';
 import '../../../theme/app_palette.dart';
 
-/// 设置页（路由 `/settings`）：账号 / 外观 / 播放 / 关于。
+/// 设置页（路由 `/settings`）：外观 / 播放 / 关于。
+///
+/// 账号、登录 / 退出登录等个人信息已迁出，统一放 `/profile`（见 ProfilePage）。
 ///
 /// 骨架期所有开关仅作用于内存态；TODO(storage): 接入 Hive settings box（文档 §8）。
 class SettingsPage extends ConsumerWidget {
@@ -36,64 +35,11 @@ class SettingsPage extends ConsumerWidget {
           Text('设置', style: theme.textTheme.headlineMedium),
           const SizedBox(height: AppSpacing.xs),
           Text(
-            '骨架期设置仅内存生效，持久化在文档 §8 接入',
+            '外观、播放等本地设置；账号与登录信息已迁至「个人信息」页',
             style: theme.textTheme.bodySmall
                 ?.copyWith(color: context.palette.textSecondary),
           ),
           const SizedBox(height: AppSpacing.xl),
-          _SettingSection(
-            title: '账号',
-            children: <Widget>[
-              if (session.isLoggedIn)
-                ListTile(
-                  contentPadding: EdgeInsets.zero,
-                  leading: CircleAvatar(
-                    backgroundColor: AppColors.primaryDim,
-                    child: const Icon(
-                      Icons.person_rounded,
-                      size: 18,
-                      color: Colors.white,
-                    ),
-                  ),
-                  title: Text(
-                    session.nickname.isEmpty ? '酷狗用户' : session.nickname,
-                  ),
-                  subtitle: Text('已登录 · userid ${session.userid}'),
-                  trailing: TextButton(
-                    onPressed: () async {
-                      await ref
-                          .read(kugouSessionProvider.notifier)
-                          .signOut();
-                      if (!context.mounted) {
-                        return;
-                      }
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('已退出登录，当前为游客模式')),
-                      );
-                    },
-                    child: const Text('退出登录'),
-                  ),
-                )
-              else
-                ListTile(
-                  contentPadding: EdgeInsets.zero,
-                  leading: CircleAvatar(
-                    backgroundColor: context.palette.surfaceAlt,
-                    child: Icon(
-                      Icons.person_outline_rounded,
-                      size: 18,
-                      color: context.palette.textSecondary,
-                    ),
-                  ),
-                  title: const Text('未登录 · 游客模式'),
-                  subtitle: const Text('手机号 / 微信扫码 / QQ 扫码 / 酷狗扫码，登录后解锁全曲与高音质'),
-                  trailing: FilledButton(
-                    onPressed: () => context.go(AppRoutes.login),
-                    child: const Text('登录'),
-                  ),
-                ),
-            ],
-          ),
           _SettingSection(
             title: '每日 VIP',
             children: <Widget>[

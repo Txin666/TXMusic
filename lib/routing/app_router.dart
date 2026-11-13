@@ -9,6 +9,7 @@ import '../features/discover/presentation/discover_page.dart';
 import '../features/library/presentation/library_page.dart';
 import '../features/player/presentation/player_page.dart';
 import '../features/playlist/presentation/playlist_detail_page.dart';
+import '../features/profile/presentation/profile_page.dart';
 import '../features/rank/presentation/rank_detail_page.dart';
 import '../features/rank/presentation/rank_page.dart';
 import '../features/search/presentation/search_page.dart';
@@ -75,6 +76,10 @@ class AppRouter {
             GoRoute(
               path: AppRoutes.library,
               pageBuilder: _fadePage(const LibraryPage()),
+            ),
+            GoRoute(
+              path: AppRoutes.profile,
+              pageBuilder: _fadePage(const ProfilePage()),
             ),
             GoRoute(
               path: AppRoutes.settings,

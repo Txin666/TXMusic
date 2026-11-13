@@ -530,7 +530,8 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     if (context.canPop()) {
       context.pop();
     } else {
-      context.go(AppRoutes.settings);
+      // 登录入口现已从设置页迁到「个人信息」页，兜底也回到该页。
+      context.go(AppRoutes.profile);
     }
   }
 }
