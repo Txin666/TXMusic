@@ -35,12 +35,12 @@ class SettingsPage extends ConsumerWidget {
         children: <Widget>[
           Text('设置', style: theme.textTheme.headlineMedium),
           const SizedBox(height: AppSpacing.xs),
-          Text(
-            '外观、播放等本地设置；账号与登录信息已迁至「个人信息」页',
-            style: theme.textTheme.bodySmall?.copyWith(
-              color: context.palette.textSecondary,
-            ),
-          ),
+          // Text(
+          //   '外观、播放等本地设置；账号与登录信息已迁至「个人信息」页',
+          //   style: theme.textTheme.bodySmall?.copyWith(
+          //     color: context.palette.textSecondary,
+          //   ),
+          // ),
           const SizedBox(height: AppSpacing.xl),
           _SettingSection(
             title: '每日 VIP',

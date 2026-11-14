@@ -6,6 +6,7 @@ import '../../core/desktop/desktop_host.dart';
 import '../../theme/app_colors.dart';
 import '../../theme/app_palette.dart';
 import '../../theme/app_spacing.dart';
+import 'app_logo.dart';
 
 /// 无边框窗口的自绘标题栏。
 ///
@@ -68,7 +69,7 @@ class _BrandMark extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        const Icon(Icons.graphic_eq, size: 16, color: AppColors.primary),
+        const AppLogo(size: 16, radius: 4),
         const SizedBox(width: AppSpacing.sm),
         Text(
           'TX Music',

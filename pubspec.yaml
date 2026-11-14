@@ -76,6 +76,8 @@ flutter:
   # 鎵樼洏鍥炬爣锛氫笌 windows/runner/resources/app_icon.ico 鍚屾簮銆?
   # 浠诲姟鏍忕缉鐣ュ浘宸ュ叿鏍忔寜閽渶瑕?ico锛圵indows 鍙悆鍥炬爣璧勬簮锛屼笉鍚?png锛夈€?
   assets:
+    - assets/icons/TX MUSIC.png
+    - assets/icons/TX MUSIC.ico
     - assets/icons/tray.ico
     - assets/icons/taskbar_prev.ico
     - assets/icons/taskbar_play.ico

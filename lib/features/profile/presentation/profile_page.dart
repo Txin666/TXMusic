@@ -243,14 +243,7 @@ class ProfilePage extends ConsumerWidget {
             ],
           ),
           const SizedBox(height: AppSpacing.lg),
-          Text(
-            '数据来源：本地 KuGouMusicApi（/user/detail、/user/info、/user/grade/info、'
-            '/user/vip/detail、/user/listen），未登录不请求接口；空白项代表该账号未设置或'
-            '接口未回传，不做任何假数据填充。',
-            style: theme.textTheme.bodySmall?.copyWith(
-              color: context.palette.textDisabled,
-            ),
-          ),
+ 
         ],
       ),
     );
@@ -264,18 +257,26 @@ class ProfilePage extends ConsumerWidget {
         icon: const Icon(Icons.logout_rounded, color: AppColors.danger),
         title: const Text('确定要退出登录吗？'),
         content: const Text(
-          '退出后会清除本地登录凭证，音质与全曲试听将回到游客模式（60 秒试听），'
+          '退出后会清除本地登录凭证，'
           '重新登录需要再次扫码或账号验证。',
         ),
         actions: <Widget>[
-          TextButton(
-            onPressed: () => Navigator.of(dialogContext).pop(false),
-            child: const Text('取消'),
-          ),
-          FilledButton(
-            onPressed: () => Navigator.of(dialogContext).pop(true),
-            style: FilledButton.styleFrom(backgroundColor: AppColors.danger),
-            child: const Text('退出登录'),
+          OverflowBar(
+            alignment: MainAxisAlignment.center,
+            children: <Widget>[
+              TextButton(
+                onPressed: () => Navigator.of(dialogContext).pop(false),
+                child: const Text('取消'),
+              ),
+              FilledButton(
+                onPressed: () => Navigator.of(dialogContext).pop(true),
+                style: FilledButton.styleFrom(
+                  backgroundColor: AppColors.danger,
+                  foregroundColor: Colors.white,
+                ),
+                child: const Text('退出登录'),
+              ),
+            ],
           ),
         ],
       ),

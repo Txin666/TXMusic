@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/responsive/app_breakpoints.dart';
 import '../../../../routing/app_routes.dart';
-import '../../../../theme/app_colors.dart';
+import '../../../../shared/widgets/app_logo.dart';
 import '../../../../theme/app_spacing.dart';
 import '../../../../theme/app_palette.dart';
 
@@ -158,27 +158,7 @@ class AppSideNav extends StatelessWidget {
       ),
       child: Row(
         children: <Widget>[
-          Container(
-            width: 32,
-            height: 32,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: <Color>[
-                  AppColors.primary,
-                  AppColors.primary.withValues(alpha: 0.55),
-                ],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-              borderRadius: BorderRadius.circular(9),
-            ),
-            alignment: Alignment.center,
-            child: const Icon(
-              Icons.graphic_eq_rounded,
-              size: 18,
-              color: Color(0xFF04120C),
-            ),
-          ),
+          const AppLogo(size: 32, radius: 9),
           if (!collapsed) ...<Widget>[
             const SizedBox(width: AppSpacing.sm),
             Expanded(
@@ -290,7 +270,7 @@ class AppSideNav extends StatelessWidget {
                 const SizedBox(width: AppSpacing.xs),
                 Expanded(
                   child: Text(
-                    'UI 骨架版 v0.1',
+                    'TX MUSIC',
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: Theme.of(context).textTheme.labelSmall

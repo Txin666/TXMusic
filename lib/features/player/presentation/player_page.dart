@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart' hide RepeatMode;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -29,6 +32,10 @@ import '../../../theme/app_palette.dart';
 /// 播放失败时在顶部展示 [PlaybackErrorBanner] 并提供重试。
 class PlayerPage extends ConsumerWidget {
   const PlayerPage({super.key});
+
+  /// 歌词区宽度上限：超过就不再变宽，多出来的空间均匀留在整块内容两侧，
+  /// 避免歌词一路拉满、把封面视觉上「挤」在最左边。
+  static const double _lyricsMaxWidth = 920;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -103,52 +110,105 @@ class PlayerPage extends ConsumerWidget {
                   ),
                 ],
                 Expanded(
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Expanded(
-                        flex: 4,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            CoverImage(
-                              seed: song.album,
-                              url: song.coverUrl,
-                              size: 320,
-                              radius: AppRadius.lg,
-                              icon: Icons.album_rounded,
-                            ),
-                            const SizedBox(height: AppSpacing.xl),
-                            Text(
-                              song.title,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: theme.textTheme.headlineMedium,
-                            ),
-                            const SizedBox(height: AppSpacing.xs),
-                            Text(
-                              '${song.artist} · ${song.album}',
-                              style: theme.textTheme.bodyMedium?.copyWith(
-                                color: context.palette.textSecondary,
+                  child: LayoutBuilder(
+                    builder:
+                        (BuildContext context, BoxConstraints constraints) {
+                          // 宽度区间：窄窗口按可用宽度排版，宽窗口封顶后整体居中，
+                          // 不再让封面和歌词被越拉越远。
+                          final double maxAvailableWidth =
+                              constraints.maxWidth > AppSpacing.maxContentWidth
+                              ? AppSpacing.maxContentWidth
+                              : constraints.maxWidth;
+                          // 封面随可用高度自适应，但锁在区间内，不会太大也不会太小。
+                          final double coverSize =
+                              (constraints.maxHeight * 0.46).clamp(
+                                180.0,
+                                340.0,
+                              );
+                          // 歌词区单独封顶：宽屏下不让它一路顶到内容框右边，
+                          // 否则整块重心偏右，封面就被看成了「被挤到左边」。
+                          final double remainingWidth =
+                              maxAvailableWidth - coverSize - AppSpacing.xxl;
+                          final double lyricsWidth =
+                              remainingWidth > _lyricsMaxWidth
+                              ? _lyricsMaxWidth
+                              : remainingWidth;
+                          return Center(
+                            child: SizedBox(
+                              // 整块内容宽度 = 封面列 + 间距 + 歌词列，
+                              // 窗口再宽也只在外侧留余量，左右对称。
+                              width: coverSize + AppSpacing.xxl + lyricsWidth,
+                              child: Row(
+                                // 交叉轴拉伸：歌词列表要占满整行高度，不能按内容收缩。
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: <Widget>[
+                                  // 左列宽度等于封面宽度：窗口变宽只加右侧余量，
+                                  // 两栏间距恒定，不会跟着窗口一路变宽。
+                                  SizedBox(
+                                    width: coverSize,
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: <Widget>[
+                                        CoverImage(
+                                          seed: song.album,
+                                          url: song.coverUrl,
+                                          size: coverSize,
+                                          radius: AppRadius.lg,
+                                          icon: Icons.album_rounded,
+                                        ),
+                                        const SizedBox(height: AppSpacing.xl),
+                                        Text(
+                                          song.title,
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                          textAlign: TextAlign.center,
+                                          style: theme.textTheme.headlineMedium,
+                                        ),
+                                        const SizedBox(height: AppSpacing.xs),
+                                        Text(
+                                          '${song.artist} · ${song.album}',
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                          textAlign: TextAlign.center,
+                                          style: theme.textTheme.bodyMedium
+                                              ?.copyWith(
+                                                color: context
+                                                    .palette
+                                                    .textSecondary,
+                                              ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  const SizedBox(width: AppSpacing.xxl),
+                                  SizedBox(
+                                    width: lyricsWidth,
+                                    child: _LyricPane(
+                                      lyricsAsync: lyricsAsync,
+                                      position: playback.position,
+                                      onSeek: controller.seek,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                          ],
-                        ),
-                      ),
-                      Expanded(
-                        flex: 5,
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: AppSpacing.xxl),
-                          child: _LyricPane(
-                            lyricsAsync: lyricsAsync,
-                            position: playback.position,
-                          ),
-                        ),
-                      ),
-                    ],
+                          );
+                        },
                   ),
                 ),
-                _TransportBar(playback: playback, controller: controller),
+                // 进度条 / 控制按钮同样限宽居中，宽屏下不会横跨整页。
+                Center(
+                  child: ConstrainedBox(
+                    constraints: const BoxConstraints(
+                      maxWidth: AppSpacing.maxContentWidth,
+                    ),
+                    child: _TransportBar(
+                      playback: playback,
+                      controller: controller,
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
@@ -176,17 +236,158 @@ class PlayerPage extends ConsumerWidget {
 }
 
 /// 歌词区：真实歌词三态（加载中 / 失败 / 有数据）各自独立渲染。
-class _LyricPane extends StatelessWidget {
-  const _LyricPane({required this.lyricsAsync, required this.position});
+///
+/// 有歌词时是完整可滚动的歌词列表：
+/// - 默认跟随播放进度，当前行始终停在视口正中；
+/// - 鼠标滚轮 / 拖动一旦发生就暂停跟随，避免和用户抢滚动位置；
+/// - 暂停后 3 秒内没有点击任何歌词行跳转，就自动回到当前播放行继续跟随
+///   （不额外弹提示，避免挡住歌词）；
+/// - 暂停期间双击任意歌词行会 seek 到该行时间点并立刻恢复跟随
+///   （单击不跳转，留给浏览，避免误触跳走一大段）。
+class _LyricPane extends StatefulWidget {
+  const _LyricPane({
+    required this.lyricsAsync,
+    required this.position,
+    required this.onSeek,
+  });
 
   final AsyncValue<List<LyricLine>> lyricsAsync;
   final Duration position;
+  final ValueChanged<Duration> onSeek;
+
+  @override
+  State<_LyricPane> createState() => _LyricPaneState();
+}
+
+class _LyricPaneState extends State<_LyricPane> {
+  /// 每行固定高度：固定 itemExtent 才能用滚动偏移精确算出「第几行居中」。
+  static const double _lineExtent = 56;
+
+  /// 播放位置跳变超过这个阈值（拖动进度条 / 重播）就恢复自动跟随。
+  static const Duration _seekThreshold = Duration(seconds: 2);
+
+  /// 手动浏览后多久没双击歌词跳转，就自动回到当前播放行。
+  static const Duration _autoResumeDelay = Duration(seconds: 3);
+
+  final ScrollController _scroll = ScrollController();
+
+  /// true = 跟随播放进度；滚轮 / 拖动后置 false，交给用户自己浏览。
+  bool _autoFollow = true;
+
+  /// 上一次自动跟随到的行号，避免每次位置刷新都重复滚动。
+  int _followedLine = -1;
+
+  /// 当前高亮行，暂停跟随期间也要能随时取到（自动恢复时用）。
+  int _currentLine = 0;
+
+  /// 闲置自动恢复计时器：暂停跟随起算，到点没双击歌词就回到当前播放。
+  Timer? _resumeTimer;
+
+  @override
+  void initState() {
+    super.initState();
+    _currentLine = _currentLineOf(widget.lyricsAsync);
+  }
+
+  int _currentLineOf(AsyncValue<List<LyricLine>> lyricsAsync) {
+    final List<LyricLine>? lyrics = lyricsAsync.asData?.value;
+    if (lyrics == null || lyrics.isEmpty) {
+      return 0;
+    }
+    return LyricIndex.indexAt(lyrics, widget.position);
+  }
+
+  @override
+  void didUpdateWidget(covariant _LyricPane oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    // 换歌（歌词来源变了）：位置、跟随状态、滚动位置全部归零重来。
+    if (!identical(oldWidget.lyricsAsync, widget.lyricsAsync)) {
+      _cancelResumeTimer();
+      _followedLine = -1;
+      _autoFollow = true;
+      if (_scroll.hasClients) {
+        _scroll.jumpTo(0);
+      }
+      return;
+    }
+    // 位置被外部大幅改动（拖动进度条、重播）时恢复跟随，否则会一直卡在手动态。
+    final int delta = (widget.position - oldWidget.position).inMilliseconds
+        .abs();
+    if (delta > _seekThreshold.inMilliseconds) {
+      _cancelResumeTimer();
+      _autoFollow = true;
+    }
+  }
+
+  @override
+  void dispose() {
+    _cancelResumeTimer();
+    _scroll.dispose();
+    super.dispose();
+  }
+
+  void _cancelResumeTimer() {
+    _resumeTimer?.cancel();
+    _resumeTimer = null;
+  }
+
+  /// 让第 [line] 行停在视口正中。
+  void _scrollToLine(int line, {required bool animate}) {
+    if (!_scroll.hasClients) {
+      return;
+    }
+    final double target = (line * _lineExtent).clamp(
+      0.0,
+      _scroll.position.maxScrollExtent,
+    );
+    if ((_scroll.offset - target).abs() < 1) {
+      return;
+    }
+    if (animate) {
+      _scroll.animateTo(
+        target,
+        duration: const Duration(milliseconds: 260),
+        curve: Curves.easeOutCubic,
+      );
+    } else {
+      _scroll.jumpTo(target);
+    }
+  }
+
+  /// 用户一动（滚轮 / 拖动 / 惯性），立刻交还滚动控制权，
+  /// 并重新计时：到点仍未双击歌词跳转就自动回到当前播放。
+  void _pauseFollow() {
+    _cancelResumeTimer();
+    _resumeTimer = Timer(_autoResumeDelay, () {
+      _resumeTimer = null;
+      if (!mounted || _autoFollow) {
+        return;
+      }
+      _resumeFollow(_currentLine);
+    });
+    if (_autoFollow) {
+      setState(() => _autoFollow = false);
+    }
+  }
+
+  void _resumeFollow(int currentLine) {
+    _cancelResumeTimer();
+    if (!mounted) {
+      return;
+    }
+    setState(() {
+      _autoFollow = true;
+      _followedLine = currentLine;
+      _currentLine = currentLine;
+    });
+    _scrollToLine(currentLine, animate: true);
+  }
 
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
 
-    return lyricsAsync.when(
+    return widget.lyricsAsync.when(
       loading: () => Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -247,38 +448,203 @@ class _LyricPane extends StatelessWidget {
           );
         }
 
-        final int currentLine = LyricIndex.indexAt(lyrics, position);
-        final int start = (currentLine - 4).clamp(0, lyrics.length - 1);
-        final int end = (currentLine + 5).clamp(0, lyrics.length);
+        final int currentLine = LyricIndex.indexAt(lyrics, widget.position);
+        _currentLine = currentLine;
+        if (currentLine != _followedLine) {
+          _followedLine = currentLine;
+          if (_autoFollow) {
+            // build 期间不能直接滚，排到帧末再对齐当前行。
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              if (mounted && _autoFollow) {
+                _scrollToLine(currentLine, animate: true);
+              }
+            });
+          }
+        }
 
-        return Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            for (int i = start; i < end; i++)
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: AppSpacing.sm),
+        return ShaderMask(
+          // 上下边缘淡出，滚动时不会有硬切边。
+          shaderCallback: (Rect bounds) => const LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: <Color>[
+              Color(0x00000000),
+              Color(0xFF000000),
+              Color(0xFF000000),
+              Color(0x00000000),
+            ],
+            stops: <double>[0, 0.1, 0.9, 1],
+          ).createShader(bounds),
+          blendMode: BlendMode.dstIn,
+          child: _buildLineList(theme, lyrics, currentLine),
+        );
+      },
+    );
+  }
+
+  Widget _buildLineList(
+    ThemeData theme,
+    List<LyricLine> lyrics,
+    int currentLine,
+  ) {
+    return LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) {
+        // 上下各留半屏空白，首末行也能停在视口正中。
+        final double verticalPad = ((constraints.maxHeight - _lineExtent) / 2)
+            .clamp(0.0, double.infinity);
+        return Listener(
+          onPointerSignal: (PointerSignalEvent event) {
+            // 桌面上滚轮走 PointerSignal，不一定产生 UserScrollNotification。
+            if (event is PointerScrollEvent && event.scrollDelta.dy != 0) {
+              _pauseFollow();
+            }
+          },
+          child: NotificationListener<ScrollNotification>(
+            onNotification: (ScrollNotification notification) {
+              // 拖动皮肤 / 滚动条 / 惯性滚动都算用户操作。
+              if (notification is UserScrollNotification ||
+                  (notification is ScrollStartNotification &&
+                      notification.dragDetails != null)) {
+                _pauseFollow();
+              }
+              return false;
+            },
+            child: ScrollConfiguration(
+              behavior: ScrollConfiguration.of(context)
+                  .copyWith(scrollbars: false),
+              child: ListView.builder(
+                controller: _scroll,
+                itemExtent: _lineExtent,
+                padding: EdgeInsets.symmetric(vertical: verticalPad),
+                itemCount: lyrics.length,
+                itemBuilder: (BuildContext context, int index) {
+                  final LyricLine line = lyrics[index];
+                  return _LyricLineTile(
+                    text: line.text,
+                    time: line.time,
+                    isCurrent: index == currentLine,
+                    onDoubleTap: () {
+                      widget.onSeek(line.time);
+                      _resumeFollow(index);
+                    },
+                  );
+                },
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+/// 单行歌词：整体居中，hover 高亮并在文本后补上该行时间戳，
+/// 双击跳到该行时间点（单击留给浏览，避免误触跳走）。
+class _LyricLineTile extends StatefulWidget {
+  const _LyricLineTile({
+    required this.text,
+    required this.time,
+    required this.isCurrent,
+    required this.onDoubleTap,
+  });
+
+  final String text;
+
+  /// 该行对应的时间点，hover 时显示在歌词后面，方便判断会跳到哪一段。
+  final Duration time;
+  final bool isCurrent;
+  final VoidCallback onDoubleTap;
+
+  @override
+  State<_LyricLineTile> createState() => _LyricLineTileState();
+}
+
+class _LyricLineTileState extends State<_LyricLineTile> {
+  /// 时间胶囊的固定槽位宽度：够放 `1:23:45` 这类长时间戳。
+  static const double _timeSlotWidth = 64;
+
+  bool _hovered = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final AppPalette palette = context.palette;
+    final Color color = widget.isCurrent
+        ? palette.emphasized
+        : (_hovered ? palette.textPrimary : palette.textSecondary);
+
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      onEnter: (PointerEnterEvent event) => setState(() => _hovered = true),
+      onExit: (PointerExitEvent event) => setState(() => _hovered = false),
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        // 双击才跳转：单击太容易在滚轮浏览时误触，跳过一整段。
+        onDoubleTap: widget.onDoubleTap,
+        child: Container(
+          margin: const EdgeInsets.symmetric(vertical: AppSpacing.xxs),
+          padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            color: _hovered ? palette.hoverOverlay : Colors.transparent,
+            borderRadius: BorderRadius.circular(AppRadius.sm),
+          ),
+          child: Row(
+            children: <Widget>[
+              // 左右各留一个等宽槽位：歌词视觉居中，时间固定在行尾。
+              const SizedBox(width: _timeSlotWidth),
+              Expanded(
                 child: AnimatedDefaultTextStyle(
                   duration: const Duration(milliseconds: 200),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.center,
                   style:
-                      (i == currentLine
+                      (widget.isCurrent
                               ? theme.textTheme.headlineSmall
                               : theme.textTheme.titleMedium)
                           ?.copyWith(
-                            color: i == currentLine
-                                ? context.palette.emphasized
-                                : context.palette.textSecondary,
-                            fontWeight: i == currentLine
+                            color: color,
+                            fontWeight: widget.isCurrent
                                 ? FontWeight.w700
                                 : FontWeight.w400,
                           ) ??
                       const TextStyle(),
-                  child: Text(lyrics[i].text),
+                  child: Text(widget.text, textAlign: TextAlign.center),
                 ),
               ),
-          ],
-        );
-      },
+              SizedBox(
+                width: _timeSlotWidth,
+                // 时间右对齐贴行尾，hover 才出现；强调色胶囊保证足够醒目。
+                child: _hovered
+                    ? Align(
+                        alignment: Alignment.centerRight,
+                        child: DecoratedBox(
+                          decoration: BoxDecoration(
+                            color: palette.emphasized.withValues(alpha: 0.16),
+                            borderRadius: BorderRadius.circular(AppRadius.pill),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: AppSpacing.sm,
+                              vertical: AppSpacing.xxs,
+                            ),
+                            child: Text(
+                              Formatters.duration(widget.time),
+                              style: theme.textTheme.bodySmall?.copyWith(
+                                color: palette.emphasized,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                          ),
+                        ),
+                      )
+                    : null,
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
@@ -341,9 +707,7 @@ class _TransportBar extends ConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             IconButton(
-              tooltip: !loggedIn
-                  ? '登录后可同步收藏'
-                  : (liked ? '取消收藏' : '收藏到「我喜欢」'),
+              tooltip: !loggedIn ? '登录后可同步收藏' : (liked ? '取消收藏' : '收藏到「我喜欢」'),
               onPressed: canCollect
                   ? () => _toggleLiked(context, ref, currentSong)
                   : null,

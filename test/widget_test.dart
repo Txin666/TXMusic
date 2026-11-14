@@ -33,7 +33,8 @@ void main() {
     await _pumpApp(tester);
 
     expect(find.byType(MainShell), findsOneWidget);
-    expect(find.text('TX MUSIC'), findsOneWidget);
+    // 侧边导航顶部品牌区与底部信息栏各有一处品牌文字。
+    expect(find.text('TX MUSIC'), findsNWidgets(2));
     expect(find.text('发现'), findsWidgets);
     expect(find.text('暂无播放'), findsOneWidget);
   });

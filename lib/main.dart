@@ -14,6 +14,7 @@ import 'core/desktop/panel/tray_panel_host.dart';
 import 'core/desktop/panel/tray_panel_window.dart';
 import 'core/network/kugou_providers.dart';
 import 'core/network/kugou_session.dart';
+import 'features/player/application/player_controller.dart';
 import 'features/settings/application/settings_controller.dart';
 import 'routing/app_router.dart';
 import 'shared/widgets/app_window_frame.dart';
@@ -58,15 +59,29 @@ Future<void> main(List<String> args) async {
     );
   }
 
+  // 显式建容器：退出前要能从容器里取到播放控制器，把听歌进度落盘。
+  final ProviderContainer container = ProviderContainer(
+    overrides: [
+      // NotifierProvider 不支持 overrideWithValue，
+      // 用 KugouSessionController 的初始值构造重写（详见 kugou_providers.dart）。
+      kugouSessionProvider.overrideWith(
+        () => KugouSessionController(session),
+      ),
+    ],
+  );
+
+  // 退出前收尾：托盘「退出 TX Music」会 await 本回调，保证进度已写盘。
+  DesktopHost.instance.onBeforeQuit = () async {
+    try {
+      await container.read(playerControllerProvider.notifier).flushProgress();
+    } on Object catch (error) {
+      debugPrint('退出前保存播放进度失败: $error');
+    }
+  };
+
   runApp(
-    ProviderScope(
-      overrides: [
-        // NotifierProvider 不支持 overrideWithValue，
-        // 用 KugouSessionController 的初始值构造重写（详见 kugou_providers.dart）。
-        kugouSessionProvider.overrideWith(
-          () => KugouSessionController(session),
-        ),
-      ],
+    UncontrolledProviderScope(
+      container: container,
       child: const TxMusicApp(),
     ),
   );
@@ -98,6 +113,14 @@ Future<void> _setupDesktopWindow() async {
       skipTaskbar: false,
     );
     await windowManager.waitUntilReadyToShow(options, () async {
+      // 窗口 / 任务栏图标：与托盘共用同一份 ico，替换掉默认的 Flutter 图标。
+      // window_manager 会把相对路径拼到 `data/flutter_assets` 下读取。
+      try {
+        await windowManager.setIcon(DesktopHost.windowIconAsset);
+      } on Object catch (error) {
+        // 图标设置失败不能连累后面的 show()，否则窗口根本不出来。
+        debugPrint('窗口图标设置失败（不影响启动）: $error');
+      }
       await windowManager.show();
       await windowManager.focus();
     });

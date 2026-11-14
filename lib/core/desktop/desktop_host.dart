@@ -22,8 +22,17 @@ class DesktopHost with WindowListener {
   /// 全局单例：窗口与托盘在进程内只应存在一份。
   static final DesktopHost instance = DesktopHost._();
 
-  /// 托盘图标资源（与 windows/runner/resources/app_icon.ico 同源）。
-  static const String trayIconAsset = 'assets/icons/tray.ico';
+  /// 应用图标资源（窗口 / 任务栏 / 托盘共用 `assets/icons/TX MUSIC.ico`，
+  /// 与 windows/runner/resources/app_icon.ico 同源；Windows 只吃 ico 资源）。
+  static const String windowIconAsset = 'assets/icons/TX MUSIC.ico';
+
+  /// 托盘图标资源：与窗口图标同一份文件。
+  static const String trayIconAsset = windowIconAsset;
+
+  /// 退出前的收尾回调（由 UI 层注入，用于落盘播放进度等本地数据）。
+  ///
+  /// [quitApp] 会先 await 本回调再销毁窗口，保证「退出即保存」不丢最后一次进度。
+  Future<void> Function()? onBeforeQuit;
 
   /// SnackBar 入口，挂到 MaterialApp.scaffoldMessengerKey 上。
   final GlobalKey<ScaffoldMessengerState> messengerKey =
@@ -168,6 +177,16 @@ class DesktopHost with WindowListener {
       return;
     }
     _quitting = true;
+
+    // 退出即保存：先把播放进度等本地数据落盘，再回收托盘与窗口。
+    final Future<void> Function()? beforeQuit = onBeforeQuit;
+    if (beforeQuit != null) {
+      try {
+        await beforeQuit();
+      } on Object catch (error) {
+        debugPrint('退出前收尾失败: $error');
+      }
+    }
 
     _disposeTray();
     // 任务栏缩略图按钮属于窗口的 COM 扩展，退出前摘掉避免任务栏残留。

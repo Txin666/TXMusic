@@ -22,6 +22,7 @@ class AppSpacing {
     horizontal: 16,
     vertical: 16,
   );
+
   static const EdgeInsets card = EdgeInsets.all(12);
 
   // ---- 骨架尺寸 ----

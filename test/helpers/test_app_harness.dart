@@ -7,6 +7,7 @@ import 'package:txmusic/core/network/kugou_providers.dart';
 import 'package:txmusic/core/network/kugou_session.dart';
 import 'package:txmusic/features/discover/application/discover_providers.dart';
 import 'package:txmusic/features/library/application/library_providers.dart';
+import 'package:txmusic/features/player/data/playback_archive.dart';
 import 'package:txmusic/features/playlist/domain/playlist.dart';
 import 'package:txmusic/features/rank/application/rank_providers.dart';
 import 'package:txmusic/features/rank/domain/rank_item.dart';
@@ -167,6 +168,26 @@ const DiscoverFeed kTestDiscoverFeed = DiscoverFeed(
   ranks: kTestRanks,
 );
 
+/// 内存版播放存档：测试不读写用户真实 `.local/playback_state.json`。
+class FakePlaybackArchiveStorage extends PlaybackArchiveStorage {
+  FakePlaybackArchiveStorage([this.archive]);
+
+  PlaybackArchive? archive;
+
+  @override
+  Future<PlaybackArchive?> load() async => archive;
+
+  @override
+  Future<void> save(PlaybackArchive value) async {
+    archive = value;
+  }
+
+  @override
+  Future<void> clear() async {
+    archive = null;
+  }
+}
+
 /// 构造一组可复用的测试 overrides。
 ///
 /// 覆盖内容：
@@ -174,11 +195,17 @@ const DiscoverFeed kTestDiscoverFeed = DiscoverFeed(
 /// - [kugouSessionProvider] → 游客态（不读 `.local/kugou_cookie.json`）
 /// - [libraryProvider] → [FakeLibraryController]（不读写本地 JSON）
 /// - 各数据 FutureProvider → 桩数据（不发 HTTP 请求）
-List<Override> buildTestOverrides({FakeAudioEngine? engine}) {
+List<Override> buildTestOverrides({
+  FakeAudioEngine? engine,
+  FakePlaybackArchiveStorage? archiveStorage,
+}) {
   final FakeAudioEngine fakeEngine = engine ?? FakeAudioEngine();
 
   return <Override>[
     audioEngineProvider.overrideWith((Ref ref) => fakeEngine),
+    playbackArchiveStorageProvider.overrideWith(
+      (Ref ref) => archiveStorage ?? FakePlaybackArchiveStorage(),
+    ),
     kugouSessionProvider.overrideWith(
       () => KugouSessionController(KugouSession.guest),
     ),
