@@ -28,6 +28,12 @@ class LibraryRepository {
     return next;
   }
 
+  /// 用服务器「我喜欢」整体覆盖本机收藏（登录态下本机只做镜像）。
+  Future<List<Song>> replaceFavorites(List<Song> songs) async {
+    await _save(favoritesFile, songs);
+    return songs;
+  }
+
   /// 记录最近播放（去重后置顶，超限截断）。
   Future<List<Song>> pushRecent(Song song) async {
     final List<Song> recent = await loadRecent();

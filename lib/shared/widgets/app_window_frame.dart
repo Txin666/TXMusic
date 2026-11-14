@@ -7,6 +7,7 @@ import '../../core/desktop/desktop_host.dart';
 import '../../core/desktop/panel/tray_panel_host.dart';
 import '../../core/desktop/panel/tray_panel_models.dart';
 import '../../core/desktop/taskbar_thumbnail_toolbar.dart';
+import '../../core/network/kugou_client.dart';
 import '../../features/library/application/library_providers.dart';
 import '../../features/player/application/player_controller.dart';
 import '../../features/player/domain/playback_state.dart';
@@ -119,7 +120,13 @@ class _AppWindowFrameState extends ConsumerState<AppWindowFrame> {
     if (song == null) {
       return;
     }
-    await ref.read(libraryProvider.notifier).toggleFavorite(song);
+    try {
+      await ref.read(libraryProvider.notifier).toggleFavorite(song);
+    } on KugouApiException catch (error) {
+      debugPrint('[collect] 收藏失败：${error.message}');
+    } on Object catch (error) {
+      debugPrint('[collect] 收藏失败：$error');
+    }
     await _syncPanelState(ref.read(playerControllerProvider));
   }
 
@@ -130,7 +137,7 @@ class _AppWindowFrameState extends ConsumerState<AppWindowFrame> {
     }
     final Song? song = snapshot.currentSong;
     final bool liked =
-        song != null && ref.read(libraryProvider).isFavorite(song.hash);
+        song != null && ref.read(isFavoriteProvider)(song.hash);
 
     await TrayPanelHost.instance.pushState(
       TrayPanelState(

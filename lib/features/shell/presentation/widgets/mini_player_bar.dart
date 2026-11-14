@@ -176,22 +176,27 @@ class MiniPlayerBar extends ConsumerWidget {
                 const SizedBox(width: AppSpacing.sm),
                 Builder(
                   builder: (BuildContext buttonContext) {
-                    // 收藏态来自真实 LibraryController（落盘 `.local/favorites.json`）。
-                    final bool liked = ref
-                        .watch(libraryProvider)
-                        .isFavorite(song.hash);
+                    // 收藏态读统一入口：登录时以服务器「我喜欢」为准。
+                    final bool liked = ref.watch(isFavoriteProvider)(song.hash);
                     return IconButton(
                       tooltip: liked ? '取消收藏' : '收藏',
                       onPressed: () async {
-                        await ref
-                            .read(libraryProvider.notifier)
-                            .toggleFavorite(song);
+                        String message = liked ? '已取消收藏' : '已加入我喜欢的音乐';
+                        try {
+                          await ref
+                              .read(libraryProvider.notifier)
+                              .toggleFavorite(song);
+                        } on KugouApiException catch (error) {
+                          message = '收藏失败：${error.message}';
+                        } on Object catch (error) {
+                          message = '收藏失败：$error';
+                        }
                         if (!buttonContext.mounted) {
                           return;
                         }
                         ScaffoldMessenger.of(buttonContext).showSnackBar(
                           SnackBar(
-                            content: Text(liked ? '已取消收藏' : '已加入我喜欢的音乐'),
+                            content: Text(message),
                             duration: const Duration(seconds: 2),
                           ),
                         );

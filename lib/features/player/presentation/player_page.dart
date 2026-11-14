@@ -2,6 +2,8 @@ import 'package:flutter/material.dart' hide RepeatMode;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../core/network/kugou_client.dart';
+import '../../../core/network/kugou_providers.dart';
 import '../../../core/utils/formatters.dart';
 import '../../../routing/app_routes.dart';
 import '../../../shared/widgets/cover_image.dart';
@@ -10,6 +12,8 @@ import '../../../shared/widgets/playback_error_banner.dart';
 import '../../../shared/widgets/song_tile.dart';
 import '../../../theme/app_colors.dart';
 import '../../../theme/app_spacing.dart';
+import '../../library/application/liked_songs_providers.dart';
+import '../../library/data/kugou_collect_api.dart';
 import '../../lyric/application/lyric_providers.dart';
 import '../../lyric/domain/lyric_index.dart';
 import '../../lyric/domain/lyric_line.dart';
@@ -279,15 +283,24 @@ class _LyricPane extends StatelessWidget {
   }
 }
 
-class _TransportBar extends StatelessWidget {
+class _TransportBar extends ConsumerWidget {
   const _TransportBar({required this.playback, required this.controller});
 
   final PlaybackSnapshot playback;
   final PlayerController controller;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final ThemeData theme = Theme.of(context);
+    final Song? currentSong = playback.currentSong;
+    final AsyncValue<LikedSongsSnapshot> likedState = ref.watch(
+      likedSongsProvider,
+    );
+    final bool liked =
+        currentSong != null &&
+        (likedState.asData?.value.has(currentSong.hash) ?? false);
+    final bool loggedIn = ref.watch(kugouSessionProvider).isLoggedIn;
+    final bool canCollect = currentSong != null && loggedIn;
     final double maxSeconds = playback.duration.inSeconds
         .clamp(1, 24 * 3600)
         .toDouble();
@@ -327,6 +340,21 @@ class _TransportBar extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            IconButton(
+              tooltip: !loggedIn
+                  ? '登录后可同步收藏'
+                  : (liked ? '取消收藏' : '收藏到「我喜欢」'),
+              onPressed: canCollect
+                  ? () => _toggleLiked(context, ref, currentSong)
+                  : null,
+              icon: Icon(
+                liked ? Icons.favorite_rounded : Icons.favorite_border_rounded,
+              ),
+              color: liked
+                  ? context.palette.emphasized
+                  : context.palette.textSecondary,
+            ),
+            const SizedBox(width: AppSpacing.lg),
             IconButton(
               tooltip: playback.repeatMode.label,
               onPressed: controller.cycleRepeatMode,
@@ -405,6 +433,36 @@ class _TransportBar extends StatelessWidget {
         const SizedBox(height: AppSpacing.sm),
       ],
     );
+  }
+
+  /// 收藏 / 取消收藏：写服务器后本地镜像同步，「我的音乐」页随之刷新。
+  Future<void> _toggleLiked(
+    BuildContext context,
+    WidgetRef ref,
+    Song song,
+  ) async {
+    final ScaffoldMessengerState messenger = ScaffoldMessenger.of(context);
+    try {
+      final bool liked = await ref
+          .read(likedSongsProvider.notifier)
+          .toggle(song);
+      messenger
+        ..hideCurrentSnackBar()
+        ..showSnackBar(
+          SnackBar(
+            content: Text(liked ? '已收藏到「我喜欢」' : '已从「我喜欢」移除'),
+            duration: const Duration(seconds: 2),
+          ),
+        );
+    } on KugouApiException catch (error) {
+      messenger
+        ..hideCurrentSnackBar()
+        ..showSnackBar(SnackBar(content: Text('收藏失败：${error.message}')));
+    } on Object catch (error) {
+      messenger
+        ..hideCurrentSnackBar()
+        ..showSnackBar(SnackBar(content: Text('收藏失败：$error')));
+    }
   }
 
   void _showQueue(BuildContext context) {
