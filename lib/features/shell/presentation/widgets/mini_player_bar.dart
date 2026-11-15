@@ -8,6 +8,7 @@ import '../../../../core/network/kugou_client.dart';
 import '../../../../routing/app_routes.dart';
 import '../../../../core/utils/formatters.dart';
 import '../../../../shared/widgets/cover_image.dart';
+import '../../../../shared/widgets/app_snack_bar.dart';
 import '../../../../shared/widgets/cover_placeholder.dart';
 import '../../../../theme/app_colors.dart';
 import '../../../../theme/app_spacing.dart';
@@ -194,12 +195,7 @@ class MiniPlayerBar extends ConsumerWidget {
                         if (!buttonContext.mounted) {
                           return;
                         }
-                        ScaffoldMessenger.of(buttonContext).showSnackBar(
-                          SnackBar(
-                            content: Text(message),
-                            duration: const Duration(seconds: 2),
-                          ),
-                        );
+                        showAppSnackBar(buttonContext, message);
                       },
                       icon: Icon(
                         liked
@@ -462,9 +458,7 @@ class _ShuffleButtonState extends ConsumerState<_ShuffleButton> {
     if (!mounted) {
       return;
     }
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(message), duration: const Duration(seconds: 2)),
-    );
+    showAppSnackBar(context, message);
   }
 
   @override

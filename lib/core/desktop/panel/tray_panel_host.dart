@@ -8,6 +8,7 @@ import 'package:flutter/widgets.dart';
 import 'package:screen_retriever/screen_retriever.dart';
 
 import '../desktop_host.dart';
+import '../../diagnostics/boot_log.dart';
 import 'tray_panel_models.dart';
 
 /// 托盘悬浮面板的「主窗口侧」控制器。
@@ -40,20 +41,65 @@ class TrayPanelHost {
     mode: ChannelMode.unidirectional,
   );
 
+  /// 主窗口 → 面板的**双向**查询通道。
+  ///
+  /// [uiChannel] / [hostChannel] 都是单向推，拿不到返回值；而「面板此刻到底
+  /// 可不可见」必须以面板窗口的真实状态为准（Win32 IsWindowVisible），不能
+  /// 靠主窗口自己缓存，否则失焦上报一旦丢失就会错位成「点一下只收起、点第
+  /// 二下才弹出」。
+  static const WindowMethodChannel queryChannel = WindowMethodChannel(
+    'txmusic/tray_panel_query',
+    mode: ChannelMode.bidirectional,
+  );
+
   WindowController? _controller;
   Future<void>? _creating;
   Completer<void>? _readyCompleter;
   bool _ready = false;
   bool _visible = false;
-  DateTime? _lastHiddenAt;
+  /// 是否正处在「显示中」的窗口期：面板窗口首次创建、抢前台的那几百毫秒里，
+  /// 系统会回一次伪失焦并上报 dismissed，若当真会把刚弹出的面板判成已收起，
+  /// 导致下一次点击被当成「收起」而不是「弹出」。
+  bool _showing = false;
   DateTime? _lastToggleAt;
+  bool _queryUnavailable = false;
   TrayPanelState? _latestState;
   void Function(TrayPanelAction action, num? value)? _onAction;
 
   bool get isVisible => _visible;
 
-  /// 当前引擎是否是面板窗口；主窗口调用时会返回 null（原生查不到窗口定义，
-  /// 主引擎抛 PlatformException 属于预期行为）。
+  /// 判断当前引擎是不是 desktop_multi_window 拉起的面板窗口。
+  ///
+  /// 只看 Dart 入口参数，不碰任何原生通道：子引擎的 Dart 入口会在
+  /// desktop_multi_window 把插件注册到该引擎**之前**就开始执行，此时调用
+  /// [WindowController.fromCurrentEngine] 必然抛 MissingPluginException；
+  /// debug 下 JIT 启动慢刚好躲过去，release 的 AOT 启动快则必现——结果是面板
+  /// 引擎误判成主引擎，于是多建一个托盘图标，且面板 UI 从未被 runApp。
+  ///
+  /// 子引擎的 args 形如 `[multi_window, <windowId>, <arguments>]`。
+  static bool isPanelEngine(List<String> args) {
+    if (args.length < 3 || args.first != 'multi_window') {
+      return false;
+    }
+    return args.last == windowArgument;
+  }
+
+  /// 等待 desktop_multi_window 把插件注册到当前引擎。
+  ///
+  /// 面板侧所有 [WindowMethodChannel] 的注册都依赖该插件，必须等它就绪。
+  static Future<void> waitForMultiWindowPlugin() async {
+    for (int i = 0; i < 100; i++) {
+      try {
+        await WindowController.fromCurrentEngine();
+        bootLog('desktop_multi_window 插件已就绪（第 ${i + 1} 次尝试）');
+        return;
+      } on Object catch (_) {
+        await Future<void>.delayed(const Duration(milliseconds: 30));
+      }
+    }
+    bootLog('等待 desktop_multi_window 插件注册超时');
+  }
+
   static Future<WindowController?> currentPanelController() async {
     if (!DesktopHost.isDesktopPlatform) {
       return null;
@@ -61,8 +107,13 @@ class TrayPanelHost {
     try {
       final WindowController controller =
           await WindowController.fromCurrentEngine();
+      bootLog(
+        'fromCurrentEngine 成功: windowId=${controller.windowId} '
+        'arguments=${controller.arguments}',
+      );
       return controller.arguments == windowArgument ? controller : null;
     } on Object catch (error) {
+      bootLog('fromCurrentEngine 失败（非多窗口引擎）: $error');
       debugPrint('当前引擎不是多窗口实例：$error');
       return null;
     }
@@ -78,6 +129,11 @@ class TrayPanelHost {
     }
     try {
       await hostChannel.setMethodCallHandler(_handleHostCall);
+      // 双向通道必须两端都注册才算配对成功，否则主窗口侧 invoke 会直接抛
+      // CHANNEL_UNREGISTERED。这里主窗口只负责「接」，不需要处理面板的调用。
+      await queryChannel.setMethodCallHandler(
+        (MethodCall call) async => null,
+      );
     } on Object catch (error, stack) {
       debugPrint('托盘面板通道注册失败：$error\n$stack');
     }
@@ -98,9 +154,14 @@ class TrayPanelHost {
         break;
       case 'dismissed':
         // 面板自己判定失焦并隐藏，主窗口只需同步可见标志。
+        if (_showing) {
+          // 弹出窗口期内的伪失焦：不推翻显示状态，否则紧接着的托盘点击
+          // 会被误判成「应当收起」。
+          debugPrint('[panel] dismissed ignored during show');
+          break;
+        }
         debugPrint('[panel] dismissed visible=$_visible');
         _visible = false;
-        _lastHiddenAt = DateTime.now();
         break;
       case 'action':
         final Object? raw = call.arguments;
@@ -118,11 +179,11 @@ class TrayPanelHost {
     return null;
   }
 
-  /// 托盘图标点击：面板已显示则收起，否则定位到托盘上方弹出。
+  /// 托盘图标点击：面板真实可见则收起，否则定位到托盘上方弹出。
   ///
-  /// 面板失焦与托盘点击是两条独立路径，用户点托盘想让面板收起时，面板可能
-  /// 已经先一步因失焦自行隐藏，此时再 show 会出现「点了关不掉 / 一闪再开」，
-  /// 所以刚隐藏的 250ms 内点击一律视为收起动作，不再重新弹出。
+  /// 判据一律取面板窗口的原生可见性，不看 [isVisible] 缓存：面板因失焦
+  /// 自行关闭时「dismissed」上报有可能晚到或丢失，用缓存判断就会变成
+  /// 「第一次点只做了收起、第二次点才弹出」。
   Future<void> toggle({Rect? trayBounds}) async {
     // 同一次物理点击在部分托盘实现里会连发 down/up 两次回调，
     // 不去抖会变成「刚弹出又被自己收起」。
@@ -133,24 +194,46 @@ class TrayPanelHost {
         now.difference(lastToggle) < const Duration(milliseconds: 250)) {
       return;
     }
-    final DateTime? hiddenAt = _lastHiddenAt;
-    if (hiddenAt != null &&
-        DateTime.now().difference(hiddenAt) <
-            const Duration(milliseconds: 250)) {
-      await hide();
-      return;
-    }
-    if (_visible) {
+    final bool visible = await _queryNativeVisible();
+    if (visible) {
       await hide();
       return;
     }
     await show(trayBounds: trayBounds);
   }
 
+  /// 向面板窗口查询它的真实可见性；查询通道不可用时退回本地缓存。
+  Future<bool> _queryNativeVisible() async {
+    if (!DesktopHost.isDesktopPlatform || _controller == null) {
+      return _visible;
+    }
+    try {
+      final Object? raw = await queryChannel.invokeMethod<Object?>('isVisible');
+      debugPrint('[panel] query raw=$raw');
+      if (raw is bool) {
+        debugPrint('[panel] native visible=$raw');
+        _visible = raw;
+        return raw;
+      }
+    } on Object catch (error) {
+      if (!_queryUnavailable) {
+        _queryUnavailable = true;
+        debugPrint('托盘面板可见性查询不可用，改用本地状态：$error');
+      }
+    }
+    return _visible;
+  }
+
   Future<void> show({Rect? trayBounds}) async {
     if (!DesktopHost.isDesktopPlatform) {
       return;
     }
+    // 同一时刻只允许一次显示流程：并发 show 会互相覆盖 rect，还会让后一次
+    // 点击白白排队，表现出来就是「第一次点了没反应」。
+    if (_showing) {
+      return;
+    }
+    _showing = true;
     try {
       await ensureCreated();
       await _waitUntilReady();
@@ -159,15 +242,17 @@ class TrayPanelHost {
       if (latest != null) {
         await _push(latest);
       }
-      _visible = true;
       final Rect bounds = await _computeBounds(trayBounds);
       debugPrint('[panel] show rect=$bounds');
       await uiChannel.invokeMethod<void>('show', <String, dynamic>{
         'rect': <double>[bounds.left, bounds.top, bounds.width, bounds.height],
       });
+      _visible = true;
     } on Object catch (error) {
       _visible = false;
       debugPrint('托盘面板显示失败：$error');
+    } finally {
+      _showing = false;
     }
   }
 
@@ -305,13 +390,15 @@ class TrayPanelHost {
   }
 
   Future<void> hide() async {
-    if (!_visible || !DesktopHost.isDesktopPlatform) {
+    if (!DesktopHost.isDesktopPlatform) {
       _visible = false;
       return;
     }
     _visible = false;
-    _lastHiddenAt = DateTime.now();
     try {
+      // 不因本地 _visible 已是 false 就跳过：伪失焦上报会让主窗口与面板的
+      // 显隐状态错位（面板还在屏幕上、主窗口却以为已收起），此时点托盘必须
+      // 仍然能把面板关掉，所以 hide 一律下发（原生侧幂等）。
       await uiChannel.invokeMethod<void>('hide');
     } on Object catch (error) {
       debugPrint('托盘面板隐藏通道不可用，退回窗口控制器：$error');
@@ -368,8 +455,10 @@ class TrayPanelHost {
       return;
     }
     // 新引擎冷启动需要一点时间，超时后仍然照常显示（面板自带空态兜底）。
+    // 超时压到 2 秒：等太久会让首次点击看起来像「点了没反应」，用户再点
+    // 一次反而撞上第二次触发。
     await completer.future.timeout(
-      const Duration(seconds: 5),
+      const Duration(seconds: 2),
       onTimeout: () => debugPrint('等待托盘面板就绪超时，继续显示'),
     );
   }

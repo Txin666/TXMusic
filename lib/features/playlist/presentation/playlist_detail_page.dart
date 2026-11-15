@@ -6,6 +6,7 @@ import '../../../core/network/kugou_client.dart';
 import '../../../core/utils/formatters.dart';
 import '../../../routing/app_routes.dart';
 import '../../../shared/widgets/detail_hero.dart';
+import '../../../shared/widgets/app_snack_bar.dart';
 import '../../../shared/widgets/empty_state.dart';
 import '../../../shared/widgets/page_container.dart';
 import '../../../shared/widgets/section_header.dart';
@@ -105,8 +106,10 @@ class PlaylistDetailPage extends ConsumerWidget {
                           .playQueue(songs),
                 secondaryLabel: '电台/收藏',
                 onSecondaryTap: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('收藏功能待接入本地库（后续任务）')),
+                  showAppSnackBar(
+                    context,
+                    '收藏功能待接入本地库（后续任务）',
+                    kind: AppSnackKind.warning,
                   );
                 },
               ),

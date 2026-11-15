@@ -7,6 +7,7 @@ import '../../../core/network/kugou_session.dart';
 import '../../../core/utils/formatters.dart';
 import '../../../routing/app_routes.dart';
 import '../../../shared/widgets/empty_state.dart';
+import '../../../shared/widgets/app_snack_bar.dart';
 import '../../../shared/widgets/media_card.dart';
 import '../../../shared/widgets/page_container.dart';
 import '../../../shared/widgets/playback_error_banner.dart';
@@ -316,11 +317,10 @@ class _LibraryPageState extends ConsumerState<LibraryPage> {
           : null,
       onTap: () {
         if (!playlist.hasCollectionId) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('该歌单缺少 collection id，暂无法打开详情'),
-              duration: Duration(seconds: 2),
-            ),
+          showAppSnackBar(
+            context,
+            '该歌单缺少 collection id，暂无法打开详情',
+            kind: AppSnackKind.warning,
           );
           return;
         }
@@ -400,11 +400,10 @@ class _LibraryPageState extends ConsumerState<LibraryPage> {
             if (!mounted) {
               return;
             }
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('已清空最近播放记录'),
-                duration: Duration(seconds: 2),
-              ),
+            showAppSnackBar(
+              context,
+              '已清空最近播放记录',
+              kind: AppSnackKind.success,
             );
           },
         ),

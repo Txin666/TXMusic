@@ -8,6 +8,7 @@ import 'package:go_router/go_router.dart';
 import '../../../core/network/kugou_providers.dart';
 import '../../../core/network/kugou_session.dart';
 import '../../../routing/app_routes.dart';
+import '../../../shared/widgets/app_snack_bar.dart';
 import '../../../theme/app_colors.dart';
 import '../../../theme/app_palette.dart';
 import '../../../theme/app_spacing.dart';
@@ -95,12 +96,10 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     ) {
       if (next.phase == AuthPhase.success &&
           previous?.phase != AuthPhase.success) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              next.nickname.isEmpty ? '登录成功' : '登录成功：${next.nickname}',
-            ),
-          ),
+        showAppSnackBar(
+          context,
+          next.nickname.isEmpty ? '登录成功' : '登录成功：${next.nickname}',
+          kind: AppSnackKind.success,
         );
         Future<void>.delayed(const Duration(milliseconds: 600), () {
           if (!context.mounted) {
@@ -196,8 +195,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
             if (!context.mounted) {
               return;
             }
-            ScaffoldMessenger.of(context)
-                .showSnackBar(const SnackBar(content: Text('已退出登录，当前为游客模式')));
+            showAppSnackBar(context, '已退出登录，当前为游客模式');
           },
           icon: const Icon(Icons.logout_rounded, size: 18),
           label: const Text('退出登录'),

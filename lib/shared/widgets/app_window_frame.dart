@@ -16,6 +16,7 @@ import '../../routing/app_router.dart';
 import '../../routing/app_routes.dart';
 import '../../theme/app_palette.dart';
 import 'window_title_bar.dart';
+import 'app_snack_bar.dart';
 
 /// 应用外壳：在所有路由之上统一叠加自绘标题栏，并挂载托盘 / 窗口原生能力。
 ///
@@ -176,14 +177,7 @@ class _AppWindowFrameState extends ConsumerState<AppWindowFrame> {
     if (messenger == null) {
       return;
     }
-    messenger
-      ..hideCurrentSnackBar()
-      ..showSnackBar(
-        const SnackBar(
-          content: Text('已最小化到托盘，仍在后台播放'),
-          duration: Duration(seconds: 3),
-        ),
-      );
+    showAppSnackBarWith(messenger, '已最小化到托盘，仍在后台播放');
   }
 
   @override

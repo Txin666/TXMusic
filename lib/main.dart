@@ -10,6 +10,7 @@ import 'package:media_kit/media_kit.dart';
 import 'package:window_manager/window_manager.dart';
 
 import 'core/desktop/desktop_host.dart';
+import 'core/diagnostics/boot_log.dart';
 import 'core/desktop/panel/tray_panel_host.dart';
 import 'core/desktop/panel/tray_panel_window.dart';
 import 'core/network/kugou_providers.dart';
@@ -18,6 +19,7 @@ import 'features/player/application/player_controller.dart';
 import 'features/settings/application/settings_controller.dart';
 import 'routing/app_router.dart';
 import 'shared/widgets/app_window_frame.dart';
+import 'shared/widgets/desktop_scroll_behavior.dart';
 import 'theme/app_colors.dart';
 import 'theme/app_theme.dart';
 
@@ -31,13 +33,20 @@ import 'theme/app_theme.dart';
 /// 5. 按设置项切换主题（默认深色），路由交给 GoRouter。
 Future<void> main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
+  bootLog('--- boot 开始, args=$args');
 
   // 托盘悬浮面板是 desktop_multi_window 拉起的独立引擎：只跑面板 UI，
   // 不初始化音频引擎与登录态，省下整套 libmpv 内存与启动耗时。
-  if (!kIsWeb && await TrayPanelHost.currentPanelController() != null) {
+  //
+  // 判定只看入口参数，不能在这里调 WindowController.fromCurrentEngine()：
+  // 子引擎的 Dart 入口早于插件注册执行，release 下必然抛 MissingPluginException，
+  // 一旦误判成主引擎就会多建一个托盘图标，且面板 UI 永远不启动。
+  if (!kIsWeb && TrayPanelHost.isPanelEngine(args)) {
+    bootLog('=> 本引擎判定为【托盘面板】，只跑面板 UI');
     await runTrayPanelWindow();
     return;
   }
+  bootLog('=> 本引擎判定为【主窗口】，继续完整启动');
 
   MediaKit.ensureInitialized();
 
@@ -50,12 +59,19 @@ Future<void> main(List<String> args) async {
 
   await _setupDesktopWindow();
 
-  if (!kIsWeb && Platform.environment['TX_PANEL_AUTOTEST'] == '1') {
+  final String? autoTest =
+      kIsWeb ? null : Platform.environment['TX_PANEL_AUTOTEST'];
+  if (autoTest == '1' || autoTest == '2') {
     unawaited(
-      Future<void>.delayed(
-        const Duration(seconds: 4),
-        () => TrayPanelHost.instance.toggle(),
-      ),
+      Future<void>.delayed(const Duration(seconds: 4), () async {
+        await TrayPanelHost.instance.toggle();
+        bootLog('autotest: 第一次 toggle 完成');
+        if (autoTest == '2') {
+          await Future<void>.delayed(const Duration(seconds: 4));
+          await TrayPanelHost.instance.toggle();
+          bootLog('autotest: 第二次 toggle 完成');
+        }
+      }),
     );
   }
 
@@ -142,6 +158,8 @@ class TxMusicApp extends ConsumerWidget {
     return MaterialApp.router(
       title: 'TX Music',
       debugShowCheckedModeBanner: false,
+      // 桌面端要能用鼠标拖 PageView/横向列表，默认 dragDevices 不含鼠标。
+      scrollBehavior: const DesktopScrollBehavior(),
       routerConfig: router,
       theme: AppTheme.light(),
       darkTheme: AppTheme.dark(),

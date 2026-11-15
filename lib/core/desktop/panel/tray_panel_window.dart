@@ -70,24 +70,63 @@ class _TrayPanelViewState extends State<TrayPanelView> {
     super.initState();
     // 原生侧在面板失去激活时先隐藏再发 blurred，Dart 只负责同步状态。
     _windowChannel.setMethodCallHandler(_handleWindowCall);
-    TrayPanelHost.uiChannel
-        .setMethodCallHandler(_handleUiCall)
-        .then((_) => _notifyReady())
-        .catchError((Object error) {
-          debugPrint('托盘面板 UI 通道注册失败：$error');
-          _notifyReady();
-        });
+    unawaited(_registerMultiWindowChannels());
+  }
+
+  /// 注册跨窗口通道。
+  ///
+  /// 面板引擎的 Dart 入口早于 desktop_multi_window 完成插件注册，此时直接注册
+  /// [TrayPanelHost.uiChannel] 会失败（MissingPluginException），主窗口后续推来的
+  /// show/state 就全部落空——表现正是「点托盘不弹面板」。所以先等插件就绪。
+  Future<void> _registerMultiWindowChannels() async {
+    await TrayPanelHost.waitForMultiWindowPlugin();
+    // 主窗口要知道面板的真实可见性，但单向通道回传不了值，只能靠这条双向
+    // 查询通道把原生 IsWindowVisible 的结果带回去。
+    try {
+      await TrayPanelHost.queryChannel.setMethodCallHandler(_handleQueryCall);
+    } on Object catch (error) {
+      debugPrint('托盘面板查询通道注册失败：$error');
+    }
+    try {
+      await TrayPanelHost.uiChannel.setMethodCallHandler(_handleUiCall);
+    } on Object catch (error) {
+      debugPrint('托盘面板 UI 通道注册失败：$error');
+    }
+    await _notifyReady();
   }
 
   @override
   void dispose() {
     _windowChannel.setMethodCallHandler(null);
+    // 通道可能因为插件未就绪而从未注册成功，这里吞掉异常。
+    TrayPanelHost.queryChannel.setMethodCallHandler(null).catchError((Object _) {});
     super.dispose();
+  }
+
+  /// 回答主窗口的「面板可见吗」：直接问原生窗口，不读 Dart 侧状态。
+  Future<dynamic> _handleQueryCall(MethodCall call) async {
+    if (call.method == 'isVisible') {
+      try {
+        return await _windowChannel.invokeMethod<bool>('isVisible') ?? false;
+      } on Object catch (error) {
+        debugPrint('查询面板可见性失败：$error');
+        return false;
+      }
+    }
+    return null;
   }
 
   Future<dynamic> _handleWindowCall(MethodCall call) async {
     if (call.method == 'blurred') {
       await _hideSelf();
+      return null;
+    }
+    if (call.method == 'dismissed') {
+      // 原生因失焦已经把窗口隐藏了，这里不能再调一次 hide，只需要把「已关闭」
+      // 如实转告主窗口；以前这条消息没人接，主窗口就一直以为面板还开着，
+      // 于是下一次点托盘只做了收起、要点第二次才弹出。
+      await _notifyDismissed();
+      return null;
     }
     return null;
   }
@@ -157,6 +196,10 @@ class _TrayPanelViewState extends State<TrayPanelView> {
     } on Object catch (error) {
       debugPrint('托盘面板隐藏失败：$error');
     }
+    await _notifyDismissed();
+  }
+
+  Future<void> _notifyDismissed() async {
     try {
       await TrayPanelHost.hostChannel.invokeMethod<void>('dismissed');
     } on Object catch (error) {

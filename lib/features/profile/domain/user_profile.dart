@@ -5,7 +5,8 @@ import 'package:flutter/foundation.dart';
 /// 数据聚合自本地 KuGouMusicApi 的四个真实接口（均已实测）：
 /// - `GET /user/detail`    昵称、头像、性别、粉丝 / 关注 / 好友 / 访客
 /// - `GET /user/info`      注册时间（乐龄依据）、账号名、签名、绑定信息
-/// - `GET /user/grade/info` 累计听歌时长 `duration`（秒）、听歌等级成长值
+/// - `GET /user/grade/info` 累计听歌时长 `duration`（**分钟**，与官方客户端口径一致）、
+///   听歌等级成长值
 /// - `GET /user/vip/detail` 概念版 VIP 权益
 /// - `GET /user/listen`    本周 / 累计听歌统计
 ///
@@ -20,7 +21,7 @@ class UserProfile {
     this.gender = 0,
     this.region = '',
     this.registeredAt,
-    this.listenSeconds = 0,
+    this.listenMinutes = 0,
     this.grade = 0,
     this.gradePoint = 0,
     this.nextGradePoint = 0,
@@ -52,8 +53,11 @@ class UserProfile {
   /// 注册时间：乐龄（注册天数）的唯一依据。
   final DateTime? registeredAt;
 
-  /// 累计听歌时长（秒），来自 `/user/grade/info` 的 `duration`。
-  final int listenSeconds;
+  /// 累计听歌时长（**分钟**），来自 `/user/grade/info` 的 `duration`。
+  ///
+  /// 注意单位：酷狗官方客户端展示的「听歌 xxxx 分钟」与接口 `duration` 数值完全一致，
+  /// 说明该字段口径就是分钟（早期按秒解读会导致时长被缩小 60 倍）。
+  final int listenMinutes;
 
   /// 听歌等级（`p_grade`）及当前成长值 / 下一级所需成长值。
   final int grade;
@@ -99,11 +103,11 @@ class UserProfile {
     return days < 0 ? 0 : days;
   }
 
-  /// 累计听歌时长。
+  /// 累计听歌时长（按接口口径，单位分钟）。
   Duration get listenDuration =>
-      Duration(seconds: listenSeconds < 0 ? 0 : listenSeconds);
+      Duration(minutes: listenMinutes < 0 ? 0 : listenMinutes);
 
-  bool get hasListenDuration => listenSeconds > 0;
+  bool get hasListenDuration => listenMinutes > 0;
 
   /// 升级到下一级还差多少成长值。
   int get gradeGap {
@@ -149,7 +153,7 @@ class UserProfile {
     int? gender,
     String? region,
     DateTime? registeredAt,
-    int? listenSeconds,
+    int? listenMinutes,
     int? grade,
     int? gradePoint,
     int? nextGradePoint,
@@ -174,7 +178,7 @@ class UserProfile {
       gender: gender ?? this.gender,
       region: region ?? this.region,
       registeredAt: registeredAt ?? this.registeredAt,
-      listenSeconds: listenSeconds ?? this.listenSeconds,
+      listenMinutes: listenMinutes ?? this.listenMinutes,
       grade: grade ?? this.grade,
       gradePoint: gradePoint ?? this.gradePoint,
       nextGradePoint: nextGradePoint ?? this.nextGradePoint,

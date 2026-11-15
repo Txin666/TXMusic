@@ -16,7 +16,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 1.0.0+1
+version: 3.2.11+1
 
 environment:
   sdk: ^3.13.4
@@ -50,6 +50,8 @@ dependencies:
   screen_retriever: ^0.2.2
   # 封面图片：磁盘缓存（文档 §5 图片加载策略）
   cached_network_image: ^3.4.1
+  # 设备标识：MD5 计算 KUGOU_API_MID（与 KuGouMusicApi 的 calculateMid 对齐）
+  crypto: ^3.0.3
 
 dev_dependencies:
   flutter_test:
@@ -79,6 +81,7 @@ flutter:
     - assets/icons/TX MUSIC.png
     - assets/icons/TX MUSIC.ico
     - assets/icons/tray.ico
+    - assets/icons/tray.png
     - assets/icons/taskbar_prev.ico
     - assets/icons/taskbar_play.ico
     - assets/icons/taskbar_pause.ico

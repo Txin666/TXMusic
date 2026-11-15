@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 
 import '../storage/local_store.dart';
 import 'kugou_config.dart';
+import 'kugou_device_identity.dart';
 
 /// 酷狗登录态 / 设备标识（对应 `.local/kugou_cookie.json`）。
 ///
@@ -21,6 +22,7 @@ class KugouSession {
     this.token = '',
     this.nickname = '',
     this.baseUrl = KugouConfig.defaultBaseUrl,
+    this.guid = '',
     this.sourceFile,
   });
 
@@ -30,6 +32,10 @@ class KugouSession {
   final String token;
   final String nickname;
   final String baseUrl;
+
+  /// 设备 GUID（32 位十六进制）。播放上报要靠它（`KUGOU_API_GUID`），
+  /// 缺了会被服务端直接判 400，听歌时长自然不累加。
+  final String guid;
 
   /// 登录态来源文件，未落盘时为 null。
   final String? sourceFile;
@@ -43,25 +49,36 @@ class KugouSession {
   /// 若留 `; ` 这种分隔会产生带前导空格的键名，导致 token/userid 取不到值，
   /// 上游随即返回 20002 / 20010（表现为「HTTP 502」）。
   String get cookieHeader {
+    final List<String> parts = <String>[];
     if (cookie.isNotEmpty) {
-      final List<String> normalized = cookie
-          .split(';')
-          .map((String item) => item.trim())
-          .where((String item) => item.isNotEmpty && item.contains('='))
-          .toList();
-      if (normalized.isNotEmpty) {
-        return normalized.join(';');
+      parts.addAll(
+        cookie
+            .split(';')
+            .map((String item) => item.trim())
+            .where((String item) => item.isNotEmpty && item.contains('=')),
+      );
+    }
+    if (parts.isEmpty) {
+      if (dfid.isNotEmpty) {
+        parts.add('dfid=$dfid');
+      }
+      if (userid.isNotEmpty) {
+        parts.add('userid=$userid');
+      }
+      if (token.isNotEmpty) {
+        parts.add('token=$token');
       }
     }
-    final List<String> parts = <String>[];
-    if (dfid.isNotEmpty) {
-      parts.add('dfid=$dfid');
-    }
-    if (userid.isNotEmpty) {
-      parts.add('userid=$userid');
-    }
-    if (token.isNotEmpty) {
-      parts.add('token=$token');
+    // 设备标识兜底：本地服务的注入中间件在未配置 KUGOU_API_GUID 环境变量时
+    // 下发的是空值，等于没补，这里由客户端自己补齐，保证播放上报能过校验。
+    if (guid.isNotEmpty &&
+        !parts.any((String item) => item.startsWith('KUGOU_API_GUID='))) {
+      parts.add('KUGOU_API_GUID=${guid.replaceAll('-', '')}');
+      final String mid = KugouDeviceIdentity.midOf(guid);
+      if (mid.isNotEmpty &&
+          !parts.any((String item) => item.startsWith('KUGOU_API_MID='))) {
+        parts.add('KUGOU_API_MID=$mid');
+      }
     }
     return parts.join(';');
   }
@@ -73,6 +90,7 @@ class KugouSession {
     String? token,
     String? nickname,
     String? baseUrl,
+    String? guid,
     String? sourceFile,
   }) {
     return KugouSession(
@@ -82,6 +100,7 @@ class KugouSession {
       token: token ?? this.token,
       nickname: nickname ?? this.nickname,
       baseUrl: baseUrl ?? this.baseUrl,
+      guid: guid ?? this.guid,
       sourceFile: sourceFile ?? this.sourceFile,
     );
   }
@@ -101,7 +120,16 @@ class KugouSession {
         if (decoded is! Map<String, dynamic>) {
           continue;
         }
-        return _fromJson(decoded, path);
+        final KugouSession session = _fromJson(decoded, path);
+        if (session.guid.isEmpty) {
+          // 老文件没有设备标识：补一个并写回，避免每次启动都换指纹。
+          final KugouSession fixed = session.copyWith(
+            guid: KugouDeviceIdentity.generateGuid(),
+          );
+          await fixed.persist();
+          return fixed;
+        }
+        return session;
       } on Object catch (error) {
         debugPrint('读取酷狗登录态失败($path): $error');
       }
@@ -123,6 +151,7 @@ class KugouSession {
       token: str('token'),
       nickname: str('nickname'),
       baseUrl: fileBase.isNotEmpty ? fileBase : KugouConfig.baseUrl,
+      guid: str('guid'),
       sourceFile: path,
     );
   }
@@ -134,6 +163,7 @@ class KugouSession {
     'token': token,
     'nickname': nickname,
     'base_url': baseUrl,
+    'guid': guid,
     'saved_at': DateTime.now().toIso8601String(),
   };
 

@@ -10,6 +10,7 @@ import '../../../core/network/kugou_providers.dart';
 import '../../../core/utils/formatters.dart';
 import '../../../routing/app_routes.dart';
 import '../../../shared/widgets/cover_image.dart';
+import '../../../shared/widgets/app_snack_bar.dart';
 import '../../../shared/widgets/empty_state.dart';
 import '../../../shared/widgets/playback_error_banner.dart';
 import '../../../shared/widgets/song_tile.dart';
@@ -810,22 +811,23 @@ class _TransportBar extends ConsumerWidget {
       final bool liked = await ref
           .read(likedSongsProvider.notifier)
           .toggle(song);
-      messenger
-        ..hideCurrentSnackBar()
-        ..showSnackBar(
-          SnackBar(
-            content: Text(liked ? '已收藏到「我喜欢」' : '已从「我喜欢」移除'),
-            duration: const Duration(seconds: 2),
-          ),
-        );
+      showAppSnackBarWith(
+        messenger,
+        liked ? '已收藏到「我喜欢」' : '已从「我喜欢」移除',
+        kind: AppSnackKind.success,
+      );
     } on KugouApiException catch (error) {
-      messenger
-        ..hideCurrentSnackBar()
-        ..showSnackBar(SnackBar(content: Text('收藏失败：${error.message}')));
+      showAppSnackBarWith(
+        messenger,
+        '收藏失败：${error.message}',
+        kind: AppSnackKind.error,
+      );
     } on Object catch (error) {
-      messenger
-        ..hideCurrentSnackBar()
-        ..showSnackBar(SnackBar(content: Text('收藏失败：$error')));
+      showAppSnackBarWith(
+        messenger,
+        '收藏失败：$error',
+        kind: AppSnackKind.error,
+      );
     }
   }
 

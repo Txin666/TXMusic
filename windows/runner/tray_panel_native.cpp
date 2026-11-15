@@ -36,6 +36,10 @@ std::shared_ptr<flutter::MethodChannel<flutter::EncodableValue>> g_channel;
 // 否则面板会一闪即消。抢前台在前台锁下可能要重试一两次，留足窗口。
 ULONGLONG g_shown_at_tick = 0;
 constexpr ULONGLONG kBlurGuardMs = 600;
+// guard 期内只有「窗口已经稳定显示一小会儿」之后的鼠标外击才判为真实关闭：
+// 点击托盘那一下左键还没抬起、光标必然在面板之外，过早判断会把刚弹出的面板
+// 直接当成外部点击收起，表现为「第一次点托盘没反应，要点第二次」。
+constexpr ULONGLONG kAutoHideMinMs = 300;
 constexpr UINT_PTR kForegroundRetryTimer = 0x7A01;
 constexpr int kForegroundRetryMax = 3;
 int g_foreground_retry = 0;
@@ -168,6 +172,12 @@ void ShowPanel(const flutter::EncodableMap& args) {
   if (device_width <= 0 || device_height <= 0) {
     flags |= SWP_NOSIZE;
   }
+  // 时间基准必须在窗口真正显示之前重置：首次弹出时窗口刚创建、g_shown_at_tick
+  // 还是旧值（甚至 0），若等到显示之后才刷新，中间那一次 WA_INACTIVE 会被判成
+  // 「早已超出 guard」而立刻收起面板。
+  ::KillTimer(g_panel_hwnd, kForegroundRetryTimer);
+  g_shown_at_tick = ::GetTickCount64();
+  g_foreground_retry = 0;
   ::SetWindowPos(g_panel_hwnd, HWND_TOPMOST, device_x, device_y, device_width,
                  device_height, flags);
   ::ShowWindow(g_panel_hwnd, SW_SHOWNORMAL);
@@ -175,8 +185,6 @@ void ShowPanel(const flutter::EncodableMap& args) {
   // 面板拿不到激活就会出现「刚弹出就被判失焦收起」。先借用前台线程的输入
   // 队列抢一次，没抢到就交给定时器重试。
   GrabForeground(g_panel_hwnd);
-  g_shown_at_tick = ::GetTickCount64();
-  g_foreground_retry = 0;
   ::SetTimer(g_panel_hwnd, kForegroundRetryTimer, 120, nullptr);
 }
 
@@ -201,11 +209,14 @@ LRESULT CALLBACK PanelSubclassProc(HWND hwnd, UINT message, WPARAM wparam,
       break;
     case WM_ACTIVATE:
       if (LOWORD(wparam) == WA_INACTIVE && ::IsWindowVisible(hwnd)) {
-        const bool out_of_guard =
-            ::GetTickCount64() - g_shown_at_tick > kBlurGuardMs;
-        // 超出 guard 一律收起；guard 内只有「用户在面板外按下鼠标」才算
-        // 真实的外部点击，弹出瞬间的伪失焦继续忽略。
-        if (out_of_guard || IsRealOutsideClick(hwnd)) {
+        const ULONGLONG elapsed = ::GetTickCount64() - g_shown_at_tick;
+        const bool out_of_guard = elapsed > kBlurGuardMs;
+        // 超出 guard 一律收起；guard 内只有「面板已稳定显示一小会儿后用户又在
+        // 面板外按下鼠标」才算真实外部点击，弹出瞬间的伪失焦（含点托盘那一下
+        // 尚未抬起的左键）继续忽略。
+        const bool real_outside_click =
+            elapsed > kAutoHideMinMs && IsRealOutsideClick(hwnd);
+        if (out_of_guard || real_outside_click) {
           HidePanel();
           if (g_channel) {
             g_channel->InvokeMethod("dismissed", nullptr);
@@ -242,6 +253,15 @@ void HandleMethodCall(
     result->Success();
     return;
   }
+  if (method == "isVisible") {
+    // 以 Win32 真实可见性为唯一真相源：主窗口侧缓存的状态可能因失焦上报
+    // 丢失而与屏幕上的实际情况错位，导致「点一下只收起、点第二下才弹出」。
+    const bool visible = g_panel_hwnd != nullptr &&
+                         ::IsWindow(g_panel_hwnd) &&
+                         ::IsWindowVisible(g_panel_hwnd) != FALSE;
+    result->Success(flutter::EncodableValue(visible));
+    return;
+  }
   result->NotImplemented();
 }
 
@@ -260,6 +280,9 @@ void OnPanelWindowCreated(void* controller_pointer) {
   }
 
   g_panel_hwnd = hwnd;
+  // 窗口一创建就把 guard 计时起点拉到现在：ApplyPanelStyles 里的 SW_HIDE 会
+  // 触发一次 WA_INACTIVE，若基准仍是 0 会被判成「超出 guard」直接收起。
+  g_shown_at_tick = ::GetTickCount64();
   ApplyPanelStyles(hwnd);
   ::SetWindowSubclass(hwnd, PanelSubclassProc, kSubclassId, 0);
 

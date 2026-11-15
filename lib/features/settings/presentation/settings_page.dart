@@ -5,6 +5,7 @@ import '../../../core/constants/app_constants.dart';
 import '../../../core/network/kugou_providers.dart';
 import '../../../core/network/kugou_session.dart';
 import '../../../shared/widgets/page_container.dart';
+import '../../../shared/widgets/app_snack_bar.dart';
 import '../../../theme/app_spacing.dart';
 import '../../vip/application/daily_vip_controller.dart';
 import '../application/settings_controller.dart';
@@ -83,9 +84,7 @@ class SettingsPage extends ConsumerWidget {
                           final DailyVipState latest = ref.read(
                             dailyVipControllerProvider,
                           );
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text(latest.lastMessage)),
-                          );
+                          showAppSnackBar(context, latest.lastMessage);
                         },
                   child: const Text('立即领取'),
                 ),
@@ -171,12 +170,14 @@ class SettingsPage extends ConsumerWidget {
                 contentPadding: EdgeInsets.zero,
                 title: Text(AppConstants.appName),
                 subtitle: Text(
-                  '版本 ${AppConstants.appVersion} · ${AppConstants.appSlogan}',
+                  '版本 ${AppConstants.appVersion}',
                 ),
                 trailing: TextButton(
-                  onPressed: () => ScaffoldMessenger.of(
+                  onPressed: () => showAppSnackBar(
                     context,
-                  ).showSnackBar(const SnackBar(content: Text('骨架期暂未接入检查更新'))),
+                    '骨架期暂未接入检查更新',
+                    kind: AppSnackKind.warning,
+                  ),
                   child: const Text('检查更新'),
                 ),
               ),

@@ -20,39 +20,52 @@ class WindowTitleBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final AppPalette palette = context.palette;
 
-    return GestureDetector(
-      behavior: HitTestBehavior.opaque,
-      // 无边框窗口没有系统拖拽区，按住空白处交给原生处理。
-      onPanStart: (_) => unawaited(DesktopHost.instance.startDragging()),
-      onDoubleTap: () => unawaited(DesktopHost.instance.toggleMaximize()),
-      child: MouseRegion(
-        cursor: SystemMouseCursors.basic,
-        child: Container(
-          height: AppSpacing.titleBarHeight,
-          decoration: BoxDecoration(
-            // 用 surface 而非 background：浅色主题下页面底色比纯白深一档，
-            // 标题栏取白色才能和内容区拉开层次，否则整条顶部会糊成一片。
-            color: palette.surface,
-            border: Border(bottom: BorderSide(color: palette.divider)),
-          ),
-          child: Row(
-            children: <Widget>[
-              const SizedBox(width: AppSpacing.md),
-              const _BrandMark(),
-              const Spacer(),
-              _CaptionButton(
-                tooltip: '最小化',
-                icon: Icons.remove,
-                onPressed: DesktopHost.instance.minimize,
+    // 标题栏挂在 Navigator 之外（MaterialApp.builder），身边没有 Material 祖先，
+    // 文本会退回 Material 的 debug 兜底样式：红字 + 黄色双下划线（就是那两条黄线）。
+    // 补一层透明 Material 与显式默认文本样式，把兜底样式彻底挡在外面。
+    return Material(
+      type: MaterialType.transparency,
+      child: DefaultTextStyle(
+        style: TextStyle(
+          fontSize: 12,
+          color: palette.textSecondary,
+          decoration: TextDecoration.none,
+        ),
+        child: GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          // 无边框窗口没有系统拖拽区，按住空白处交给原生处理。
+          onPanStart: (_) => unawaited(DesktopHost.instance.startDragging()),
+          onDoubleTap: () => unawaited(DesktopHost.instance.toggleMaximize()),
+          child: MouseRegion(
+            cursor: SystemMouseCursors.basic,
+            child: Container(
+              height: AppSpacing.titleBarHeight,
+              decoration: BoxDecoration(
+                // 用 surface 而非 background：浅色主题下页面底色比纯白深一档，
+                // 标题栏取白色才能和内容区拉开层次，否则整条顶部会糊成一片。
+                color: palette.surface,
+                border: Border(bottom: BorderSide(color: palette.divider)),
               ),
-              const _MaximizeButton(),
-              _CaptionButton(
-                tooltip: '关闭',
-                icon: Icons.close,
-                hoverColor: AppColors.danger,
-                onPressed: DesktopHost.instance.hideToTray,
+              child: Row(
+                children: <Widget>[
+                  const SizedBox(width: AppSpacing.md),
+                  const _BrandMark(),
+                  const Spacer(),
+                  _CaptionButton(
+                    tooltip: '最小化',
+                    icon: Icons.remove,
+                    onPressed: DesktopHost.instance.minimize,
+                  ),
+                  const _MaximizeButton(),
+                  _CaptionButton(
+                    tooltip: '关闭',
+                    icon: Icons.close,
+                    hoverColor: AppColors.danger,
+                    onPressed: DesktopHost.instance.hideToTray,
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
         ),
       ),
@@ -73,11 +86,15 @@ class _BrandMark extends StatelessWidget {
         const SizedBox(width: AppSpacing.sm),
         Text(
           'TX Music',
+          // 显式关闭文本装饰：标题栏文字会继承上层的装饰样式（double underline），
+          // 在 Windows 渲染下表现为文字下方两条黄色横线。
           style: TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w600,
             letterSpacing: 0.3,
             color: palette.textSecondary,
+            decoration: TextDecoration.none,
+            decorationColor: Colors.transparent,
           ),
         ),
       ],

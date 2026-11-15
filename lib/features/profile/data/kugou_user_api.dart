@@ -60,7 +60,8 @@ class KugouUserApi {
       ]),
       region: _region(info, detail),
       registeredAt: _dateTime(_str(info, <String>['reg_time'])),
-      listenSeconds: _int(grade, <String>['duration']),
+      // `/user/grade/info` 的 duration 单位是分钟（官方客户端「听歌 xxxx 分钟」同值）。
+      listenMinutes: _int(grade, <String>['duration']),
       grade: _int(grade, <String>['p_grade']),
       gradePoint: _int(grade, <String>['p_current_point', 'p_grade_point']),
       nextGradePoint: _int(grade, <String>['p_next_grade_point']),

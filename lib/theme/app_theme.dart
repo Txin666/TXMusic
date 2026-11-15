@@ -163,11 +163,17 @@ class AppTheme {
           borderSide: const BorderSide(color: AppColors.primary, width: 1.4),
         ),
       ),
+      // 提示条统一走 shared/widgets/app_snack_bar.dart 自绘样式；
+      // 这里只保留兜底：万一有遗漏的直接 showSnackBar 调用，也不会是黑白默认块。
       snackBarTheme: SnackBarThemeData(
-        backgroundColor: isDark ? surfaceHigh : textPrimary,
-        contentTextStyle: textTheme.bodyMedium?.copyWith(color: Colors.white),
+        backgroundColor: isDark ? surfaceHigh : Colors.white,
+        contentTextStyle: textTheme.bodyMedium?.copyWith(color: textPrimary),
         behavior: SnackBarBehavior.floating,
-        shape: const RoundedRectangleBorder(borderRadius: AppRadius.cover),
+        elevation: 0,
+        shape: RoundedRectangleBorder(
+          borderRadius: AppRadius.cover,
+          side: BorderSide(color: palette.divider),
+        ),
       ),
       tooltipTheme: TooltipThemeData(
         decoration: BoxDecoration(

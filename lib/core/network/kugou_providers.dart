@@ -6,6 +6,7 @@ import '../../features/auth/data/kugou_login_api.dart';
 import '../../features/discover/data/kugou_discover_api.dart';
 import '../../features/lyric/data/kugou_lyric_api.dart';
 import '../../features/library/data/kugou_library_api.dart';
+import '../../features/player/data/kugou_play_report_api.dart';
 import '../../features/player/data/song_url_resolver.dart';
 import '../../features/playlist/data/kugou_playlist_api.dart';
 import '../../features/profile/data/kugou_user_api.dart';
@@ -16,6 +17,7 @@ import '../../features/vip/data/kugou_vip_api.dart';
 import '../audio/i_audio_engine.dart';
 import '../audio/media_kit_audio_engine.dart';
 import 'kugou_client.dart';
+import 'kugou_device_identity.dart';
 import 'kugou_session.dart';
 
 /// 登录态控制器。
@@ -36,19 +38,26 @@ class KugouSessionController extends Notifier<KugouSession> {
     final KugouSession merged = session.copyWith(
       baseUrl: state.baseUrl,
       dfid: session.dfid.isNotEmpty ? session.dfid : state.dfid,
+      // 设备标识由本机生成并跨登录复用，登录返回的 session 不带它。
+      guid: session.guid.isNotEmpty ? session.guid : deviceGuid(state.guid),
     );
     await merged.persist();
     state = merged;
   }
 
-  /// 退出登录：删本地 cookie，退回游客态（保留 dfid 以便继续浏览）。
+  /// 退出登录：删本地 cookie，退回游客态（保留 dfid 与设备标识）。
   Future<void> signOut() async {
     await KugouSession.clearPersisted();
     state = KugouSession.guest.copyWith(
       dfid: state.dfid,
       baseUrl: state.baseUrl,
+      guid: deviceGuid(state.guid),
     );
   }
+
+  /// 兜底设备标识：沿用已有的，没有就现生成一个。
+  static String deviceGuid(String current) =>
+      current.isNotEmpty ? current : KugouDeviceIdentity.generateGuid();
 }
 
 /// 登录态：默认游客态，`main()` 通过 `overrideWith` 注入真实值。
@@ -131,6 +140,12 @@ final Provider<KugouLibraryApi> kugouLibraryApiProvider =
 final Provider<KugouVipApi> kugouVipApiProvider = Provider<KugouVipApi>(
   (Ref ref) => KugouVipApi(ref.watch(kugouClientProvider)),
 );
+
+/// 播放行为上报（`/user/listen/report`）：服务端据此累加听歌时长。
+final Provider<KugouPlayReportApi> kugouPlayReportApiProvider =
+    Provider<KugouPlayReportApi>(
+      (Ref ref) => KugouPlayReportApi(ref.watch(kugouClientProvider)),
+    );
 
 /// 音源解析器。
 final Provider<SongUrlResolver> songUrlResolverProvider =

@@ -7,6 +7,7 @@ import '../../../core/audio/i_audio_engine.dart';
 import '../../../core/network/kugou_client.dart';
 import '../../../core/network/kugou_providers.dart';
 import '../../song/domain/song.dart';
+import '../data/kugou_play_report_api.dart';
 import '../data/playback_archive.dart';
 import '../data/song_url_resolver.dart';
 import '../domain/playback_state.dart';
@@ -49,11 +50,50 @@ class PlayerController extends Notifier<PlaybackSnapshot> {
 
   SongUrlResolver get _resolver => ref.read(songUrlResolverProvider);
 
+  /// 服务端听歌时长累加：`/user/listen/report` 的 start / end 配对计时器。
+  final PlayReportClock _reportClock = PlayReportClock();
+
+  /// 缓存实例：`ref.onDispose` 阶段不允许再 `ref.read`，必须先取好。
+  KugouPlayReportApi? _reportApi;
+
+  /// 结清本段播放并上报 `event=end`（暂停 / 切歌 / 播放完成 / 退出都会走这里）。
+  void _finishListeningReport() {
+    final ({String songId, Duration played})? result = _reportClock.finish();
+    final KugouPlayReportApi? api = _reportApi;
+    if (result == null || api == null) {
+      return;
+    }
+    unawaited(api.reportEnd(mixSongId: result.songId, played: result.played));
+  }
+
+  /// 为当前曲开始计时并上报 `event=start`，同时结清上一首。
+  void _beginListeningReport(Song? song) {
+    _finishListeningReport();
+    if (song == null || song.id.isEmpty) {
+      return;
+    }
+    _reportClock.begin(song.id);
+    unawaited(_reportApi?.reportStart(mixSongId: song.id) ?? Future<void>.value());
+  }
+
+  /// 续播补一次 start（暂停时已结清过 end）。
+  void _resumeListeningReport() {
+    final Song? song = state.currentSong;
+    if (song == null || song.id.isEmpty || _reportClock.songId == song.id) {
+      return;
+    }
+    _reportClock.begin(song.id);
+    unawaited(_reportApi?.reportStart(mixSongId: song.id) ?? Future<void>.value());
+  }
+
   @override
   PlaybackSnapshot build() {
     final AudioEngine engine = ref.read(audioEngineProvider);
+    _reportApi = ref.read(kugouPlayReportApiProvider);
     _engineSub = engine.events.listen(_onEngineEvent);
     ref.onDispose(() {
+      // 退出前把还没结清的听歌时长补报给服务端。
+      _finishListeningReport();
       _engineSub?.cancel();
       _engineSub = null;
     });
@@ -202,6 +242,8 @@ class PlayerController extends Notifier<PlaybackSnapshot> {
             ? seekTo
             : Duration.zero,
       );
+      // 听歌时长上报：先结清上一首，再为当前曲开一次 start。
+      _beginListeningReport(state.currentSong);
       // 切歌即落盘，保证异常退出后也能接着上一首。
       unawaited(flushProgress());
     } on Object catch (error) {
@@ -234,6 +276,8 @@ class PlayerController extends Notifier<PlaybackSnapshot> {
     }
     state = state.copyWith(status: PlaybackStatus.paused);
     unawaited(_engine.pause());
+    // 暂停即结清这一段播放，上报给服务端累加听歌时长。
+    _finishListeningReport();
     unawaited(flushProgress());
   }
 
@@ -255,6 +299,7 @@ class PlayerController extends Notifier<PlaybackSnapshot> {
     }
     state = state.copyWith(status: PlaybackStatus.playing);
     await _engine.play();
+    _resumeListeningReport();
   }
 
   void skipNext() {
@@ -274,6 +319,7 @@ class PlayerController extends Notifier<PlaybackSnapshot> {
           position: Duration.zero,
         );
         unawaited(_engine.pause());
+        _finishListeningReport();
         return;
       }
       unawaited(playSong(queue.first, queue: queue));

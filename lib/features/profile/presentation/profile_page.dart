@@ -7,6 +7,7 @@ import '../../../core/network/kugou_session.dart';
 import '../../../core/utils/formatters.dart';
 import '../../../routing/app_routes.dart';
 import '../../../shared/widgets/cover_image.dart';
+import '../../../shared/widgets/app_snack_bar.dart';
 import '../../../shared/widgets/page_container.dart';
 import '../../../shared/widgets/section_header.dart';
 import '../../../theme/app_colors.dart';
@@ -109,8 +110,8 @@ class ProfilePage extends ConsumerWidget {
                 label: '累计听歌时长',
                 value: _listenText(profile),
                 hint: profile.weekListenCount > 0
-                    ? '本周听歌 ${profile.weekListenCount} 次'
-                    : '本周暂无听歌记录',
+                    ? _listenTextHour(profile)
+                    :'暂无听歌记录',
               ),
               _StatTile(
                 icon: Icons.military_tech_outlined,
@@ -288,8 +289,7 @@ class ProfilePage extends ConsumerWidget {
     if (!context.mounted) {
       return;
     }
-    ScaffoldMessenger.of(context)
-        .showSnackBar(const SnackBar(content: Text('已退出登录，当前为游客模式')));
+    showAppSnackBar(context, '已退出登录，当前为游客模式');
   }
 
   /// 乐龄文案：注册天数为 0（今天注册）时也给明确反馈。
@@ -309,24 +309,31 @@ class ProfilePage extends ConsumerWidget {
     return '$days 天';
   }
 
-  /// 累计听歌时长文案（接口给的是秒）。
+  /// 累计听歌时长文案。
+  ///
+  /// 接口 `duration` 的单位是「分钟」（官方客户端「听歌 66272 分钟」与接口原值一致），
+  /// 因此主文案直接按分钟展示以便和官方软件逐位核对，小时数只作为辅助换算。
   static String _listenText(UserProfile profile) {
     if (!profile.hasListenDuration) {
       return '暂无记录';
     }
-    final Duration d = profile.listenDuration;
-    final int hours = d.inHours;
-    final int minutes = d.inMinutes % 60;
-    if (hours >= 100) {
-      return '$hours 小时';
+    final int minutes = profile.listenMinutes;
+      return '$minutes 分钟';
+  }
+
+  ///听歌时长分钟变小时
+  static String _listenTextHour(UserProfile profile) {
+    if (!profile.hasListenDuration) {
+      return '暂无记录';
     }
-    if (hours > 0) {
-      return minutes > 0 ? '$hours 小时 $minutes 分' : '$hours 小时';
-    }
-    if (minutes > 0) {
+    final int minutes = profile.listenMinutes;
+    if (minutes < 60) {
       return '$minutes 分钟';
     }
-    return '${d.inSeconds} 秒';
+    final int hours = minutes ~/ 60;
+    final int rest = minutes % 60;
+    final String approx = rest == 0 ? '$hours 小时' : '$hours 小时 $rest 分';
+    return approx;
   }
 
   /// 手机号脱敏：保留前 3 后 4。

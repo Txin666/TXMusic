@@ -7,6 +7,7 @@ import 'package:tray_manager/tray_manager.dart' as tray;
 import 'package:window_manager/window_manager.dart';
 
 import 'taskbar_thumbnail_toolbar.dart';
+import '../diagnostics/boot_log.dart';
 
 /// 桌面壳层原生能力宿主：无边框窗口控制、关闭进托盘、系统托盘图标。
 ///
@@ -27,7 +28,10 @@ class DesktopHost with WindowListener {
   static const String windowIconAsset = 'assets/icons/TX MUSIC.ico';
 
   /// 托盘图标资源：与窗口图标同一份文件。
-  static const String trayIconAsset = windowIconAsset;
+  /// 托盘图标单独走 PNG：tray_manager 的图标由 Rust 侧 image crate 解码，
+  /// 多帧 ICO 只会解出空白图（此前「图标不显示」的根因），PNG 带 alpha 最稳；
+  /// 文件名也刻意不留空格，避免资源路径在原生侧拼接时出岔子。
+  static const String trayIconAsset = 'assets/icons/tray.png';
 
   /// 退出前的收尾回调（由 UI 层注入，用于落盘播放进度等本地数据）。
   ///
@@ -178,7 +182,19 @@ class DesktopHost with WindowListener {
     }
     _quitting = true;
 
-    // 退出即保存：先把播放进度等本地数据落盘，再回收托盘与窗口。
+    // 点「退出」后任务栏按钮必须立刻消失。落盘、COM 清理、destroy 全是跨通道
+    // 往返，若等它们全部做完再关窗口，用户就会看到任务栏图标卡在原地几百毫秒。
+    // 所以先把窗口从任务栏摘掉并隐藏，剩余清理在窗口不可见的状态下继续做。
+    if (isSupported) {
+      try {
+        await windowManager.setSkipTaskbar(true);
+        await windowManager.hide();
+      } on Object catch (error) {
+        debugPrint('退出前隐藏窗口失败: $error');
+      }
+    }
+
+    // 退出即保存：窗口已不可见，此时再落盘不影响用户感知。
     final Future<void> Function()? beforeQuit = onBeforeQuit;
     if (beforeQuit != null) {
       try {
@@ -216,6 +232,7 @@ class DesktopHost with WindowListener {
   Future<void> initTray({
     required void Function(Rect? trayBounds) onTrayIconClicked,
   }) async {
+    bootLog('initTray 调用: supported=$isSupported 已就绪=$_trayReady');
     if (!isSupported || _trayReady) {
       return;
     }
@@ -223,6 +240,7 @@ class DesktopHost with WindowListener {
 
     try {
       final tray.TrayIcon? icon = tray.TrayIcon.create();
+      bootLog('TrayIcon.create 返回: ${icon?.hashCode}');
       if (icon == null) {
         _trayReady = false;
         return;
@@ -246,9 +264,11 @@ class DesktopHost with WindowListener {
       });
 
       icon.setVisible(true);
+      bootLog('系统托盘已创建：$trayIconAsset');
       debugPrint('系统托盘已创建：$trayIconAsset');
     } on Object catch (error) {
       _trayReady = false;
+      bootLog('系统托盘初始化失败: $error');
       debugPrint('系统托盘初始化失败: $error');
     }
   }

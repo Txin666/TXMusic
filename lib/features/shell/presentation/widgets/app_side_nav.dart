@@ -173,7 +173,7 @@ class AppSideNav extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    'Windows 桌面播放器',
+                    '听音乐，享生活',
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: Theme.of(context).textTheme.labelSmall

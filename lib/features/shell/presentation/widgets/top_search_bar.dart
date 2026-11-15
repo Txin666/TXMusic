@@ -10,41 +10,17 @@ import '../../../../shared/widgets/cover_image.dart';
 import '../../../../theme/app_spacing.dart';
 import '../../../profile/application/profile_providers.dart';
 import '../../../profile/domain/user_profile.dart';
-import '../../../search/application/search_controller.dart';
 import '../../../../theme/app_palette.dart';
 
-/// 顶部栏：返回 + 全局搜索框 + 右侧快捷操作。
-/// 搜索框回车即跳转搜索页并触发检索（真实接口接入点见 search_controller 的 TODO）。
-class TopSearchBar extends ConsumerStatefulWidget {
+/// 顶部栏：返回 + 搜索入口 + 右侧快捷操作。
+///
+/// 搜索交互全部收归搜索页：这里只放一个放大镜按钮，点击即进入搜索页，
+/// 由页面内的自动补全输入框承接关键词输入。
+class TopSearchBar extends ConsumerWidget {
   const TopSearchBar({super.key});
 
   @override
-  ConsumerState<TopSearchBar> createState() => _TopSearchBarState();
-}
-
-class _TopSearchBarState extends ConsumerState<TopSearchBar> {
-  late final TextEditingController _controller = TextEditingController();
-  final FocusNode _focusNode = FocusNode();
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    _focusNode.dispose();
-    super.dispose();
-  }
-
-  void _submit(String value) {
-    final String keyword = value.trim();
-    if (keyword.isEmpty) {
-      return;
-    }
-    ref.read(searchPageControllerProvider.notifier).search(keyword);
-    _focusNode.unfocus();
-    context.go('${AppRoutes.search}?q=${Uri.encodeQueryComponent(keyword)}');
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     // 前进 / 后退改走自建历史栈：go_router 的 go 不入栈，canPop 在 Shell 内基本恒为 false。
     final NavigationHistoryState history = ref.watch(navigationHistoryProvider);
     final bool canGoBack = history.canGoBack;
@@ -78,42 +54,13 @@ class _TopSearchBarState extends ConsumerState<TopSearchBar> {
                 ? context.palette.textSecondary
                 : context.palette.textDisabled,
           ),
-          const SizedBox(width: AppSpacing.md),
-          ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 460),
-            child: SizedBox(
-              height: 38,
-              child: TextField(
-                controller: _controller,
-                focusNode: _focusNode,
-                textInputAction: TextInputAction.search,
-                onSubmitted: _submit,
-                onTap: () {
-                  if (_controller.text.isEmpty) {
-                    context.go(AppRoutes.search);
-                  }
-                },
-                style: Theme.of(context).textTheme.bodyMedium,
-                decoration: InputDecoration(
-                  isDense: true,
-                  hintText: '搜索歌曲、歌手、歌单',
-                  prefixIcon: const Icon(Icons.search_rounded, size: 18),
-                  prefixIconColor: context.palette.textSecondary,
-                  suffixIcon: _controller.text.isEmpty
-                      ? null
-                      : IconButton(
-                          tooltip: '清空',
-                          icon: const Icon(Icons.close_rounded, size: 16),
-                          onPressed: () => setState(_controller.clear),
-                        ),
-                  contentPadding: const EdgeInsets.symmetric(
-                    vertical: AppSpacing.sm,
-                  ),
-                ),
-              ),
-            ),
-          ),
           const Spacer(),
+          _ActionIcon(
+            tooltip: '搜索',
+            icon: Icons.search_rounded,
+            onPressed: () => context.go(AppRoutes.search),
+          ),
+          const SizedBox(width: AppSpacing.sm),
           _ActionIcon(
             tooltip: '设置',
             icon: Icons.tune_rounded,
