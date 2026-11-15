@@ -10,9 +10,11 @@ import 'package:media_kit/media_kit.dart';
 import 'package:window_manager/window_manager.dart';
 
 import 'core/desktop/desktop_host.dart';
+import 'core/desktop/kugou_service_launcher.dart';
 import 'core/diagnostics/boot_log.dart';
 import 'core/desktop/panel/tray_panel_host.dart';
 import 'core/desktop/panel/tray_panel_window.dart';
+import 'core/network/kugou_config.dart';
 import 'core/network/kugou_providers.dart';
 import 'core/network/kugou_session.dart';
 import 'features/player/application/player_controller.dart';
@@ -50,14 +52,18 @@ Future<void> main(List<String> args) async {
 
   MediaKit.ensureInitialized();
 
+  // 先把窗口亮出来，再拉内嵌服务：node 冷启动要 1~3 秒，
+  // 别让用户开个软件先对着白屏干等。
+  await _setupDesktopWindow();
+
+  await _startLocalMusicService();
+
   final KugouSession session = await KugouSession.load();
   debugPrint(
     session.isLoggedIn
         ? '酷狗登录态已恢复：${session.nickname}（dfid=${session.dfid}）'
         : '未检测到酷狗登录态，将以游客模式运行（仅 60 秒试听）',
   );
-
-  await _setupDesktopWindow();
 
   final String? autoTest =
       kIsWeb ? null : Platform.environment['TX_PANEL_AUTOTEST'];
@@ -86,13 +92,15 @@ Future<void> main(List<String> args) async {
     ],
   );
 
-  // 退出前收尾：托盘「退出 TX Music」会 await 本回调，保证进度已写盘。
+  // 退出前收尾：托盘「退出 TX Music」会 await 本回调，保证进度已写盘，
+  // 同时回收随包拉起的本地音乐服务进程，不留孤儿 node。
   DesktopHost.instance.onBeforeQuit = () async {
     try {
       await container.read(playerControllerProvider.notifier).flushProgress();
     } on Object catch (error) {
       debugPrint('退出前保存播放进度失败: $error');
     }
+    await KugouApiService.current?.shutdown();
   };
 
   runApp(
@@ -101,6 +109,27 @@ Future<void> main(List<String> args) async {
       child: const TxMusicApp(),
     ),
   );
+}
+
+/// 拉起随包的 KuGouMusicApi 服务，并把真实端口注入 [KugouConfig]。
+///
+/// 失败不阻塞启动：界面照常出来、由页面按网络错误提示用户，
+/// 总比整个软件打不开强。
+Future<void> _startLocalMusicService() async {
+  if (kIsWeb) {
+    return;
+  }
+  try {
+    final KugouApiService service = await KugouApiService.ensureRunning();
+    KugouConfig.setRuntimeBaseUrl(service.baseUrl);
+    bootLog('=> 本地音乐服务就绪 ${service.baseUrl}');
+  } on KugouServiceException catch (error) {
+    bootLog('!! 本地音乐服务不可用: ${error.message}');
+    debugPrint('本地音乐服务不可用: ${error.message}');
+  } on Object catch (error) {
+    bootLog('!! 本地音乐服务启动异常: $error');
+    debugPrint('本地音乐服务启动异常: $error');
+  }
 }
 
 /// 桌面窗口初始化：去掉系统标题栏（改由 [WindowTitleBar] 自绘），

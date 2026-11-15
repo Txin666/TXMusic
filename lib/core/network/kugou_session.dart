@@ -3,7 +3,6 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 
-import '../storage/local_store.dart';
 import 'kugou_config.dart';
 import 'kugou_device_identity.dart';
 
@@ -143,14 +142,15 @@ class KugouSession {
       return value == null ? '' : value.toString();
     }
 
-    final String fileBase = str('base_url');
+    // 服务端口由内嵌服务在启动时动态分配，文件里存的 base_url 可能已过期，
+    // 一律以当前运行地址为准。
     return KugouSession(
       cookie: str('cookie'),
       dfid: str('dfid'),
       userid: str('userid'),
       token: str('token'),
       nickname: str('nickname'),
-      baseUrl: fileBase.isNotEmpty ? fileBase : KugouConfig.baseUrl,
+      baseUrl: KugouConfig.baseUrl,
       guid: str('guid'),
       sourceFile: path,
     );
@@ -167,11 +167,12 @@ class KugouSession {
     'saved_at': DateTime.now().toIso8601String(),
   };
 
-  /// 把当前登录态写回 `.local/kugou_cookie.json`（扫码登录成功后调用）。
+  /// 把当前登录态写回用户数据目录（扫码登录成功后调用）。
   ///
-  /// 目录与 [LocalStore] 保持一致，保证 dev / 打包两种情况都命中同一份文件。
+  /// 目标位置由 [KugouConfig.primaryCookieFile] 决定：默认写
+  /// `%APPDATA%\TXMusic\kugou_cookie.json`，程序装在只读目录时也能落盘。
   Future<void> persist() async {
-    final File file = LocalStore.fileOf('kugou_cookie.json');
+    final File file = File(KugouConfig.primaryCookieFile);
     try {
       final Directory dir = file.parent;
       if (!await dir.exists()) {

@@ -12,16 +12,16 @@ class LocalStore {
 
   static Directory? _cachedDir;
 
-  /// `.local/` 目录：优先跟随已有 login cookie 的目录，保证 dev / 打包两种情况
-  /// 都能命中同一份用户数据。
+  /// 数据目录：已有 cookie 的目录优先（升级前后落在同一处，不会突然变游客）；
+  /// 全新安装则用 `%APPDATA%\TXMusic`，保证程序装在 `C:\Program Files`
+  /// 这类只读目录时也能正常写盘。
   static Directory _dir() {
     final Directory? cached = _cachedDir;
     if (cached != null) {
       return cached;
     }
 
-    final List<String> cookiePaths = KugouConfig.cookieFileCandidates;
-    for (final String path in cookiePaths) {
+    for (final String path in KugouConfig.cookieFileCandidates) {
       final File file = File(path);
       if (file.existsSync()) {
         final Directory dir = file.parent;
@@ -29,22 +29,17 @@ class LocalStore {
         return dir;
       }
     }
-    for (final String path in cookiePaths) {
-      final Directory dir = File(path).parent;
-      if (dir.existsSync()) {
-        _cachedDir = dir;
-        return dir;
+
+    final Directory data = Directory(KugouConfig.dataDirectoryPath);
+    if (!data.existsSync()) {
+      try {
+        data.createSync(recursive: true);
+      } on Object catch (error) {
+        debugPrint('创建用户数据目录失败(${data.path}): $error');
       }
     }
-
-    final Directory fallback = Directory(
-      '${Directory.current.path}${Platform.pathSeparator}.local',
-    );
-    if (!fallback.existsSync()) {
-      fallback.createSync(recursive: true);
-    }
-    _cachedDir = fallback;
-    return fallback;
+    _cachedDir = data;
+    return data;
   }
 
   static File fileOf(String name) =>

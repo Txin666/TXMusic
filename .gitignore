@@ -57,3 +57,6 @@ temp_analyze.txt
 
 # 本地构建日志（不入库）
 build_log.txt
+
+# 打包产物（含内嵌 Node 服务，体积大，不入库）
+dist/
