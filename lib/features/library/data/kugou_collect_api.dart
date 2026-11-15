@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 
+import '../../../core/diagnostics/boot_log.dart';
 import '../../../core/network/json_utils.dart';
 import '../../../core/network/kugou_client.dart';
 import '../../song/data/song_mappers.dart';
@@ -122,7 +123,57 @@ class KugouCollectApi {
         'data': _collectPayload(song),
       },
     );
-    _ensureAccepted(json, '收藏');
+    _ensureAcceptedWithRetry(json, '收藏', song.hash);
+  }
+
+  /// 收藏结果校验：`30227` 时回拉列表核验，避免把「已收藏」误报成失败。
+  ///
+  /// 30227 是酷狗写接口的拒绝码，实测至少在「该曲目已在『我喜欢』中」
+  /// 与「登录态在本次请求里失效」两种情况下出现，光看码分不出来，
+  /// 只能回拉一次列表确认；确认不在列表里再按登录态失效提示用户重登。
+  Future<void> _ensureAcceptedWithRetry(
+    Map<String, dynamic> json,
+    String action,
+    String hash,
+  ) async {
+    try {
+      _ensureAccepted(json, action);
+    } on KugouApiException catch (error) {
+      if (error.code != 30227) {
+        rethrow;
+      }
+      if (await _isAlreadyLiked(hash)) {
+        return;
+      }
+      // 走到这里说明写接口确实被拒、且列表里也没有这首：多半是登录态失效。
+      // 把登录态关键信息（不含 token 明文）落进启动日志，方便在别的机器上定位。
+      bootLog(
+        '[收藏] 30227 被拒 action=$action hash=$hash '
+        'loggedIn=${_client.session.isLoggedIn} '
+        'useridTail=${_tail(_client.session.userid)} '
+        'tokenLen=${_client.session.token.length} '
+        'dfidLen=${_client.session.dfid.length} raw=$json',
+      );
+      throw KugouApiException(
+        '$action被拒绝（30227）：请重新登录酷狗账号后再试'
+        '（诊断：${_client.session.isLoggedIn ? '已登录，userid 尾号 ${_tail(_client.session.userid)}' : '当前未登录'}）',
+        path: error.path,
+        code: error.code,
+      );
+    }
+  }
+
+  /// 回拉「我喜欢」列表判断该 hash 是否已在其中；拉取失败按「不在」处理。
+  Future<bool> _isAlreadyLiked(String hash) async {
+    if (hash.isEmpty) {
+      return false;
+    }
+    try {
+      final LikedSongsSnapshot snapshot = await likedSongs();
+      return snapshot.has(hash);
+    } on Object {
+      return false;
+    }
   }
 
   /// 从「我喜欢」取消收藏（`fileid` 来自 [likedSongs] 的映射）。
@@ -151,6 +202,14 @@ class KugouCollectApi {
     return '${name.isEmpty ? '未知歌曲' : name}|${song.hash}|'
         '${albumId.isEmpty ? '0' : albumId}|'
         '${mixSongId.isEmpty ? '0' : mixSongId}';
+  }
+
+  /// userid 尾号：只在日志/提示里区分账号，避免把完整 id 摊到界面上。
+  static String _tail(String value) {
+    if (value.isEmpty) {
+      return '空';
+    }
+    return value.length <= 4 ? value : value.substring(value.length - 4);
   }
 
   static String _digits(String value) {

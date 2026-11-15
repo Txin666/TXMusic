@@ -1,5 +1,6 @@
 import '../../../core/network/kugou_client.dart';
 import '../../song/domain/song.dart';
+import 'guest_song_url_api.dart';
 
 /// 解析后的可播放音源。
 class ResolvedAudio {
@@ -23,16 +24,24 @@ class ResolvedAudio {
 /// 关键参数（联调记录 §2）：
 /// - `hash`：歌曲 FileHash；
 /// - `album_id`：专辑 ID，缺失时部分曲目解析失败；
-/// - `free_part=1`：不带会直接 errcode 20028；
+/// - `free_part=1`：必带；但未登录时上游对任何参数组合都回 20028（实测）；
 /// - `quality`：128 / 320 / flac，未登录会被强制降级。
 class SongUrlResolver {
-  SongUrlResolver(this._client);
+  SongUrlResolver(this._client, {GuestSongUrlApi? guest})
+    : _guest = guest ?? GuestSongUrlApi();
 
   final KugouClient _client;
+  final GuestSongUrlApi _guest;
 
   Future<ResolvedAudio> resolve(Song song, {String quality = '128'}) async {
     if (!song.canResolve) {
       throw const KugouApiException('该歌曲缺少 hash，无法解析音源');
+    }
+    // 游客态：上游 `/song/url`、`/song/url/new` 一律回 20028「本次请求需要验证」，
+    // 补 free_part / album_audio_id 也解不开。但 m.kugou.com 的旧播放信息接口
+    // 对游客仍下发 128k 直链，所以未登录时改走这条兜底链路。
+    if (!_client.session.isLoggedIn) {
+      return _resolveAsGuest(song);
     }
     final Map<String, dynamic> json = await _client.getJson(
       '/song/url',
@@ -74,6 +83,24 @@ class SongUrlResolver {
       url: merged.first,
       backups: merged.skip(1).toList(growable: false),
       duration: seconds > 0 ? Duration(seconds: seconds) : song.duration,
+    );
+  }
+
+  /// 游客态取源：m.kugou.com 旧接口只给 128k，会员/版权曲会返回空 url。
+  Future<ResolvedAudio> _resolveAsGuest(Song song) async {
+    final GuestSong guest = await _guest.fetch(song.hash);
+    if (!guest.hasUrl) {
+      if (guest.vipPrivilege != 0 || guest.privilege >= 10) {
+        throw const KugouApiException(
+          '这首歌未登录时只提供试听/无版权，登录酷狗账号后再试',
+        );
+      }
+      throw const KugouApiException('这首歌暂时取不到可用音源，换一首或登录后再试');
+    }
+    return ResolvedAudio(
+      url: Uri.parse(guest.url),
+      backups: const <Uri>[],
+      duration: guest.duration.inSeconds > 0 ? guest.duration : song.duration,
     );
   }
 

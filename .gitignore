@@ -54,6 +54,8 @@ app.*.map.json
 *.log
 test_out.txt
 temp_analyze.txt
+temp_build.txt
+temp_test.txt
 
 # 本地构建日志（不入库）
 build_log.txt

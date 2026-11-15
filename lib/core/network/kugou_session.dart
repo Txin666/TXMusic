@@ -9,7 +9,9 @@ import 'kugou_device_identity.dart';
 /// 酷狗登录态 / 设备标识（对应 `.local/kugou_cookie.json`）。
 ///
 /// 说明：
-/// - `dfid` 是设备指纹，**每个请求都必须带**，未登录也能用（走 60 秒试听）；
+/// - `dfid` 是设备指纹，**每个请求都必须带**，未登录也能用于搜索/歌单等只读接口；
+///   但取音源已被上游封死：游客态请求 `/song/url`、`/song/url/new` 一律回
+///   `errcode 20028`（补 `free_part` / `album_audio_id` 均无效），因此未登录不能播放；
 /// - `userid` + `token` 存在时视为已登录，能解锁全曲与高音质；
 /// - 该文件不入库（`.gitignore` 已忽略 `.local/`），凭证只在本地流转。
 @immutable
@@ -57,16 +59,19 @@ class KugouSession {
             .where((String item) => item.isNotEmpty && item.contains('=')),
       );
     }
-    if (parts.isEmpty) {
-      if (dfid.isNotEmpty) {
-        parts.add('dfid=$dfid');
-      }
-      if (userid.isNotEmpty) {
-        parts.add('userid=$userid');
-      }
-      if (token.isNotEmpty) {
-        parts.add('token=$token');
-      }
+    // 逐项补齐：旧版本 persist 只把 userid/token 拼进 cookie 串，没有 dfid。
+    // 若只沿用整串，请求就漏了 dfid，服务端随后用随机 dfid 覆盖，
+    // 收藏 / 播放类接口跟着报 30227 / 20028。所以缺哪项补哪项。
+    bool hasCookie(String name) =>
+        parts.any((String item) => item.split('=').first.trim() == name);
+    if (dfid.isNotEmpty && !hasCookie('dfid')) {
+      parts.add('dfid=$dfid');
+    }
+    if (userid.isNotEmpty && !hasCookie('userid')) {
+      parts.add('userid=$userid');
+    }
+    if (token.isNotEmpty && !hasCookie('token')) {
+      parts.add('token=$token');
     }
     // 设备标识兜底：本地服务的注入中间件在未配置 KUGOU_API_GUID 环境变量时
     // 下发的是空值，等于没补，这里由客户端自己补齐，保证播放上报能过校验。
@@ -119,14 +124,24 @@ class KugouSession {
         if (decoded is! Map<String, dynamic>) {
           continue;
         }
-        final KugouSession session = _fromJson(decoded, path);
+        KugouSession session = _fromJson(decoded, path);
+        bool dirty = false;
         if (session.guid.isEmpty) {
           // 老文件没有设备标识：补一个并写回，避免每次启动都换指纹。
-          final KugouSession fixed = session.copyWith(
-            guid: KugouDeviceIdentity.generateGuid(),
+          session = session.copyWith(guid: KugouDeviceIdentity.generateGuid());
+          dirty = true;
+        }
+        if (session.dfid.isEmpty) {
+          // 老文件没有 dfid：优先复用 cookie 串里的值，否则用设备指纹兜底。
+          // 留空会让每个请求都吃到服务端随机 dfid，收藏/播放接口会报 30227。
+          final String fromCookie = _dfidFromCookie(session.cookie);
+          session = session.copyWith(
+            dfid: fromCookie.isNotEmpty ? fromCookie : session.guid,
           );
-          await fixed.persist();
-          return fixed;
+          dirty = true;
+        }
+        if (dirty) {
+          await session.persist();
         }
         return session;
       } on Object catch (error) {
@@ -134,6 +149,17 @@ class KugouSession {
       }
     }
     return guest.copyWith(baseUrl: KugouConfig.baseUrl);
+  }
+
+  /// 从 cookie 串里取 `dfid`（旧版本 persist 可能只存了 userid/token）。
+  static String _dfidFromCookie(String cookie) {
+    for (final String item in cookie.split(';')) {
+      final String trimmed = item.trim();
+      if (trimmed.startsWith('dfid=')) {
+        return trimmed.substring('dfid='.length).trim();
+      }
+    }
+    return '';
   }
 
   static KugouSession _fromJson(Map<String, dynamic> json, String path) {

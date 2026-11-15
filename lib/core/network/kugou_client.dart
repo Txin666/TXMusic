@@ -277,7 +277,12 @@ class KugouClient {
       case 152:
         return '缺少 dfid 设备标识，请先执行 /register/dev 初始化';
       case 20028:
-        return '需要 free_part=1 参数，或该曲目无版权/需付费';
+        // 实测：游客态（仅 dfid）请求 /song/url、/song/url/new 一律回 20028
+        // 「本次请求需要验证」，补 free_part / album_audio_id 均无效，
+        // 属酷狗服务端限制，不要再把它描述成参数缺失。
+        return session.isLoggedIn
+            ? '登录态已失效或被风控，酷狗未下发音源，请重新登录后再试'
+            : '未登录无法获取音源（酷狗限制），请先登录账号';
       case 20010:
         return '歌曲 hash 无效';
       case 20002:
